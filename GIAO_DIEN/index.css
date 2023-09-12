@@ -13,7 +13,15 @@ body {
 .content {
     height: 75vh;
     width: 100%;
-    background-color: aquamarine;
+}
+.content > div {
+    height: 100%;
+    width: 100%;
+}
+
+.content > div > svg {
+    height: 100%;
+    width: 100%;
 }
 .contact {
     height: 15vh;
