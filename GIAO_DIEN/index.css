@@ -19,6 +19,11 @@ body {
     font-weight: bold;
     font-size: 28px;
 }
+.header div:nth-child(1) svg {
+    width: 50%;
+    height: 60%;
+    margin-left: 140px;
+}
 .header div:nth-child(2) {
     width: 60%;
     display: flex;
@@ -29,7 +34,7 @@ body {
 .header div:nth-child(2)> a {
     text-decoration: none;
     color: #101010;
-    font-size: 22px;
+    font-size: 18px;
     margin-right: 80px;
 }
 
@@ -46,7 +51,7 @@ body {
     color: #ffffff;
     border-radius: 30px;
     border: none;
-    font-size: 22px;
+    font-size: 18px;
     background-color: #101010;
 }
 
@@ -162,6 +167,9 @@ body {
     .contact div:nth-child(5) {
         width: 100%;
     }
+    .header div:nth-child(1) svg {
+        margin-left: 10px;
+    }
 }
 
 @media screen and (max-width: 1200px) {
@@ -186,5 +194,8 @@ body {
     .contact div:nth-child(5) {
         width: 100%;
     }
+    .header div:nth-child(1) svg {
+        margin-left: 10px;
+    }  
 }
 
