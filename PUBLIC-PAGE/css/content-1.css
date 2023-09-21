@@ -1,6 +1,6 @@
 .content-1 {
     height: 56vh;
-    background-color: #ffffff;
+    background-color: #3b5d50;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -17,7 +17,7 @@
 .left-side {
     width: 40%;
     height: 100%;
-    background-color: bisque;
+    background-color: #3b5d50;
 }
 .right-side {
     width: 60%;
