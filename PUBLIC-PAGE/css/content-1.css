@@ -45,6 +45,7 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    margin-top: 0px;
 }
 
 .div-3 {
@@ -79,6 +80,7 @@
     padding: 16px 30px;
     color: #ffffff;
     font-weight: 600;
+    transition: border-color 0.3s ease;
 }
 
 .explore:hover {
@@ -96,4 +98,84 @@
     top: 0;
     right: 0;
     z-index: 2;
+}
+
+@media (max-width: 400px) {
+    .content-1 {
+        height: 93vh;
+    }
+    .child {
+        width: 100%;
+        flex-direction: column;
+    }
+    .left-side {
+        margin-left: 16px;
+        width: 100%;
+    }
+    .right-side {
+        width: 100%;
+        margin-right: 16px;
+    }
+    .div-1 {
+        font-size: 30px;
+        height: 12vh;
+    }
+    .div-2 {
+        margin-bottom: 20px;
+        margin-right: 20px;
+        height: 16vh;
+
+    }
+    .shop-now {
+        height: 50px;
+    }
+    .explore {
+        height: 50px;
+    }
+    .chair {
+        width: 100%;
+    }
+    .dot-light {
+        width: 40%;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-1 {
+        height: 93vh;
+    }
+    .child {
+        width: 100%;
+        flex-direction: column;
+    }
+    .left-side {
+        margin-left: 16px;
+        width: 100%;
+    }
+    .right-side {
+        width: 100%;
+        margin-right: 16px;
+    }
+    .div-1 {
+        font-size: 30px;
+        height: 12vh;
+    }
+    .div-2 {
+        margin-bottom: 20px;
+        margin-right: 20px;
+        height: 16vh;
+
+    }
+    .shop-now {
+        height: 50px;
+    }
+    .explore {
+        height: 50px;
+    }
+    .chair {
+        width: 100%;
+    }
+    .dot-light {
+        width: 40%;
+    }
 }

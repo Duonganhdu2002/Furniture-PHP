@@ -19,8 +19,12 @@
     include "component/header.php";
     ?>
     <?php
+    include "component/menu-click-icon.php";
+    ?>
+    <?php
     include "component/content-1.php";
     ?>
+    
 </body>
 
 </html>
