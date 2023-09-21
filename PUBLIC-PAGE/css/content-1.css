@@ -8,7 +8,7 @@
 
 .child {
     width: 68%;
-    background-color: #eff2f1;
+    background-color: #3b5d50;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,49 +17,51 @@
 .left-side {
     width: 40%;
     height: 100%;
-    background-color: #3b5d50;
 }
+
 .right-side {
     width: 60%;
     height: 100%;
-    background-color: #f9bf29;
+    position: relative;
 }
 
 .div-1 {
     width: 100%;
-    font-size: 52px;
+    font-size: 54px;
     color: white;
     font-weight: 600;
-    height: 60%;
+    height: 40%;
     display: flex;
     justify-content: start;
     align-items: end;
 }
+
 .div-2 {
     width: 100%;
     font-size: 14px;
     color: white;
-    opacity: 0.8;
-    height: 20%;
+    opacity: 0.5;
+    height: 25%;
     display: flex;
     justify-content: start;
     align-items: center;
 }
+
 .div-3 {
     width: 100%;
     display: flex;
     font-size: 16px;
     justify-content: start;
     align-items: start;
-    height: 20%;
+    height: 35%;
 }
 
 .shop-now {
     width: 140px;
-    height: 50px;
+    height: 55px;
     background-color: #f9bf29;
     font-size: 16px;
-    border-radius: 40px;
+    border-radius: 50px;
     border: none;
     padding: 16px 30px;
     color: #2f2f2f;
@@ -69,14 +71,29 @@
 
 .explore {
     width: 140px;
-    height: 50px;
-    background-color: #f9bf29;
+    height: 55px;
+    background-color: #3b5d50;
     font-size: 16px;
-    border-radius: 40px;
-    border: none;
+    border-radius: 50px;
+    border: solid 2px rgba(255, 255, 255, 0.3);
     padding: 16px 30px;
-    color: #2f2f2f;
+    color: #ffffff;
     font-weight: 600;
 }
 
+.explore:hover {
+    border: solid 2px rgba(255, 255, 255, 1);
+}
 
+.dot-light {
+    position: relative;
+    z-index: 1;
+    float: right;
+}
+
+.chair {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+}

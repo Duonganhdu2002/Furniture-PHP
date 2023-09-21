@@ -19,7 +19,8 @@
             </div>
         </div>
         <div class="right-side">
-            <div></div>
+            <img class="chair" src="/PUBLIC-PAGE/images/couch.png" alt="">
+            <img class="dot-light" src="/PUBLIC-PAGE/images/dots-light.svg" alt="">
         </div>
     </div>
 </div>
