@@ -1,0 +1,82 @@
+.content-1 {
+    height: 56vh;
+    background-color: #ffffff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.child {
+    width: 68%;
+    background-color: #eff2f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-side {
+    width: 40%;
+    height: 100%;
+    background-color: bisque;
+}
+.right-side {
+    width: 60%;
+    height: 100%;
+    background-color: #f9bf29;
+}
+
+.div-1 {
+    width: 100%;
+    font-size: 52px;
+    color: white;
+    font-weight: 600;
+    height: 60%;
+    display: flex;
+    justify-content: start;
+    align-items: end;
+}
+.div-2 {
+    width: 100%;
+    font-size: 14px;
+    color: white;
+    opacity: 0.8;
+    height: 20%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.div-3 {
+    width: 100%;
+    display: flex;
+    font-size: 16px;
+    justify-content: start;
+    align-items: start;
+    height: 20%;
+}
+
+.shop-now {
+    width: 140px;
+    height: 50px;
+    background-color: #f9bf29;
+    font-size: 16px;
+    border-radius: 40px;
+    border: none;
+    padding: 16px 30px;
+    color: #2f2f2f;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.explore {
+    width: 140px;
+    height: 50px;
+    background-color: #f9bf29;
+    font-size: 16px;
+    border-radius: 40px;
+    border: none;
+    padding: 16px 30px;
+    color: #2f2f2f;
+    font-weight: 600;
+}
+
+

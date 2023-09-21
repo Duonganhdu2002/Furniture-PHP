@@ -1,0 +1,63 @@
+.header {
+    height: 8vh;
+    background-color: #3b5d50;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-child {
+    display: flex;
+    align-items: center;
+    width: 68%;
+    justify-content: center;
+}
+
+.logo-brand {
+    width: 20%;
+    display: flex;
+}
+
+.menu {
+    width: 65%;
+    display: flex;
+    justify-content: end;
+}
+
+.menu a {
+    margin-left: 42px;
+    font-size: 14px;
+    font-weight: 300;
+    opacity: 0.7;
+    text-decoration: none;
+    color: #eff2f1;
+}
+
+.user-cart-icon {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-cart-icon div {
+    margin-left: 50px;
+}
+
+.menu-icon {
+    width: 5%;
+    display: none;
+}
+
+.logo-brand a {
+    text-decoration: none;
+    color: #eff2f1;
+    font-size: 32px;
+    font-weight: 600;
+}
+.logo-brand a span{
+    font-size: 32px;
+    font-weight: 600;
+    opacity: 0.7;
+}
