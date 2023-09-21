@@ -1,8 +1,3 @@
-body {
-    margin: 0;
-    font-family: "Inter", sans-serif;
-}
-
 .content-1 {
     height: 56vh;
     background-color: #180c77;
@@ -11,7 +6,7 @@ body {
     justify-content: center;
 }
 
-.content-1-child {
+.child {
     width: 68%;
     background-color: #eff2f1;
     display: flex;
@@ -19,29 +14,33 @@ body {
     align-items: center;
 }
 
-.content-1-child-left-side {
+.left-side {
     width: 40%;
+    height: 100%;
     background-color: bisque;
 }
+.right-side {
+    width: 60%;
+    height: 100%;
+    background-color: #f9bf29;
+}
 
-.content-1-child-left-side div:nth-child(1) {
+.div-1 {
     width: 100%;
     font-size: 40px;
     color: white;
     font-weight: 600;
-    margin-top: 80px;
-    margin-bottom: 80px;
     height: 40%;
 }
-.content-1-child-left-side div:nth-child(2) {
+.div-2 {
     width: 100%;
     font-size: 14px;
     color: white;
     opacity: 0.8;
     height: 10%;
 }
-.content-1-child-left-side div:nth-child(3) {
-    width: 60%;
+.div-3 {
+    width: 100%;
     display: flex;
     font-size: 16px;
     justify-content: center;
@@ -73,6 +72,4 @@ body {
     font-weight: 600;
 }
 
-.content-1-child div:nth-child(2) {
-    width: 60%;
-}
+
