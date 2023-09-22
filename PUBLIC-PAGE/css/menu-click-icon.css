@@ -1,13 +1,7 @@
 .menu-click-icon {
     display: none;
-    opacity: 0; /* Ẩn div và đặt độ trong suốt 0 */
     background-color: #3b5d50;
-    transition: opacity 0.3s ease; /* Chuyển đổi opacity trong 0.3 giây */
 }
-
-/* Các quy tắc CSS khác ở đây... */
-
-
 
 .menu-click-icon div {
     background-color: #3b5d50;
