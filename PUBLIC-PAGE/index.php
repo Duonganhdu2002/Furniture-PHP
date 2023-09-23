@@ -14,7 +14,7 @@
     </style>
 </head>
 
-<body>
+<body style="background-color: #eff2f1;">
     <div style="background-color: #3b5d50;">
         <?php
         include "component/header.php";
@@ -26,6 +26,9 @@
         include "component/content-1.php";
         ?>
     </div>
+    <?php
+    include "component/content-2.php"
+    ?> 
 </body>
 
 </html>
