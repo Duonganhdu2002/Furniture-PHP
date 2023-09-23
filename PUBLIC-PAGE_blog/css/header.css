@@ -1,0 +1,148 @@
+.header {
+    height: 10vh;
+    background-color: #3b5d50;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-child {
+    display: flex;
+    align-items: center;
+    width: 68%;
+    justify-content: center;
+}
+
+.logo-brand {
+    width: 20%;
+    display: flex;
+}
+
+.menu {
+    width: 65%;
+    display: flex;
+    justify-content: end;
+}
+
+.menu a {
+    margin-left: 42px;
+    margin-top: 15px;
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.6;
+    text-decoration: none;
+    color: #ffffff;
+    padding-bottom: 14px;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.menu a:hover {
+    color: #ffffff;
+    opacity: 1;
+}
+
+.menu a::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 6px;
+    background-color: #f9bf29;
+    transition: width 0.3s ease;
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+.user-cart-icon {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-cart-icon div {
+    margin-left: 50px;
+}
+
+.menu-icon {
+    width: 5%;
+    display: none;
+}
+
+.logo-brand a {
+    text-decoration: none;
+    color: #eff2f1;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.logo-brand a span {
+    font-size: 32px;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+@media (max-width: 400px) {
+    .header {
+        height: 80px;
+        width: 100%;
+    }
+    .header-child {
+        width: 100%;
+    }
+    .logo-brand {
+        width:100%;
+        margin-left: 30px;
+    }
+    .menu {
+        display: none;
+    }
+    .user-cart-icon {
+        display: none;
+    }
+    .menu-icon {
+        display: flex;
+        width: 100%;
+        justify-content: end;
+        align-items: center;
+        margin-right: 20px;
+        opacity: 0.7;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: 80px;
+        width: 100%;
+    }
+    .header-child {
+        width: 100%;
+    }
+    .logo-brand {
+        width:100%;
+        margin-left: 10px;
+    }
+    .menu {
+        display: none;
+    }
+    .user-cart-icon {
+        display: none;
+    }
+    .menu-icon {
+        display: flex;
+        width: 100%;
+        justify-content: end;
+        align-items: center;
+        margin-right: 20px;
+        opacity: 0.7;
+    }
+}
+
+
