@@ -7,7 +7,7 @@
                 Design Studio
             </div>
             <div class="div-2">
-                Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet <br> <br> velit. Aliquam vulputate velit imperdiet dolor tempor tristique.
+                Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.
             </div>
             <div class="div-3">
                 <div>

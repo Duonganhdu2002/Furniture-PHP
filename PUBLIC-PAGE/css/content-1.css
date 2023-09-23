@@ -17,12 +17,15 @@
 .left-side {
     width: 40%;
     height: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .right-side {
     width: 60%;
     height: 100%;
     position: relative;
+    z-index: 0;
 }
 
 .div-1 {
@@ -46,6 +49,7 @@
     justify-content: start;
     align-items: center;
     margin-top: 0px;
+    line-height: 2.0;
 }
 
 .div-3 {

@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/PUBLIC-PAGE/css/menu-click-icon.css">
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const menuIcon = document.querySelector('.menu-icon');
         const menu = document.querySelector('.menu-click-icon');
 
@@ -12,17 +12,19 @@
             }
         }
 
-        menuIcon.addEventListener('click', toggleMenu);
-
-        function hideMenuIfLargeScreen() {
+        function hideMenuOnLargeScreen() {
             if (window.innerWidth > 768) {
                 menu.style.display = 'none';
             }
         }
 
-        hideMenuIfLargeScreen();
+        // Bật/tắt menu khi nhấp vào biểu tượng
+        menuIcon.addEventListener('click', toggleMenu);
 
-        window.addEventListener('resize', hideMenuIfLargeScreen);
+        // Ẩn menu trên màn hình lớn khi tải trang và thay đổi kích thước cửa sổ
+        hideMenuOnLargeScreen();
+
+        window.addEventListener('resize', hideMenuOnLargeScreen);
     });
 </script>
 

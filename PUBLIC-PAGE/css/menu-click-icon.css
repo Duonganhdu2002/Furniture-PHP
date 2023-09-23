@@ -17,6 +17,7 @@
 }
 
 .menu-click-icon div div a {
+    font-size: 14px;
     text-decoration: none;
     color: white;
     opacity: 0.7;

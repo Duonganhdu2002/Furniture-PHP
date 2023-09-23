@@ -15,16 +15,17 @@
 </head>
 
 <body>
-    <?php
-    include "component/header.php";
-    ?>
-    <?php
-    include "component/menu-click-icon.php";
-    ?>
-    <?php
-    include "component/content-1.php";
-    ?>
-    
+    <div style="background-color: #3b5d50;">
+        <?php
+        include "component/header.php";
+        ?>
+        <?php
+        include "component/menu-click-icon.php";
+        ?>
+        <?php
+        include "component/content-1.php";
+        ?>
+    </div>
 </body>
 
 </html>
