@@ -16,15 +16,17 @@
                 thumbnails.forEach(thumbnail => {
                     thumbnail.style.width = '50%';
                 });
+            } else if (window.innerWidth > 700 && window.innerWidth <= 800) {
+                thumbnails.forEach(thumbnail => {
+                    thumbnail.style.width = '50%';
+                });
             } else {
                 thumbnails.forEach(thumbnail => {
                     thumbnail.style.width = '100%';
                 });
             }
         }
-
         hideThumbnailsOnLargeScreen();
-
         window.addEventListener('resize', hideThumbnailsOnLargeScreen);
     });
 </script>

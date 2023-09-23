@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/index.css">
     <style>
         body {
             margin: 0;
@@ -28,6 +27,9 @@
     </div>
     <?php
     include "component/content-2.php"
+    ?> 
+    <?php
+    include "component/content-3.php"
     ?> 
 </body>
 
