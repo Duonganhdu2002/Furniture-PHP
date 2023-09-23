@@ -1,0 +1,73 @@
+.popular-product {}
+
+.container {
+    display: flex;
+    max-width: 90%;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-3-frames {
+    display: flex;
+    max-width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.popular-product .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popular-product .chair {
+    display: flex;
+    font-size: 14px;
+    font-weight: 1px;
+    color: #2f2f2f;
+}
+
+.popular-product .chair a {
+    text-decoration: none;
+    color: #464545;
+}
+
+.popular-product .chair a:hover {
+    color: rgba(47, 47, 47, 0.5);
+}
+
+.popular-product .chair p {
+    line-height: 1.4;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.popular-product .chair .thumbnail {
+    margin-right: 10px;
+    margin-top: 20px;
+    flex: 0 0 120px;
+    position: relative;
+}
+
+.popular-product .chair .thumbnail:before {
+    content: "";
+    position: absolute;
+    border-radius: 20px;
+    background: #dce5e4;
+    width: 98px;
+    height: 98px;
+    top: 46%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auSto
+}
+
+.pt-3 {
+    padding-top: 1rem!important
+}
