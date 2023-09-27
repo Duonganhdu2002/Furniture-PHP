@@ -31,6 +31,13 @@
     <?php
     include "component/content-3.php"
     ?> 
+    <?php
+    include "component/content-4.php"
+    ?> 
+    <?php
+    include "component/content-5.php"
+    ?> 
+    
 </body>
 
 </html>

@@ -89,6 +89,19 @@
     opacity: 0.7;
 }
 
+.shop-module {
+    display: none;
+    position: absolute;
+    background-color: #3b5d50;
+    border: 1px solid #ccc;
+    z-index: 2;
+}
+
+/* Style for the "Shop" link on hover */
+.shop-container:hover .shop-module {
+    display: block;
+}
+
 @media (max-width: 400px) {
     .header {
         height: 80px;

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="css/content-1.css">
 <div class="content-1">
     <div class="child">
-        <div class="left-side">
+        <div class="left-side-ct1">
             <div class="div-1">
                 Modern Interior <br>
                 Design Studio
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div class="right-side">
+        <div class="right-side-ct1">
             <img class="chair" src="/PUBLIC-PAGE/images/couch.png" alt="">
             <img class="dot-light" src="/PUBLIC-PAGE/images/dots-light.svg" alt="">
         </div>
