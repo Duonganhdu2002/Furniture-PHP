@@ -1,0 +1,31 @@
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: aliceblue;
+}
+
+.container-ct6 {
+    width: 68%;
+    background-color: antiquewhite;
+}
+
+.container-ct6-first-child {
+    display: flex;
+}
+
+.subscription-form {
+    width: 70%;
+    margin-top: 0px;
+    margin-bottom: 80px;
+}
+
+.subscription-form h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #3b5d50;
+}
+
+.sofa-img {
+    width: 30%;
+}

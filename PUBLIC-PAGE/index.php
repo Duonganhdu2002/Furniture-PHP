@@ -37,6 +37,9 @@
     <?php
     include "component/content-5.php"
     ?> 
+    <?php
+    include "component/content-6.php"
+    ?> 
     
 </body>
 
