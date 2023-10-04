@@ -1,0 +1,231 @@
+<?php
+$link = new mysqli("localhost", "root", "", "shopping_online");
+$sql1 = "select * from categories";
+$sql2 = "select * from products";
+$result1 = $link->query($sql1);
+$result2 = $link->query($sql2);
+?>
+<div style="margin-bottom: 120px; height: auto; width: 100%;">
+    <?php
+    while ($row = $result1->fetch_assoc()) {
+    ?>
+        <div class="product-section">
+            <div class="row">
+                <!-- Start Column 1 -->
+                <div>
+                    <h2 class="section-title"><?php echo $row["category_name"]; ?></h2>
+                    <p style="" class="section-decrition"><?php echo $row["description"]; ?></p>
+                    <p><a href="../shop/<?php echo $row["url"]; ?>" class="btn">Explore</a></p>
+                </div>
+                <!-- End Column 1 -->
+
+                <?php
+                for ($itemCount = 0; ($row = $result2->fetch_assoc()) && ($itemCount < 3); $itemCount++) {
+                ?>
+                    <div>
+                        <a class="product-item" href="cart.html">
+                            <img src="images/chairs/<?php echo $row["image"]; ?>" class="product-thumbnail">
+                            <h3 class="product-title"><?php echo $row["product_name"]; ?></h3>
+                            <strong class="product-price"><?php echo $row["price"]; ?></strong>
+                            <span class="icon-cross">
+                                <img src="images/cross.svg">
+                            </span>
+                        </a>
+                    </div>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
+    <?php
+    }
+    ?>
+
+</div>
+<style>
+    .btn {
+        font-weight: 600;
+        padding: 16px 34px;
+        border-radius: 30px;
+        color: #eff2f1;
+        ;
+        background: #2f2f2f;
+        border-color: #2f2f2f;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        color: #ffffff;
+        background: #222222;
+        border-color: #222222;
+    }
+
+    .section-title {
+        color: #2f2f2f;
+        font-size: 34px;
+        font-weight: 500;
+    }
+
+    .section-decrition {
+        color: #2f2f2f;
+        font-size: 14px;
+        opacity: 0.7;
+        line-height: 2.0;
+        margin-bottom: 50px;
+    }
+
+    .product-section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 900px;
+    }
+
+
+    .row {
+        width: 68%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .row div {
+        width: 25%;
+    }
+
+    .product-item {
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        position: relative;
+        padding-bottom: 50px;
+        cursor: pointer;
+    }
+
+    .product-thumbnail {
+        margin-bottom: 30px;
+        position: relative;
+        width: 100%;
+        -webkit-transition: .3s all ease;
+        -o-transition: .3s all ease;
+        transition: .3s all ease;
+    }
+
+    .product-item h3 {
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .product-item strong {
+        font-weight: 800 !important;
+        font-size: 18px !important;
+    }
+
+    .product-item h3,
+    .product-item strong {
+        color: #2f2f2f;
+        text-decoration: none;
+    }
+
+    .icon-cross {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        display: inline-block;
+        background: #2f2f2f;
+        bottom: 15px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+        margin-bottom: -17.5px;
+        border-radius: 50%;
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: .3s all ease;
+        -o-transition: .3s all ease;
+        transition: .3s all ease;
+    }
+
+    .icon-cross img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .product-item:before {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        content: "";
+        background: #dce5e4;
+        height: 0%;
+        z-index: -1;
+        border-radius: 10px;
+        -webkit-transition: .3s all ease;
+        -o-transition: .3s all ease;
+        transition: .3s all ease;
+    }
+
+    .product-thumbnail {
+        top: -25px;
+    }
+
+    .product-item:hover .icon-cross {
+        bottom: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .product-item:hover:before {
+        height: 70%;
+    }
+
+    @media (max-width: 400px) {
+        .row {
+            width: 100%;
+            flex-direction: column;
+            margin: 10px;
+        }
+
+        .row div {
+            width: 100%;
+            height: 550px;
+        }
+
+        .row div:nth-child(1) {
+            height: 400px;
+        }
+
+        .product-section {
+            height: auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .row {
+            width: 100%;
+            flex-direction: column;
+            margin: 10px;
+        }
+
+        .row div {
+            width: 100%;
+            height: 550px;
+        }
+
+        .row div:nth-child(1) {
+            height: 400px;
+        }
+
+        .product-section {
+            height: auto;
+        }
+    }
+</style>

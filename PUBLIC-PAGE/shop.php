@@ -28,13 +28,12 @@
         ?>
     </div>
     <?php
-    include "component/content-2.php"
-    ?> 
-    
+    include "component/shop-general.php"
+    ?>
     <?php
     include "component/content-6.php"
-    ?> 
-    
+    ?>
+
 </body>
 
 </html>

@@ -293,4 +293,21 @@
     .text-column {
         width: 25%;
     }
+
+    .btn {
+        font-weight: 600;
+        padding: 16px 34px;
+        border-radius: 30px;
+        color: #eff2f1;
+        ;
+        background: #2f2f2f;
+        border-color: #2f2f2f;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        color: #ffffff;
+        background: #222222;
+        border-color: #222222;
+    }
 </style>
