@@ -2,8 +2,9 @@
     <div class="child">
         <div class="left-side-ct1">
             <div class="div-1">
-                Modern Interior <br>
-                Design Studio
+                <?php
+                    echo "$Content1IndexFontContent";
+                ?>
             </div>
             <div class="div-2">
                 Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.

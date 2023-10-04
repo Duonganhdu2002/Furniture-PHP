@@ -10,6 +10,7 @@
         shopModule.style.display = 'none';
     });
 </script>
+
 <?php
 $link = new mysqli("localhost", "root", "", "shopping_online");
 $sql = "select * from categories";
@@ -21,9 +22,9 @@ $result = $link->query($sql);
             <a href="">Brand<span>.</span></a>
         </div>
         <div class="menu">
-            <div><a class="menu-link" href="index.php">Home</a></div>
+            <div><a style="<?php echo $headerHomeHomeLinkCss ?>" class="menu-link" href="index.php">Home</a></div>
             <div class="shop-container">
-                <a class="menu-link" href="shop.php">Shop</a>
+                <a style="<?php echo $headerHomeShopLinkCss ?>" class="menu-link" href="shop.php">Shop</a>
                 <div class="shop-module">
                     <ul style="list-style: none; padding-right: 40px; padding-left: 0px">
                         <?php
@@ -37,10 +38,10 @@ $result = $link->query($sql);
                     </ul>
                 </div>
             </div>
-            <div><a class="menu-link" href="about-us.php">About us</a></div>
-            <div><a class="menu-link" href="services.php">Services</a></div>
-            <div><a class="menu-link" href="blog.php">Blog</a></div>
-            <div><a class="menu-link" href="contact-us.php">Contact us</a></div>
+            <div><a style="<?php echo $headerHomeAboutUsLinkCss ?>" class="menu-link" href="about-us.php">About us</a></div>
+            <div><a style="<?php echo $headerHomeServicesLinkCss ?>" class="menu-link" href="services.php">Services</a></div>
+            <div><a style="<?php echo $headerHomeBlogLinkCss ?>" class="menu-link" href="blog.php">Blog</a></div>
+            <div><a style="<?php echo $headerHomeContactUsLinkCss ?>" class="menu-link" href="contact-us.php">Contact us</a></div>
         </div>
         <div class="user-cart-icon">
             <div class="user-icon">

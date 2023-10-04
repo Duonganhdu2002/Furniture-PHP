@@ -16,12 +16,14 @@
 <body style="background-color: #eff2f1;">
     <div style="background-color: #3b5d50;">
         <?php
+        $headerHomeShopLinkCss = "opacity: 1;";
         include "component/header.php";
         ?>
         <?php
         include "component/menu-click-icon.php";
         ?>
         <?php
+        $Content1IndexFontContent = "Shop";
         include "component/content-1.php";
         ?>
     </div>
