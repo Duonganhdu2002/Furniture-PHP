@@ -11,13 +11,12 @@ $result2 = $link->query($sql2);
     ?>
         <div class="product-section">
             <div class="row">
-                <!-- Start Column 1 -->
+
                 <div>
                     <h2 class="section-title"><?php echo $row["category_name"]; ?></h2>
                     <p style="" class="section-decrition"><?php echo $row["description"]; ?></p>
                     <p><a href="../shop/<?php echo $row["url"]; ?>" class="btn">Explore</a></p>
                 </div>
-                <!-- End Column 1 -->
 
                 <?php
                 for ($itemCount = 0; ($row = $result2->fetch_assoc()) && ($itemCount < 3); $itemCount++) {
@@ -107,7 +106,7 @@ $result2 = $link->query($sql2);
     .product-thumbnail {
         margin-bottom: 30px;
         position: relative;
-        width: 100%;
+        width: 90%;
         -webkit-transition: .3s all ease;
         -o-transition: .3s all ease;
         transition: .3s all ease;
