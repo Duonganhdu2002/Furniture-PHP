@@ -1,31 +1,44 @@
 <?php
 $link = new mysqli("localhost", "root", "", "shopping_online");
-$sql1 = "select * from categories";
-$sql2 = "select * from products";
-$result1 = $link->query($sql1);
-$result2 = $link->query($sql2);
+
+$sqlIdArray = "SELECT id FROM categories";
+$resultIdArray = $link->query($sqlIdArray);
+$category_ids = array();
+
+if ($resultIdArray->num_rows > 0) {
+    while ($row = $resultIdArray->fetch_assoc()) {
+        $category_ids[] = $row["id"];
+    }
+} else {
+    echo "Không có dữ liệu trong bảng categories";
+}
+
+foreach ($category_ids as $category_id) {
+    $sql1 = "SELECT * FROM categories WHERE id = $category_id";
+    $result1 = $link->query($sql1);
+
+    if ($result1->num_rows > 0) {
+        $row1 = $result1->fetch_assoc();
 ?>
-<div style="margin-bottom: 120px; height: auto; width: 100%;">
-    <?php
-    while ($row = $result1->fetch_assoc()) {
-    ?>
         <div class="product-section">
             <div class="row">
-
                 <div>
-                    <h2 class="section-title"><?php echo $row["category_name"]; ?></h2>
-                    <p style="" class="section-decrition"><?php echo $row["description"]; ?></p>
-                    <p><a href="../shop/<?php echo $row["url"]; ?>" class="btn">Explore</a></p>
+                    <h2 class="section-title"><?php echo $row1["category_name"]; ?></h2>
+                    <p style="" class="section-decrition"><?php echo $row1["description"]; ?></p>
+                    <p><a href="../shop/<?php echo $row1["url"]; ?>" class="btn">Explore</a></p>
                 </div>
 
                 <?php
-                for ($itemCount = 0; ($row = $result2->fetch_assoc()) && ($itemCount < 3); $itemCount++) {
+                $sqlid1 = "SELECT * FROM products WHERE category_id = $category_id";
+                $resultid1 = $link->query($sqlid1);
+
+                while ($row2 = $resultid1->fetch_assoc()) {
                 ?>
                     <div>
                         <a class="product-item" href="cart.html">
-                            <img src="images/chairs/<?php echo $row["image"]; ?>" class="product-thumbnail">
-                            <h3 class="product-title"><?php echo $row["product_name"]; ?></h3>
-                            <strong class="product-price"><?php echo $row["price"]; ?></strong>
+                            <img src="images/chairs/<?php echo $row2["image"]; ?>" class="product-thumbnail">
+                            <h3 class="product-title"><?php echo $row2["product_name"]; ?></h3>
+                            <strong class="product-price"><?php echo $row2["price"]; ?></strong>
                             <span class="icon-cross">
                                 <img src="images/cross.svg">
                             </span>
@@ -36,9 +49,10 @@ $result2 = $link->query($sql2);
                 ?>
             </div>
         </div>
-    <?php
+<?php
     }
-    ?>
+}
+?>
 
 </div>
 <style>
@@ -79,7 +93,7 @@ $result2 = $link->query($sql2);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 900px;
+        height: 700px;
     }
 
 
