@@ -32,6 +32,7 @@ foreach ($category_ids as $category_id) {
                 $sqlid1 = "SELECT * FROM products WHERE category_id = $category_id";
                 $resultid1 = $link->query($sqlid1);
 
+                $i = 0; 
                 while ($row2 = $resultid1->fetch_assoc()) {
                 ?>
                     <div>
@@ -45,6 +46,10 @@ foreach ($category_ids as $category_id) {
                         </a>
                     </div>
                 <?php
+                    $i++;
+                    if ($i >= 3) {
+                        break; 
+                    }
                 }
                 ?>
             </div>
