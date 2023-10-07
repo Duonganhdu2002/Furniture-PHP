@@ -24,6 +24,7 @@
         ?>
         <?php
         $Content1IndexFontContent = "Blog";
+        $Content1IndexPresentContent = "Uncover serenity at home. Explore minimalist design, functional elegance, and mindful living in our latest blog. Elevate your space with simplicity. #HomeSanctuary";
         include "component/content-1.php";
         ?>
     </div>

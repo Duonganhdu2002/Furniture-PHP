@@ -24,6 +24,7 @@
         ?>
         <?php
         $Content1IndexFontContent = "Services";
+        $Content1IndexPresentContent = "Elevate your experience with services as exceptional as our designs. Welcome to a new standard of curated living";
         include "component/content-1.php";
         ?>
     </div>

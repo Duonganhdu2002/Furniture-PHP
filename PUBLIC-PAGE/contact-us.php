@@ -24,6 +24,7 @@
         ?>
         <?php
         $Content1IndexFontContent = "Contact us";
+        $Content1IndexPresentContent = "We look forward to assisting you in creating your ideal space!";
         include "component/content-1.php";
         ?>
     </div>

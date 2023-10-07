@@ -24,6 +24,7 @@
         ?>
         <?php
         $Content1IndexFontContent = "About us";
+        $Content1IndexPresentContent = "Elevate your space with our curated collection of modern designs. We believe in blending style and comfort, making every piece a statement of contemporary living. Thank you for choosing us as your partner in creating a home that reflects your unique style.";
         include "component/content-1.php";
         ?>
     </div>
