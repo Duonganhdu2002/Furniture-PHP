@@ -99,6 +99,7 @@ foreach ($category_ids as $category_id) {
         justify-content: center;
         align-items: center;
         height: 700px;
+        margin-bottom: 80px;
     }
 
 
