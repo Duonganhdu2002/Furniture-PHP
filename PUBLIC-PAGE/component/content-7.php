@@ -50,7 +50,54 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
 
 </body>
 
 </html>
+=======
+        
+    </body>
+</html>
+<!--End-->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+*{
+    margin: 10px;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-family: 'poppins',sans-serif;
+    
+}
+h2{
+    color: gray;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.pictute1{
+    position: relative;
+    width: 350px;
+    height: 450px;
+    background: transparent;
+    border: none;
+    float: left;
+    margin-top: 0px;
+}
+.ha1{
+    max-width: 300px;
+    height: 300px;
+    border-radius: 15px;
+    
+}
+.hinhanh{
+    padding: 0px;
+    content: "";
+    clear: both;
+    display: table;
+    height: auto;
+    
+}
+
+</style>
+>>>>>>> e2665e81800de9c7cef808aa35a93c168c1df9d8
