@@ -51,3 +51,44 @@
         
     </body>
 </html>
+<!--End-->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+*{
+    margin: 10px;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-family: 'poppins',sans-serif;
+    
+}
+h2{
+    color: gray;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.pictute1{
+    position: relative;
+    width: 350px;
+    height: 450px;
+    background: transparent;
+    border: none;
+    float: left;
+    margin-top: 0px;
+}
+.ha1{
+    max-width: 300px;
+    height: 300px;
+    border-radius: 15px;
+    
+}
+.hinhanh{
+    padding: 0px;
+    content: "";
+    clear: both;
+    display: table;
+    height: auto;
+    
+}
+
+</style>
