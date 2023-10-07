@@ -19,7 +19,7 @@ $result = $link->query($sql);
 <div class="header">
     <div class="header-child">
         <div class="logo-brand">
-            <a href="">Brand<span>.</span></a>
+            <a href="">Nova<span>.</span></a>
         </div>
         <div class="menu">
             <div><a style="<?php echo $headerHomeHomeLinkCss ?>" class="menu-link" href="index.php">Home</a></div>

@@ -39,8 +39,8 @@
 
         <div style="display: flex; margin-bottom: 60px">
             <div style="width: 30%;">
-                <div style="font-weight: bold;" class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Furni<span>.</span></a></div>
-                <p style="line-height: 1.8; font-size: 14px; opacity: 0.7" class="mb-4">Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant</p>
+                <div style="font-weight: bold;" class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Nova<span>.</span></a></div>
+                <p style="line-height: 1.8; font-size: 14px; opacity: 0.7" class="mb-4">Welcome to Nova - where sophistication meets comfort. Discover a curated selection of exquisite furniture pieces, from cozy chairs to stylish tables, all tailored to elevate every living space. Step into a new realm of living with Nova - where furniture comes to life with vibrancy and allure.</p>
 
                 <ul style="display: flex; justify-content: start;" class="custom-social">
                     <li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>

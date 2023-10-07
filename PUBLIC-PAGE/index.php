@@ -25,6 +25,7 @@
         ?>
         <?php
         $Content1IndexFontContent = "Modern Interior <br> Design Studio";
+        $Content1IndexPresentContent = "Explore unique and elegant furnishings at NOVA. Elevate your space with our curated collection of stylish and comfortable pieces. Discover living redefined at NOVA.        ";
         include "component/content-1.php";
         ?>
     </div>

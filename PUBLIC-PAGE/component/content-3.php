@@ -7,7 +7,7 @@
                     <h2 class="section-title">Why Choose Us</h2>
                 </div>
                 <div>
-                    <p class="descrition">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+                    <p class="descrition">Choose us for unparalleled quality and style. Our curated selection features meticulously crafted pieces, blending functionality with aesthetics. Elevate your living space with confidence.</p>
                 </div>
             </div>
             <div class="for-stack">
@@ -17,14 +17,14 @@
                             <img src="images/truck.svg" alt="Image" class="imf-fluid">
                         </div>
                         <h3>Fast &amp; Free Shipping</h3>
-                        <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                        <p>Swift & Complimentary Shipping – Your Orders, Our Priority. Experience Seamless Shopping.</p>
                     </div>
                     <div class="feature">
                         <div class="icon">
                             <img src="images/bag.svg" alt="Image" class="imf-fluid">
                         </div>
                         <h3>Easy to Shop</h3>
-                        <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                        <p>Effortless Shopping Experience – Simplify Your Lifestyle with Ease.</p>
                     </div>
                 </div>
                 <div class="two-stack">
@@ -33,14 +33,14 @@
                             <img src="images/support.svg" alt="Image" class="imf-fluid">
                         </div>
                         <h3>24/7 Support</h3>
-                        <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                        <p>Always There for You – 24/7 Support for Seamless Assistance.</p>
                     </div>
                     <div class="feature">
                         <div class="icon">
                             <img src="images/return.svg" alt="Image" class="imf-fluid">
                         </div>
                         <h3>Hassle Free Returns</h3>
-                        <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+                        <p>Stress-Free Returns – Your Satisfaction, Our Commitment</p>
                     </div>
                 </div>
             </div>

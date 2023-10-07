@@ -14,18 +14,18 @@
             <h2 class="section-title-ct4">
                 We Help You Make Modern Interior Design
             </h2>
-            <p class="text-ct4">Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+            <p class="text-ct4">We go beyond selling furniture; we're your partners in creating modern interior masterpieces. Let us guide you through a curated selection, turning your vision into a sophisticated reality. Elevate your space with our expertly crafted pieces, where style meets innovation, making your home uniquely yours.</p>
             <div>
                 <div>
                     <ul class="custom-list">
-                        <li>Donec vitae odio quis nisl dapibus malesuada</li>
-                        <li>Donec vitae odio quis nisl dapibus malesuada</li>
+                        <li>Discover chic furniture curated for contemporary homes.</li>
+                        <li>Trendy and practical pieces for smart, modern living.</li>
                     </ul>
                 </div>
                 <div>
                     <ul class="custom-list">
-                        <li>Donec vitae odio quis nisl dapibus malesuada</li>
-                        <li>Donec vitae odio quis nisl dapibus malesuada</li>
+                        <li>Our design team ensures your choices match the latest trends.</li>
+                        <li>Stylish furniture crafted to endure the test of time.</li>
                     </ul>
                 </div>
             </div>

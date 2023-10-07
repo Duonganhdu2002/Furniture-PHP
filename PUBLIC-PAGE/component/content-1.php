@@ -3,11 +3,13 @@
         <div class="left-side-ct1">
             <div class="div-1">
                 <?php
-                    echo "$Content1IndexFontContent";
+                echo "$Content1IndexFontContent";
                 ?>
             </div>
             <div class="div-2">
-                Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.
+                <?php
+                echo "$Content1IndexPresentContent";
+                ?>
             </div>
             <div class="div-3">
                 <div>
