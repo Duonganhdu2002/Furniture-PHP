@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 18, 2023 lúc 10:15 AM
+-- Thời gian đã tạo: Th10 07, 2023 lúc 11:08 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -20,6 +20,42 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `shopping_online`
 --
+
+DELIMITER $$
+--
+-- Thủ tục
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertDummyData` ()   BEGIN
+  DECLARE category_id INT;
+  DECLARE done INT DEFAULT FALSE;
+
+  -- Declare cursor for category_ids
+  DECLARE cur CURSOR FOR SELECT id FROM categories;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+  OPEN cur;
+
+  read_loop: LOOP
+    FETCH cur INTO category_id;
+    IF done THEN
+      LEAVE read_loop;
+    END IF;
+
+    -- Insert 5 products for each category
+    SET @i = 1;
+    WHILE @i <= 5 DO
+      INSERT INTO `products` (`category_id`, `brand_id`, `product_name`, `description`, `image`, `price`, `stock_quantity`)
+      VALUES
+        (category_id, FLOOR(RAND() * (SELECT MAX(id) FROM brands) + 1), CONCAT('Product', @i), CONCAT('Description for Product', @i),
+        CONCAT('product', @i, '.jpg'), ROUND(RAND() * 500 + 50, 2), FLOOR(RAND() * 50 + 1));
+      SET @i = @i + 1;
+    END WHILE;
+  END LOOP;
+
+  CLOSE cur;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -56,7 +92,6 @@ CREATE TABLE `brands` (
   `id` int(11) NOT NULL,
   `brand_name` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `website` text DEFAULT NULL,
   `logo` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -64,10 +99,27 @@ CREATE TABLE `brands` (
 -- Đang đổ dữ liệu cho bảng `brands`
 --
 
-INSERT INTO `brands` (`id`, `brand_name`, `description`, `website`, `logo`) VALUES
-(4, 'IKEA', 'Furniture Retailer', 'https://www.ikea.com', 'ikea-logo.png'),
-(5, 'Ashley Furniture', 'Furniture Manufacturer', 'https://www.ashleyfurniture.com', 'ashley-logo.png'),
-(6, 'Wayfair', 'Online Furniture Retailer', 'https://www.wayfair.com', 'wayfair-logo.png');
+INSERT INTO `brands` (`id`, `brand_name`, `description`, `logo`) VALUES
+(1, 'IKEA', 'Furniture Retailer', 'ikea-logo.png'),
+(2, 'Ashley Furniture', 'Furniture Manufacturer', 'ashley-logo.png'),
+(3, 'Wayfair', 'Online Furniture Retailer', 'wayfair-logo.png'),
+(4, 'Rooms To Go', 'Furniture Retail Chain', 'roomstogo-logo.png'),
+(5, 'La-Z-Boy', 'Furniture Manufacturer', 'lazboy-logo.png'),
+(6, 'Herman Miller', 'Modern Furniture Design', 'hermanmiller-logo.png'),
+(7, 'Crate & Barrel', 'Home Furnishings Retailer', 'crateandbarrel-logo.png'),
+(8, 'Ethan Allen', 'Furniture Manufacturer and Retailer', 'ethanallen-logo.png'),
+(9, 'Pottery Barn', 'Home Furnishings Retailer', 'potterybarn-logo.png'),
+(10, 'Bob\'s Discount Furniture', 'Discount Furniture Retailer', 'bobsdiscount-logo.png'),
+(11, 'Arhaus', 'Home Furnishings Retailer', 'arhaus-logo.png'),
+(12, 'West Elm', 'Modern Furniture and Decor', 'westelm-logo.png'),
+(13, 'Raymour & Flanigan', 'Furniture and Mattress Retailer', 'raymourflanigan-logo.png'),
+(14, 'Havertys', 'Furniture Retailer', 'havertys-logo.png'),
+(15, 'Jonathan Adler', 'Modern American Glamour', 'jonathanadler-logo.png'),
+(16, 'Bernhardt Furniture', 'Luxury Furniture Manufacturer', 'bernhardt-logo.png'),
+(17, 'BoConcept', 'Modern Danish Design', 'boconcept-logo.png'),
+(18, 'Stanley Furniture', 'Quality Furniture Since 1924', 'stanleyfurniture-logo.png'),
+(19, 'Broyhill Furniture', 'Classic American Furniture', 'broyhill-logo.png'),
+(20, 'Sauder Furniture', 'Ready-to-Assemble Furniture', 'sauder-logo.png');
 
 -- --------------------------------------------------------
 
@@ -82,15 +134,6 @@ CREATE TABLE `cart_items` (
   `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Đang đổ dữ liệu cho bảng `cart_items`
---
-
-INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
-(4, 1, 4, 3),
-(5, 2, 5, 2),
-(6, 3, 6, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -100,17 +143,42 @@ INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `parent_category_id` int(11) DEFAULT NULL,
-  `category_name` varchar(255) DEFAULT NULL
+  `category_name` varchar(50) DEFAULT NULL,
+  `url` varchar(50) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `categories`
 --
 
-INSERT INTO `categories` (`id`, `parent_category_id`, `category_name`) VALUES
-(4, NULL, 'Furniture'),
-(5, 4, 'Living Room'),
-(6, 4, 'Bedroom');
+INSERT INTO `categories` (`id`, `parent_category_id`, `category_name`, `url`, `description`) VALUES
+(1, 1, 'Table', 'table.php', 'A table, be it for dining or work, is a practical centerpiece in any space. Its design and material contribute to the overall aesthetic, reflecting both function and style. Tables bring people together, facilitating meals, conversations, or work, and serv'),
+(2, 3, 'Chair', 'chair.php', 'A chair is more than a seat; it\'s a design element and comfort hub. From dining to lounging, chairs merge style with function, inviting moments of relaxation and connection in any space.\r\n\r\n\r\n\r\n\r\n'),
+(3, NULL, 'Bathtub', 'bathtub.php', 'Immerse yourself in maximum comfort with our luxurious bathtubs. Modern design, premium materials, and a convenient bathing experience. Relax in personal space.'),
+(4, NULL, 'Bed', 'bed.php', 'Discover a wide range of comfortable and stylish beds for a restful night\'s sleep. From classic designs to modern styles, our Beds collection ensures quality and elegance. Transform your bedroom into a cozy haven with our premium Bed selection.'),
+(7, NULL, 'Led', 'led.php', 'Illuminate your space with cutting-edge LED lighting solutions. Our LED category offers a diverse range of energy-efficient lighting options suitable for various applications. From stylish LED fixtures for your home to robust industrial-grade lighting sol'),
+(8, NULL, 'Mirror', 'mirror.php', 'Reflect your style with our elegant collection of mirrors. From sleek modern designs to timeless classics, find the perfect mirror to enhance any space.'),
+(9, NULL, 'Shelves', 'shelves.php', 'Organize in style with our diverse range of shelves. Explore functional and decorative shelves for every room, crafted to elevate your storage and display solutions.'),
+(10, NULL, 'Sink', 'sink.php', 'Elevate your bathroom or kitchen with our premium sinks. Choose from a variety of styles and materials, each designed for durability and aesthetic appeal.'),
+(11, NULL, 'Sofa', 'sofa.php', 'Indulge in comfort with our luxurious sofa collection. From contemporary to classic designs, each sofa is crafted for relaxation and adds a touch of elegance to your living space.'),
+(12, NULL, 'Tapestry', 'tapestry.php', 'Transform your walls with our artistic tapestries. Explore a rich array of colors and designs, each tapestry telling a unique story and adding a bohemian touch to your space.'),
+(13, NULL, 'Toilet', 'toilet.php', 'Upgrade your bathroom experience with our modern toilets. Discover efficient and stylish options designed for comfort, cleanliness, and water conservation.'),
+(14, NULL, 'Wardrobe', 'wardrobe.php', 'Organize your attire with our stylish wardrobes. From spacious modern closets to classic armoires, find the perfect wardrobe to complement your bedroom.');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `display_product`
+--
+
+CREATE TABLE `display_product` (
+  `id` int(11) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `url` varchar(50) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -172,15 +240,6 @@ CREATE TABLE `order_items` (
   `price` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Đang đổ dữ liệu cho bảng `order_items`
---
-
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
-(1, 1, 4, 2, 1999.98),
-(2, 1, 5, 1, 1099.99),
-(3, 2, 6, 3, 389.97);
-
 -- --------------------------------------------------------
 
 --
@@ -227,9 +286,245 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `brand_id`, `product_name`, `description`, `image`, `price`, `stock_quantity`) VALUES
-(4, 4, 4, 'IKEA Hemnes Sofa', 'Comfortable and stylish sofa', NULL, 499.99, 20),
-(5, 5, 5, 'Ashley Furniture King Bed', 'Elegant king-size bed frame', NULL, 799.99, 10),
-(6, 6, 6, 'Wayfair Coffee Table', 'Modern coffee table with storage', NULL, 149.99, 30);
+(1, 1, 1, 'Solid Wood Dining Table', 'A beautiful dining table made from solid wood, suitable for family gatherings and dinner parties.', 'table-1.png', 499.99, 20),
+(2, 1, 2, 'Extendable Glass Dining Table', 'Modern and stylish glass dining table with an extendable feature, perfect for contemporary homes.', 'table-2.png', 699.99, 15),
+(3, 1, 3, 'Rustic Farmhouse Table', 'A charming farmhouse-style table crafted from reclaimed wood, adding warmth to your dining space.', 'table-3.png', 599.99, 18),
+(4, 1, 1, 'Round Pedestal Dining Table', 'Elegant round pedestal dining table, ideal for smaller spaces and intimate dinners.', 'table-4.png', 449.99, 25),
+(5, 1, 2, 'Industrial Style Dining Table', 'Dining table with an industrial design, featuring metal accents and a robust construction.', 'table-5.png', 549.99, 22),
+(6, 1, 3, 'Mid-Century Modern Dining Table', 'Iconic mid-century modern dining table, combining style and functionality.', 'table-6.png', 799.99, 12),
+(7, 1, 4, 'Glass Top Patio Table', 'Outdoor dining table with a glass top, perfect for enjoying meals in your garden or patio.', 'table-7.png', 299.99, 30),
+(8, 1, 1, 'Rectangular Oak Dining Table', 'Classic rectangular oak dining table, a timeless addition to your dining room.', 'table-8.png', 649.99, 17),
+(9, 1, 2, 'White Marble Top Dining Table', 'Luxurious dining table featuring a white marble top and elegant design.', 'table-9.png', 899.99, 10),
+(10, 1, 3, 'Foldable Space-Saving Table', 'Innovative foldable table design, perfect for small apartments or multipurpose rooms.', 'table-10.png', 349.99, 28),
+(11, 1, 4, 'Walnut Finish Dining Table', 'Dining table with a rich walnut finish, bringing warmth and sophistication to your space.', 'table-11.png', 579.99, 14),
+(12, 1, 1, 'Glass and Chrome Dining Table', 'Contemporary dining table featuring a glass top and chrome accents, creating a sleek look.', 'table-12.png', 749.99, 16),
+(13, 1, 2, 'Live Edge Wood Dining Table', 'Unique live edge wood dining table, showcasing the natural beauty of the wood grain.', 'table-13.png', 999.99, 8),
+(14, 1, 3, 'Counter Height Dining Table', 'Stylish counter height dining table, perfect for casual meals and entertaining.', 'table-14.png', 479.99, 20),
+(15, 1, 4, 'Vintage Drop-Leaf Table', 'Charming vintage drop-leaf dining table, offering versatility and a touch of nostalgia.', 'table-15.png', 399.99, 24),
+(16, 1, 1, 'Concrete Top Outdoor Table', 'Modern outdoor dining table with a durable concrete top, ideal for al fresco dining.', 'table-16.png', 699.99, 18),
+(17, 1, 2, 'Cherry Wood Dining Table', 'Elegant cherry wood dining table with intricate detailing, a classic choice for any dining room.', 'table-17.png', 829.99, 13),
+(18, 1, 3, 'Square Glass Bistro Table', 'Compact square glass bistro table, perfect for creating a cozy dining nook.', 'table-18.png', 299.99, 26),
+(19, 1, 4, 'Folding Picnic Table', 'Portable folding picnic table, great for outdoor activities and picnics.', 'table-19.png', 149.99, 40),
+(20, 1, 1, 'Espresso Finish Dining Table', 'Dining table with an espresso finish, blending modern style with warmth.', 'table-20.png', 549.99, 15),
+(21, 2, 5, 'Leather Upholstered Chair', 'Comfortable leather upholstered chair with a modern design, perfect for your living room or office.', 'chair-1.png', 199.99, 30),
+(22, 2, 6, 'Wooden Accent Chair', 'Stylish wooden accent chair featuring a unique design, adding a touch of sophistication to any space.', 'chair-2.png', 149.99, 25),
+(23, 2, 7, 'Swivel Lounge Chair', 'Lounge chair with a swivel feature, providing flexibility and comfort for a relaxing experience.', 'chair-3.png', 249.99, 20),
+(24, 2, 5, 'Velvet Armchair', 'Elegant velvet armchair with plush upholstery, creating a luxurious and inviting seating area.', 'chair-4.png', 299.99, 18),
+(25, 2, 6, 'Mid-Century Modern Armchair', 'Iconic mid-century modern armchair, combining comfort with a timeless design aesthetic.', 'chair-5.png', 279.99, 22),
+(26, 2, 7, 'Wingback Accent Chair', 'Classic wingback accent chair, featuring a high back and winged sides for a regal look.', 'chair-6.png', 229.99, 28),
+(27, 2, 8, 'Metal Frame Dining Chair', 'Dining chair with a sturdy metal frame, providing durability and a modern industrial look.', 'chair-7.png', 119.99, 35),
+(28, 2, 5, 'Leather Recliner Chair', 'Relaxing leather recliner chair with multiple reclining positions for personalized comfort.', 'chair-8.png', 349.99, 15),
+(29, 2, 6, 'Tufted Velvet Side Chair', 'Chic tufted velvet side chair, perfect for adding a touch of glamour to your dining area.', 'chair-9.png', 169.99, 30),
+(30, 2, 7, 'Sleek Modern Office Chair', 'Sleek and modern office chair with adjustable features, ideal for a stylish and comfortable workspace.', 'chair-10.png', 199.99, 25),
+(31, 2, 8, 'Acrylic Ghost Chair', 'Transparent acrylic ghost chair, a contemporary piece that adds a minimalist and airy feel to any room.', 'chair-11.png', 159.99, 20),
+(32, 2, 5, 'Rattan Accent Chair', 'Natural rattan accent chair, bringing a bohemian touch to your living space with its organic texture.', 'chair-12.png', 189.99, 22),
+(33, 2, 6, 'Plush Lounge Chaise', 'Plush lounge chaise with a curved design, providing a comfortable and stylish spot for relaxation.', 'chair-13.png', 279.99, 18),
+(34, 2, 7, 'Eames Style Dining Chair', 'Timeless Eames style dining chair, known for its ergonomic design and versatility.', 'chair-14.png', 129.99, 28),
+(35, 2, 8, 'Cotton Upholstered Armchair', 'Cotton upholstered armchair with a casual and cozy design, perfect for reading corners.', 'chair-15.png', 169.99, 24),
+(36, 2, 5, 'Modern Rocking Chair', 'Contemporary rocking chair with a modern twist, providing a soothing and stylish rocking experience.', 'chair-16.png', 199.99, 20),
+(37, 2, 6, 'Wire Frame Accent Chair', 'Wire frame accent chair with a minimalist design, adding an industrial touch to your space.', 'chair-17.png', 139.99, 30),
+(38, 2, 7, 'Convertible Sleeper Chair', 'Versatile convertible sleeper chair, serving as both a comfortable chair and an extra bed when needed.', 'chair-18.png', 249.99, 15),
+(39, 2, 8, 'Linen Upholstered Dining Chair', 'Linen upholstered dining chair with a classic look, suitable for both formal and casual dining spaces.', 'chair-19.png', 159.99, 28),
+(40, 2, 5, 'Sculptural Lounge Chair', 'Artistic sculptural lounge chair, making a statement in any room with its unique and creative design.', 'chair-20.png', 299.99, 18),
+(41, 3, 10, 'Freestanding Bathtub', 'Luxurious freestanding bathtub with modern design, providing a spa-like experience in your bathroom.', 'bathtub-1.png', 899.99, 15),
+(42, 3, 11, 'Clawfoot Soaking Tub', 'Elegant clawfoot soaking tub with a vintage-inspired design, creating a focal point in your bathroom.', 'bathtub-2.png', 1199.99, 10),
+(43, 3, 12, 'Oval Drop-In Bathtub', 'Sleek oval drop-in bathtub with clean lines, offering a contemporary look for your bathroom space.', 'bathtub-3.png', 1099.99, 12),
+(44, 3, 10, 'Corner Whirlpool Tub', 'Space-saving corner whirlpool tub with hydrotherapy features, bringing relaxation to a new level.', 'bathtub-4.png', 1499.99, 8),
+(45, 3, 11, 'Modern Square Bathtub', 'Modern square bathtub with a geometric design, blending functionality with a touch of sophistication.', 'bathtub-5.png', 1299.99, 10),
+(46, 3, 12, 'Wooden Soaking Tub', 'Unique wooden soaking tub with a natural aesthetic, adding warmth and character to your bathroom.', 'bathtub-6.png', 1599.99, 6),
+(47, 3, 13, 'Round Freestanding Tub', 'Round freestanding tub with a minimalistic look, perfect for creating a serene and stylish bathing area.', 'bathtub-7.png', 899.99, 15),
+(48, 3, 14, 'Copper Slipper Tub', 'Copper slipper tub with an antique-inspired design, making a bold statement in your bathroom decor.', 'bathtub-8.png', 1799.99, 5),
+(49, 3, 10, 'Double Ended Clawfoot Tub', 'Double ended clawfoot tub with a symmetrical design, offering a comfortable and classic bathing experience.', 'bathtub-9.png', 1299.99, 8),
+(50, 3, 11, 'Rectangular Drop-In Tub', 'Rectangular drop-in tub with sleek lines, providing a contemporary and versatile option for your bathroom.', 'bathtub-10.png', 1399.99, 10),
+(51, 3, 12, 'Stone Soaking Bathtub', 'Stone soaking bathtub with a natural and organic look, creating a spa-like atmosphere in your home.', 'bathtub-11.png', 1699.99, 7),
+(52, 3, 13, 'Acrylic Oval Tub', 'Acrylic oval tub with a simple and elegant design, offering durability and easy maintenance.', 'bathtub-12.png', 999.99, 12),
+(53, 3, 14, 'Freestanding Slipper Tub', 'Freestanding slipper tub with a timeless slipper shape, enhancing the aesthetic of your bathroom.', 'bathtub-13.png', 1499.99, 8),
+(54, 3, 10, 'Built-In Whirlpool Tub', 'Built-in whirlpool tub with advanced hydrotherapy features, providing a spa-like experience at home.', 'bathtub-14.png', 1999.99, 5),
+(55, 3, 11, 'Glass-Enclosed Bathtub', 'Innovative glass-enclosed bathtub with a modern design, creating a seamless and stylish bathing space.', 'bathtub-15.png', 1799.99, 6),
+(56, 3, 12, 'Square Drop-In Tub', 'Square drop-in tub with a contemporary and geometric design, adding a modern touch to your bathroom.', 'bathtub-16.png', 1199.99, 10),
+(57, 3, 13, 'Cast Iron Slipper Tub', 'Cast iron slipper tub with a durable and classic design, offering both style and functionality.', 'bathtub-17.png', 1599.99, 7),
+(58, 3, 14, 'Wooden Barrel Soaking Tub', 'Wooden barrel soaking tub with a rustic and charming appearance, creating a unique focal point in your bathroom.', 'bathtub-18.png', 2099.99, 4),
+(59, 3, 10, 'Modern Freestanding Tub', 'Modern freestanding tub with clean lines and a sleek silhouette, bringing a contemporary vibe to your bathroom.', 'bathtub-19.png', 1399.99, 9),
+(60, 3, 11, 'Round Soaking Tub', 'Round soaking tub with a minimalist design, offering a simple and stylish bathing option for your home.', 'bathtub-20.png', 1099.99, 11),
+(61, 4, 15, 'King Size Bed', 'Luxurious king-size bed with a timeless design, providing ultimate comfort for a restful night\'s sleep.', 'bed-1.jpg', 1599.99, 10),
+(62, 4, 16, 'Queen Size Platform Bed', 'Elegant queen-size platform bed with a contemporary look, offering both style and functionality.', 'bed-2.jpg', 1199.99, 12),
+(63, 4, 17, 'Modern Storage Bed', 'Modern storage bed with built-in drawers, optimizing space and providing a sleek bedroom solution.', 'bed-3.jpg', 1399.99, 8),
+(64, 4, 18, 'Upholstered Sleigh Bed', 'Upholstered sleigh bed with a luxurious design, adding a touch of sophistication to your bedroom decor.', 'bed-4.jpg', 1799.99, 6),
+(65, 4, 19, 'Canopy Bed Frame', 'Elegant canopy bed frame with a romantic and classic design, creating a focal point in your bedroom.', 'bed-5.jpg', 1999.99, 5),
+(66, 4, 20, 'Mid-Century Modern Bed', 'Mid-century modern bed with clean lines and tapered legs, bringing a retro charm to your bedroom space.', 'bed-6.jpg', 1299.99, 12),
+(67, 4, 15, 'Platform Storage Bed', 'Platform storage bed with a sleek and functional design, offering ample storage space for your bedroom essentials.', 'bed-7.jpg', 1499.99, 10),
+(68, 4, 16, 'Tufted Wingback Bed', 'Tufted wingback bed with a classic and elegant design, creating a luxurious atmosphere in your bedroom.', 'bed-8.jpg', 1699.99, 9),
+(69, 4, 17, 'Rustic Wooden Bed', 'Rustic wooden bed with a charming and natural appearance, adding warmth and character to your bedroom decor.', 'bed-9.jpg', 1599.99, 10),
+(70, 4, 18, 'Four Poster Bed', 'Four poster bed with a traditional and grand design, making a bold statement in your bedroom space.', 'bed-10.jpg', 2199.99, 4),
+(71, 4, 19, 'Leather Upholstered Bed', 'Leather upholstered bed with a modern and luxurious look, offering both comfort and style in your bedroom.', 'bed-11.jpg', 1899.99, 6),
+(72, 4, 20, 'Sleigh Bed with Storage', 'Sleigh bed with integrated storage drawers, providing a stylish and practical solution for your bedroom.', 'bed-12.jpg', 1799.99, 7),
+(73, 4, 15, 'Floating Platform Bed', 'Floating platform bed with a minimalist design, giving the illusion of weightlessness for a contemporary bedroom look.', 'bed-13.jpg', 1299.99, 12),
+(74, 4, 16, 'Industrial Pipe Bed Frame', 'Industrial pipe bed frame with a rugged and urban design, adding an edgy touch to your bedroom decor.', 'bed-14.jpg', 1499.99, 9),
+(75, 4, 17, 'Adjustable Bed Base', 'Adjustable bed base with customizable positions, providing personalized comfort and support for a good night\'s sleep.', 'bed-15.jpg', 2499.99, 3),
+(76, 4, 18, 'Classic Wooden Bed', 'Classic wooden bed with a timeless design, offering durability and a traditional aesthetic for your bedroom.', 'bed-16.jpg', 1699.99, 8),
+(77, 4, 19, 'Metal Canopy Bed', 'Metal canopy bed with a modern twist, combining sleek lines with the romantic touch of a canopy for a stylish bedroom.', 'bed-17.jpg', 1999.99, 5),
+(78, 4, 20, 'Velvet Upholstered Bed', 'Velvet upholstered bed with a plush and luxurious look, bringing a touch of opulence to your bedroom space.', 'bed-18.jpg', 2099.99, 4),
+(79, 4, 15, 'Round Bed', 'Round bed with a unique and contemporary design, creating a striking focal point in your bedroom.', 'bed-19.jpg', 2599.99, 2),
+(80, 4, 16, 'Mission Style Bed', 'Mission style bed with clean lines and a simple yet elegant design, offering a timeless addition to your bedroom decor.', 'bed-20.jpg', 1499.99, 7),
+(121, 7, 1, 'Smart LED TV - 55 Inch', 'Smart LED TV with a 55-inch display, featuring high-definition resolution and smart connectivity for streaming your favorite content.', 'led-1.jpg', 699.99, 15),
+(122, 7, 2, 'LED Desk Lamp', 'LED desk lamp with adjustable brightness levels and color temperatures, providing optimal lighting for your workspace.', 'led-2.jpg', 49.99, 20),
+(123, 7, 3, 'LED Ceiling Light Fixture', 'LED ceiling light fixture with a modern design, illuminating your living space with energy-efficient and long-lasting LED technology.', 'led-3.jpg', 89.99, 18),
+(124, 7, 4, 'LED Floor Lamp', 'LED floor lamp with a contemporary design, adding ambient lighting to your room while serving as a stylish decor element.', 'led-4.jpg', 129.99, 12),
+(125, 7, 5, 'LED Strip Lights - RGB', 'LED strip lights with customizable RGB colors, allowing you to create dynamic and vibrant lighting effects in any room.', 'led-5.jpg', 39.99, 25),
+(126, 7, 6, 'Smart LED Bulbs - Set of 4', 'Set of smart LED bulbs compatible with smart home systems, offering adjustable brightness and color options for personalized lighting.', 'led-6.jpg', 29.99, 30),
+(127, 7, 7, 'LED Vanity Mirror', 'LED vanity mirror with built-in lights, providing bright and even illumination for your makeup routine or grooming tasks.', 'led-7.jpg', 69.99, 15),
+(128, 7, 8, 'LED Wall Sconces - Set of 2', 'Set of two LED wall sconces with a sleek and minimalist design, adding modern elegance to your living space.', 'led-8.jpg', 59.99, 14),
+(129, 7, 9, 'LED Desk Clock', 'LED desk clock with a digital display and adjustable brightness, serving as a functional and stylish addition to your workspace.', 'led-9.jpg', 19.99, 20),
+(130, 7, 10, 'Smart LED Light Strips', 'Smart LED light strips with Wi-Fi connectivity, allowing you to control colors and effects through a mobile app or voice commands.', 'led-10.jpg', 49.99, 18),
+(131, 7, 11, 'LED Pendant Light', 'LED pendant light with a contemporary design, hanging elegantly from your ceiling and providing focused lighting for specific areas.', 'led-11.jpg', 79.99, 17),
+(132, 7, 12, 'LED String Lights - Outdoor', 'LED string lights for outdoor use, creating a magical and festive atmosphere for your garden or patio.', 'led-12.jpg', 34.99, 22),
+(133, 7, 13, 'Smart LED Desk Fan', 'Smart LED desk fan with adjustable speed and color-changing LED lights, providing a cool breeze and ambient lighting.', 'led-13.jpg', 44.99, 18),
+(134, 7, 14, 'LED Plant Grow Light', 'LED plant grow light with a full spectrum of colors, promoting healthy plant growth indoors.', 'led-14.jpg', 59.99, 15),
+(135, 7, 15, 'Floating Shelves with LED Lights', 'Floating shelves with integrated LED lights, showcasing your decor items in a stylish and illuminated way.', 'led-15.jpg', 79.99, 12),
+(136, 7, 16, 'LED Gaming Mouse', 'LED gaming mouse with customizable RGB lighting, providing a visually immersive gaming experience.', 'led-16.jpg', 39.99, 25),
+(137, 7, 17, 'LED Desk Organizer Lamp', 'LED desk organizer lamp with multiple compartments and adjustable light, keeping your workspace tidy and well-lit.', 'led-17.jpg', 49.99, 20),
+(138, 7, 18, 'LED Motion Sensor Night Light', 'LED motion sensor night light for hallways and bedrooms, offering automatic illumination in low-light conditions.', 'led-18.jpg', 19.99, 30),
+(139, 7, 19, 'Smart LED Alarm Clock', 'Smart LED alarm clock with sunrise simulation, waking you up gently with gradually increasing light.', 'led-19.jpg', 29.99, 25),
+(140, 7, 20, 'Portable LED Camping Lantern', 'Portable LED camping lantern with adjustable brightness, providing reliable illumination during outdoor adventures.', 'led-20.jpg', 24.99, 28),
+(141, 8, 1, 'Full-Length Wall Mirror', 'Full-length wall mirror with a sleek frame, providing a functional and stylish accent to your bedroom or dressing area.', 'mirror-1.jpg', 129.99, 15),
+(142, 8, 2, 'Round Vanity Mirror', 'Round vanity mirror with a decorative frame, perfect for adding a touch of elegance to your bathroom or makeup vanity.', 'mirror-2.jpg', 49.99, 20),
+(143, 8, 3, 'Rectangular Entryway Mirror', 'Rectangular entryway mirror with a modern design, enhancing the visual appeal of your entry or hallway space.', 'mirror-3.jpg', 79.99, 18),
+(144, 8, 4, 'Oval Standing Mirror', 'Oval standing mirror with a freestanding design, allowing you to place it anywhere in your home for a quick outfit check.', 'mirror-4.jpg', 69.99, 12),
+(145, 8, 5, 'Antique Wall Mirror', 'Antique-style wall mirror with intricate detailing, creating a timeless and sophisticated look in any room.', 'mirror-5.jpg', 149.99, 17),
+(146, 8, 6, 'Hexagonal Bathroom Mirror', 'Hexagonal bathroom mirror with a geometric shape, adding a modern and unique touch to your bathroom decor.', 'mirror-6.jpg', 54.99, 25),
+(147, 8, 7, 'Frameless Floor Mirror', 'Frameless floor mirror with a minimalist design, providing a clean and contemporary look to your living space.', 'mirror-7.jpg', 99.99, 14),
+(148, 8, 8, 'Decorative Wall Mirror Set', 'Set of decorative wall mirrors in various shapes and sizes, allowing you to create a stylish gallery wall in your home.', 'mirror-8.jpg', 79.99, 14),
+(149, 8, 9, 'Gold Accent Mirror', 'Gold accent mirror with a gold-finished frame, bringing a touch of glamour and luxury to your bedroom or living room.', 'mirror-9.jpg', 89.99, 15),
+(150, 8, 10, 'Wooden Framed Vanity Mirror', 'Wooden framed vanity mirror with a natural wood finish, blending seamlessly with rustic or farmhouse-style decor.', 'mirror-10.jpg', 64.99, 20),
+(151, 8, 11, 'Sunburst Wall Mirror', 'Sunburst wall mirror with a sunburst design, serving as a bold and eye-catching focal point in any room.', 'mirror-11.jpg', 109.99, 18),
+(152, 8, 12, 'Art Deco Dresser Mirror', 'Art Deco dresser mirror with an Art Deco-inspired design, adding a touch of vintage glamour to your dressing area.', 'mirror-12.jpg', 79.99, 17),
+(153, 8, 13, 'Framed Bathroom Vanity Mirror', 'Framed bathroom vanity mirror with a classic frame, complementing traditional bathroom decor with timeless elegance.', 'mirror-13.jpg', 54.99, 22),
+(154, 8, 14, 'LED Lighted Makeup Mirror', 'LED lighted makeup mirror with adjustable brightness, providing optimal lighting for your makeup application.', 'mirror-14.jpg', 39.99, 18),
+(155, 8, 15, 'Vintage Handheld Mirror', 'Vintage handheld mirror with a decorative handle, perfect for adding a touch of vintage charm to your dressing table.', 'mirror-15.jpg', 24.99, 30),
+(156, 8, 16, 'Floating Shelf with Mirror', 'Floating shelf with an integrated mirror, combining functionality and style for a modern and practical storage solution.', 'mirror-16.jpg', 69.99, 12),
+(157, 8, 17, 'Distressed Wood Wall Mirror', 'Distressed wood wall mirror with a weathered finish, bringing rustic charm and character to your living space.', 'mirror-17.jpg', 89.99, 18),
+(158, 8, 18, 'Round Wooden Framed Mirror', 'Round wooden framed mirror with a simple and versatile design, suitable for various rooms in your home.', 'mirror-18.jpg', 49.99, 20),
+(159, 8, 19, 'Black Metal Frame Mirror', 'Black metal frame mirror with a sleek and modern design, adding an industrial touch to your home decor.', 'mirror-19.jpg', 59.99, 25),
+(160, 9, 1, 'Floating Wall Shelves', 'Set of floating wall shelves in various sizes, providing a stylish and space-saving storage solution for your books, decor, and more.', 'shelves-1.jpg', 34.99, 25),
+(161, 9, 2, 'Corner Shelf Unit', 'Corner shelf unit with a triangular design, maximizing corner space and offering a decorative display for your collectibles and plants.', 'shelves-2.jpg', 29.99, 20),
+(162, 9, 3, 'Industrial Pipe Wall Shelf', 'Industrial pipe wall shelf with a rustic design, combining functionality with an edgy and modern industrial aesthetic.', 'shelves-3.jpg', 44.99, 18),
+(163, 9, 4, 'Wooden Bookcase with Drawers', 'Wooden bookcase with built-in drawers, providing a versatile storage solution for both books and small items in your living room or office.', 'shelves-4.jpg', 79.99, 15),
+(164, 9, 5, 'Floating Corner Shelves', 'Set of floating corner shelves, ideal for displaying small decor items or creating a stylish arrangement in unused corner spaces.', 'shelves-5.jpg', 24.99, 30),
+(165, 9, 6, 'Modern Wall-Mounted Shelf', 'Modern wall-mounted shelf with clean lines and a sleek design, adding a contemporary touch to your living room or bedroom decor.', 'shelves-6.jpg', 39.99, 22),
+(166, 9, 7, 'Cubby Storage Organizer', 'Cubby storage organizer with cubbies of various sizes, perfect for organizing and displaying items in your entryway or kids\' room.', 'shelves-7.jpg', 54.99, 20),
+(167, 9, 8, 'Rustic Floating Shelves', 'Rustic floating shelves with a distressed wood finish, creating a charming and farmhouse-inspired display for your home decor.', 'shelves-8.jpg', 32.99, 25),
+(168, 9, 9, 'Glass Shelving Unit', 'Glass shelving unit with tempered glass shelves and a metal frame, offering a sleek and modern storage solution for your bathroom or kitchen.', 'shelves-9.jpg', 49.99, 15),
+(169, 9, 10, 'Adjustable Wall-Mounted Shelves', 'Adjustable wall-mounted shelves with a versatile design, allowing you to customize the shelf height and create a personalized storage solution.', 'shelves-10.jpg', 29.99, 30),
+(170, 9, 11, 'Bamboo Bathroom Shelves', 'Bamboo bathroom shelves with a natural finish, providing a eco-friendly and stylish storage option for your bathroom essentials.', 'shelves-11.jpg', 39.99, 18),
+(171, 9, 12, 'Ladder Bookshelf', 'Ladder bookshelf with a tiered design, offering a unique and eye-catching way to display your book collection and decor items.', 'shelves-12.jpg', 69.99, 15),
+(172, 9, 13, 'Wall-Mounted Spice Rack', 'Wall-mounted spice rack with multiple shelves, keeping your spices organized and easily accessible in the kitchen.', 'shelves-13.jpg', 19.99, 25),
+(173, 9, 14, 'Hanging Rope Shelf', 'Hanging rope shelf with wooden planks, adding a bohemian touch to your decor while providing a charming display for small items.', 'shelves-14.jpg', 27.99, 20),
+(174, 9, 15, 'Metal Wire Cube Shelves', 'Metal wire cube shelves that can be arranged in various configurations, offering a modern and customizable storage solution for any room.', 'shelves-15.jpg', 59.99, 12),
+(175, 9, 16, 'Kids\' Book Display Shelf', 'Kids\' book display shelf with colorful bins, encouraging children to keep their books organized and easily accessible.', 'shelves-16.jpg', 34.99, 20),
+(176, 9, 17, 'Floating Wine Rack Shelves', 'Floating wine rack shelves with space for wine bottles and wine glasses, combining storage and display for wine enthusiasts.', 'shelves-17.jpg', 49.99, 15),
+(177, 9, 18, 'Under-Sink Storage Shelves', 'Under-sink storage shelves with an expandable design, optimizing storage space in your kitchen or bathroom cabinet.', 'shelves-18.jpg', 22.99, 30),
+(178, 9, 19, 'Wall-Mounted Display Ledge', 'Wall-mounted display ledge with a slim profile, perfect for showcasing framed photos, artwork, or small decor items.', 'shelves-19.jpg', 17.99, 35),
+(179, 9, 20, 'Modern Cube Bookcase', 'Modern cube bookcase with open and closed storage cubes, offering a contemporary and versatile solution for organizing your books and belongings.', 'shelves-20.jpg', 64.99, 18),
+(180, 10, 1, 'Stainless Steel Kitchen Sink', 'High-quality stainless steel kitchen sink with a sleek and durable design, ideal for modern kitchens.', 'sink-1.png', 199.99, 15),
+(181, 10, 2, 'Double Basin Undermount Sink', 'Double basin undermount sink with a versatile design, providing ample space for washing dishes and food preparation.', 'sink-2.png', 229.99, 12),
+(182, 10, 3, 'Farmhouse Apron Front Sink', 'Farmhouse apron front sink with a classic and charming appearance, adding a rustic touch to your kitchen decor.', 'sink-3.png', 279.99, 10),
+(183, 10, 4, 'Granite Composite Kitchen Sink', 'Granite composite kitchen sink with a durable and heat-resistant construction, combining style and functionality.', 'sink-4.png', 349.99, 8),
+(184, 10, 5, 'Single Bowl Top Mount Sink', 'Single bowl top mount sink with a simple and space-saving design, perfect for smaller kitchens or bar areas.', 'sink-5.png', 149.99, 20),
+(185, 10, 6, 'Drop-In Stainless Steel Sink', 'Drop-in stainless steel sink with an easy installation process, offering a practical and modern solution for your kitchen.', 'sink-6.png', 189.99, 18),
+(186, 10, 7, 'Deep Undermount Bar Sink', 'Deep undermount bar sink with a compact size, making it ideal for bars, entertainment areas, or secondary kitchen spaces.', 'sink-7.png', 129.99, 25),
+(187, 10, 8, 'Ceramic Vanity Sink', 'Ceramic vanity sink with a smooth and easy-to-clean surface, bringing a touch of elegance to your bathroom or powder room.', 'sink-8.png', 99.99, 30),
+(188, 10, 9, 'Wall-Mounted Laundry Sink', 'Wall-mounted laundry sink with a space-saving design, perfect for laundry rooms or utility areas with limited space.', 'sink-9.png', 169.99, 15),
+(189, 10, 10, 'Corner Kitchen Sink', 'Corner kitchen sink with a unique triangular design, maximizing corner space and adding a modern flair to your kitchen.', 'sink-10.png', 199.99, 12),
+(190, 10, 11, 'Black Matte Finish Sink', 'Black matte finish sink with a contemporary and stylish appearance, creating a bold focal point in your kitchen or bar area.', 'sink-11.png', 259.99, 10),
+(191, 10, 12, 'Glass Vessel Bathroom Sink', 'Glass vessel bathroom sink with an artistic and translucent design, elevating the aesthetic of your bathroom space.', 'sink-12.png', 149.99, 8),
+(192, 10, 13, 'Round Undermount Bar Sink', 'Round undermount bar sink with a versatile and space-efficient design, suitable for various bar and entertainment setups.', 'sink-13.png', 119.99, 15),
+(193, 10, 14, 'Modern Square Kitchen Sink', 'Modern square kitchen sink with clean lines and a contemporary look, enhancing the overall style of your kitchen.', 'sink-14.png', 179.99, 20),
+(194, 10, 15, 'Pedestal Bathroom Sink', 'Pedestal bathroom sink with a classic and timeless design, perfect for traditional or vintage-inspired bathroom settings.', 'sink-15.png', 189.99, 25),
+(195, 10, 16, 'Slim Undermount Bar Sink', 'Slim undermount bar sink with a sleek profile, providing a modern and efficient solution for your bar or entertainment space.', 'sink-16.png', 129.99, 18),
+(196, 10, 17, 'Copper Farmhouse Sink', 'Copper farmhouse sink with a warm and rustic appeal, adding character to your kitchen and complementing various design styles.', 'sink-17.png', 299.99, 10),
+(197, 10, 18, 'Undercounter Bathroom Sink', 'Undercounter bathroom sink with an unobtrusive and space-saving design, suitable for contemporary and minimalist bathroom layouts.', 'sink-18.png', 109.99, 15),
+(198, 10, 19, 'Rectangular Top Mount Sink', 'Rectangular top mount sink with a versatile and easy-to-install design, offering a practical solution for your kitchen or bar area.', 'sink-19.png', 159.99, 20),
+(199, 10, 20, 'Marble Vessel Sink', 'Marble vessel sink with a luxurious and sophisticated appearance, becoming a focal point in your bathroom or vanity area.', 'sink-20.png', 249.99, 12),
+(200, 11, 1, 'Modern Sofa Set', 'Modern sofa set with a sleek design, providing comfort and style to your living room or entertainment area.', 'sofa-1.png', 799.99, 15),
+(201, 11, 2, 'Sectional Sleeper Sofa', 'Sectional sleeper sofa with a pull-out bed, perfect for hosting guests and providing additional sleeping space in your home.', 'sofa-2.png', 899.99, 20),
+(202, 11, 3, 'Velvet Loveseat', 'Velvet loveseat with plush cushions, adding a touch of luxury and sophistication to your home decor.', 'sofa-3.png', 549.99, 12),
+(203, 11, 4, 'Reclining Armchair', 'Reclining armchair with adjustable positions, offering maximum comfort for relaxation in your living room or home theater.', 'sofa-4.png', 349.99, 25),
+(204, 11, 5, 'Tufted Chaise Lounge', 'Tufted chaise lounge with an elegant design, providing a stylish and comfortable spot for lounging and reading in your home.', 'sofa-5.png', 479.99, 18),
+(205, 11, 6, 'Mid-Century Modern Sofa', 'Mid-century modern sofa with a timeless design, featuring clean lines and tapered legs for a retro-inspired look.', 'sofa-6.png', 699.99, 15),
+(206, 11, 7, 'Convertible Futon Sofa', 'Convertible futon sofa that can be easily transformed into a bed, making it a versatile and space-saving addition to your home.', 'sofa-7.png', 329.99, 10),
+(207, 11, 8, 'Power Recliner Set', 'Power recliner set with USB ports, providing convenient charging and relaxation options in a modern and tech-friendly design.', 'sofa-8.png', 799.99, 8),
+(208, 11, 9, 'L-Shaped Sectional Sofa', 'L-shaped sectional sofa with ample seating space, perfect for entertaining guests and creating a cozy atmosphere in your living room.', 'sofa-9.png', 899.99, 15),
+(209, 11, 10, 'Microfiber Sofa and Loveseat Set', 'Microfiber sofa and loveseat set with soft and durable upholstery, offering a comfortable and inviting seating arrangement for your home.', 'sofa-10.png', 649.99, 20),
+(210, 11, 11, 'Modern Leather Recliner', 'Modern leather recliner with a sleek and minimalist design, providing a chic and comfortable seating option for your home or office.', 'sofa-11.png', 449.99, 12),
+(211, 11, 12, 'Chic Velvet Sofa', 'Chic velvet sofa with rolled arms and button-tufted details, adding a touch of glamour and sophistication to your living space.', 'sofa-12.png', 569.99, 25),
+(212, 11, 13, 'Swivel Glider Chair', 'Swivel glider chair with a contemporary design, offering a stylish and functional seating option for your nursery, living room, or bedroom.', 'sofa-13.png', 389.99, 18),
+(213, 11, 14, 'Traditional Sofa and Chair Set', 'Traditional sofa and chair set with classic details, creating an elegant and timeless seating arrangement for your formal living room.', 'sofa-14.png', 749.99, 20),
+(214, 11, 15, 'Plaid Upholstered Loveseat', 'Plaid upholstered loveseat with a charming pattern, bringing a cozy and inviting feel to your home decor.', 'sofa-15.png', 519.99, 15),
+(215, 11, 16, 'Contemporary Loveseat', 'Contemporary loveseat with clean lines and neutral upholstery, offering a versatile and modern seating option for your home.', 'sofa-16.png', 469.99, 10),
+(216, 11, 17, 'Power Lift Recliner', 'Power lift recliner with a lift function, providing assistance to individuals with mobility challenges while maintaining a stylish appearance.', 'sofa-17.png', 699.99, 8),
+(217, 11, 18, 'Sleeper Ottoman', 'Sleeper ottoman with a hidden bed, serving as a space-saving and multifunctional furniture piece for your living room or guest room.', 'sofa-18.png', 349.99, 15),
+(218, 11, 19, 'Mid-Back Accent Chair', 'Mid-back accent chair with a unique design, adding a pop of color and style to your home decor.', 'sofa-19.png', 259.99, 30),
+(219, 11, 20, 'Rustic Wood and Metal Bench', 'Rustic wood and metal bench with a combination of materials, offering a sturdy and industrial-inspired seating option for your entryway or dining area.', 'sofa-20.png', 179.99, 25),
+(220, 12, 1, 'Abstract Pattern Tapestry', 'Abstract pattern tapestry with vibrant colors, adding a unique and artistic touch to your living space.', 'Tapestry-1.jpg', 79.99, 15),
+(221, 12, 2, 'Nature-Inspired Wall Hanging', 'Nature-inspired wall hanging tapestry featuring scenic landscapes and natural elements, creating a tranquil and soothing atmosphere in your home.', 'Tapestry-2.jpg', 89.99, 20),
+(222, 12, 3, 'Bohemian Style Tapestry', 'Bohemian style tapestry with intricate patterns and fringe details, bringing a free-spirited and eclectic vibe to your home decor.', 'Tapestry-3.jpg', 59.99, 12),
+(223, 12, 4, 'Mandala Wall Tapestry', 'Mandala wall tapestry with a mesmerizing geometric design, serving as a focal point for meditation and relaxation in your living space.', 'Tapestry-4.jpg', 69.99, 25),
+(224, 12, 5, 'Vintage Floral Tapestry', 'Vintage floral tapestry featuring classic flower patterns, adding a touch of nostalgia and elegance to your home.', 'Tapestry-5.jpg', 49.99, 18),
+(225, 12, 6, 'Ethnic Print Wall Art', 'Ethnic print wall art tapestry showcasing cultural motifs and symbols, creating a visually stunning and meaningful decoration for your home.', 'Tapestry-6.jpg', 59.99, 15),
+(226, 12, 7, 'Galaxy and Stars Tapestry', 'Galaxy and stars tapestry depicting cosmic scenes, bringing a sense of wonder and cosmic beauty to your bedroom or living room.', 'Tapestry-7.jpg', 79.99, 10),
+(227, 12, 8, 'Abstract Landscape Wall Tapestry', 'Abstract landscape wall tapestry with bold shapes and colors, making a contemporary statement in your home decor.', 'Tapestry-8.jpg', 69.99, 8),
+(228, 12, 9, 'Sun and Moon Celestial Tapestry', 'Sun and moon celestial tapestry with celestial motifs, creating a mystical and celestial ambiance in your living space.', 'Tapestry-9.jpg', 89.99, 15),
+(229, 12, 10, 'Ocean Wave Tapestry', 'Ocean wave tapestry capturing the beauty and movement of the sea, bringing a coastal and calming feel to your home.', 'Tapestry-10.jpg', 79.99, 20),
+(230, 12, 11, 'Abstract Artistic Tapestry', 'Abstract artistic tapestry showcasing unique and creative patterns, making a bold and imaginative statement in your home decor.', 'Tapestry-11.jpg', 59.99, 12),
+(231, 12, 12, 'Colorful Mandala Wall Hanging', 'Colorful mandala wall hanging tapestry with intricate details, adding a burst of color and positive energy to your living space.', 'Tapestry-12.jpg', 69.99, 25),
+(232, 12, 13, 'Botanical Print Tapestry', 'Botanical print tapestry featuring lush botanical illustrations, bringing a touch of nature and greenery to your home.', 'Tapestry-13.jpg', 49.99, 18),
+(233, 12, 14, 'Retro Geometric Wall Tapestry', 'Retro geometric wall tapestry with a vintage-inspired design, adding a playful and nostalgic element to your home decor.', 'Tapestry-14.jpg', 59.99, 20),
+(234, 12, 15, 'Abstract Expressionism Tapestry', 'Abstract expressionism tapestry with bold brushstrokes and vibrant colors, creating a dynamic and artistic focal point in your space.', 'Tapestry-15.jpg', 79.99, 15),
+(235, 12, 16, 'Tropical Paradise Wall Art', 'Tropical paradise wall art tapestry featuring exotic flora and fauna, bringing a touch of the tropics to your home.', 'Tapestry-16.jpg', 89.99, 10),
+(236, 12, 17, 'Modern Abstract Tapestry', 'Modern abstract tapestry with clean lines and contemporary patterns, adding a sophisticated and artistic touch to your living space.', 'Tapestry-17.jpg', 69.99, 8),
+(237, 12, 18, 'Dreamcatcher Wall Tapestry', 'Dreamcatcher wall tapestry with bohemian charm, creating a whimsical and spiritual atmosphere in your bedroom or meditation space.', 'Tapestry-18.jpg', 59.99, 15),
+(238, 12, 19, 'Rustic Woven Wall Hanging', 'Rustic woven wall hanging tapestry with textured details, adding a touch of warmth and coziness to your home decor.', 'Tapestry-19.jpg', 69.99, 10),
+(239, 12, 20, 'Cityscape Urban Art Tapestry', 'Cityscape urban art tapestry featuring city skyline views, adding an urban and cosmopolitan vibe to your living space.', 'Tapestry-20.jpg', 79.99, 25),
+(240, 13, 1, 'Modern Dual Flush Toilet', 'Modern dual flush toilet with water-saving technology, providing efficiency and style to your bathroom.', 'toilet-1.png', 299.99, 15),
+(241, 13, 2, 'Elongated Comfort Height Toilet', 'Elongated comfort height toilet with an ergonomic design, offering added comfort and accessibility in your bathroom.', 'toilet-2.png', 349.99, 20),
+(242, 13, 3, 'Smart Bidet Toilet Seat', 'Smart bidet toilet seat with customizable features, bringing advanced hygiene and convenience to your daily bathroom routine.', 'toilet-3.png', 499.99, 12),
+(243, 13, 4, 'Compact Corner Toilet', 'Compact corner toilet designed for small spaces, offering a space-saving and efficient solution for your bathroom layout.', 'toilet-4.png', 249.99, 25),
+(244, 13, 5, 'Wall-Mounted Dual Flush Toilet', 'Wall-mounted dual flush toilet with a sleek and space-saving design, creating a modern and minimalist look in your bathroom.', 'toilet-5.png', 399.99, 18),
+(245, 13, 6, 'Round Bowl Toilet', 'Round bowl toilet with a classic design, suitable for smaller bathrooms and powder rooms without compromising on style and functionality.', 'toilet-6.png', 199.99, 15),
+(246, 13, 7, 'Comfort Grip Handle Toilet', 'Comfort grip handle toilet with an easy-to-use handle design, providing convenience and accessibility for users of all ages.', 'toilet-7.png', 279.99, 10),
+(247, 13, 8, 'Skirted One-Piece Toilet', 'Skirted one-piece toilet with a seamless and easy-to-clean design, offering a contemporary and hygienic addition to your bathroom.', 'toilet-8.png', 449.99, 8),
+(248, 13, 9, 'High-Efficiency Dual Flush Toilet', 'High-efficiency dual flush toilet with powerful flushing performance, promoting water conservation without sacrificing performance.', 'toilet-9.png', 329.99, 20),
+(249, 13, 10, 'Square Front Toilet', 'Square front toilet with a modern and geometric design, adding a touch of sophistication to your bathroom decor.', 'toilet-10.png', 369.99, 12),
+(250, 13, 11, 'Soft Close Toilet Seat', 'Soft close toilet seat with a gentle and quiet closing mechanism, preventing slamming and providing a discreet and peaceful bathroom experience.', 'toilet-11.png', 59.99, 25),
+(251, 13, 12, 'Pressure Assist Toilet', 'Pressure assist toilet with a high-powered flush, ensuring effective waste removal and maintaining a clean and hygienic bathroom environment.', 'toilet-12.png', 499.99, 18),
+(252, 13, 13, 'Compact Round Front Toilet', 'Compact round front toilet designed for tight spaces, offering a practical and space-efficient solution for small bathrooms.', 'toilet-13.png', 239.99, 15),
+(253, 13, 14, 'Touchless Flush Toilet', 'Touchless flush toilet with sensor technology, providing a hygienic and hands-free flushing experience in your bathroom.', 'toilet-14.png', 379.99, 10),
+(254, 13, 15, 'Dual Flush Corner Toilet', 'Dual flush corner toilet designed to fit seamlessly into corner spaces, optimizing your bathroom layout without sacrificing performance.', 'toilet-15.png', 299.99, 15),
+(255, 13, 16, 'Round Front Comfort Height Toilet', 'Round front comfort height toilet with an elevated seat, offering added comfort and accessibility for users with mobility considerations.', 'toilet-16.png', 319.99, 20),
+(256, 13, 17, 'Bidet Attachment for Toilet', 'Bidet attachment for toilet with adjustable settings, providing a cost-effective and eco-friendly alternative to traditional toilet paper.', 'toilet-17.png', 89.99, 18),
+(257, 13, 18, 'Vintage Style High Tank Toilet', 'Vintage style high tank toilet with a classic pull chain flush, adding a touch of nostalgia and vintage charm to your bathroom.', 'toilet-18.png', 599.99, 25),
+(258, 13, 19, 'Square Front Dual Flush Toilet', 'Square front dual flush toilet with a contemporary design, combining style and water-saving functionality in your bathroom.', 'toilet-19.png', 349.99, 10),
+(259, 13, 20, 'Modern Wall-Hung Toilet', 'Modern wall-hung toilet with a suspended design, creating a clean and contemporary look while maximizing floor space in your bathroom.', 'toilet-20.png', 429.99, 8),
+(260, 14, 1, 'Sliding Door Wardrobe', 'Sliding door wardrobe with ample storage space, providing a stylish and functional solution for organizing your clothes and accessories.', 'wardrobe-1.jpg', 699.99, 15),
+(261, 14, 2, 'Wooden Wardrobe with Drawers', 'Wooden wardrobe with drawers for added storage, featuring a classic design that complements a variety of bedroom styles.', 'wardrobe-2.jpg', 799.99, 20),
+(262, 14, 3, 'Mirrored Wardrobe Armoire', 'Mirrored wardrobe armoire with a full-length mirror, offering both storage and a convenient dressing mirror in one elegant piece of furniture.', 'wardrobe-3.jpg', 899.99, 12),
+(263, 14, 4, 'Modern Freestanding Closet', 'Modern freestanding closet with open shelving and hanging space, allowing you to showcase and organize your clothing in a contemporary way.', 'wardrobe-4.jpg', 549.99, 25),
+(264, 14, 5, 'Corner Wardrobe Unit', 'Corner wardrobe unit designed to maximize space in your bedroom, providing a functional and stylish storage solution for tight corners.', 'wardrobe-5.jpg', 449.99, 18),
+(265, 14, 6, 'Built-In Closet Organizer', 'Built-in closet organizer with customizable shelves and drawers, helping you create a personalized and efficient storage system for your belongings.', 'wardrobe-6.jpg', 649.99, 15),
+(266, 14, 7, 'Rustic Wardrobe Cabinet', 'Rustic wardrobe cabinet with distressed wood finish, adding a touch of farmhouse charm to your bedroom while offering practical storage.', 'wardrobe-7.jpg', 499.99, 10),
+(267, 14, 8, 'Walk-In Closet System', 'Walk-in closet system with modular components, allowing you to design and organize a spacious walk-in closet tailored to your needs and preferences.', 'wardrobe-8.jpg', 1299.99, 8),
+(268, 14, 9, 'Children\'s Wardrobe with Fun Design', 'Children\'s wardrobe with a playful and fun design, providing a whimsical and functional storage solution for your child\'s clothes and accessories.', 'wardrobe-9.jpg', 299.99, 20),
+(269, 14, 10, 'Traditional Wardrobe with Carved Details', 'Traditional wardrobe with carved details and antique-inspired design, bringing a touch of timeless elegance to your bedroom decor.', 'wardrobe-10.jpg', 899.99, 12),
+(270, 14, 11, 'Compact Wardrobe with Sliding Doors', 'Compact wardrobe with sliding doors, ideal for smaller spaces, offering discreet and efficient storage without compromising on style.', 'wardrobe-11.jpg', 399.99, 15),
+(271, 14, 12, 'Metal Frame Wardrobe', 'Metal frame wardrobe with an industrial look, featuring sturdy construction and a minimalist design for a modern and urban-inspired bedroom.', 'wardrobe-12.jpg', 549.99, 25),
+(272, 14, 13, 'Contemporary Wardrobe Set', 'Contemporary wardrobe set with a matching dresser, providing a coordinated and stylish storage solution for your bedroom.', 'wardrobe-13.jpg', 799.99, 18),
+(273, 14, 14, 'Wall-Mounted Wardrobe Shelf', 'Wall-mounted wardrobe shelf with hooks, offering a space-saving and functional storage option for coats, hats, and other accessories.', 'wardrobe-14.jpg', 129.99, 15),
+(274, 14, 15, 'Built-In Wardrobe Closet', 'Built-in wardrobe closet with integrated lighting, creating a sophisticated and organized storage space for your clothes and accessories.', 'wardrobe-15.jpg', 999.99, 10),
+(275, 14, 16, 'Freestanding Canvas Wardrobe', 'Freestanding canvas wardrobe with fabric cover, providing a portable and flexible storage solution that can be easily moved around your home.', 'wardrobe-16.jpg', 79.99, 18),
+(276, 14, 17, 'L-Shaped Wardrobe System', 'L-shaped wardrobe system with multiple compartments and hanging rails, optimizing corner spaces in your bedroom for efficient storage.', 'wardrobe-17.jpg', 699.99, 15),
+(277, 14, 18, 'Antique Wardrobe with Mirror', 'Antique wardrobe with a mirrored door, offering a touch of vintage charm and functionality for your bedroom or dressing room.', 'wardrobe-18.jpg', 1199.99, 20),
+(278, 14, 19, 'Minimalist Wardrobe Design', 'Minimalist wardrobe design with clean lines and neutral tones, providing a sleek and contemporary storage solution for modern bedrooms.', 'wardrobe-19.jpg', 599.99, 12),
+(279, 14, 20, 'Portable Fabric Closet', 'Portable fabric closet with zipper doors, offering a temporary and versatile storage solution for seasonal clothing or as a quick wardrobe supplement.', 'wardrobe-20.jpg', 49.99, 25);
 
 -- --------------------------------------------------------
 
@@ -243,15 +538,6 @@ CREATE TABLE `product_variations` (
   `variation_type` varchar(255) DEFAULT NULL,
   `variation_value` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `product_variations`
---
-
-INSERT INTO `product_variations` (`id`, `product_id`, `variation_type`, `variation_value`) VALUES
-(4, 4, 'Color', 'Gray'),
-(5, 4, 'Color', 'Beige'),
-(6, 5, 'Size', 'King Size');
 
 -- --------------------------------------------------------
 
@@ -267,15 +553,6 @@ CREATE TABLE `promotions` (
   `end_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Đang đổ dữ liệu cho bảng `promotions`
---
-
-INSERT INTO `promotions` (`id`, `category_id`, `discount_percentage`, `start_date`, `end_date`) VALUES
-(4, 4, 15.00, '2023-09-18', '2023-09-25'),
-(5, 5, 10.00, '2023-09-20', '2023-09-27'),
-(6, 6, 20.00, '2023-09-22', '2023-09-29');
-
 -- --------------------------------------------------------
 
 --
@@ -289,15 +566,6 @@ CREATE TABLE `reviews` (
   `rating` int(11) DEFAULT NULL,
   `comment` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `reviews`
---
-
-INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `rating`, `comment`) VALUES
-(4, 1, 4, 4, 'Comfortable sofa, but assembly is a bit tricky.'),
-(5, 2, 5, 5, 'Love the design of the bed!'),
-(6, 1, 6, 4, 'Nice coffee table for the price.');
 
 -- --------------------------------------------------------
 
