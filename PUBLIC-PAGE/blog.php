@@ -29,7 +29,7 @@
         ?>
     </div>
     <?php
-    include "component/content-2.php"
+    include "component/content-7.php"
     ?> 
     
     <?php
