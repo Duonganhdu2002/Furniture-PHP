@@ -83,7 +83,6 @@
         margin: 10px 0;
         padding: 5px 5px 5px 25px;
         box-sizing: border-box;
-        /* Đảm bảo padding được tính vào width và height */
     }
 
     .container8 button {

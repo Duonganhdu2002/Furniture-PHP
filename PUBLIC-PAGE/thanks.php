@@ -16,20 +16,20 @@
 <body style="background-color: #eff2f1;">
     <div style="background-color: #3b5d50;">
         <?php
-        $headerHomeContactUsLinkCss = "opacity: 1;";
+        $headerHomeBlogLinkCss = "opacity: 1;";
         include "component/header.php";
         ?>
         <?php
         include "component/menu-click-icon.php";
         ?>
         <?php
-        $Content1IndexFontContent = "Contact us";
-        $Content1IndexPresentContent = "We look forward to assisting you in creating your ideal space!";
+        $Content1IndexFontContent = "Thank you!";
+        $Content1IndexPresentContent = "";
         include "component/content-1.php";
         ?>
     </div>
     <?php
-    include "component/content-8.php"
+    include "component/content-11.php"
     ?> 
     
     <?php
