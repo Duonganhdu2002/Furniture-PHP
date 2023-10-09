@@ -20,7 +20,7 @@ foreach ($category_ids as $category_id) {
     if ($result1->num_rows > 0) {
         $row1 = $result1->fetch_assoc();
 ?>
-        <div style="background-color: #eff2f1;" class="product-section">
+        <divs class="product-section">
             <div class="row">
                 <div>
                     <h2 class="section-title"><?php echo $row1["category_name"]; ?></h2>
@@ -53,7 +53,7 @@ foreach ($category_ids as $category_id) {
                 }
                 ?>
             </div>
-        </div>
+        </divs>
 <?php
     }
 }
@@ -99,6 +99,7 @@ foreach ($category_ids as $category_id) {
         justify-content: center;
         align-items: center;
         height: 700px;
+        margin-bottom: 80px;
     }
 
 
