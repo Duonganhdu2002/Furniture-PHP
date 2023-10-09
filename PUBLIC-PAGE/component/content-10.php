@@ -136,7 +136,7 @@
                         <div style="margin-top: 20px; padding: 20px; border:rgba(128, 128, 128, 0.3) 1px solid">
                             <a style="color: black; font-weight: 300;" href="">Paypal</a>
                         </div>
-                        <a  href="thanks.php">
+                        <a  href="index.php?pid=8">
                             <button style="font-size: 22px; margin-top: 20px; cursor: pointer;">
                                 Place Order
                             </button>

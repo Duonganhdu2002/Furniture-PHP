@@ -24,7 +24,7 @@ $result = $link->query($sql);
         <div class="menu">
             <div><a style="<?php echo $headerHomeHomeLinkCss ?>" class="menu-link" href="index.php">Home</a></div>
             <div class="shop-container">
-                <a style="<?php echo $headerHomeShopLinkCss ?>" class="menu-link" href="shop.php">Shop</a>
+                <a style="<?php echo $headerHomeShopLinkCss ?>" class="menu-link" href="index.php?pid=1">Shop</a>
                 <div class="shop-module">
                     <ul style="list-style: none; padding-right: 40px; padding-left: 0px">
                         <?php
@@ -38,10 +38,10 @@ $result = $link->query($sql);
                     </ul>
                 </div>
             </div>
-            <div><a style="<?php echo $headerHomeAboutUsLinkCss ?>" class="menu-link" href="about-us.php">About us</a></div>
-            <div><a style="<?php echo $headerHomeServicesLinkCss ?>" class="menu-link" href="services.php">Services</a></div>
-            <div><a style="<?php echo $headerHomeBlogLinkCss ?>" class="menu-link" href="blog.php">Blog</a></div>
-            <div><a style="<?php echo $headerHomeContactUsLinkCss ?>" class="menu-link" href="contact-us.php">Contact us</a></div>
+            <div><a style="<?php echo $headerHomeAboutUsLinkCss ?>" class="menu-link" href="index.php?pid=2">About us</a></div>
+            <div><a style="<?php echo $headerHomeServicesLinkCss ?>" class="menu-link" href="index.php?pid=3">Services</a></div>
+            <div><a style="<?php echo $headerHomeBlogLinkCss ?>" class="menu-link" href="index.php?pid=4">Blog</a></div>
+            <div><a style="<?php echo $headerHomeContactUsLinkCss ?>" class="menu-link" href="index.php?pid=5">Contact us</a></div>
         </div>
         <div class="user-cart-icon">
             <div class="user-icon">
@@ -50,7 +50,7 @@ $result = $link->query($sql);
                 </a>
             </div>
             <div class="cart-icon">
-                <a href="cart.php">
+                <a href="index.php?pid=6">
                     <img src="/PUBLIC-PAGE/images/cart.svg" alt="">
                 </a>
             </div>

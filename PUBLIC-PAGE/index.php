@@ -16,7 +16,6 @@
 <body style="background-color: #eff2f1;">
     <div style="background-color: #3b5d50;">
         <?php
-        
         $headerHomeHomeLinkCss = "opacity: 1;";
         include "component/header.php";
         ?>
@@ -30,21 +29,47 @@
         ?>
     </div>
     <?php
-    include "component/content-2.php"
-    ?> 
-    <?php
-    include "component/content-3.php"
-    ?> 
-    <?php
-    include "component/content-4.php"
-    ?> 
-    <?php
-    include "component/content-5.php"
-    ?> 
+    if (isset($_GET['pid'])) {
+        $id = $_GET['pid'];
+        switch ($id) {
+            case '1':
+                include("component/shop-general.php");
+                break;
+            case '2':
+                include("component/content-2.php");
+                include("component/content-3.php");
+                break;
+            case '3':
+                include("component/content-2.php");
+                include("component/content-4.php");
+                break;
+            case '4':
+                include("component/content-7.php");
+                break;
+            case '5':
+                include("component/content-8.php");
+                break;
+            case '6':
+                include("component/content-9.php");
+                break;
+            case '7':
+                include("component/content-10.php");
+                break;
+            case '8':
+                include("component/content-11.php");
+                break;
+        }
+    } else {
+        include("component/content-2.php");
+        include("component/content-3.php");
+        include("component/content-4.php");
+        include("component/content-5.php");
+    }
+    ?>
     <?php
     include "component/content-6.php"
-    ?> 
-    
+    ?>
+
 </body>
 
 </html>

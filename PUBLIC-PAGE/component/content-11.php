@@ -8,7 +8,7 @@
         </span>
         <h2 style="font-size: 52px; font-weight: 300;">Thank you!</h2>
         <p style="font-size: 24px; opacity: 0.7;">You order was successfuly completed.</p>
-        <p><a href="shop.php" class="btn">Back to shop</a></p>
+        <p><a href="index.php?pid=1" class="btn">Back to shop</a></p>
     </div>
 </div>
 <style>

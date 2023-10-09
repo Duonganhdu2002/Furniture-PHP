@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div>
-                    <a href="checkout.php">
+                    <a href="index.php?pid=7">
                         <button style="font-size: 18px; cursor: pointer">Procced to checkout</button>
                     </a>
                 </div>
