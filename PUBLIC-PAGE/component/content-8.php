@@ -1,4 +1,4 @@
-<form action="/PUBLIC-PAGE/component/send.php" method="post">
+<form action="/PUBLIC-PAGE/send.php" method="post">
     <div class="content-8">
         <div class="container8">
             <div style="display: flex; margin-bottom: 50px" class="adress-info">
