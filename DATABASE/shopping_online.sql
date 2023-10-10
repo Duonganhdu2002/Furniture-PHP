@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 07, 2023 lúc 11:08 AM
+-- Thời gian đã tạo: Th10 10, 2023 lúc 05:43 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -100,6 +100,7 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `brand_name`, `description`, `logo`) VALUES
+(0, 'hihih', 'adhiahid', 'áodjoas'),
 (1, 'IKEA', 'Furniture Retailer', 'ikea-logo.png'),
 (2, 'Ashley Furniture', 'Furniture Manufacturer', 'ashley-logo.png'),
 (3, 'Wayfair', 'Online Furniture Retailer', 'wayfair-logo.png'),
@@ -119,7 +120,9 @@ INSERT INTO `brands` (`id`, `brand_name`, `description`, `logo`) VALUES
 (17, 'BoConcept', 'Modern Danish Design', 'boconcept-logo.png'),
 (18, 'Stanley Furniture', 'Quality Furniture Since 1924', 'stanleyfurniture-logo.png'),
 (19, 'Broyhill Furniture', 'Classic American Furniture', 'broyhill-logo.png'),
-(20, 'Sauder Furniture', 'Ready-to-Assemble Furniture', 'sauder-logo.png');
+(20, 'Sauder Furniture', 'Ready-to-Assemble Furniture', 'sauder-logo.png'),
+(21, 'ădawdaw', 'adwdaw', 'ădwd'),
+(22, 'ădwd', 'đawad', 'âs');
 
 -- --------------------------------------------------------
 
@@ -144,7 +147,6 @@ CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `parent_category_id` int(11) DEFAULT NULL,
   `category_name` varchar(50) DEFAULT NULL,
-  `url` varchar(50) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -152,19 +154,19 @@ CREATE TABLE `categories` (
 -- Đang đổ dữ liệu cho bảng `categories`
 --
 
-INSERT INTO `categories` (`id`, `parent_category_id`, `category_name`, `url`, `description`) VALUES
-(1, 1, 'Table', 'table.php', 'A table, be it for dining or work, is a practical centerpiece in any space. Its design and material contribute to the overall aesthetic, reflecting both function and style. Tables bring people together, facilitating meals, conversations, or work, and serv'),
-(2, 3, 'Chair', 'chair.php', 'A chair is more than a seat; it\'s a design element and comfort hub. From dining to lounging, chairs merge style with function, inviting moments of relaxation and connection in any space.\r\n\r\n\r\n\r\n\r\n'),
-(3, NULL, 'Bathtub', 'bathtub.php', 'Immerse yourself in maximum comfort with our luxurious bathtubs. Modern design, premium materials, and a convenient bathing experience. Relax in personal space.'),
-(4, NULL, 'Bed', 'bed.php', 'Discover a wide range of comfortable and stylish beds for a restful night\'s sleep. From classic designs to modern styles, our Beds collection ensures quality and elegance. Transform your bedroom into a cozy haven with our premium Bed selection.'),
-(7, NULL, 'Led', 'led.php', 'Illuminate your space with cutting-edge LED lighting solutions. Our LED category offers a diverse range of energy-efficient lighting options suitable for various applications. From stylish LED fixtures for your home to robust industrial-grade lighting sol'),
-(8, NULL, 'Mirror', 'mirror.php', 'Reflect your style with our elegant collection of mirrors. From sleek modern designs to timeless classics, find the perfect mirror to enhance any space.'),
-(9, NULL, 'Shelves', 'shelves.php', 'Organize in style with our diverse range of shelves. Explore functional and decorative shelves for every room, crafted to elevate your storage and display solutions.'),
-(10, NULL, 'Sink', 'sink.php', 'Elevate your bathroom or kitchen with our premium sinks. Choose from a variety of styles and materials, each designed for durability and aesthetic appeal.'),
-(11, NULL, 'Sofa', 'sofa.php', 'Indulge in comfort with our luxurious sofa collection. From contemporary to classic designs, each sofa is crafted for relaxation and adds a touch of elegance to your living space.'),
-(12, NULL, 'Tapestry', 'tapestry.php', 'Transform your walls with our artistic tapestries. Explore a rich array of colors and designs, each tapestry telling a unique story and adding a bohemian touch to your space.'),
-(13, NULL, 'Toilet', 'toilet.php', 'Upgrade your bathroom experience with our modern toilets. Discover efficient and stylish options designed for comfort, cleanliness, and water conservation.'),
-(14, NULL, 'Wardrobe', 'wardrobe.php', 'Organize your attire with our stylish wardrobes. From spacious modern closets to classic armoires, find the perfect wardrobe to complement your bedroom.');
+INSERT INTO `categories` (`id`, `parent_category_id`, `category_name`, `description`) VALUES
+(1, 1, 'Table', 'A table, be it for dining or work, is a practical centerpiece in any space. Its design and material contribute to the overall aesthetic, reflecting both function and style. Tables bring people together, facilitating meals, conversations, or work, and serv'),
+(2, 3, 'Chair', 'A chair is more than a seat; it\'s a design element and comfort hub. From dining to lounging, chairs merge style with function, inviting moments of relaxation and connection in any space.\r\n\r\n\r\n\r\n\r\n'),
+(3, NULL, 'Bathtub', 'Immerse yourself in maximum comfort with our luxurious bathtubs. Modern design, premium materials, and a convenient bathing experience. Relax in personal space.'),
+(4, NULL, 'Bed', 'Discover a wide range of comfortable and stylish beds for a restful night\'s sleep. From classic designs to modern styles, our Beds collection ensures quality and elegance. Transform your bedroom into a cozy haven with our premium Bed selection.'),
+(7, NULL, 'Led', 'Illuminate your space with cutting-edge LED lighting solutions. Our LED category offers a diverse range of energy-efficient lighting options suitable for various applications. From stylish LED fixtures for your home to robust industrial-grade lighting sol'),
+(8, NULL, 'Mirror', 'Reflect your style with our elegant collection of mirrors. From sleek modern designs to timeless classics, find the perfect mirror to enhance any space.'),
+(9, NULL, 'Shelves', 'Organize in style with our diverse range of shelves. Explore functional and decorative shelves for every room, crafted to elevate your storage and display solutions.'),
+(10, NULL, 'Sink', 'Elevate your bathroom or kitchen with our premium sinks. Choose from a variety of styles and materials, each designed for durability and aesthetic appeal.'),
+(11, NULL, 'Sofa', 'Indulge in comfort with our luxurious sofa collection. From contemporary to classic designs, each sofa is crafted for relaxation and adds a touch of elegance to your living space.'),
+(12, NULL, 'Tapestry', 'Transform your walls with our artistic tapestries. Explore a rich array of colors and designs, each tapestry telling a unique story and adding a bohemian touch to your space.'),
+(13, NULL, 'Toilet', 'Upgrade your bathroom experience with our modern toilets. Discover efficient and stylish options designed for comfort, cleanliness, and water conservation.'),
+(14, NULL, 'Wardrobe', 'Organize your attire with our stylish wardrobes. From spacious modern closets to classic armoires, find the perfect wardrobe to complement your bedroom.');
 
 -- --------------------------------------------------------
 
