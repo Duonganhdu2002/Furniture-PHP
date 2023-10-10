@@ -46,18 +46,18 @@ $result = $link->query($sql);
         <div class="user-cart-icon">
             <div class="user-icon">
                 <a href="#">
-                    <img src="/PUBLIC-PAGE/images/user.svg" alt="">
+                    <img src="../PUBLIC-PAGE/images/user.svg" alt="">
                 </a>
             </div>
             <div class="cart-icon">
                 <a href="index.php?pid=6">
-                    <img src="/PUBLIC-PAGE/images/cart.svg" alt="">
+                    <img src="../PUBLIC-PAGE/images/cart.svg" alt="">
                 </a>
             </div>
         </div>
         <div class="menu-icon">
             <a href="">
-                <img src="/PUBLIC-PAGE/images/menu.svg" alt="">
+                <img src="../PUBLIC-PAGE/images/menu.svg" alt="">
             </a>
         </div>
     </div>
