@@ -1,60 +1,61 @@
-<div class="content-8">
-    <div class="container8">
-        <div style="display: flex; margin-bottom: 50px" class="adress-info">
-            <div style="width: 33%; display: flex; justify-content: center; align-items: center;">
-                <div style="min-width: 50px; height:50px; border-radius: 10px; display: flex; justify-content: center; align-items: center; background-color: #3b5d50">
-                    <img style="width: 20px; height: 20px" src="/PUBLIC-PAGE/images/marker.svg" alt="">
+<form action="/PUBLIC-PAGE/component/send.php" method="post">
+    <div class="content-8">
+        <div class="container8">
+            <div style="display: flex; margin-bottom: 50px" class="adress-info">
+                <div style="width: 33%; display: flex; justify-content: center; align-items: center;">
+                    <div style="min-width: 50px; height:50px; border-radius: 10px; display: flex; justify-content: center; align-items: center; background-color: #3b5d50">
+                        <img style="width: 20px; height: 20px" src="/PUBLIC-PAGE/images/marker.svg" alt="">
+                    </div>
+                    <div style="width: fit-content;">
+                        <p style="padding-left: 20px; padding-right: 20px;">18E Cong Hoa Street, Ward 13, Tan Binh District, Ho Chi Minh City</p>
+                    </div>
                 </div>
-                <div style="width: fit-content;">
-                    <p style="padding-left: 20px; padding-right: 20px;">18E Cong Hoa Street, Ward 13, Tan Binh District, Ho Chi Minh City</p>
+                <div style="width: 34%; display: flex; justify-content: center; align-items: center;">
+                    <div style="min-width: 50px; height:50px; border-radius: 10px; display: flex; justify-content: center; align-items: center; background-color: #3b5d50">
+                        <img style="width: 20px; height: 20px" src="/PUBLIC-PAGE/images/envelope.svg" alt="">
+                    </div>
+                    <div style="width: fit-content;">
+                        <p style="padding-left: 20px; padding-right: 20px;">Nova@gmail.com</p>
+                    </div>
+                </div>
+                <div style="width: 33%; display: flex; justify-content: center; align-items: center;">
+                    <div style="min-width: 50px; height:50px; border-radius: 10px; display: flex; justify-content: center; align-items: center; background-color: #3b5d50">
+                        <img style="width: 20px; height: 20px" src="/PUBLIC-PAGE/images/phone-flip.svg" alt="">
+                    </div>
+                    <div style="width: fit-content;">
+                        <p style="padding-left: 20px; padding-right: 20px;">0898999999</p>
+                    </div>
                 </div>
             </div>
-            <div style="width: 34%; display: flex; justify-content: center; align-items: center;">
-                <div style="min-width: 50px; height:50px; border-radius: 10px; display: flex; justify-content: center; align-items: center; background-color: #3b5d50">
-                    <img style="width: 20px; height: 20px" src="/PUBLIC-PAGE/images/envelope.svg" alt="">
+            <div class="form-email-user">
+                <div style="display: flex; justify-content:space-between">
+                    <div style="width: 46%">
+                        <label for="frame">First name</label>
+                        <br>
+                        <input type="text" id="frame" name="first-name" required>
+                    </div>
+                    <div style="width: 46%">
+                        <label for="lrame">Last name</label>
+                        <br>
+                        <input type="text" id="lrame" name="last-name" required>
+                    </div>
                 </div>
-                <div style="width: fit-content;">
-                    <p style="padding-left: 20px; padding-right: 20px;">Nova@gmail.com</p>
-                </div>
-            </div>
-            <div style="width: 33%; display: flex; justify-content: center; align-items: center;">
-                <div style="min-width: 50px; height:50px; border-radius: 10px; display: flex; justify-content: center; align-items: center; background-color: #3b5d50">
-                    <img style="width: 20px; height: 20px" src="/PUBLIC-PAGE/images/phone-flip.svg" alt="">
-                </div>
-                <div style="width: fit-content;">
-                    <p style="padding-left: 20px; padding-right: 20px;">0898999999</p>
-                </div>
-            </div>
-        </div>
-        <div class="form-email-user">
-            <div style="display: flex; justify-content:space-between">
-                <div style="width: 46%">
-                    <label for="first-name">First name</label>
+                <div>
+                    <label for="email">Email address</label>
                     <br>
-                    <input type="text" id="first-name" name="first-name" required>
+                    <input type="text" id="email" name="email" required>
                 </div>
-                <div style="width: 46%">
-                    <label for="first-name">Last name</label>
+                <div>
+                    <label for="message">Message</label>
                     <br>
-                    <input type="text" id="last-name" name="last-name" required>
+                    <textarea name="message" id="message" cols="30" rows="10"></textarea>
                 </div>
             </div>
-            <div>
-                <label for="first-name">Email address</label>
-                <br>
-                <input type="text" id="email-addess" name="email-addess" required>
-            </div>
-            <div>
-                <label for="first-name">Message</label>
-                <br>
-                <textarea name="message" id="message" cols="30" rows="10"></textarea>
-            </div>
+            <button type="submit" name="send">Send Message</button>
         </div>
-        <button>
-            Send message
-        </button>
     </div>
-</div>
+</form>
+
 <style>
     .content-8 {
         height: fit-content;
