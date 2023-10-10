@@ -13,10 +13,14 @@
             </div>
             <div class="div-3">
                 <div>
-                    <button class="shop-now">Shop now</button>
+                    <a href="index.php?pid=1">
+                        <button class="shop-now">Shop now</button>
+                    </a>
                 </div>
                 <div>
-                    <button class="explore">Explore</button>
+                    <a href="index.php?pid=9">
+                        <button class="explore">Explore</button>
+                    </a>
                 </div>
             </div>
         </div>

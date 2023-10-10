@@ -79,6 +79,10 @@
                     $Content1IndexFontContent = "Thank you so much!";
                     $Content1IndexPresentContent = "We appreciate your business. Your satisfaction is our top priority.";
                     break;
+                case '9':
+                    $Content1IndexFontContent = "Our Products";
+                    $Content1IndexPresentContent = "Thousand of products are waiting for new house.";
+                    break;
             }
         } else {
             $Content1IndexFontContent = "Modern Interior <br> Design Studio";
@@ -116,6 +120,9 @@
                 break;
             case '8':
                 include("component/content-11.php");
+                break;
+            case '9':
+                include("component/shop-detail.php");
                 break;
         }
     } else {
