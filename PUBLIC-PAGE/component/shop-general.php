@@ -10,7 +10,7 @@ if ($resultIdArray->num_rows > 0) {
         $category_ids[] = $row["id"];
     }
 } else {
-    echo "Không có dữ liệu trong bảng categories";
+    echo "No Data";
 }
 
 foreach ($category_ids as $category_id) {
@@ -25,7 +25,7 @@ foreach ($category_ids as $category_id) {
                 <div>
                     <h2 class="section-title"><?php echo $row1["category_name"]; ?></h2>
                     <p style="" class="section-decrition"><?php echo $row1["description"]; ?></p>
-                    <p><a href="../shop/<?php echo $row1["url"]; ?>" class="btn">Explore</a></p>
+                    <p><a href="index.php?pid=9" class="btn">Explore</a></p>
                 </div>
 
                 <?php
