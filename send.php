@@ -19,8 +19,8 @@ if(isset($_POST["send"])){
     $mail->Port = 587;  // Sử dụng cổng 587 , ssl 465
 
     $mail->setFrom($_POST["email"], $_POST["email"]); // sender email
-    $mail->addReplyTo('nguyenvanphuqui170304@gmail.com',"Phu Qui");
-    $mail->addAddress('nguyenvanphuqui170304@gmail.com', 'Receiver Name');
+    $mail->addReplyTo('nguyenphuqui170304@gmail.com',"Phu Qui");
+    $mail->addAddress('nguyenphuqui170304@gmail.com', 'Receiver Name');
 
     $mail->isHTML(true); 
 
