@@ -19,7 +19,7 @@
 
                 if ($product) {
     ?>
-                    <div class="col"> <!-- Added class "col" to match the structure -->
+                    <div class="col"> 
                         <a class="product-item" href="cart.html">
                             <img src="images/chairs/<?php echo $product['image']; ?>" class="product-thumbnail">
                             <h3 class="product-title"><?php echo $product['product_name']; ?></h3>
@@ -31,7 +31,6 @@
                     </div>
     <?php
                 } else {
-                    // If there are no more products, break out of the inner loop
                     break;
                 }
             }

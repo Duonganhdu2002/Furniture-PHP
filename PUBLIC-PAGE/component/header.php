@@ -12,8 +12,8 @@
 
     function handleEnter(event) {
         if (event.key === "Enter") {
-            event.preventDefault(); // Ngăn chặn sự kiện mặc định của phím Enter (tránh line break trong textarea)
-            document.getElementById("myForm").submit(); // Submit form
+            event.preventDefault(); 
+            document.getElementById("myForm").submit(); 
         }
     }
 </script>

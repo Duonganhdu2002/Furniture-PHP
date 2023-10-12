@@ -25,7 +25,6 @@
                     </div>
     <?php
                 } else {
-                    // If there are no more products, break out of the inner loop
                     break;
                 }
             }
