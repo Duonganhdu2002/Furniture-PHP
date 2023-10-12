@@ -13,7 +13,7 @@
     function handleEnter(event) {
         if (event.key === "Enter") {
             event.preventDefault(); 
-            document.getElementById("myForm").submit(); 
+            document.getElementById("myForm").submit(); // Submit form
         }
     }
 </script>
