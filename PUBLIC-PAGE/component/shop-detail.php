@@ -36,7 +36,6 @@ $resultProducts = $link->query($sqlProducts);
                         $row = $resultCategories->fetch_assoc();
                         $categoryId = $row["id"];
 
-                        // Kiểm tra xem mục đang được lặp có phải là mục trang hiện tại hay không
                         $currentCategory = isset($_GET['categoryId']) ? $_GET['categoryId'] : null;
                         $activeClass = ($currentCategory == $categoryId) ? 'active-category' : '';
                 ?>

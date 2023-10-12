@@ -41,46 +41,42 @@
         </div>
         <!-- End Column 1 -->
 
-        <!-- Start Column 2 -->
-        <div>
-            <a class="product-item" href="cart.html">
+        <!-- Product 1 -->
+        <div class="product-item">
+            <a href="product-detail.html">
                 <img src="images/product-1.png" class="product-thumbnail">
-                <h3 class="product-title">Nordic Chair</h3>
-                <strong class="product-price">$50.00</strong>
-                <span class="icon-cross">
-                    <img src="images/cross.svg">
-                </span>
             </a>
+            <h3 class="product-title">Nordic Chair</h3>
+            <strong class="product-price">$50.00</strong>
+            <span class="icon-cross">
+                <a href="cart.html"><img src="images/cross.svg"></a>
+            </span>
         </div>
-        <!-- End Column 2 -->
 
-        <!-- Start Column 3 -->
-        <div>
-            <a class="product-item" href="cart.html">
+        <!-- Product 2 -->
+        <div class="product-item">
+            <a href="cart.html">
                 <img src="images/product-2.png" class="product-thumbnail">
-                <h3 class="product-title">Kruzo Aero Chair</h3>
-                <strong class="product-price">$78.00</strong>
-
-                <span class="icon-cross">
-                    <img src="images/cross.svg">
-                </span>
             </a>
+            <h3 class="product-title">Kruzo Aero Chair</h3>
+            <strong class="product-price">$78.00</strong>
+            <span class="icon-cross">
+                <a href="cart.html"><img src="images/cross.svg"></a>
+            </span>
         </div>
-        <!-- End Column 3 -->
 
-        <!-- Start Column 4 -->
-        <div>
-            <a class="product-item" href="cart.html">
+        <!-- Product 3 -->
+        <div class="product-item">
+            <a href="cart.html">
                 <img src="images/product-3.png" class="product-thumbnail">
-                <h3 class="product-title">Ergonomic Chair</h3>
-                <strong class="product-price">$43.00</strong>
-
-                <span class="icon-cross">
-                    <img src="images/cross.svg">
-                </span>
             </a>
+            <h3 class="product-title">Ergonomic Chair</h3>
+            <strong class="product-price">$43.00</strong>
+            <span class="icon-cross">
+                <a href="cart.html"><img src="images/cross.svg"></a>
+            </span>
         </div>
-        <!-- End Column 4 -->
+
 
     </div>
 </div>

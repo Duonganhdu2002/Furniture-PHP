@@ -19,15 +19,15 @@
 
                 if ($product) {
     ?>
-                    <div class="col"> 
-                        <a class="product-item" href="cart.html">
+                    <div class="product-item">
+                        <a href="product-detail.html">
                             <img src="images/chairs/<?php echo $product['image']; ?>" class="product-thumbnail">
-                            <h3 class="product-title"><?php echo $product['product_name']; ?></h3>
-                            <strong class="product-price"><?php echo $product['price']; ?></strong>
-                            <span class="icon-cross">
-                                <img src="images/cross.svg">
-                            </span>
                         </a>
+                        <h3 class="product-title"><?php echo $product['product_name']; ?></h3>
+                        <strong class="product-price"><?php echo $product['price']; ?></strong>
+                        <span class="icon-cross">
+                            <a id="add-cart" href="cart.html"><img src="images/cross.svg"></a>
+                        </span>
                     </div>
     <?php
                 } else {

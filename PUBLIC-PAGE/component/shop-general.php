@@ -32,23 +32,24 @@ foreach ($category_ids as $category_id) {
                 $sqlid1 = "SELECT * FROM products WHERE category_id = $category_id";
                 $resultid1 = $link->query($sqlid1);
 
-                $i = 0; 
+                $i = 0;
                 while ($row2 = $resultid1->fetch_assoc()) {
                 ?>
-                    <div>
-                        <a class="product-item" href="cart.html">
+                    <div class="product-item">
+                        <a href="product-detail.html">
                             <img src="images/chairs/<?php echo $row2["image"]; ?>" class="product-thumbnail">
-                            <h3 class="product-title"><?php echo $row2["product_name"]; ?></h3>
-                            <strong class="product-price"><?php echo $row2["price"]; ?></strong>
-                            <span class="icon-cross">
-                                <img src="images/cross.svg">
-                            </span>
                         </a>
+                        <h3 class="product-title"><?php echo $row2["product_name"]; ?></h3>
+                        <strong class="product-price"><?php echo $row2["price"]; ?></strong>
+                        <span class="icon-cross">
+                            <a id="add-cart" href="cart.html"><img src="images/cross.svg"></a>
+                        </span>
                     </div>
+
                 <?php
                     $i++;
                     if ($i >= 3) {
-                        break; 
+                        break;
                     }
                 }
                 ?>
