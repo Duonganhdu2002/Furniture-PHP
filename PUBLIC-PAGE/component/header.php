@@ -29,7 +29,7 @@ $result = $link->query($sql);
             <a href="">Nova<span>.</span></a>
         </div>
         <div class="search-products">
-            <form action="index.php?pid=9" method="post" id="myForm">
+            <form action="index.php?pid=9&categoryId=0" method="post" id="myForm">
                 <input style="width: 100%; height: 40px; padding-left: 20px; border: none; border-radius: 5px; color: #3b5d50" placeholder="What are you looking for?" type="text" name="search" id="search" onkeydown="handleEnter(event)">
             </form>
         </div>
