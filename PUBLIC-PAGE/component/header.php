@@ -21,6 +21,9 @@ $result = $link->query($sql);
         <div class="logo-brand">
             <a href="">Nova<span>.</span></a>
         </div>
+        <div class="search-products">
+            <input style="width: 100%; height: 40px; padding-left: 20px; border: none; border-radius: 5px; color: #3b5d50" placeholder="What are you looking for?" type="text" name="" id="">
+        </div>
         <div class="menu">
             <div><a style="<?php echo $headerHomeHomeLinkCss ?>" class="menu-link" href="index.php">Home</a></div>
             <div class="shop-container">
@@ -80,12 +83,16 @@ $result = $link->query($sql);
     }
 
     .logo-brand {
-        width: 20%;
+        width: 10%;
         display: flex;
     }
 
+    .search-products {
+        width: 30%;
+    }
+
     .menu {
-        width: 65%;
+        width: 45%;
         display: flex;
         justify-content: end;
     }
