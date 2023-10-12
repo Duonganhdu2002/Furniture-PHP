@@ -1,0 +1,364 @@
+
+<!-- Hiển thị danh sách sản phẩm trong giỏ hàng -->
+<h2>Giỏ hàng của bạn</h2>
+<form method="POST">
+    <ul>
+        <?php foreach ($_SESSION['cart'] as $product_id => $product_info): ?>
+            <li>
+                <?php echo $product_info['product_name']; ?> -
+                Giá: <?php echo $product_info['product_price']; ?> -
+                Số lượng: 
+                <input type="number" name="quantity" value="<?php echo $product_info['quantity']; ?>" min="1">
+                <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                <button type="submit" name="edit_cart">Sửa đổi</button>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</form>
+
+// hiển thị form đăng kí hoặc đăng nhập
+
+<?php
+session_start(); // Bắt đầu phiên làm việc (nếu chưa có)
+
+// Kiểm tra xem người dùng đã đăng nhập chưa
+if (isset($_SESSION['username'])) {
+    // Người dùng đã đăng nhập, hiển thị thông tin chào mừng và nút đăng xuất
+    echo "Chào mừng, " . $_SESSION['username'] . "! ";
+    echo '<a href="logout.php">Đăng xuất</a>';
+} else {
+    // Người dùng chưa đăng nhập, hiển thị form đăng nhập và đăng ký
+    echo '<h2>Đăng nhập</h2>';
+    echo '<form action="login.php" method="POST">';
+    echo '  <label for="username">Tên đăng nhập:</label>';
+    echo '  <input type="text" id="username" name="username" required><br>';
+    echo '  <label for="password">Mật khẩu:</label>';
+    echo '  <input type="password" id="password" name="password" required><br>';
+    echo '  <input type="submit" value="Đăng nhập">';
+    echo '</form>';
+    
+    echo '<h2>Đăng ký</h2>';
+    echo '<form action="register.php" method="POST">';
+    echo '  <label for="new_username">Tên đăng nhập:</label>';
+    echo '  <input type="text" id="new_username" name="new_username" required><br>';
+    echo '  <label for="new_password">Mật khẩu:</label>';
+    echo '  <input type="password" id="new_password" name="new_password" required><br>';
+    echo '  <input type="submit" value="Đăng ký">';
+    echo '</form>';
+}
+?>
+
+
+
+// tính tổng giá trị đơn hàng
+<?php
+// Giả sử bạn đã lưu thông tin giỏ hàng trong biến $cart, có cấu trúc như sau:
+// $cart = array(
+//     array(
+//         'product_id' => 1,
+//         'product_name' => 'Sản phẩm 1',
+//         'quantity' => 2,
+//         'price' => 19.99
+//     ),
+//     array(
+//         'product_id' => 2,
+//         'product_name' => 'Sản phẩm 2',
+//         'quantity' => 1,
+//         'price' => 29.99
+//     ),
+//     // ... và các sản phẩm khác
+// );
+
+$total_price = 0;
+
+foreach ($cart as $item) {
+    $quantity = $item['quantity'];
+    $price = $item['price'];
+    $subtotal = $quantity * $price;
+    $total_price += $subtotal;
+}
+
+// Sau khi lặp qua tất cả sản phẩm trong giỏ hàng, $total_price sẽ chứa tổng giá trị đơn hàng
+echo "Tổng giá trị đơn hàng: $" . number_format($total_price, 2);
+?>
+
+
+
+// thêm thao tác người dùng nhấn vào nút cập nhật thì sẽ update dữ liệu đơn đặt 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cập nhật đơn đặt hàng</title>
+</head>
+<body>
+    <h1>Cập nhật đơn đặt hàng</h1>
+    
+    <?php
+    // Kết nối đến cơ sở dữ liệu và lấy thông tin đơn đặt hàng
+    $order_id = $_GET['order_id']; // Lấy mã đơn đặt hàng từ tham số URL
+    $servername = "localhost";
+    $username = "your_username";
+    $password = "your_password";
+    $database = "your_database";
+
+    $conn = new mysqli($servername, $username, $password, $database);
+
+    if ($conn->connect_error) {
+        die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM orders WHERE order_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $order_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+    } else {
+        echo "Không tìm thấy đơn đặt hàng có mã số " . $order_id;
+        $conn->close();
+        exit();
+    }
+
+    $conn->close();
+    ?>
+
+    <form method="post" action="update_order.php"> // khi người dùng nhấn nút cập nhật thì sẽ chuyển sang udate.php để thực hiện code
+        <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
+        <label for="status">Trạng thái vận chuyển:</label>
+        <input type="text" name="status" value="<?php echo $row['status']; ?>"><br>
+        <label for="tracking_number">Số theo dõi vận chuyển:</label>
+        <input type="text" name="tracking_number" value="<?php echo $row['tracking_number']; ?>"><br>
+        <input type="submit" name="update" value="Cập nhật">
+    </form>
+</body>
+</html>
+
+
+
+
+// THÊM MỚI THÔNG TINN KHÁCH hàng
+<?php
+// Kết nối đến cơ sở dữ liệu
+$servername = "localhost"; // Thay bằng tên máy chủ cơ sở dữ liệu của bạn
+$username = "username"; // Thay bằng tên đăng nhập cơ sở dữ liệu
+$password = "password"; // Thay bằng mật khẩu cơ sở dữ liệu
+$dbname = "FurnitureStore"; // Thay bằng tên cơ sở dữ liệu của bạn
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Kiểm tra kết nối
+if ($conn->connect_error) {
+    die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+}
+
+// Lấy thông tin từ biểu mẫu
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $firstName = $_POST["firstName"];
+    $lastName = $_POST["lastName"];
+    $email = $_POST["email"];
+    $address = $_POST["address"];
+    $phoneNumber = $_POST["phoneNumber"];
+
+    // Chuẩn bị truy vấn SQL để thêm dữ liệu khách hàng
+    $sql = "INSERT INTO Customers (FirstName, LastName, Email, Address, PhoneNumber)
+            VALUES ('$firstName', '$lastName', '$email', '$address', '$phoneNumber')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Thêm khách hàng mới thành công.";
+    } else {
+        echo "Lỗi: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+// Đóng kết nối đến cơ sở dữ liệu
+$conn->close();
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thêm Khách Hàng Mới</title>
+</head>
+<body>
+    <h2>Thêm Khách Hàng Mới</h2>
+    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <label for="firstName">Họ:</label>
+        <input type="text" name="firstName" required><br>
+
+        <label for="lastName">Tên:</label>
+        <input type="text" name="lastName" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required><br>
+
+        <label for="address">Địa chỉ:</label>
+        <input type="text" name="address"><br>
+
+        <label for="phoneNumber">Số điện thoại:</label>
+        <input type="text" name="phoneNumber"><br>
+
+        <input type="submit" value="Thêm Khách Hàng" name="submit">
+    </form>
+</body>
+</html>
+
+
+
+// Hỗ trợ và Liên lạc KHI CÓ BẢNG DATA VỀ PHẢN HỒI KHÁCH HÀNG
+Tạo cơ sở dữ liệu và bảng cho hệ thống hỗ trợ:
+-- Tạo cơ sở dữ liệu
+CREATE DATABASE IF NOT EXISTS SupportSystem;
+
+-- Sử dụng cơ sở dữ liệu
+USE SupportSystem;
+
+-- Tạo bảng cho các câu hỏi từ khách hàng
+CREATE TABLE IF NOT EXISTS CustomerQuestions (
+    QuestionID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    QuestionText TEXT NOT NULL,
+    Status ENUM('Open', 'Closed') DEFAULT 'Open'
+);
+
+-- Tạo bảng cho các phản hồi từ nhân viên hỗ trợ
+CREATE TABLE IF NOT EXISTS SupportReplies (
+    ReplyID INT AUTO_INCREMENT PRIMARY KEY,
+    QuestionID INT,
+    ReplyText TEXT NOT NULL,
+    FOREIGN KEY (QuestionID) REFERENCES CustomerQuestions(QuestionID)
+);
+
+Hiển thị danh sách câu hỏi từ khách hàng:
+<?php
+// Kết nối đến cơ sở dữ liệu
+$conn = new mysqli("localhost", "username", "password", "SupportSystem");
+
+// Kiểm tra kết nối
+if ($conn->connect_error) {
+    die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+}
+
+// Lấy danh sách câu hỏi từ khách hàng
+$sql = "SELECT * FROM CustomerQuestions";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<h2>Câu hỏi từ khách hàng:</h2>";
+    while ($row = $result->fetch_assoc()) {
+        echo "<p>";
+        echo "Tên: " . $row["Name"] . "<br>";
+        echo "Email: " . $row["Email"] . "<br>";
+        echo "Câu hỏi: " . $row["QuestionText"] . "<br>";
+        echo "Trạng thái: " . $row["Status"] . "<br>";
+        echo "</p>";
+    }
+} else {
+    echo "Không có câu hỏi từ khách hàng.";
+}
+?>
+
+Trả lời câu hỏi từ khách hàng:
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $questionID = $_POST["question_id"];
+    $replyText = $_POST["reply_text"];
+
+    // Thêm phản hồi vào bảng SupportReplies
+    $insertQuery = "INSERT INTO SupportReplies (QuestionID, ReplyText) VALUES ($questionID, '$replyText')";
+
+    if ($conn->query($insertQuery) === TRUE) {
+        // Cập nhật trạng thái câu hỏi thành "Closed"
+        $updateQuery = "UPDATE CustomerQuestions SET Status = 'Closed' WHERE QuestionID = $questionID";
+        $conn->query($updateQuery);
+        
+        echo "Đã trả lời câu hỏi và đánh dấu là đã đóng.";
+    } else {
+        echo "Lỗi: " . $conn->error;
+    }
+}
+?>
+
+Form trả lời câu hỏi từ khách hàng:
+<form method="post">
+    <input type="hidden" name="question_id" value="1"> <!-- Thay thế bằng ID của câu hỏi cần trả lời -->
+    <label for="reply_text">Phản hồi:</label>
+    <textarea id="reply_text" name="reply_text"></textarea>
+    <button type="submit">Gửi phản hồi</button>
+</form>
+
+
+// thêm sản phẩm 
+
+var addItemId = 0;
+
+S function addToCart (item) { 
+
+addItemId += 1;
+
+var selectedItem document.createElement('div'); =
+
+selectedItem.classList.add('cartImg'); selectedItem.setAttribute('id', addItemId);
+var img = document.createElement('img');
+
+11 12
+
+img.setAttribute('src', item.children[0].currentSrc);
+
+13
+
+var title = document.createElement('div'); title.innerText item.children[1].innerText; =
+
+14
+
+var label = document.createElement('div');
+
+15
+
+16
+
+label.innerText item.children [2].children[0].innerText; =
+
+var select = document.createElement('span');
+
+select.innerText item.children [2].children[1].value;
+
+17
+
+18
+
+label.append(select); var delBtn = document.createElement('button');
+
+delBtn.innerText = 'Delete';
+
+19
+
+20
+
+24 delBtn.setAttribute('onclick', 'del('+addItemId+')'); var cartItems = document.getElementById('title');
+
+22
+
+23
+
+selectedItem.append(img);
+
+24
+
+selectedItem.append(title);
+
+25
+
+26
+
+selectedItem.append(label); selectedItem.append (delBtn);
+
+27
+
+cartItems.append(selectedItem);
+
+20
+
+29
