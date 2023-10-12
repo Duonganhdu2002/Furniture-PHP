@@ -9,6 +9,13 @@
     shopLink.addEventListener('mouseleave', () => {
         shopModule.style.display = 'none';
     });
+
+    function handleEnter(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Ngăn chặn sự kiện mặc định của phím Enter (tránh line break trong textarea)
+            document.getElementById("myForm").submit(); // Submit form
+        }
+    }
 </script>
 
 <?php
@@ -22,7 +29,9 @@ $result = $link->query($sql);
             <a href="">Nova<span>.</span></a>
         </div>
         <div class="search-products">
-            <input style="width: 100%; height: 40px; padding-left: 20px; border: none; border-radius: 5px; color: #3b5d50" placeholder="What are you looking for?" type="text" name="" id="">
+            <form action="index.php?pid=9" method="post" id="myForm">
+                <input style="width: 100%; height: 40px; padding-left: 20px; border: none; border-radius: 5px; color: #3b5d50" placeholder="What are you looking for?" type="text" name="search" id="search" onkeydown="handleEnter(event)">
+            </form>
         </div>
         <div class="menu">
             <div><a style="<?php echo $headerHomeHomeLinkCss ?>" class="menu-link" href="index.php">Home</a></div>
