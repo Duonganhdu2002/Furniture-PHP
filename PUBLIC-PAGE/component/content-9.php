@@ -40,7 +40,6 @@
         quantityInput.addEventListener("input", updateTotal);
     });
 </script>
-s
 <div class="content-9">
     <div class="container9">
         <table style="margin-top: 20px; width: 100%; " class="frst-child">

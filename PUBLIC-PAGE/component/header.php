@@ -37,7 +37,7 @@ $result = $link->query($sql);
             <div><a style="<?php echo $headerHomeHomeLinkCss ?>" class="menu-link" href="index.php">Home</a></div>
             <div class="shop-container">
                 <a style="<?php echo $headerHomeShopLinkCss ?>" class="menu-link" href="index.php?pid=1">Shop</a>
-                <div class="shop-module">
+                <!-- <div class="shop-module">
                     <ul style="list-style: none; padding-right: 40px; padding-left: 0px">
                         <?php
                         while ($row = $result->fetch_assoc()) {
@@ -48,7 +48,7 @@ $result = $link->query($sql);
                         }
                         ?>
                     </ul>
-                </div>
+                </div> -->
             </div>
             <div><a style="<?php echo $headerHomeAboutUsLinkCss ?>" class="menu-link" href="index.php?pid=2">About us</a></div>
             <div><a style="<?php echo $headerHomeServicesLinkCss ?>" class="menu-link" href="index.php?pid=3">Services</a></div>
