@@ -76,6 +76,9 @@ $result = $link->query($sql);
 </div>
 <style>
     .header {
+        position: sticky;
+        position: fixed;
+        z-index: 1;
         height: 10vh;
         background-color: #3b5d50;
         width: 100%;

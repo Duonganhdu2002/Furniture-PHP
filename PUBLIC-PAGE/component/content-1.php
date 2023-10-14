@@ -51,7 +51,7 @@
         width: 40%;
         height: 100%;
         position: relative;
-        z-index: 1;
+        
     }
 
     .right-side-ct1 {

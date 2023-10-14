@@ -43,6 +43,7 @@
     }
 
     .container-ct4 {
+        z-index: -1;
         margin-top: 120px;
         width: 68%;
         display: flex;
