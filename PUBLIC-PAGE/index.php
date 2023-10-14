@@ -41,9 +41,6 @@
         include "component/header.php";
         ?>
         <?php
-        include "component/menu-click-icon.php";
-        ?>
-        <?php
         if (isset($_GET['pid'])) {
             $id = $_GET['pid'];
             switch ($id) {
