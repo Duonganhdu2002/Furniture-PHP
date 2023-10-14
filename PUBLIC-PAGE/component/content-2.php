@@ -37,7 +37,7 @@
         <div>
             <h2 class="section-title">Crafted with excellent material.</h2>
             <p class="section-decrition">Discover furniture excellence at NOVA. Each piece is meticulously crafted with premium materials, ensuring quality and style for your space. Elevate your home with our exquisite collection.</p>
-            <p><a href="shop.html" class="btn">Explore</a></p>
+            <p><a href="index.php?pid=9" class="btn">Explore</a></p>
         </div>
         <!-- End Column 1 -->
 
