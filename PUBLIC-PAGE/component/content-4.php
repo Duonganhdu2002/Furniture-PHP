@@ -35,6 +35,10 @@
 </div>
 <!-- End We Help Section -->
 <style>
+
+    .left-side-ct4 {
+        z-index: -1;
+    }
     .we-help-section {
         width: 100%;
         display: flex;
@@ -43,7 +47,6 @@
     }
 
     .container-ct4 {
-        z-index: -1;
         margin-top: 120px;
         width: 68%;
         display: flex;
