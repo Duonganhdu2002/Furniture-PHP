@@ -92,9 +92,7 @@ $result = $link->query($sql);
         justify-content: center;
         align-items: center;
         position: fixed;
-        /* Thêm thuộc tính position: fixed; */
         top: 0;
-        /* Đặt vị trí phía trên cùng của màn hình */
     }
 
 
