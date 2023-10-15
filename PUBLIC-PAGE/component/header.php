@@ -12,7 +12,7 @@
 
     function handleEnter(event) {
         if (event.key === "Enter") {
-            event.preventDefault(); 
+            event.preventDefault();
             document.getElementById("myForm").submit(); // Submit form
         }
     }
@@ -76,8 +76,6 @@ $result = $link->query($sql);
 </div>
 <style>
     .header {
-        position: sticky;
-        position: fixed;
         z-index: 1;
         height: 10vh;
         background-color: #3b5d50;
@@ -85,7 +83,10 @@ $result = $link->query($sql);
         display: flex;
         justify-content: center;
         align-items: center;
+        position: fixed;
+        top: 0;
     }
+
 
     .header-child {
         display: flex;
