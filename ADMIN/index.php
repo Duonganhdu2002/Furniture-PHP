@@ -20,31 +20,32 @@
                 <a id="brand-letter" style="opacity: 0.8;">Nova<span>.</span></a>
             </div>
             <div class="menu-bar">
-                <div><a href="#">Quản trị danh mục</a></div>
-                <div><a href="#">Quản trị sản phẩm</a></div>
-                <div><a href="#">Quản trị thương hiệu</a></div>
-                <div><a href="#">Quản trị thành viên</a></div>
-                <div><a href="#">Quản trị khách hàng</a></div>
-                <div><a href="#">Quản lý đơn hàng</a></div>
-                <div><a href="#">Doanh thu</a></div>
+                <div><a href="#">Category Management</a></div>
+                <div><a href="#">Product Management</a></div>
+                <div><a href="#">Brand Management</a></div>
+                <div><a href="#">Member Management</a></div>
+                <div><a href="#">Customer Management</a></div>
+                <div><a href="#">Order Management</a></div>
+                <div><a href="#">Revenue</a></div>
             </div>
         </div>
         <div class="right-side" id="right-side">
             <div class="header">
-                <span>Employee name</span>
+                <span>Employee Name</span>
                 <img class="bell" src="../PUBLIC-PAGE/images/bell.svg" alt="">
-                <img class="avatar" src="../PUBLIC-PAGE/images/person-1.jpg " alt="">
+                <img class="avatar" src="../PUBLIC-PAGE/images/person-1.jpg" alt="">
             </div>
             <div class="title">
-                Thành viên
+                Member
             </div>
             <div class="display-info">
                 <div class="data">
-                    data. This content can be changed. By the way, including php.
+                    Data. This content can be changed. By the way, including PHP.
                 </div>
             </div>
         </div>
     </div>
+
     <script>
         function toggleSidebar() {
             var sideBar = document.getElementById("side-bar");
@@ -69,6 +70,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin-top: 10px;
     }
 
     .menu-bar div {
@@ -161,7 +163,10 @@
 
     .side-bar {
         width: 15%;
+        border-right: 1px solid transparent;
+        box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.3);
     }
+
 
     .right-side {
         width: 85%;
