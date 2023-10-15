@@ -13,7 +13,7 @@
         <?php
         include "component/side-bar.php";
         ?>
-        <div class="right-side" id="right-side">
+        <div id="right-side">
             <?php
             include "component/header.php";
             include "component/title.php";
@@ -25,7 +25,6 @@
             </div>
         </div>
     </div>
-
 </body>
 <style>
     
@@ -41,7 +40,7 @@
         height: 100vh;
     }
 
-    .right-side {
+    #right-side {
         width: 85%;
     }
 
