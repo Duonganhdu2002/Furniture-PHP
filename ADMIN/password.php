@@ -15,7 +15,7 @@
     font-family: sans-serif;
 }
 body {
-    background-image: url('images/b2.jpg');
+    background-image: url('b2.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
