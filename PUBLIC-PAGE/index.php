@@ -124,6 +124,7 @@
             case '9':
                 include("component/shop-detail.php");
                 break;
+            
         }
     } else {
         include("component/content-2.php");
