@@ -1,5 +1,11 @@
 <div>
     <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $searchTerm = $_POST['search'];
+        $sqlProducts = "SELECT id, product_name, image, price FROM products WHERE product_name LIKE '%$searchTerm%'";
+        $resultProducts = $link->query($sqlProducts);
+    }
+
     if ($resultProducts->num_rows > 0) {
         $totalProducts = $resultProducts->num_rows;
         $productsPerRow = 3;
@@ -23,7 +29,6 @@
                             <a id="add-cart" href="cart.html"><img src="images/cross.svg"></a>
                         </span>
                     </div>
-
     <?php
                 } else {
                     break;

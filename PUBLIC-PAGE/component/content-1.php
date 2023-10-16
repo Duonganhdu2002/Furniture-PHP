@@ -18,7 +18,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href="index.php?pid=9">
+                    <a href="index.php?pid=9&categoryId=3">
                         <button class="explore">Explore</button>
                     </a>
                 </div>
@@ -37,6 +37,7 @@
         width: 100%;
         display: flex;
         justify-content: center;
+        margin-top: 10vh;
     }
 
     .child {
@@ -51,7 +52,7 @@
         width: 40%;
         height: 100%;
         position: relative;
-        z-index: 1;
+        
     }
 
     .right-side-ct1 {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 10, 2023 lúc 05:43 PM
+-- Thời gian đã tạo: Th10 14, 2023 lúc 06:48 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -20,42 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `shopping_online`
 --
-
-DELIMITER $$
---
--- Thủ tục
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertDummyData` ()   BEGIN
-  DECLARE category_id INT;
-  DECLARE done INT DEFAULT FALSE;
-
-  -- Declare cursor for category_ids
-  DECLARE cur CURSOR FOR SELECT id FROM categories;
-  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-  OPEN cur;
-
-  read_loop: LOOP
-    FETCH cur INTO category_id;
-    IF done THEN
-      LEAVE read_loop;
-    END IF;
-
-    -- Insert 5 products for each category
-    SET @i = 1;
-    WHILE @i <= 5 DO
-      INSERT INTO `products` (`category_id`, `brand_id`, `product_name`, `description`, `image`, `price`, `stock_quantity`)
-      VALUES
-        (category_id, FLOOR(RAND() * (SELECT MAX(id) FROM brands) + 1), CONCAT('Product', @i), CONCAT('Description for Product', @i),
-        CONCAT('product', @i, '.jpg'), ROUND(RAND() * 500 + 50, 2), FLOOR(RAND() * 50 + 1));
-      SET @i = @i + 1;
-    END WHILE;
-  END LOOP;
-
-  CLOSE cur;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -134,7 +98,8 @@ CREATE TABLE `cart_items` (
   `id` int(11) NOT NULL,
   `cart_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL
+  `quantity` int(11) DEFAULT NULL,
+  `user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -167,41 +132,6 @@ INSERT INTO `categories` (`id`, `parent_category_id`, `category_name`, `descript
 (12, NULL, 'Tapestry', 'Transform your walls with our artistic tapestries. Explore a rich array of colors and designs, each tapestry telling a unique story and adding a bohemian touch to your space.'),
 (13, NULL, 'Toilet', 'Upgrade your bathroom experience with our modern toilets. Discover efficient and stylish options designed for comfort, cleanliness, and water conservation.'),
 (14, NULL, 'Wardrobe', 'Organize your attire with our stylish wardrobes. From spacious modern closets to classic armoires, find the perfect wardrobe to complement your bedroom.');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `display_product`
---
-
-CREATE TABLE `display_product` (
-  `id` int(11) DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `url` varchar(50) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `follows`
---
-
-CREATE TABLE `follows` (
-  `following_user_id` int(11) DEFAULT NULL,
-  `followed_user_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `follows`
---
-
-INSERT INTO `follows` (`following_user_id`, `followed_user_id`, `created_at`) VALUES
-(1, 2, '2023-09-18 03:30:00'),
-(2, 1, '2023-09-18 04:15:00'),
-(3, 1, '2023-09-18 05:45:00');
 
 -- --------------------------------------------------------
 
@@ -657,7 +587,8 @@ ALTER TABLE `brands`
 ALTER TABLE `cart_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cart_id` (`cart_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `cart_items_ibfk_3` (`user`);
 
 --
 -- Chỉ mục cho bảng `categories`
@@ -665,13 +596,6 @@ ALTER TABLE `cart_items`
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD KEY `parent_category_id` (`parent_category_id`);
-
---
--- Chỉ mục cho bảng `follows`
---
-ALTER TABLE `follows`
-  ADD KEY `following_user_id` (`following_user_id`),
-  ADD KEY `followed_user_id` (`followed_user_id`);
 
 --
 -- Chỉ mục cho bảng `orders`
@@ -762,20 +686,14 @@ ALTER TABLE `addresses`
 --
 ALTER TABLE `cart_items`
   ADD CONSTRAINT `cart_items_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `shopping_carts` (`id`),
-  ADD CONSTRAINT `cart_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+  ADD CONSTRAINT `cart_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `cart_items_ibfk_3` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
 
 --
 -- Các ràng buộc cho bảng `categories`
 --
 ALTER TABLE `categories`
   ADD CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`parent_category_id`) REFERENCES `categories` (`id`);
-
---
--- Các ràng buộc cho bảng `follows`
---
-ALTER TABLE `follows`
-  ADD CONSTRAINT `follows_ibfk_1` FOREIGN KEY (`following_user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `follows_ibfk_2` FOREIGN KEY (`followed_user_id`) REFERENCES `users` (`id`);
 
 --
 -- Các ràng buộc cho bảng `orders`

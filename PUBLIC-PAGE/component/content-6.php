@@ -224,7 +224,7 @@
     .footer-section .sofa-img {
         position: absolute;
         top: -200px;
-        z-index: 1;
+        z-index: 0;
         right: 0;
     }
 

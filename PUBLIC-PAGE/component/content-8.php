@@ -4,7 +4,7 @@
             <div style="display: flex; margin-bottom: 50px" class="adress-info">
                 <div style="width: 33%; display: flex; justify-content: center; align-items: center;">
                     <div style="min-width: 50px; height:50px; border-radius: 10px; display: flex; justify-content: center; align-items: center; background-color: #3b5d50">
-                        <img style="width: 20px; height: 20px" src="/PUBLIC-PAGE/images/marker.svg" alt="">
+                        <img style="width: 20px; height: 20px" src="../PUBLIC-PAGE/images/marker.svg" alt="">
                     </div>
                     <div style="width: fit-content;">
                         <p style="padding-left: 20px; padding-right: 20px;">18E Cong Hoa Street, Ward 13, Tan Binh District, Ho Chi Minh City</p>
@@ -12,7 +12,7 @@
                 </div>
                 <div style="width: 34%; display: flex; justify-content: center; align-items: center;">
                     <div style="min-width: 50px; height:50px; border-radius: 10px; display: flex; justify-content: center; align-items: center; background-color: #3b5d50">
-                        <img style="width: 20px; height: 20px" src="/PUBLIC-PAGE/images/envelope.svg" alt="">
+                        <img style="width: 20px; height: 20px" src="../PUBLIC-PAGE/images/envelope.svg" alt="">
                     </div>
                     <div style="width: fit-content;">
                         <p style="padding-left: 20px; padding-right: 20px;">Nova@gmail.com</p>
@@ -20,7 +20,7 @@
                 </div>
                 <div style="width: 33%; display: flex; justify-content: center; align-items: center;">
                     <div style="min-width: 50px; height:50px; border-radius: 10px; display: flex; justify-content: center; align-items: center; background-color: #3b5d50">
-                        <img style="width: 20px; height: 20px" src="/PUBLIC-PAGE/images/phone-flip.svg" alt="">
+                        <img style="width: 20px; height: 20px" src="../PUBLIC-PAGE/images/phone-flip.svg" alt="">
                     </div>
                     <div style="width: fit-content;">
                         <p style="padding-left: 20px; padding-right: 20px;">0898999999</p>

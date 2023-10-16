@@ -1,16 +1,86 @@
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const cancelButtons = document.querySelectorAll(".cancel");
+        const quantityInput = document.getElementById("quantity");
+        const plusButton = document.getElementById("plus");
+        const minusButton = document.getElementById("minus");
+        const price = 49.00; // Replace with the actual price
+
+        function updateTotal() {
+            const total = parseFloat(quantityInput.value) * price;
+            document.getElementById("total").innerText = `$${total.toFixed(2)}`;
+        }
+
+        cancelButtons.forEach(function(cancelButton) {
+            cancelButton.addEventListener("click", function() {
+                const row = cancelButton.closest("tr");
+                row.remove();
+                updateTotal(); // Update total when an item is removed
+            });
+        });
+
+        // Add click event listener to the plus button
+        plusButton.addEventListener("click", function() {
+            // Increase the value by 1
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            updateTotal();
+        });
+
+        // Add click event listener to the minus button
+        minusButton.addEventListener("click", function() {
+            // Ensure the value does not go below 0
+            if (parseInt(quantityInput.value) > 0) {
+                // Decrease the value by 1
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+                updateTotal();
+            }
+        });
+
+        // Update total when quantity changes
+        quantityInput.addEventListener("input", updateTotal);
+    });
+</script>
 <div class="content-9">
     <div class="container9">
-        <div class="first-child">
-            <ul>
-                <li>Image</li>
-                <li>Product</li>
-                <li>Price</li>
-                <li>Quantity</li>
-                <li>Total</li>
-                <li>Remove</li>
-            </ul>
-            <hr style="border: solid 1px black; margin-top: 20px">
-        </div>
+        <table style="margin-top: 20px; width: 100%; " class="frst-child">
+
+            <thead>
+                <tr style="font-size: 20px; opacity: 0.9; text-align: center; height: 80px;">
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr style="height: 300px; text-align: center; border-bottom: 1px solid black;">
+                    <td>
+                        <img style="width: 100%;" src="images/product-1.png" alt="Image" class="img-fluid">
+                    </td>
+                    <td>
+                        <h3>Product 1</h3>
+                    </td>
+                    <td>$49.00</td>
+                    <td>
+                        <div style="max-width: 120px; display: flex;">
+                            <button id="minus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">-</button>
+                            <input id="quantity" style="width: 50px; text-align: center; border: 1px solid gray; border-radius: 10px" type="text" value="1">
+                            <button id="plus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">+</button>
+                        </div>
+                    </td>
+                    <td id="total">$49.00</td>
+                    <td>
+                        <button class="cancel" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">X</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
         <div class="second-child">
             <div class="left-side">
                 <div style="display: flex;">
@@ -26,7 +96,7 @@
                     <p>Enter your coupon code if you have one.</p>
                 </div>
                 <div style="display: flex; align-items: center;">
-                    <input placeholder="Cupon code" type="text" name="code" id="code">
+                    <input class="input-code" placeholder="Cupon code" type="text" name="code" id="code">
                     <button style="font-size: 16px">Apply Coupon</button>
                 </div>
             </div>
@@ -54,6 +124,26 @@
     </div>
 </div>
 <style>
+    .frst-child td,
+    th {
+        width: 16.67%;
+        padding: 8px;
+        border: none;
+    }
+
+    .frst-child tr {
+        font-size: 20px;
+        opacity: 0.9;
+        text-align: left;
+        border-bottom: 2px solid black;
+    }
+
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
     .content-9 {
         height: fit-content;
         display: flex;
@@ -71,15 +161,6 @@
 
     .container9 .first-child {
         width: 90%;
-
-    }
-
-    .container9 .first-child ul {
-        padding-left: 0px;
-        display: flex;
-        justify-content: space-between;
-        list-style: none;
-        font-weight: bold;
     }
 
     .container9 .second-child {
@@ -112,7 +193,7 @@
         opacity: 0.7;
     }
 
-    .container9 input {
+    .container9 .input-code {
         width: 400px;
         height: 50px;
         border-radius: 10px;

@@ -1,86 +1,49 @@
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const thumbnails = document.querySelectorAll('.product-thumbnail');
-
-        function hideThumbnailsOnLargeScreen() {
-            if (window.innerWidth > 400 && window.innerWidth <= 500) {
-                thumbnails.forEach(thumbnail => {
-                    thumbnail.style.width = '70%';
-                });
-            } else if (window.innerWidth > 500 && window.innerWidth <= 600) {
-                thumbnails.forEach(thumbnail => {
-                    thumbnail.style.width = '60%';
-                });
-            } else if (window.innerWidth > 600 && window.innerWidth <= 768) {
-                thumbnails.forEach(thumbnail => {
-                    thumbnail.style.width = '50%';
-                });
-            } else if (window.innerWidth > 700 && window.innerWidth <= 800) {
-                thumbnails.forEach(thumbnail => {
-                    thumbnail.style.width = '50%';
-                });
-            } else {
-                thumbnails.forEach(thumbnail => {
-                    thumbnail.style.width = '100%';
-                });
-            }
-        }
-        hideThumbnailsOnLargeScreen();
-        window.addEventListener('resize', hideThumbnailsOnLargeScreen);
-    });
-</script>
-
-<!-- Start Product Section -->
 <div class="product-section">
     <div class="row">
         <!-- Start Column 1 -->
         <div>
             <h2 class="section-title">Crafted with excellent material.</h2>
             <p class="section-decrition">Discover furniture excellence at NOVA. Each piece is meticulously crafted with premium materials, ensuring quality and style for your space. Elevate your home with our exquisite collection.</p>
-            <p><a href="shop.html" class="btn">Explore</a></p>
+            <p><a href="index.php?pid=9" class="btn">Explore</a></p>
         </div>
         <!-- End Column 1 -->
 
-        <!-- Start Column 2 -->
-        <div>
-            <a class="product-item" href="cart.html">
+        <!-- Product 1 -->
+        <div class="product-item">
+            <a href="product-detail.html">
                 <img src="images/product-1.png" class="product-thumbnail">
-                <h3 class="product-title">Nordic Chair</h3>
-                <strong class="product-price">$50.00</strong>
-                <span class="icon-cross">
-                    <img src="images/cross.svg">
-                </span>
             </a>
+            <h3 class="product-title">Nordic Chair</h3>
+            <strong class="product-price">$50.00</strong>
+            <span class="icon-cross">
+                <a href="cart.html"><img src="images/cross.svg"></a>
+            </span>
         </div>
-        <!-- End Column 2 -->
 
-        <!-- Start Column 3 -->
-        <div>
-            <a class="product-item" href="cart.html">
+        <!-- Product 2 -->
+        <div class="product-item">
+            <a href="cart.html">
                 <img src="images/product-2.png" class="product-thumbnail">
-                <h3 class="product-title">Kruzo Aero Chair</h3>
-                <strong class="product-price">$78.00</strong>
-
-                <span class="icon-cross">
-                    <img src="images/cross.svg">
-                </span>
             </a>
+            <h3 class="product-title">Kruzo Aero Chair</h3>
+            <strong class="product-price">$78.00</strong>
+            <span class="icon-cross">
+                <a href="cart.html"><img src="images/cross.svg"></a>
+            </span>
         </div>
-        <!-- End Column 3 -->
 
-        <!-- Start Column 4 -->
-        <div>
-            <a class="product-item" href="cart.html">
+        <!-- Product 3 -->
+        <div class="product-item">
+            <a href="cart.html">
                 <img src="images/product-3.png" class="product-thumbnail">
-                <h3 class="product-title">Ergonomic Chair</h3>
-                <strong class="product-price">$43.00</strong>
-
-                <span class="icon-cross">
-                    <img src="images/cross.svg">
-                </span>
             </a>
+            <h3 class="product-title">Ergonomic Chair</h3>
+            <strong class="product-price">$43.00</strong>
+            <span class="icon-cross">
+                <a href="cart.html"><img src="images/cross.svg"></a>
+            </span>
         </div>
-        <!-- End Column 4 -->
+
 
     </div>
 </div>

@@ -12,7 +12,7 @@
 
     function handleEnter(event) {
         if (event.key === "Enter") {
-            event.preventDefault(); // Ngăn chặn sự kiện mặc định của phím Enter (tránh line break trong textarea)
+            event.preventDefault();
             document.getElementById("myForm").submit(); // Submit form
         }
     }
@@ -24,12 +24,20 @@ $sql = "select * from categories";
 $result = $link->query($sql);
 ?>
 <div class="header">
+
     <div class="header-child">
+
         <div class="logo-brand">
-            <a href="">Nova<span>.</span></a>
+            <div class="logo">
+                <a href="../PUBLIC-PAGE/index.php">
+                    <img src="./images/logo.svg" alt="">
+                </a>
+            </div>
+            <a href="../PUBLIC-PAGE/index.php">Nova<span>.</span></a>
         </div>
+
         <div class="search-products">
-            <form action="index.php?pid=9" method="post" id="myForm">
+            <form action="index.php?pid=9&categoryId=0" method="post" id="myForm">
                 <input style="width: 100%; height: 40px; padding-left: 20px; border: none; border-radius: 5px; color: #3b5d50" placeholder="What are you looking for?" type="text" name="search" id="search" onkeydown="handleEnter(event)">
             </form>
         </div>
@@ -37,7 +45,7 @@ $result = $link->query($sql);
             <div><a style="<?php echo $headerHomeHomeLinkCss ?>" class="menu-link" href="index.php">Home</a></div>
             <div class="shop-container">
                 <a style="<?php echo $headerHomeShopLinkCss ?>" class="menu-link" href="index.php?pid=1">Shop</a>
-                <div class="shop-module">
+                <!-- <div class="shop-module">
                     <ul style="list-style: none; padding-right: 40px; padding-left: 0px">
                         <?php
                         while ($row = $result->fetch_assoc()) {
@@ -48,7 +56,7 @@ $result = $link->query($sql);
                         }
                         ?>
                     </ul>
-                </div>
+                </div> -->
             </div>
             <div><a style="<?php echo $headerHomeAboutUsLinkCss ?>" class="menu-link" href="index.php?pid=2">About us</a></div>
             <div><a style="<?php echo $headerHomeServicesLinkCss ?>" class="menu-link" href="index.php?pid=3">Services</a></div>
@@ -76,32 +84,46 @@ $result = $link->query($sql);
 </div>
 <style>
     .header {
+        z-index: 1;
         height: 10vh;
         background-color: #3b5d50;
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+        position: fixed;
+        top: 0;
     }
+
+
 
     .header-child {
         display: flex;
         align-items: center;
-        width: 68%;
+        width: 72%;
         justify-content: center;
     }
 
     .logo-brand {
-        width: 10%;
+        width: 17%;
         display: flex;
+        justify-content: center;
+        align-items: center;
     }
+
+    .logo {
+        width: 27%;
+        justify-content: center;
+        align-items: center;
+    }
+
 
     .search-products {
         width: 30%;
     }
 
     .menu {
-        width: 45%;
+        width: 47%;
         display: flex;
         justify-content: end;
     }

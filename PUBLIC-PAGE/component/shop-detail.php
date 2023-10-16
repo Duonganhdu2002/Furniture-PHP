@@ -34,23 +34,37 @@ $resultProducts = $link->query($sqlProducts);
 
                     if ($resultCategories->num_rows > 0) {
                         $row = $resultCategories->fetch_assoc();
-                        ?>
+                        $categoryId = $row["id"];
+
+                        $currentCategory = isset($_GET['categoryId']) ? $_GET['categoryId'] : null;
+                        $activeClass = ($currentCategory == $categoryId) ? 'active-category' : '';
+                ?>
                         <li style="margin-bottom: 30px;">
-                            <a style="color: black; text-decoration: none; text-transform: uppercase;
-                            font-size: 18px; font-weight: 600; color: #3b5d50" href="index.php?pid=9&categoryId=<?php echo $row["id"]; ?>">
+                            <a style="color: #f9bf29; text-decoration: none; text-transform: uppercase;
+                    font-size: 18px; font-weight: 600; color: #3b5d50 <?php echo $activeClass; ?>" href="index.php?pid=9&categoryId=<?php echo $categoryId; ?>">
                                 <?php echo $row["category_name"]; ?>
                             </a>
                         </li>
-                        <?php
+                <?php
                     }
                 }
                 ?>
             </ul>
         </div>
 
+
         <div style="width: 75%; margin-top: 50px;" class="products-column">
             <?php
-            include "shop-section.php";
+            if (isset($_GET['categoryId'])) {
+                $categoryId = $_GET['categoryId'];
+                if ($categoryId == '0') {
+                    include "shop-searching.php";
+                } else {
+                    include "shop-section.php";
+                }
+            } else {
+                include "shop-section.php";
+            }
             ?>
         </div>
     </div>
