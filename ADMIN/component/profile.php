@@ -1,5 +1,5 @@
 <div class="header-data">
-                        <button class="button-edit">Sủa</button>
+                        <button class="button-edit">Sửa</button>
                     </div>
                     <div class="data-1">
                         <div class="data-left-1">
@@ -30,7 +30,7 @@
                         <div class="data-right-2">
                             <h3>Giới tính</h3>
                             <p>Nữ</p>
-                            <h3>Só điện thoại</h3>
+                            <h3>Số điện thoại</h3>
                             <p>090995663</p>
                             <h3>Địa chỉ</h3>
                             <p>Địa chỉ số 456, Đường Hà Nội, Ngõ B, Quận C, Hà nội</p>
