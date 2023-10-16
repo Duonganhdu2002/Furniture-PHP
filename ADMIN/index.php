@@ -20,15 +20,15 @@
             ?>
             <div class="display-info">
                 <div class="data">
-                    Data. This content can be changed. By the way, including PHP.
+                    <?php
+                    include "component/profile.php";
+                    ?>
                 </div>
             </div>
         </div>
     </div>
 </body>
 <style>
-    
-
     body {
         margin: 0;
         font-family: "Inter", sans-serif;
@@ -54,7 +54,7 @@
     .data {
         width: 97%;
         height: 85%;
-        background-color: lightcyan;
+        background-color: #f9f9f9;
         border-radius: 20px;
         margin-bottom: 90px;
     }
