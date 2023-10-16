@@ -66,15 +66,15 @@
 
 <body>
     <div class="login">
-        <form class="login-form" action="" method="post">
+        <form class="login-form" action="kt_admin.php" method="post">
             <h1>LOGIN</h1>
             <label for="username">Username</label>
             <br>
             <input type="text" name="username" id="username">
             <br>
-            <label for="password">Password</label>
+            <label for="role">Password</label>
             <br>
-            <input type="password" name="password" id="password">
+            <input type="role" name="role" id="role">
             <br>
             <button type="submit">LOGIN</button>
         </form>

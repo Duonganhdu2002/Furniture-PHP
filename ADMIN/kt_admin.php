@@ -21,7 +21,7 @@ $result = $conn->query($query);
 
 if ($result->num_rows == 1) {
     // Đăng nhập thành công, chuyển hướng đến trang admin
-    header("Location: index_admin.php");
+    header("Location: index.php");
 } else {
     // Đăng nhập thất bại, thông báo lỗi hoặc chuyển hướng lại trang đăng nhập
     echo "Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng thử lại.";
