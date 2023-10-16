@@ -14,17 +14,7 @@
     box-sizing: border-box;
     font-family: sans-serif;
 }
-body {
-    background-image: url('b2.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-}
+
 
 .wrapper {
     margin: auto;
