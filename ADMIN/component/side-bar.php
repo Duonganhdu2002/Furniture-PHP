@@ -1,5 +1,4 @@
 <?php
-// Hàm trả về đường dẫn ảnh cho menu
 function getMenuImage($pid)
 {
     $menuImages = array(
@@ -14,7 +13,6 @@ function getMenuImage($pid)
     return $menuImages[$pid];
 }
 
-// Hàm trả về văn bản cho menu
 function getMenuText($pid)
 {
     $menuTexts = array(
