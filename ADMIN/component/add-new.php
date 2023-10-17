@@ -36,20 +36,9 @@ if (isset($_GET['pid'])) {
 <div id="<?php echo $formId; ?>" class="modal" style="display: none;">
     <div class="modal-content">
         <?php if ($id == '1') : ?>
-            <!-- Đặt biểu mẫu thêm category ở đây -->
-            <div style="width: 80%;">
-                <form>
-                    <label for="categoryName">Category Name</label>
-                    <br>
-                    <input type="text" id="categoryName" name="categoryName">
-                    <br>
-                    <label for="categoryDescription">Category Descripion</label>
-                    <br>
-                    <input type="text" name="categoryDescription" id="categoryDescription">
-                    <br>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
+            <?php
+            include "component/form/category.php";
+            ?>
         <?php elseif ($id == '2') : ?>
             <!-- Đặt biểu mẫu thêm product ở đây -->
             <form>
@@ -121,6 +110,7 @@ if (isset($_GET['pid'])) {
 </script>
 
 <style>
+
     .modal {
         display: none;
         position: fixed;
@@ -138,7 +128,7 @@ if (isset($_GET['pid'])) {
         flex-direction: column;
         align-items: center;
         height: 85%;
-        width: 90%;
+        width: 40%;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
