@@ -1,97 +1,88 @@
-<?php
-$conn = new mysqli('localhost', 'root', '', 'shopping_online');
+<div class="category">
+    <table class="category-data-table">
+        <tr>
+            <th style="text-align: center;">STT</th>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">
+                <img style="width: 25px" src="../PUBLIC-PAGE/images/settingtr.svg">
+            </th>
+            <th style="text-align: center">Category Name</th>
+            <th style="text-align: center">Description</th>
+        </tr>
 
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+        <form id="myForm" action="#" method="post">
+            <tr>
+                <td style="text-align: center">
+                    <img type="image" style="width: 25px" src="../PUBLIC-PAGE/images/filter.svg">
+                </td>
+                <td style="text-align: center" colspan="2">
+                    <input name="searchByIdCategory" id="searchByIdCategory">
+                </td>
+                <td style="text-align: center">
+                    <input name="searchByNameCategory" id="searchByNameCategory">
+                </td>
+            </tr>
+        </form>
 
-// Định số mục trên mỗi trang
-$itemsPerPage = 8;
+        <?php
+        $conn = new mysqli('localhost', 'root', '', 'shopping_online');
 
-// Lấy trang hiện tại từ tham số truyền vào hoặc mặc định là trang 1
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
-// Tính offset để lấy dữ liệu từ database
-$offset = ($page - 1) * $itemsPerPage;
+        $itemsPerPage = 8;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = ($page - 1) * $itemsPerPage;
 
-// Lấy dữ liệu từ bảng categories với giới hạn số dòng và offset
-$sql = "SELECT id, parent_category_id, category_name, description FROM categories LIMIT $offset, $itemsPerPage";
-$result = $conn->query($sql);
+        $sql = "SELECT id, parent_category_id, category_name, description FROM categories LIMIT $offset, $itemsPerPage";
+        $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    // Hiển thị dữ liệu trong bảng
-    echo "<div class='category'>";
-    echo "<table class='category-data-table'>";
-    echo 
-    "<tr>
-        <th style='text-align: center;'>STT</th>
-        <th style='text-align: center'>ID</th>
-        <th style='text-align: center'>
-            <img style='width: 25px' src='../PUBLIC-PAGE/images/settingtr.svg'>
-        </th>
-        <th style='text-align: center'>Category Name</th>
-        <th style='text-align: center'>Description</th>
-    </tr>";
-    echo 
-    "<tr>
-        <td style='text-align: center'>
-            <img style='width: 25px' src='../PUBLIC-PAGE/images/filter.svg'>
-        </td>
-        <td style='text-align: center'colspan='2'>
-            <input id='searchByIdCategory'>
-        </td>
-        <td style='text-align: center'>
-            <input id='searchByIdCategory'>
-        </td>
-    </tr>";
+        if ($result->num_rows > 0) {
+            $stt = $offset + 1;
 
-    $stt = $offset + 1; // Biến đếm STT
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
+                echo "<td style='width:4%; text-align: center;'>" . $row["id"] . "</td>";
+                echo "<td style='width:4%; text-align: center;'> 
+                        <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
+                      </td>";
+                echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["category_name"] . "</td>";
+                echo "<td style='width: 73%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["description"] . "</td>";
+                echo "</tr>";
 
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
-        echo "<td style='width:4%; text-align: center;'>" . $row["id"] . "</td>";
-        echo "<td style='width:4%; text-align: center;'> <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'> </td>";
-        echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["category_name"] . "</td>";
-        echo "<td style='width: 73%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["description"] . "</td>";
-        echo "</tr>";
+                $stt++;
+            }
 
-        $stt++; // Tăng biến đếm STT sau mỗi dòng
-    }
+            echo "</table>";
 
-    echo "</table>";
+            $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM categories"))['total'];
+            $totalPages = ceil($totalItems / $itemsPerPage);
 
-    // Tính tổng số trang
-    $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM categories"))['total'];
-    $totalPages = ceil($totalItems / $itemsPerPage);
+            echo "<div class='pagination'>";
 
-    // Hiển thị nút chuyển trang và nút Next, Previous
-    echo "<div class='pagination'>";
+            if ($page > 1) {
+                echo "<a href='index.php?pid=1&page=" . ($page - 1) . "'>Previous</a> ";
+            }
 
-    if ($page > 1) {
-        echo "<a href='index.php?pid=1&page=" . ($page - 1) . "'>Previous</a> ";
-    }
+            for ($i = 1; $i <= $totalPages; $i++) {
+                echo "<a href='index.php?pid=1&page=$i'>$i</a> ";
+            }
 
-    for ($i = 1; $i <= $totalPages; $i++) {
-        echo "<a href='index.php?pid=1&page=$i'>$i</a> ";
-    }
+            if ($page < $totalPages) {
+                echo "<a href='index.php?pid=1&page=" . ($page + 1) . "'>Next</a> ";
+            }
 
-    if ($page < $totalPages) {
-        echo "<a href='index.php?pid=1&page=" . ($page + 1) . "'>Next</a> ";
-    }
+            echo "</div>";
+        } else {
+            echo "0 results";
+        }
 
-    echo "</div>";
-
-    echo "</div>";
-} else {
-    echo "0 results";
-}
-
-// Đóng kết nối
-$conn->close();
-?>
-
+        $conn->close();
+        ?>
+    </table>
+</div>
 <style>
     .category {
         width: 100%;

@@ -1,6 +1,6 @@
 <div class="title-section">
     <?php
-    $nameCategory = 'Nova';
+    $nameCategory = '';
     if (isset($_GET['pid'])) {
         $id = $_GET['pid'];
         switch ($id) {
