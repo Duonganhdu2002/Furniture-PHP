@@ -16,36 +16,6 @@
         <div id="right-side">
             <?php
             include "component/header.php";
-            ?>
-            <?php
-            if (isset($_GET['pid'])) {
-                $id = $_GET['pid'];
-                switch ($id) {
-                    case '1':
-                        $nameCategory = 'Category';
-                        break;
-                    case '2':
-                        $nameCategory = 'Product';
-                        break;
-                    case '3':
-                        $nameCategory = 'Brand';
-                        break;
-                    case '4':
-                        $nameCategory = 'Member';
-                        break;
-                    case '5':
-                        $nameCategory = 'Customer';
-                        break;
-                    case '6':
-                        $nameCategory = 'Order';
-                        break;
-                    case '7':
-                        $nameCategory = 'Revenue';
-                        break;
-                }
-            } else {
-                $nameCategory = 'Nova.';
-            }
             include "component/title.php";
             ?>
             <div class="display-info">
@@ -102,7 +72,7 @@
     }
 
     .display-info {
-        height: 88vh;
+        height: 87vh;
         display: flex;
         justify-content: center;
         align-items: center;

@@ -77,12 +77,14 @@ $background_color = array_key_exists($current_page, $page_colors) ? $page_colors
 <script>
     function toggleSidebar() {
         var sideBar = document.getElementById("side-bar");
+        var rightSide = document.getElementById("right-side");
         var brandLetter = document.getElementById("brand-letter");
         var textMenus = document.querySelectorAll(".text-menu");
         var imgElements = document.querySelectorAll(".image-menu");
 
         if (sideBar.style.width === "15%") {
             sideBar.style.width = "5%";
+            rightSide.style.width = "95%";
             brandLetter.style.display = "none";
 
             textMenus.forEach(function(element) {
@@ -90,10 +92,11 @@ $background_color = array_key_exists($current_page, $page_colors) ? $page_colors
             });
 
             imgElements.forEach(function(element) {
-                element.style.marginRight = "0";
+                element.style.marginRight = "20px";
             });
         } else {
             sideBar.style.width = "15%";
+            rightSide.style.width = "85%";
             brandLetter.style.display = "block";
 
             textMenus.forEach(function(element) {
@@ -101,7 +104,7 @@ $background_color = array_key_exists($current_page, $page_colors) ? $page_colors
             });
 
             imgElements.forEach(function(element) {
-                element.style.marginRight = "0px";
+                element.style.marginRight = "20px";
             });
         }
     }
