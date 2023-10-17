@@ -23,8 +23,28 @@ if ($result->num_rows > 0) {
     // Hiển thị dữ liệu trong bảng
     echo "<div class='category'>";
     echo "<table class='category-data-table'>";
-    echo "<tr><th style='text-align: center;'>STT</th><th style='text-align: center'>ID</th><th style='text-align: center'><img style='width: 25px' src='../PUBLIC-PAGE/images/settingtr.svg'></th><th style='text-align: center'>Category Name</th><th style='text-align: center'>Description</th></tr>";
-    echo "<tr><td style='text-align: center'><img style='width: 25px' src='../PUBLIC-PAGE/images/filter.svg'></td><td style='text-align: center' colspan='2'><input></td><td style='text-align: center'><input></td></tr>";
+    echo 
+    "<tr>
+        <th style='text-align: center;'>STT</th>
+        <th style='text-align: center'>ID</th>
+        <th style='text-align: center'>
+            <img style='width: 25px' src='../PUBLIC-PAGE/images/settingtr.svg'>
+        </th>
+        <th style='text-align: center'>Category Name</th>
+        <th style='text-align: center'>Description</th>
+    </tr>";
+    echo 
+    "<tr>
+        <td style='text-align: center'>
+            <img style='width: 25px' src='../PUBLIC-PAGE/images/filter.svg'>
+        </td>
+        <td style='text-align: center'colspan='2'>
+            <input id='searchByIdCategory'>
+        </td>
+        <td style='text-align: center'>
+            <input id='searchByIdCategory'>
+        </td>
+    </tr>";
 
     $stt = $offset + 1; // Biến đếm STT
 
