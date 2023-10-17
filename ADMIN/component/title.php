@@ -24,6 +24,10 @@
             case '7':
                 $nameCategory = 'Revenue';
                 break;
+            case '8':
+                $nameCategory = 'Personal information';
+                $hideButtonAdd = true;
+                break;
             default:
                 $nameCategory = 'Nova';
                 break;
@@ -33,7 +37,9 @@
     }
     echo $nameCategory;
     ?>
+    <?php if (!isset($hideButtonAdd) || !$hideButtonAdd): ?>
     <button class="button-add">Add new product</button>
+    <?php endif; ?>
 
 </div>
 
