@@ -1,5 +1,5 @@
 <div class="title">
-    Member
+    <?php echo $nameCategory?>
 </div>
 <style>
     .title {

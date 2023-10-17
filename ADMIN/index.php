@@ -16,12 +16,69 @@
         <div id="right-side">
             <?php
             include "component/header.php";
+            ?>
+            <?php
+            if (isset($_GET['pid'])) {
+                $id = $_GET['pid'];
+                switch ($id) {
+                    case '1':
+                        $nameCategory = 'Category';
+                        break;
+                    case '2':
+                        $nameCategory = 'Product';
+                        break;
+                    case '3':
+                        $nameCategory = 'Brand';
+                        break;
+                    case '4':
+                        $nameCategory = 'Member';
+                        break;
+                    case '5':
+                        $nameCategory = 'Customer';
+                        break;
+                    case '6':
+                        $nameCategory = 'Order';
+                        break;
+                    case '7':
+                        $nameCategory = 'Revenue';
+                        break;
+                }
+            } else {
+                $nameCategory = 'Nova.';
+            }
             include "component/title.php";
             ?>
             <div class="display-info">
                 <div class="data">
                     <?php
-                    include "component/profile.php";
+                    if (isset($_GET['pid'])) {
+                        $id = $_GET['pid'];
+                        switch ($id) {
+                            case '1':
+                                include("component/category.php");
+                                break;
+                            case '2':
+                                include("component/product.php");
+                                break;
+                            case '3':
+                                include("component/brand.php");
+                                break;
+                            case '4':
+                                include("component/member.php");
+                                break;
+                            case '5':
+                                include("component/customer.php");
+                                break;
+                            case '6':
+                                include("component/order.php");
+                                break;
+                            case '7':
+                                include("component/revenue.php");
+                                break;
+                        }
+                    } else {
+                        include("component/nova.php");
+                    }
                     ?>
                 </div>
             </div>
