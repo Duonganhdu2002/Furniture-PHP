@@ -1,7 +1,7 @@
 <div class="header">
     <span>Employee Name</span>
     <img class="bell" src="../PUBLIC-PAGE/images/bell.svg" alt="">
-    <a href="component/profile.php">
+    <a href="index.php?pid=8">
     <img class="avatar" src="../PUBLIC-PAGE/images/person-1.jpg" alt="">
     </a>
 </div>

@@ -45,6 +45,9 @@
                             case '7':
                                 include("component/revenue.php");
                                 break;
+                            case '8':
+                                include("component/profile.php");
+                                break;
                         }
                     } else {
                         include("component/nova.php");
