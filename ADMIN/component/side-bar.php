@@ -33,16 +33,16 @@ function getMenuText($pid)
 $current_page = isset($_GET['pid']) ? $_GET['pid'] : 0;
 
 $page_colors = array(
-    1 => '#F0F7FF',
-    2 => '#F0F7FF',
-    3 => '#F0F7FF',
-    4 => '#F0F7FF',
-    5 => '#F0F7FF',
-    6 => '#F0F7FF',
-    7 => '#F0F7FF',
+    1 => '#EFFFF5',
+    2 => '#EFFFF5',
+    3 => '#EFFFF5',
+    4 => '#EFFFF5',
+    5 => '#EFFFF5',
+    6 => '#EFFFF5',
+    7 => '#EFFFF5',
 );
 
-$background_color = array_key_exists($current_page, $page_colors) ? $page_colors[$current_page] : '#F0F7FF';
+$background_color = array_key_exists($current_page, $page_colors) ? $page_colors[$current_page] : '#EFFFF5';
 ?>
 
 <div id="side-bar">
