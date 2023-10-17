@@ -83,8 +83,7 @@
 
     .data {
         width: 97%;
-        height: 85%;
-        margin-bottom: 90px;
+        height: 95%;
     }
 </style>
 

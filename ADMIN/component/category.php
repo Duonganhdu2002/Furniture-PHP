@@ -75,6 +75,7 @@ $conn->close();
 <style>
     .category {
         width: 100%;
+        margin-top: 20px;
     }
 
     .category-data-table {
@@ -89,6 +90,7 @@ $conn->close();
         padding: 8px;
         text-align: left;
     }
+
     .category-data-table td {
         height: 50px;
     }
@@ -96,7 +98,7 @@ $conn->close();
     .category-data-table tr td input {
         width: 80%;
         height: 60%;
-        padding: 3px 8px 3px 8px;
+        padding: 3px 8px;
         border: #3b5d50 1px solid;
         border-radius: 6px;
     }
@@ -106,8 +108,11 @@ $conn->close();
     }
 
     .pagination {
-        margin-top: 20px;
-        float: right;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #fff;
+        padding: 10px;
     }
 
     .pagination a {
@@ -119,7 +124,7 @@ $conn->close();
         border: none;
         border-radius: 4px;
         background-color: #3b5d50;
-        padding: 10px 15px 10px 15px;
+        padding: 10px 15px;
         color: white;
     }
 
