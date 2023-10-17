@@ -25,10 +25,14 @@
             case '7':
                 $nameCategory = 'Revenue';
                 break;
+            default:
+                $nameCategory = 'Nova';
+                break;
         }
     }
     echo $nameCategory;
     ?>
+    <button class="button-add">Add new product</button>
 
     <?php
     if (isset($_GET['pid']) && in_array($_GET['pid'], [1, 2, 3, 4])) {
