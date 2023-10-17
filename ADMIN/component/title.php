@@ -25,6 +25,9 @@
             case '7':
                 $nameCategory = 'Revenue';
                 break;
+            case '8':
+                $nameCategory = 'Personal information';
+                break;
             default:
                 $nameCategory = 'Nova';
                 break;
