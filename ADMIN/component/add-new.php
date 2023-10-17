@@ -40,13 +40,9 @@ if (isset($_GET['pid'])) {
             include "component/form/category.php";
             ?>
         <?php elseif ($id == '2') : ?>
-            <!-- Đặt biểu mẫu thêm product ở đây -->
-            <form>
-                <!-- Mã HTML của biểu mẫu -->
-                <label for="productName">Product Name:</label>
-                <input type="text" id="productName" name="productName">
-                <button type="submit">Submit</button>
-            </form>
+            <?php
+            include "component/form/product.php";
+            ?>
         <?php elseif ($id == '3') : ?>
             <!-- Đặt biểu mẫu thêm brand ở đây -->
             <form>
