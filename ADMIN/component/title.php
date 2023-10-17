@@ -32,8 +32,6 @@
     }
     echo $nameCategory;
     ?>
-    <button class="button-add">Add new product</button>
-
     <?php
     if (isset($_GET['pid']) && in_array($_GET['pid'], [1, 2, 3, 4])) {
         include "component/add-new.php";
