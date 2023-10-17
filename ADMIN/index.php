@@ -81,8 +81,6 @@
     .data {
         width: 97%;
         height: 85%;
-        background-color: #EFFFF5;
-        border-radius: 20px;
         margin-bottom: 90px;
     }
 </style>
