@@ -21,7 +21,7 @@
             <div class="display-info">
                 <div class="data">
                     <?php
-                    include "component/password.php";
+                    include "component/profile.php";
                     ?>
                 </div>
             </div>
