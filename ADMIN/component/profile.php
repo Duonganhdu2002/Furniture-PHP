@@ -1,41 +1,45 @@
-<div class="header-data">
-                        <button class="button-edit">Sủa</button>
-                    </div>
-                    <div class="data-1">
-                        <div class="data-left-1">
-                            <img class="avatar-data" src="../PUBLIC-PAGE/images/person-1.jpg" alt="">
-                            <div class="camera-icon">
-                                <a href="#">
-                                    <img src="../PUBLIC-PAGE/images/camera-outline.svg" alt="Camera Icon">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="data-right-1">
-                            <h1>Bùi Thị F</h1>
-                        </div>
-                    </div>
-                    <div class="header-data-2">
-                            <h2>Thông tin cá nhân</h2>
-                        </div>
-                    <div class="data-2">
-                        
-                        <div class="data-left-2">
-                            <h3>Tài khoản</h3>
-                            <p>abc@gmail.com</p>
-                            <h3>Ngày sinh</h3>
-                            <p>06/12/1990</p>
-                            <h3>Email</h3>
-                            <p>buithifabcde@gmail.com</p>
-                        </div>
-                        <div class="data-right-2">
-                            <h3>Giới tính</h3>
-                            <p>Nữ</p>
-                            <h3>Só điện thoại</h3>
-                            <p>090995663</p>
-                            <h3>Địa chỉ</h3>
-                            <p>Địa chỉ số 456, Đường Hà Nội, Ngõ B, Quận C, Hà nội</p>
-                        </div>
-                    </div>
+<div class="profile">
+    <div class="header-profile">
+        <div class="left-side">
+            <div class="info-emloyee">
+                <img class="avatar-emloyee" src="../PUBLIC-PAGE/images/person-1.jpg" alt="">
+                <div class="camera-icon">
+                    <a href="#">
+                        <img src="../PUBLIC-PAGE/images/camera-outline.svg" alt="Camera Icon">
+                    </a>
+                </div>
+            </div>
+            <div class="name-employee">
+                <h1>Bùi Thị F</h1>
+            </div>
+        </div>
+        <div class="right-side">
+            <button class="button-edit">Edit</button>
+        </div>
+    </div>
+    <div class="header-data-2">
+        <h2>Thông tin cá nhân</h2>
+    </div>
+    <div class="data-2">
+
+        <div class="data-left-2">
+            <h3>Tài khoản</h3>
+            <p>abc@gmail.com</p>
+            <h3>Ngày sinh</h3>
+            <p>06/12/1990</p>
+            <h3>Email</h3>
+            <p>buithifabcde@gmail.com</p>
+        </div>
+        <div class="data-right-2">
+            <h3>Giới tính</h3>
+            <p>Nữ</p>
+            <h3>Só điện thoại</h3>
+            <p>090995663</p>
+            <h3>Địa chỉ</h3>
+            <p>Địa chỉ số 456, Đường Hà Nội, Ngõ B, Quận C, Hà nội</p>
+        </div>
+    </div>
+</div>
 <style>
     .profile {
         padding-left: 200px;
