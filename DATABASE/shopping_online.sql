@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 14, 2023 lúc 06:48 PM
+-- Thời gian đã tạo: Th10 17, 2023 lúc 06:18 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -29,22 +29,49 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `addresses` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `street_address` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `state` varchar(255) DEFAULT NULL,
-  `postal_code` varchar(255) DEFAULT NULL,
-  `is_default` tinyint(1) DEFAULT NULL
+  `country` varchar(50) DEFAULT '',
+  `province` varchar(50) DEFAULT '',
+  `district` varchar(50) DEFAULT '',
+  `commune` varchar(50) DEFAULT '',
+  `street` varchar(50) DEFAULT NULL,
+  `number` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `addresses`
 --
 
-INSERT INTO `addresses` (`id`, `user_id`, `street_address`, `city`, `state`, `postal_code`, `is_default`) VALUES
-(1, 1, '123 Main St', 'City1', 'State1', '12345', 1),
-(2, 1, '456 Elm St', 'City2', 'State2', '67890', 0),
-(3, 2, '789 Oak St', 'City3', 'State3', '54321', 1);
+INSERT INTO `addresses` (`id`, `country`, `province`, `district`, `commune`, `street`, `number`) VALUES
+(1, 'Vietnam', 'Hanoi', 'Ba Dinh', 'Quan Thanh', 'Phan Dinh Phung', '123'),
+(2, 'USA', 'California', 'Los Angeles', 'Downtown', 'Main Street', '456'),
+(3, 'UK', 'England', 'London', 'Westminster', 'Abbey Road', '789'),
+(4, 'France', 'Île-de-France', 'Paris', '1st Arrondissement', 'Champs-Élysées', '101'),
+(5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202'),
+(6, 'Japan', 'Tokyo', 'Minato', 'Roppongi', 'Tokyo Tower Street', '303'),
+(7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404'),
+(8, 'Australia', 'New South Wales', 'Sydney', 'Central Business District', 'George Street', '505'),
+(9, 'Brazil', 'Sao Paulo', 'Sao Paulo', 'Jardim Paulista', 'Paulista Avenue', '606'),
+(10, 'South Korea', 'Seoul', 'Jung', 'Myeongdong', 'Myeongdong Street', '707'),
+(11, 'India', 'Maharashtra', 'Mumbai', 'Colaba', 'Gateway of India Road', '808'),
+(12, 'China', 'Beijing', 'Chaoyang', 'Guomao', 'Beijing CBD Street', '909'),
+(13, 'Italy', 'Lazio', 'Rome', 'Historic Center', 'Via del Corso', '1010'),
+(14, 'Mexico', 'Mexico City', 'Cuauhtémoc', 'Zona Rosa', 'Paseo de la Reforma', '1111'),
+(15, 'Spain', 'Madrid', 'Community of Madrid', 'Centro', 'Gran Vía', '1212'),
+(16, 'Russia', 'Moscow', 'Central Administrative Okrug', 'Tverskoy', 'Tverskaya Street', '1313'),
+(17, 'South Africa', 'Gauteng', 'Johannesburg', 'Sandton', 'Sandton Drive', '1414'),
+(18, 'Argentina', 'Buenos Aires', 'Buenos Aires', 'Recoleta', 'Avenida Alvear', '1515'),
+(19, 'Turkey', 'Istanbul', 'Istanbul', 'Beyoğlu', 'Istiklal Avenue', '1616'),
+(20, 'Thailand', 'Bangkok', 'Bangkok', 'Pathum Wan', 'Siam Square', '1717'),
+(21, 'Singapore', 'Singapore', 'Central Region', 'Orchard', 'Orchard Road', '1818'),
+(22, 'Netherlands', 'North Holland', 'Amsterdam', 'Centrum', 'Dam Square', '1919'),
+(23, 'Switzerland', 'Zurich', 'Zurich', 'Old Town', 'Bahnhofstrasse', '2020'),
+(24, 'Sweden', 'Stockholm', 'Stockholm County', 'Norrmalm', 'Drottninggatan', '2121'),
+(25, 'Norway', 'Oslo', 'Oslo', 'Sentrum', 'Karl Johans gate', '2222'),
+(26, 'Denmark', 'Copenhagen', 'Capital Region', 'Indre By', 'Strøget', '2323'),
+(27, 'Finland', 'Helsinki', 'Uusimaa', 'Kluuvi', 'Aleksanterinkatu', '2424'),
+(28, 'Portugal', 'Lisbon', 'Lisbon', 'Baixa', 'Rua Augusta', '2525'),
+(29, 'Ireland', 'Dublin', 'Leinster', 'City Centre', 'Grafton Street', '2626'),
+(30, 'Belgium', 'Brussels', 'Brussels-Capital Region', 'City of Brussels', 'Rue Neuve', '2727');
 
 -- --------------------------------------------------------
 
@@ -136,6 +163,57 @@ INSERT INTO `categories` (`id`, `parent_category_id`, `category_name`, `descript
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `information`
+--
+
+CREATE TABLE `information` (
+  `id` int(11) NOT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `date_of_birth` datetime DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `gender` int(11) DEFAULT NULL,
+  `phone_number` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `information`
+--
+
+INSERT INTO `information` (`id`, `full_name`, `date_of_birth`, `email`, `gender`, `phone_number`) VALUES
+(1, 'John Doe', '1990-01-15 00:00:00', 'john.doe@example.com', 1, '+123456789'),
+(2, 'Jane Doe', '1985-05-22 00:00:00', 'jane.doe@example.com', 2, '+987654321'),
+(3, 'Alice Smith', '1995-08-10 00:00:00', 'alice.smith@example.com', 2, '+111223344'),
+(4, 'Bob Johnson', '1980-03-30 00:00:00', 'bob.johnson@example.com', 1, '+555666777'),
+(5, 'Eva Williams', '1992-11-05 00:00:00', 'eva.williams@example.com', 2, '+999888777'),
+(6, 'Michael Brown', '1993-04-18 00:00:00', 'michael.brown@example.com', 1, '+444333222'),
+(7, 'Sophia Lee', '1988-09-12 00:00:00', 'sophia.lee@example.com', 2, '+123987654'),
+(8, 'Daniel Taylor', '1998-07-25 00:00:00', 'daniel.taylor@example.com', 1, '+987123654'),
+(9, 'Olivia Davis', '1987-12-08 00:00:00', 'olivia.davis@example.com', 2, '+555111222'),
+(10, 'Matthew Evans', '1994-02-28 00:00:00', 'matthew.evans@example.com', 1, '+111222333'),
+(11, 'Ava Martinez', '1996-06-15 00:00:00', 'ava.martinez@example.com', 2, '+999555777'),
+(12, 'Jacob Wilson', '1986-10-04 00:00:00', 'jacob.wilson@example.com', 1, '+333888999'),
+(13, 'Emma Anderson', '1991-03-22 00:00:00', 'emma.anderson@example.com', 2, '+777444555'),
+(14, 'Alexander Nguyen', '1989-08-17 00:00:00', 'alexander.nguyen@example.com', 1, '+111999888'),
+(15, 'Mia Brown', '1997-01-11 00:00:00', 'mia.brown@example.com', 2, '+777111222'),
+(16, 'Liam Garcia', '1985-05-30 00:00:00', 'liam.garcia@example.com', 1, '+555333444'),
+(17, 'Amelia Kim', '1990-11-25 00:00:00', 'amelia.kim@example.com', 2, '+123789456'),
+(18, 'Ethan Patel', '1999-07-08 00:00:00', 'ethan.patel@example.com', 1, '+555777999'),
+(19, 'Olivia White', '1984-12-01 00:00:00', 'olivia.white@example.com', 2, '+999111222'),
+(20, 'Noah Lee', '1992-02-14 00:00:00', 'noah.lee@example.com', 1, '+444666777'),
+(21, 'Isabella Wilson', '1995-06-10 00:00:00', 'isabella.wilson@example.com', 2, '+123555999'),
+(22, 'James Martin', '1983-10-23 00:00:00', 'james.martin@example.com', 1, '+555444333'),
+(23, 'Sophia Kim', '1993-04-28 00:00:00', 'sophia.kim@example.com', 2, '+123456987'),
+(24, 'Jackson Smith', '1988-09-15 00:00:00', 'jackson.smith@example.com', 1, '+987654321'),
+(25, 'Emma Davis', '1998-07-28 00:00:00', 'emma.davis@example.com', 2, '+987123654'),
+(26, 'Aiden Taylor', '1987-12-11 00:00:00', 'aiden.taylor@example.com', 1, '+555111222'),
+(27, 'Olivia Wilson', '1994-03-01 00:00:00', 'olivia.wilson@example.com', 2, '+111222333'),
+(28, 'Lucas Anderson', '1996-06-18 00:00:00', 'lucas.anderson@example.com', 1, '+999555777'),
+(29, 'Ava Wilson', '1986-10-07 00:00:00', 'ava.wilson@example.com', 2, '+333888999'),
+(30, 'Mason Martinez', '1991-03-25 00:00:00', 'mason.martinez@example.com', 1, '+777444555');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `orders`
 --
 
@@ -148,15 +226,6 @@ CREATE TABLE `orders` (
   `billing_address_id` int(11) DEFAULT NULL,
   `shipping_address_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `orders`
---
-
-INSERT INTO `orders` (`id`, `user_id`, `order_date`, `status`, `shipping_method_id`, `billing_address_id`, `shipping_address_id`) VALUES
-(1, 1, '2023-09-19 02:00:00', 'Processing', 1, 1, 1),
-(2, 2, '2023-09-20 03:30:00', 'Shipped', 2, 2, 2),
-(3, 1, '2023-09-21 04:45:00', 'Delivered', 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -186,15 +255,6 @@ CREATE TABLE `payment_methods` (
   `expiry_date` date DEFAULT NULL,
   `is_default` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `payment_methods`
---
-
-INSERT INTO `payment_methods` (`id`, `user_id`, `payment_type`, `card_number`, `expiry_date`, `is_default`) VALUES
-(1, 1, 'Credit Card', '1234-5678-9012-3456', '2025-12-31', 1),
-(2, 1, 'PayPal', 'paypal@example.com', '2024-06-30', 0),
-(3, 2, 'Credit Card', '5678-9012-3456-7890', '2025-10-31', 1);
 
 -- --------------------------------------------------------
 
@@ -533,15 +593,6 @@ CREATE TABLE `shopping_carts` (
   `status` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Đang đổ dữ liệu cho bảng `shopping_carts`
---
-
-INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`) VALUES
-(1, 1, '2023-09-18 05:00:00', 'Open'),
-(2, 2, '2023-09-18 06:30:00', 'Open'),
-(3, 1, '2023-09-18 07:15:00', 'Closed');
-
 -- --------------------------------------------------------
 
 --
@@ -551,6 +602,7 @@ INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`) VALUES
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) DEFAULT NULL,
+  `password` varchar(50) CHARACTER SET armscii8 COLLATE armscii8_general_ci DEFAULT NULL,
   `role` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -559,10 +611,37 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `role`, `created_at`) VALUES
-(1, 'user1', 'customer', '2023-09-18 03:00:00'),
-(2, 'user2', 'customer', '2023-09-18 03:05:00'),
-(3, 'admin', 'admin', '2023-09-18 04:00:00');
+INSERT INTO `users` (`id`, `username`, `password`, `role`, `created_at`) VALUES
+(1, 'user1', 'password1', 'user', '2023-10-17 04:13:34'),
+(2, 'user2', 'password2', 'user', '2023-10-17 04:13:34'),
+(3, 'user3', 'password3', 'user', '2023-10-17 04:13:34'),
+(4, 'user4', 'password4', 'user', '2023-10-17 04:13:34'),
+(5, 'user5', 'password5', 'user', '2023-10-17 04:13:34'),
+(6, 'user6', 'password6', 'user', '2023-10-17 04:13:34'),
+(7, 'user7', 'password7', 'user', '2023-10-17 04:13:34'),
+(8, 'user8', 'password8', 'user', '2023-10-17 04:13:34'),
+(9, 'user9', 'password9', 'user', '2023-10-17 04:13:34'),
+(10, 'user10', 'password10', 'user', '2023-10-17 04:13:34'),
+(11, 'admin1', 'adminpass1', 'admin', '2023-10-17 04:14:09'),
+(12, 'admin2', 'adminpass2', 'admin', '2023-10-17 04:14:09'),
+(13, 'admin3', 'adminpass3', 'admin', '2023-10-17 04:14:09'),
+(14, 'admin4', 'adminpass4', 'admin', '2023-10-17 04:14:09'),
+(15, 'admin5', 'adminpass5', 'admin', '2023-10-17 04:14:09'),
+(16, 'admin6', 'adminpass6', 'admin', '2023-10-17 04:14:09'),
+(17, 'admin7', 'adminpass7', 'admin', '2023-10-17 04:14:09'),
+(18, 'admin8', 'adminpass8', 'admin', '2023-10-17 04:14:09'),
+(19, 'admin9', 'adminpass9', 'admin', '2023-10-17 04:14:09'),
+(20, 'admin10', 'adminpass10', 'admin', '2023-10-17 04:14:09'),
+(21, 'admin11', 'adminpass11', 'admin', '2023-10-17 04:14:09'),
+(22, 'admin12', 'adminpass12', 'admin', '2023-10-17 04:14:09'),
+(23, 'admin13', 'adminpass13', 'admin', '2023-10-17 04:14:09'),
+(24, 'admin14', 'adminpass14', 'admin', '2023-10-17 04:14:09'),
+(25, 'admin15', 'adminpass15', 'admin', '2023-10-17 04:14:09'),
+(26, 'admin16', 'adminpass16', 'admin', '2023-10-17 04:14:09'),
+(27, 'admin17', 'adminpass17', 'admin', '2023-10-17 04:14:09'),
+(28, 'admin18', 'adminpass18', 'admin', '2023-10-17 04:14:09'),
+(29, 'admin19', 'adminpass19', 'admin', '2023-10-17 04:14:09'),
+(30, 'admin20', 'adminpass20', 'admin', '2023-10-17 04:14:09');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -572,8 +651,7 @@ INSERT INTO `users` (`id`, `username`, `role`, `created_at`) VALUES
 -- Chỉ mục cho bảng `addresses`
 --
 ALTER TABLE `addresses`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Chỉ mục cho bảng `brands`
@@ -596,6 +674,12 @@ ALTER TABLE `cart_items`
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD KEY `parent_category_id` (`parent_category_id`);
+
+--
+-- Chỉ mục cho bảng `information`
+--
+ALTER TABLE `information`
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Chỉ mục cho bảng `orders`
@@ -679,7 +763,7 @@ ALTER TABLE `users`
 -- Các ràng buộc cho bảng `addresses`
 --
 ALTER TABLE `addresses`
-  ADD CONSTRAINT `addresses_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `fk_addresses_information` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
 
 --
 -- Các ràng buộc cho bảng `cart_items`
@@ -696,13 +780,19 @@ ALTER TABLE `categories`
   ADD CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`parent_category_id`) REFERENCES `categories` (`id`);
 
 --
+-- Các ràng buộc cho bảng `information`
+--
+ALTER TABLE `information`
+  ADD CONSTRAINT `information_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+
+--
 -- Các ràng buộc cho bảng `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`shipping_method_id`) REFERENCES `shipping_methods` (`id`),
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`billing_address_id`) REFERENCES `addresses` (`id`),
-  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`shipping_address_id`) REFERENCES `addresses` (`id`);
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`billing_address_id`) REFERENCES `information` (`id`),
+  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`shipping_address_id`) REFERENCES `information` (`id`);
 
 --
 -- Các ràng buộc cho bảng `order_items`

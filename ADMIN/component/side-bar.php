@@ -1,3 +1,48 @@
+<?php
+function getMenuImage($pid)
+{
+    $menuImages = array(
+        1 => 'category.svg',
+        2 => 'product.svg',
+        3 => 'brand.svg',
+        4 => 'member.svg',
+        5 => 'customer.svg',
+        6 => 'order.svg',
+        7 => 'revenue.svg',
+    );
+    return $menuImages[$pid];
+}
+
+function getMenuText($pid)
+{
+    $menuTexts = array(
+        1 => 'Category',
+        2 => 'Product',
+        3 => 'Brand',
+        4 => 'Member',
+        5 => 'Customer',
+        6 => 'Order',
+        7 => 'Revenue',
+    );
+    return $menuTexts[$pid];
+}
+?>
+<?php
+$current_page = isset($_GET['pid']) ? $_GET['pid'] : 0;
+
+$page_colors = array(
+    1 => '#EFFFF5',
+    2 => '#EFFFF5',
+    3 => '#EFFFF5',
+    4 => '#EFFFF5',
+    5 => '#EFFFF5',
+    6 => '#EFFFF5',
+    7 => '#EFFFF5',
+);
+
+$background_color = array_key_exists($current_page, $page_colors) ? $page_colors[$current_page] : '#EFFFF5';
+?>
+
 <div id="side-bar">
     <div class="logo-brand" onclick="toggleSidebar()">
         <div class="logo">
@@ -8,35 +53,23 @@
         <a id="brand-letter" style="opacity: 0.8;">Nova<span>.</span></a>
     </div>
     <div class="menu-bar">
-        <div>
-            <a href="#" class="image-menu"><img src="../PUBLIC-PAGE/images/category.svg" alt=""></a>
-            <a href="#" class="text-menu">Category</a>
-        </div>
-        <div>
-            <a href="#" class="image-menu"><img src="../PUBLIC-PAGE/images/product.svg" alt=""></a>
-            <a href="#" class="text-menu">Product</a>
-        </div>
-        <div>
-            <a href="#" class="image-menu"><img src="../PUBLIC-PAGE/images/brand.svg" alt=""></a>
-            <a href="#" class="text-menu">Brand</a>
-        </div>
-        <div>
-            <a href="#" class="image-menu"><img src="../PUBLIC-PAGE/images/member.svg" alt=""></a>
-            <a href="#" class="text-menu">Member</a>
-        </div>
-        <div>
-            <a href="#" class="image-menu"><img src="../PUBLIC-PAGE/images/customer.svg" alt=""></a>
-            <a href="#" class="text-menu">Customer</a>
-        </div>
-        <div>
-            <a href="#" class="image-menu"><img src="../PUBLIC-PAGE/images/order.svg" alt=""></a>
-            <a href="#" class="text-menu">Order</a>
-        </div>
-        <div>
-            <a href="#" class="image-menu"><img src="../PUBLIC-PAGE/images/revenue.svg" alt=""></a>
-            <a href="#" class="text-menu">Revenue</a>
+        <?php for ($i = 1; $i <= 7; $i++) : ?>
+            <div onclick="window.location.href='index.php?pid=<?php echo $i; ?>';" style="background-color: <?php echo ($current_page == $i) ? $background_color : 'transparent'; ?>" class="menu-link">
+                <a href="index.php?pid=<?php echo $i; ?>" class="menu-content">
+                    <img src="../PUBLIC-PAGE/images/<?php echo getMenuImage($i); ?>" alt="" class="image-menu">
+                    <span class="text-menu"><?php echo getMenuText($i); ?></span>
+                </a>
+            </div>
+        <?php endfor; ?>
+
+        <div onclick="window.location.href='index.php';" style="background-color: <?php echo ($current_page === 0) ? $background_color : 'transparent'; ?>" class="menu-link">
+            <a href="index.php" class="menu-content">
+                <img src="../PUBLIC-PAGE/images/logo-black.svg" alt="" class="image-menu">
+                <span class="text-menu">Nova.</span>
+            </a>
         </div>
     </div>
+
 </div>
 
 <script>
@@ -52,24 +85,24 @@
             rightSide.style.width = "95%";
             brandLetter.style.display = "none";
 
-            textMenus.forEach(function (element) {
+            textMenus.forEach(function(element) {
                 element.style.display = "none";
             });
 
-            imgElements.forEach(function (element) {
-                element.style.marginRight = "0";
+            imgElements.forEach(function(element) {
+                element.style.marginRight = "20px";
             });
         } else {
             sideBar.style.width = "15%";
             rightSide.style.width = "85%";
             brandLetter.style.display = "block";
 
-            textMenus.forEach(function (element) {
+            textMenus.forEach(function(element) {
                 element.style.display = "block";
             });
 
-            imgElements.forEach(function (element) {
-                element.style.marginRight = "0px";
+            imgElements.forEach(function(element) {
+                element.style.marginRight = "20px";
             });
         }
     }
@@ -80,7 +113,7 @@
         width: 15%;
         border-right: 1px solid transparent;
         box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.3);
-        overflow: hidden; /* Added overflow property */
+        overflow: hidden;
     }
 
     .menu-bar {
@@ -100,7 +133,12 @@
         border-radius: 10px;
         display: flex;
         align-items: center;
-        cursor: pointer; /* Added cursor property */
+        cursor: pointer;
+    }
+
+    .menu-bar div a {
+        display: flex;
+        align-items: center;
     }
 
     .menu-bar div:hover {
@@ -116,6 +154,7 @@
 
     .menu-bar div a img {
         width: 30px;
+        height: 30px;
         margin-right: 20px;
     }
 
@@ -124,7 +163,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        cursor: pointer; 
+        cursor: pointer;
     }
 
     .logo-brand img {

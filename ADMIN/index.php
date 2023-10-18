@@ -21,7 +21,37 @@
             <div class="display-info">
                 <div class="data">
                     <?php
-                    include "component/profile.php";
+                    if (isset($_GET['pid'])) {
+                        $id = $_GET['pid'];
+                        switch ($id) {
+                            case '1':
+                                include("component/category.php");
+                                break;
+                            case '2':
+                                include("component/product.php");
+                                break;
+                            case '3':
+                                include("component/brand.php");
+                                break;
+                            case '4':
+                                include("component/member.php");
+                                break;
+                            case '5':
+                                include("component/customer.php");
+                                break;
+                            case '6':
+                                include("component/order.php");
+                                break;
+                            case '7':
+                                include("component/revenue.php");
+                                break;
+                            case '8':
+                                include("component/profile.php");
+                                break;
+                        }
+                    } else {
+                        include("component/nova.php");
+                    }
                     ?>
                 </div>
             </div>
@@ -45,7 +75,7 @@
     }
 
     .display-info {
-        height: 88vh;
+        height: 87vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -53,10 +83,7 @@
 
     .data {
         width: 97%;
-        height: 85%;
-        background-color: #f9f9f9;
-        border-radius: 20px;
-        margin-bottom: 90px;
+        height: 95%;
     }
 </style>
 

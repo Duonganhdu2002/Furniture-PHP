@@ -13,14 +13,13 @@ if ($resultIdArray->num_rows > 0) {
     echo "Không có dữ liệu trong bảng categories";
 }
 
-// Check if categoryId is set in the URL
 if (isset($_GET['categoryId'])) {
     $category_id = $_GET['categoryId'];
 } else {
     $category_id = $category_ids[0];
 }
 
-$sqlProducts = "SELECT id, product_name, images, price FROM products WHERE category_id = $category_id";
+$sqlProducts = "SELECT id, product_name, image, price FROM products WHERE category_id = $category_id";
 $resultProducts = $link->query($sqlProducts);
 ?>
 <div class="shop-detail">
