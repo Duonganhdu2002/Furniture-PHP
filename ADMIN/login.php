@@ -71,8 +71,7 @@
     }
     ?>
     <div class="login">
-        <form class="login-form" action="kt_admin.php" method="post" autocomplete="off">
-            <input type="hidden" name="action" value="login">
+        <form class="login-form" action="kt_admin.php" method="post">
             <h1>LOGIN</h1>
             <label for="username">Username</label>
             <br>
