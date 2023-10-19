@@ -29,12 +29,7 @@
                 <td style="text-align: center">
                     <input name="searchByemailinformation" id="searchByemailinformation">
                 </td>
-                <td style="text-align: center">
-                    <input name="searchByemailinformation" id="searchByemailinformation">
-                </td>
-                <td style="text-align: center">
-                    <input name="searchBygenderinformation" id="searchBygenderinformation">
-                </td>
+              
             </tr>
         </form>
 
