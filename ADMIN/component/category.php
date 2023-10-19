@@ -62,17 +62,24 @@
 
             echo "<div class='pagination'>";
 
-            if ($page > 1) {
-                echo "<a href='index.php?pid=1&page=" . ($page - 1) . "'>Previous</a> ";
+            // Always show "Previous" button
+            echo "<a href='index.php?pid=1&page=" . max(1, $page - 1) . "'>Previous</a> ";
+
+            // Determine the first and last two pages to display
+            $startPage = max(1, $page - 2);
+            $endPage = min($totalPages, $page + 2);
+
+            // Show the page numbers
+            for ($i = $startPage; $i <= $endPage; $i++) {
+                echo "<a href='index.php?pid=1&page=$i'";
+                if ($i == $page) {
+                    echo " class='current'";
+                }
+                echo ">$i</a> ";
             }
 
-            for ($i = 1; $i <= $totalPages; $i++) {
-                echo "<a href='index.php?pid=1&page=$i'>$i</a> ";
-            }
-
-            if ($page < $totalPages) {
-                echo "<a href='index.php?pid=1&page=" . ($page + 1) . "'>Next</a> ";
-            }
+            // Always show "Next" button
+            echo "<a href='index.php?pid=1&page=" . min($totalPages, $page + 1) . "'>Next</a>";
 
             echo "</div>";
         } else {
