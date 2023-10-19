@@ -34,7 +34,7 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $itemsPerPage = 25;
+        $itemsPerPage = 5;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page - 1) * $itemsPerPage;
 
@@ -51,12 +51,12 @@
                 echo "<td style='width:4%; text-align: center;'> 
                         <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
                       </td>";
-                echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["product_name"] . "</td>";
-                echo "<td style='width: 73%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["description"] . "</td>";
-                echo "<td style='width:10%;height:15%; text-align: center;'><img src='../PUBLIC-PAGE/images/chairs/" . $row["image"] . "' style='width: 100px; height: auto;'></td>";
+                echo "<td style='width: 20%; padding: 10px 20px 10px 20px'>" . $row["product_name"] . "</td>";
+                echo "<td style='width: 40%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["description"] . "</td>";
+                echo "<td style='width: 6%;height:15%; text-align: center;'><img style='width: 65px; height: 92px;' src='../PUBLIC-PAGE/images/chairs/" . $row["image"] . "' style='width: 100px; height: auto;'></td>";
 
-                echo "<td style='width: 73%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["price"] . "</td>";
-                echo "<td style='width: 73%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["stock_quantity"] . "</td>";
+                echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["price"] . "</td>";
+                echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["stock_quantity"] . "</td>";
                 echo "</tr>";
 
                 $stt++;
@@ -90,7 +90,7 @@
 
             echo "</div>";
 
-            
+
         } else {
             echo "0 results";
         }
