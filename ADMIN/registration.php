@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOGIN</title>
+    <title>REGISTRATION</title>
     <style>
         body {
             margin: 0;
@@ -66,14 +66,14 @@
 
 <body>
     <?php
-    if (isset($_GET['error'])) {
-        echo '<p style="color: red;">' . htmlspecialchars($_GET['error']) . '</p>';
-    }
+    // if (isset($_GET['error'])) {
+    //     echo '<p style="color: red;">' . htmlspecialchars($_GET['error']) . '</p>';
+    // }
     ?>
     <div class="login">
-        <form class="login-form" action="kt_admin.php" method="post" autocomplete="off">
-            <input type="hidden" name="action" value="login">
-            <h1>LOGIN</h1>
+        <form class="login-form" action="kt_admin.php" method="post">
+            <input type="hidden" name="action" value="registration">
+            <h1>REGISTRATION</h1>
             <label for="username">Username</label>
             <br>
             <input type="text" name="username" id="username">
@@ -82,7 +82,7 @@
             <br>
             <input type="password" name="password" id="password">
             <br>
-            <button type="submit">LOGIN</button>
+            <button type="submit">Registration</button>
         </form>
     </div>
 </body>
