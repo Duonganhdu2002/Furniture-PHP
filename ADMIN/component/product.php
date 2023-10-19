@@ -9,6 +9,8 @@
             <th style="text-align: center">Tên Sản Phẩm</th>
             <th style="text-align: center">Description</th>
             <th style="text-align: center">Image</th>
+            <th style="text-align: center">Price</th>
+            <th style="text-align: center">SL</th>
         </tr>
 
         <form id="myForm" action="#" method="post">
@@ -32,11 +34,11 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $itemsPerPage = 50;
+        $itemsPerPage = 25;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page - 1) * $itemsPerPage;
 
-        $sql = "SELECT id, category_id, product_name, description FROM products LIMIT $offset, $itemsPerPage";
+        $sql = "SELECT id, category_id, product_name, description, image, price, stock_quantity FROM products LIMIT $offset, $itemsPerPage";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -51,6 +53,10 @@
                       </td>";
                 echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["product_name"] . "</td>";
                 echo "<td style='width: 73%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["description"] . "</td>";
+                echo "<td style='width:10%;height:15%; text-align: center;'><img src='../PUBLIC-PAGE/images/chairs/" . $row["image"] . "' style='width: 100px; height: auto;'></td>";
+
+                echo "<td style='width: 73%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["price"] . "</td>";
+                echo "<td style='width: 73%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["stock_quantity"] . "</td>";
                 echo "</tr>";
 
                 $stt++;
@@ -76,6 +82,9 @@
             }
 
             echo "</div>";
+
+
+
         } else {
             echo "0 results";
         }
