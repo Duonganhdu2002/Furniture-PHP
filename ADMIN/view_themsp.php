@@ -3,7 +3,7 @@
     <div style="color: #ff3366; font-style: oblique; font-weight: bold; " align="center">ADD PRODUCT</div>
     <div align="center">
         <form id="dangky" method="post" enctype="multipart/form-data" action="ADMIN/component/them_sp.php" style="width: 700px;">
-            <table width="700" border="1" cellpadding="5" cellspacing="5" style="border-collapse: collapse; color:blue">
+            <table  style="border-collapse: collapse; color:blue; width: 700; border: 1;">
                 <tr>
                     <td width="150">CATEGORY</td>
                     <td width="450">

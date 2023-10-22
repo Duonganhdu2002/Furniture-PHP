@@ -28,5 +28,5 @@ if ($conn->query($themsp_qr)) {
     header("Location: ../ADMIN.php?pid=2");
 } else {
     echo "<script>alert('Thêm không thành công, xin kiểm tra lại!'); history.back();</script>";
-}
+}0
 ?>
