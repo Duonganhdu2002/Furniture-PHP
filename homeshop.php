@@ -37,7 +37,7 @@ foreach ($category_ids as $category_id) {
                 ?>
                     <div class="product-item">
                         <a href="product-detail.html">
-                            <img src="images/chairs/<?php echo $row2["image"]; ?>" class="product-thumbnail">
+                            <img src="../images/chairs/<?php echo $row2["image"]; ?>" class="product-thumbnail">
                         </a>
                         <h3 class="product-title"><?php echo $row2["product_name"]; ?></h3>
                         <strong class="product-price"><?php echo $row2["price"]; ?></strong>
