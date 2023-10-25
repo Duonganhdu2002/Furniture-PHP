@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
-<div style="width: 80%;">
+<div style="width: 100%;">
     <form method="post" class="categoryForm" onsubmit="return submitCategoryForm();">
         <h1>Add new category</h1>
         <label for="categoryName">Category Name</label><br>
