@@ -18,37 +18,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $newId = $maxId + 1;
 
         $sql = "INSERT INTO categories (id, category_name, description) VALUES ($newId, '$categoryName', '$categoryDescription')";
-
-        if ($conn->query($sql) === TRUE) {
-            $successMessage = "Bản ghi mới đã được tạo thành công";
-        } else {
-            $errorMessage = "Lỗi: " . $sql . "<br>" . $conn->error;
-        }
     }
 }
 
 $conn->close();
 ?>
 
-<div style="width: 80%;">
+<div style="width: 100%;">
     <form method="post" class="categoryForm" onsubmit="return submitCategoryForm();">
         <h1>Add new category</h1>
         <label for="categoryName">Category Name</label><br>
         <input type="text" id="categoryName" name="categoryName" required><br>
         <label for="categoryDescription">Category Description</label><br>
-        <input type="text" name="categoryDescription" id="categoryDescription" required><br>
+        <textarea name="categoryDescription" id="categoryDescription" cols="30" rows="10"></textarea> <br>
         <button type="submit">Submit</button>
     </form>
 </div>
 
 <style>
-    /* CSS của bạn */
+    .categoryForm h1 {
+        color: #3b5d50;
+    }
     .categoryForm input {
-        width: 100%;
+        width: 99%;
         height: 30px;
         border: 1px solid #3b5d50;
         border-radius: 10px;
         padding: 5px 10px 5px 10px;
+    }
+
+    .categoryForm textarea {
+        resize: none;
+        width: 99%;
+        height: 200px;border-radius: 10px;
+        padding: 5px 10px 5px 10px;
+        border: 1px solid #3b5d50;
     }
 
     .categoryForm label {
