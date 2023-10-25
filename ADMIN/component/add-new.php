@@ -29,7 +29,7 @@ if (isset($_GET['pid'])) {
 }
 ?>
 
-<a class="button-add" id="<?php echo $idButton; ?>" href="/ADMIN/index.php?pid=<?php echo $id; ?>&add-new" onclick="handleButtonClick('<?php echo $id; ?>')">
+<a class="button-add" id="<?php echo $idButton; ?>" href="../ADMIN/index.php?pid=<?php echo $id; ?>&add-new" onclick="handleButtonClick('<?php echo $id; ?>')">
     <button style="background-color: #3b5d50; border: none; font-size: 16px; color: white;">
         <?php echo $typeOfAdding; ?>
     </button>

@@ -26,6 +26,20 @@
                 <td style="text-align: center">
                     <input name="searchByNameproduct" id="searchByNameproduct">
                 </td>
+                <td style="text-align: center">
+                </td>
+                <td style="text-align: center">
+                </td>
+                <td style="text-align: center">
+                </td>
+                <td style="text-align: center">
+                </td>
+                <td style="text-align: center">
+                    <input name="searchByCategoryproduct" id="searchByCategoryproduct">
+                </td>
+                <td style="text-align: center">
+                    <input name="searchByBrandproduct" id="searchByBrandproduct">
+                </td>
             </tr>
         </form>
 
@@ -44,7 +58,7 @@
         INNER JOIN brands b ON p.brand_id = b.id
         INNER JOIN categories ctg ON p.category_id = ctg.id
         LIMIT $offset, $itemsPerPage";
-        
+
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -54,15 +68,15 @@
                 echo "<tr>";
                 echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
                 echo "<td style='width:4%; text-align: center;'>" . $row["id"] . "</td>";
-                echo "<td style='width:4%; text-align: center;'>
+                echo "<td style='width:4%; text-align: center;'> 
                         <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
-                    </td>";
+                      </td>";
                 echo "<td style='width: 20%; padding: 10px 20px 10px 20px'>" . $row["product_name"] . "</td>";
                 echo "<td style='width: 40%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["description"] . "</td>";
                 echo "<td style='width: 6%;height:15%; text-align: center;'><img style='width: 65px; height: 92px;' src='../PUBLIC-PAGE/images/chairs/" . $row["image"] . "' style='width: 100px; height: auto;'></td>";
 
                 echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5; text-align: center;'>" . $row["price"] . "</td>";
-                echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5; text-align: center;'>" . $row["stock_quantity"] . "</td>";
+                echo "<td style='width: 5%; padding: 10px 20px 10px 20px; line-height: 1.5; text-align: center;'>" . $row["stock_quantity"] . "</td>";
                 echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5; text-align: center;'>" . $row["category_name"] . "</td>";
                 echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5; text-align: center;'>" . $row["brand_name"] . "</td>";
                 echo "</tr>";
