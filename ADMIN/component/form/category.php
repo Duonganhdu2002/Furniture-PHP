@@ -18,11 +18,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $newId = $maxId + 1;
 
         $sql = "INSERT INTO categories (id, category_name, description) VALUES ($newId, '$categoryName', '$categoryDescription')";
+        if ($conn->query($sql)) {
+            $success = true;
+        }
     }
 }
 
 $conn->close();
 ?>
+
+<script>
+    <?php
+    if ($success) {
+        echo "alert('Thêm thành công');";
+    } else {
+        echo "alert('Thêm không thành công');";
+    }
+    ?>
+</script>
 
 <div style="width: 100%;">
     <form method="post" class="categoryForm" onsubmit="return submitCategoryForm();">
