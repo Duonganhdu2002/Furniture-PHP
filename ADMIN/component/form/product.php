@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div style="display: flex; align-items: center; flex-direction: column;">
     <div style="width: 68%;" class="productFormContainer">
         <h1>Add Product</h1>
-        <form action="process_form.php" method="post">
+        <form class="productForm" method="post" onsubmit="return submitProductForm();">
             <div style="display: flex; justify-content: space-between">
                 <div style="width: 30%;">
                     <label for="productName">Product Name:</label>
@@ -43,11 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div style="width: 20%;">
                     <label for="price">Price:</label>
-                    <input type="text" id="price" name="price"><br>
+                    <input type="number" id="price" name="price"><br>
                 </div>
                 <div style="width: 20%;">
                     <label for="stockQuantity">Stock Quantity:</label>
-                    <input type="text" id="stockQuantity" name="stockQuantity"><br>
+                    <input type="number" id="stockQuantity" name="stockQuantity"><br>
                 </div>
             </div>
             <div>
