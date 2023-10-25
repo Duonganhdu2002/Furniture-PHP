@@ -4,11 +4,38 @@ $conn = new mysqli('localhost', 'root', '', 'shopping_online');
 if ($conn->connect_error) {
     die("Kết nối thất bại: " . $conn->connect_error);
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $productName = $conn->real_escape_string($_POST["productName"]);
+    $productPrice = intval($_POST["price"]);
+    $productQuantity = intval($_POST["stockQuantity"]);
+    $productDescription = $conn->real_escape_string($_POST["productDescription"]);
+    $brandId = $conn->real_escape_string($_POST["category"]);
+    $catgoryId = $conn->real_escape_string($_POST["brand"]);
+    // xác định vị trí thư mục lưu
+    $folder = "../PUBLIC-PAGE/images/chairs/";
+    $fileName = $folder . $_FILES["image"]["name"];
+    // chép hình ảnh vào thư mục
+    move_uploaded_file($_FILES["image"]["tmp_name"], $fileName);
+    $image = $_FILES["image"]["name"];
+
+    $checkExistenceQuery = "SELECT * FROM products WHERE product_name = '$categoryName' OR description = '$categoryDescription'";
+    $result = $conn->query($checkExistenceQuery);
+
+    if ($result->num_rows == 0) {
+        $maxIdResult = $conn->query("SELECT MAX(id) AS max_id FROM products");
+        $maxId = $maxIdResult->fetch_assoc()['max_id'];
+        $newId = $maxId + 1;
+
+        $sql = "INSERT INTO products (id, category_id, brand_id, product_name, description, image, price, stock_quantity) 
+        VALUES ($newId, '$catgoryId', '$brandId', '$productName','$productDescription', '$image', '$productPrice', '$productQuantity')";
+    }
+}
 ?>
 <div style="display: flex; align-items: center; flex-direction: column;">
-    <div style="width: 68%;" class="productForm">
+    <div style="width: 68%;" class="productFormContainer">
         <h1>Add Product</h1>
-        <form action="process_form.php" method="post">
+        <form class="productForm" method="post" onsubmit="return submitProductForm();">
             <div style="display: flex; justify-content: space-between">
                 <div style="width: 30%;">
                     <label for="productName">Product Name:</label>
@@ -24,8 +51,8 @@ if ($conn->connect_error) {
                 </div>
             </div>
             <div>
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
+                <label for="productDescription">Description:</label>
+                <textarea id="productDescription" name="productDescription" rows="4" cols="50"></textarea><br>
             </div>
             <label for="image">Image:</label>
             <input style="border: none;" type="file" id="image" name="image"><br>
@@ -71,12 +98,12 @@ $conn->close();
 ?>
 
 <style>
-    .productForm h1 {
+    .productFormContainer h1 {
         color: #3b5d50;
         justify-content: space-between;
     }
 
-    .productForm input {
+    .productFormContainer input {
         width: 99%;
         height: 30px;
         border: 1px solid #3b5d50;
@@ -84,7 +111,7 @@ $conn->close();
         padding: 5px 10px 5px 10px;
     }
 
-    .productForm textarea {
+    .productFormContainer textarea {
         resize: none;
         width: 99%;
         height: 150px;
@@ -93,13 +120,13 @@ $conn->close();
         border: 1px solid #3b5d50;
     }
 
-    .productForm label {
+    .productFormContainer label {
         margin-top: 20px;
         margin-bottom: 20px;
         line-height: 4.0;
     }
 
-    .productForm button {
+    .productFormContainer button {
         width: 80px;
         height: 40px;
         border: none;
