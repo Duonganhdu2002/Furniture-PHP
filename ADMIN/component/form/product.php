@@ -4,11 +4,12 @@ $conn = new mysqli('localhost', 'root', '', 'shopping_online');
 if ($conn->connect_error) {
     die("Kết nối thất bại: " . $conn->connect_error);
 }
+
 ?>
 <div style="display: flex; align-items: center; flex-direction: column;">
     <div style="width: 68%;" class="productForm">
         <h1>Add Product</h1>
-        <form action="process_form.php" method="post">
+        <form action="them_sp.php" method="post">
             <div style="display: flex; justify-content: space-between">
                 <div style="width: 30%;">
                     <label for="productName">Product Name:</label>
@@ -110,3 +111,4 @@ $conn->close();
         margin-top: 30px;
     }
 </style>
+

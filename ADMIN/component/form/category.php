@@ -21,7 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($conn->query($sql)) {
             $success = true;
         }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 30ea2e3f83bd626e9a16ca5c33a7d1730b14b091
     }
+
 }
 
 $conn->close();
