@@ -1,35 +1,34 @@
 <div class="category">
     <table class="category-data-table">
+        <!-- Tiêu đề nha anh chị -->
         <tr>
             <th style="text-align: center;">STT</th>
-            <td style='width:4%; text-align: left;'> 
-                        <img style='width: 25px' src='../PUBLIC-PAGE/images/support.svg'>
-                      </td>
-            <th style="text-align: center">Họ và tên</th>
-            <th style="text-align: center">Số điện thoại</th>
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">
+                <img style="width: 25px" src="../PUBLIC-PAGE/images/settingtr.svg">
+            </th>
+            <th style="text-align: center">Username</th>
+            <th style="text-align: center">Password</th>
+            <th style="text-align: center">Name</th>
+            <th style="text-align: center">Birth</th>
             <th style="text-align: center">Email</th>
-            <th style="text-align: center">Địa chỉ</th>
-            <th style="text-align: center">Giới tính</th>
-            
-
+            <th style="text-align: center">Gender</th>
+            <th style="text-align: center">Phone</th>
+            <th style="text-align: center">Avatar</th>
+            <th style="text-align: center">Address</th>
         </tr>
-
+        <!-- Form chổ tìm kiếm đóa anh chị -->
         <form id="myForm" action="#" method="post">
             <tr>
                 <td style="text-align: center">
                     <img type="image" style="width: 25px" src="../PUBLIC-PAGE/images/filter.svg">
                 </td>
-               
-                <td style="text-align: center"colspan="2">
-                    <input name="searchByfull_nameinformation" id="searchByfull_nameinformation">
+                <td style="text-align: center" colspan="2">
+                    <input name="searchByIdCategory" id="searchByIdCategory">
                 </td>
                 <td style="text-align: center">
-                    <input name="searchByphone_numberinformation" id="searchByphone_numberinformation">
+                    <input name="searchByNameCategory" id="searchByNameCategory">
                 </td>
-                <td style="text-align: center">
-                    <input name="searchByemailinformation" id="searchByemailinformation">
-                </td>
-              
             </tr>
         </form>
 
@@ -39,62 +38,85 @@
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-
+        // Tạo mấy cái biến phân trang chơi
         $itemsPerPage = 8;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page - 1) * $itemsPerPage;
+        // SQL của bảng User
+        $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'user' LIMIT $offset, $itemsPerPage";
+        $resultUser = $conn->query($sqlUser);
+        // SQL của bảng Information
+        $sqlInformation = "SELECT full_name, date_of_birth, email, gender, phone_number, avatar FROM information LIMIT $offset, $itemsPerPage";
+        $resultInformation = $conn->query($sqlInformation);
+        // SQL của bảng Address
+        $sqlAddress = "SELECT country, province, district, commune, street, number FROM addresses LIMIT $offset, $itemsPerPage";
+        $resultAddress = $conn->query($sqlAddress);
 
-        $sql = "SELECT id, full_name, date_of_birth, email, gender, phone_number FROM information LIMIT $offset, $itemsPerPage";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
+        if ($resultUser->num_rows > 0 && $resultInformation->num_rows > 0 && $resultAddress->num_rows > 0) {
             $stt = $offset + 1;
 
-            while ($row = $result->fetch_assoc()) {
+            while (($rowUser = $resultUser->fetch_assoc()) && ($rowInformation = $resultInformation->fetch_assoc()) && ($rowAddress = $resultAddress->fetch_assoc())) {
                 echo "<tr>";
                 echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
-                echo "<td style='width:8%; text-align: left;'> 
+                echo "<td style='width:4%; text-align: center;'>" . $rowUser["id"] . "</td>";
+                echo "<td style='width:4%; text-align: center;'> 
                         <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
                       </td>";
-                echo "<td style='width: 13%'; text-align: left;'>" . $row["full_name"] . "</td>";
-                echo "<td style='width: 14%'; >" . $row["phone_number"] . "</td>";
-                echo "<td style='width: 25%'; >" . $row["email"] . "</td>";
-                echo "<td style='width: 30%'; >" . $row["date_of_birth"] . "</td>";
-                if ($row["gender"] == 1) {
-                    $gender = 'Nam';
-                } elseif ($row["gender"] == 2) {
-                    $gender = 'Nữ';
+                echo "<td style='width: 8%; padding: 10px 20px 10px 20px'>" . $rowUser["username"] . "</td>";
+                echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $rowUser["password"] . "</td>";
+                echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>" . $rowInformation["full_name"] . "</td>";
+                echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $rowInformation["date_of_birth"] . "</td>";
+                echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $rowInformation["email"] . "</td>";
+                if ($rowInformation["gender"] === '1') {
+                    echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>Nam</td>";
                 } else {
-                    $gender = '';
+                    echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>Nữ</td>";
                 }
-                
-                echo "<td style='width: 25%; text-align: center;' >" . $gender . "</td>";
-             
+                echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>" . $rowInformation["phone_number"] . "</td>";
+                echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>
+                    <img style='width: 40px' src='../PUBLIC-PAGE/images/" . $rowInformation["avatar"] . "'>
+                </td>";
+                $province = $rowAddress["province"];
+                $district = $rowAddress["district"];
+                $commune = $rowAddress["commune"];
+                $street = $rowAddress["street"];
+                $number = $rowAddress["number"];
+                $address = "$number, $street, $commune, $district, $province";
+                $rowAddress["address"] = $address;
+                echo "<td style='width: 25%; padding: 10px 20px 10px 20px'>" . $rowAddress["address"] . "</td>";
+                echo "</tr>";
                 $stt++;
             }
-      
-                echo "</table>";
-            $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM categories"))['total'];
-            $totalPages = ceil($totalItems / $itemsPerPage);
-
-            echo "<div class='pagination'>";
-
-            if ($page > 1) {
-                echo "<a href='index.php?pid=5&page=" . ($page - 1) . "'>Previous</a> ";
-            }
-
-            for ($i = 1; $i <= $totalPages; $i++) {
-                echo "<a href='index.php?pid=5&page=$i'>$i</a> ";
-            }
-
-            if ($page < $totalPages) {
-                echo "<a href='index.php?pid=5&page=" . ($page + 1) . "'>Next</a> ";
-            }
-
-            echo "</div>";
-        } else {
-            echo "0 results";
+            echo "</table>";
         }
+
+
+        $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM categories"))['total'];
+        $totalPages = ceil($totalItems / $itemsPerPage);
+
+        echo "<div class='pagination'>";
+
+        // Always show "Previous" button
+        echo "<a href='index.php?pid=1&page=" . max(1, $page - 1) . "'>Previous</a> ";
+
+        // Determine the first and last two pages to display
+        $startPage = max(1, $page - 2);
+        $endPage = min($totalPages, $page + 2);
+
+        // Show the page numbers
+        for ($i = $startPage; $i <= $endPage; $i++) {
+            echo "<a href='index.php?pid=5&page=$i'";
+            if ($i == $page) {
+                echo " class='current'";
+            }
+            echo ">$i</a> ";
+        }
+
+        // Always show "Next" button
+        echo "<a href='index.php?pid=5&page=" . min($totalPages, $page + 1) . "'>Next</a>";
+
+        echo "</div>";
+
         $conn->close();
         ?>
     </table>
@@ -128,7 +150,10 @@
         padding: 3px 8px;
         border: #3b5d50 1px solid;
         border-radius: 6px;
-        border: 1px solid #ddd;
+    }
+
+    .category-data-table th {
+        background-color: #f2f2f2;
     }
 
     .pagination {
