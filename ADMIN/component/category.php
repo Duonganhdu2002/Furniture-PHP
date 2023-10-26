@@ -45,8 +45,13 @@
                 echo "<tr>";
                 echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
                 echo "<td style='width:4%; text-align: center;'>" . $row["id"] . "</td>";
-                echo "<td style='width:4%; text-align: center;'> 
+                echo "<td class='hover-cell'; style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
                         <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
+                        <div class='action-buttons'>
+                            <button class='edit-button'>Update</button>
+                            <br>
+                            <button class='delete-button'>Delete</button>
+                        </div>
                       </td>";
                 echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["category_name"] . "</td>";
                 echo "<td style='width: 73%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["description"] . "</td>";
@@ -90,7 +95,62 @@
         ?>
     </table>
 </div>
+
+<script>
+    function showButtons(element) {
+        var actionButtons = element.querySelector('.action-buttons');
+        if (actionButtons) {
+            actionButtons.style.display = 'block';
+        }
+    }
+    function hideButtons(element) {
+        var actionButtons = element.querySelector('.action-buttons');
+        if (actionButtons) {
+            actionButtons.style.display = 'none';
+        }
+    }
+</script>
 <style>
+    .action-buttons {
+        z-index: 1.0;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        margin-left: 30px;
+        margin-top: 0px;
+        border: 1px solid black;
+        display: none;
+    }
+
+    .edit-button {
+        border-radius: 10px 10px 0 0;
+        border-bottom: 1px solid white;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+    }
+
+    .edit-button:hover {
+        opacity: 0.7;
+    }
+
+    .delete-button {
+        border-radius: 0 0 10px 10px;
+        border: none;
+    }
+
+    .delete-button:hover {
+        opacity: 0.7;
+    }
+
+    .action-buttons button {
+        padding: 10px 28px 10px 28px;
+        background-color: #3b5d50;
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
     .category {
         width: 100%;
         margin-top: 20px;
