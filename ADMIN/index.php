@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<?php session_start();?>
 
 <body>
+    <?php session_start(); ?>
     <div class="container-main">
         <?php
         include "component/side-bar.php";
@@ -21,7 +21,7 @@
             <div class="display-info">
                 <div class="data">
                     <?php
-                    
+
                     if (isset($_SESSION["username"])) {
                         if (isset($_GET['pid'])) {
                             $id = $_GET['pid'];
@@ -31,7 +31,7 @@
                                 include("component/form/product.php");
                             } else if ($id == '3' && isset($_GET['add-new'])) {
                                 include("component/form/brand.php");
-                            } else if ($id == '3' && isset($_GET['add-new'])) {
+                            } else if ($id == '4' && isset($_GET['add-new'])) {
                                 include("component/form/member.php");
                             } else {
                                 switch ($id) {
@@ -67,8 +67,7 @@
                         }
                     } else {
                         //echo '<script> alert("Bạn cần đăng nhập trước "); </script>';
-                        header("Location: login.php");
-                        // exit;
+                        header("Location: /ADMIN/login.php");
                     }
                     ?>
                 </div>

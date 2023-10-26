@@ -66,12 +66,58 @@
 
 <body>
     <?php
+    session_start(); // Khởi tạo phiên làm việc
+
+    // Kiểm tra nếu đã đăng nhập, chuyển hướng người dùng đến trang index.php
+    if (isset($_SESSION['user_id'])) {
+        header("Location: /ADMIN/index.php");
+        exit();
+    }
+
+    // Kiểm tra nếu có lỗi từ yêu cầu trước đó
     if (isset($_GET['error'])) {
         echo '<p style="color: red;">' . htmlspecialchars($_GET['error']) . '</p>';
     }
+
+    // Kiểm tra khi có sự kiện đăng nhập
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+
+        $conn = new mysqli('localhost', 'root', '', 'shopping_online');
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Lấy thông tin từ form đăng nhập
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        // Bảo vệ chống SQL injection
+        $username = $conn->real_escape_string($username);
+        $password = $conn->real_escape_string($password);
+
+        // Kiểm tra thông tin đăng nhập
+        $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password' AND role = 'admin'";
+        $result = $conn->query($query);
+
+        if ($result->num_rows == 1) {
+            // Đăng nhập thành công, lưu ID người dùng vào SESSION và chuyển hướng đến index.php
+            $row = $result->fetch_assoc();
+            $_SESSION['user_id'] = $row['id'];
+            header("Location: /ADMIN/index.php");
+            exit();
+        } else {
+            // Đăng nhập không thành công, chuyển hướng với thông báo lỗi
+            header("Location: /your_login_page.php?error=Invalid username or password");
+            exit();
+        }
+
+        $conn->close();
+    }
     ?>
     <div class="login">
-        <form class="login-form" action="/ADMIN/kt_admin.php" method="post">
+        <form class="login-form" action="/ADMIN/index.php" method="post">
             <h1>LOGIN</h1>
             <label for="username">Username</label>
             <br>
