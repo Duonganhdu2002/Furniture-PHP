@@ -60,14 +60,20 @@
                 echo "<td style='width: 14%'; >" . $row["phone_number"] . "</td>";
                 echo "<td style='width: 25%'; >" . $row["email"] . "</td>";
                 echo "<td style='width: 30%'; >" . $row["date_of_birth"] . "</td>";
-                echo "<td style='width: 25%; text-align: center;' >" . $row["gender"] . "</td>";
-                echo "</tr>";
-
+                if ($row["gender"] == 1) {
+                    $gender = 'Nam';
+                } elseif ($row["gender"] == 2) {
+                    $gender = 'Nữ';
+                } else {
+                    $gender = '';
+                }
+                
+                echo "<td style='width: 25%; text-align: center;' >" . $gender . "</td>";
+             
                 $stt++;
             }
-
-            echo "</table>";
-
+      
+                echo "</table>";
             $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM categories"))['total'];
             $totalPages = ceil($totalItems / $itemsPerPage);
 
@@ -89,7 +95,6 @@
         } else {
             echo "0 results";
         }
-
         $conn->close();
         ?>
     </table>
