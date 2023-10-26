@@ -10,7 +10,7 @@
     }
 
     // Lấy tên đăng nhập của người dùng từ phiên làm việc
-    $username = $_SESSION["username"];
+    $username = $_SESSION["username_admin"];
 
     // Truy vấn để lấy thông tin cá nhân từ cơ sở dữ liệu dựa trên tên đăng nhập
     $sql = "SELECT * FROM information WHERE username = '$username' ";
@@ -35,8 +35,6 @@
 // Đóng kết nối đến cơ sở dữ liệu
 $conn->close();
 ?>
-
-
 <div class="profile">
     <div class="header-profile">
         <div class="left-side">

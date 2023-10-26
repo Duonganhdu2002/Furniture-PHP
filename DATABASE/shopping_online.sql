@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 17, 2023 lúc 06:18 AM
+-- Thời gian đã tạo: Th10 26, 2023 lúc 10:49 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -168,6 +168,7 @@ INSERT INTO `categories` (`id`, `parent_category_id`, `category_name`, `descript
 
 CREATE TABLE `information` (
   `id` int(11) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
   `full_name` varchar(255) DEFAULT NULL,
   `date_of_birth` datetime DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
@@ -179,37 +180,37 @@ CREATE TABLE `information` (
 -- Đang đổ dữ liệu cho bảng `information`
 --
 
-INSERT INTO `information` (`id`, `full_name`, `date_of_birth`, `email`, `gender`, `phone_number`) VALUES
-(1, 'John Doe', '1990-01-15 00:00:00', 'john.doe@example.com', 1, '+123456789'),
-(2, 'Jane Doe', '1985-05-22 00:00:00', 'jane.doe@example.com', 2, '+987654321'),
-(3, 'Alice Smith', '1995-08-10 00:00:00', 'alice.smith@example.com', 2, '+111223344'),
-(4, 'Bob Johnson', '1980-03-30 00:00:00', 'bob.johnson@example.com', 1, '+555666777'),
-(5, 'Eva Williams', '1992-11-05 00:00:00', 'eva.williams@example.com', 2, '+999888777'),
-(6, 'Michael Brown', '1993-04-18 00:00:00', 'michael.brown@example.com', 1, '+444333222'),
-(7, 'Sophia Lee', '1988-09-12 00:00:00', 'sophia.lee@example.com', 2, '+123987654'),
-(8, 'Daniel Taylor', '1998-07-25 00:00:00', 'daniel.taylor@example.com', 1, '+987123654'),
-(9, 'Olivia Davis', '1987-12-08 00:00:00', 'olivia.davis@example.com', 2, '+555111222'),
-(10, 'Matthew Evans', '1994-02-28 00:00:00', 'matthew.evans@example.com', 1, '+111222333'),
-(11, 'Ava Martinez', '1996-06-15 00:00:00', 'ava.martinez@example.com', 2, '+999555777'),
-(12, 'Jacob Wilson', '1986-10-04 00:00:00', 'jacob.wilson@example.com', 1, '+333888999'),
-(13, 'Emma Anderson', '1991-03-22 00:00:00', 'emma.anderson@example.com', 2, '+777444555'),
-(14, 'Alexander Nguyen', '1989-08-17 00:00:00', 'alexander.nguyen@example.com', 1, '+111999888'),
-(15, 'Mia Brown', '1997-01-11 00:00:00', 'mia.brown@example.com', 2, '+777111222'),
-(16, 'Liam Garcia', '1985-05-30 00:00:00', 'liam.garcia@example.com', 1, '+555333444'),
-(17, 'Amelia Kim', '1990-11-25 00:00:00', 'amelia.kim@example.com', 2, '+123789456'),
-(18, 'Ethan Patel', '1999-07-08 00:00:00', 'ethan.patel@example.com', 1, '+555777999'),
-(19, 'Olivia White', '1984-12-01 00:00:00', 'olivia.white@example.com', 2, '+999111222'),
-(20, 'Noah Lee', '1992-02-14 00:00:00', 'noah.lee@example.com', 1, '+444666777'),
-(21, 'Isabella Wilson', '1995-06-10 00:00:00', 'isabella.wilson@example.com', 2, '+123555999'),
-(22, 'James Martin', '1983-10-23 00:00:00', 'james.martin@example.com', 1, '+555444333'),
-(23, 'Sophia Kim', '1993-04-28 00:00:00', 'sophia.kim@example.com', 2, '+123456987'),
-(24, 'Jackson Smith', '1988-09-15 00:00:00', 'jackson.smith@example.com', 1, '+987654321'),
-(25, 'Emma Davis', '1998-07-28 00:00:00', 'emma.davis@example.com', 2, '+987123654'),
-(26, 'Aiden Taylor', '1987-12-11 00:00:00', 'aiden.taylor@example.com', 1, '+555111222'),
-(27, 'Olivia Wilson', '1994-03-01 00:00:00', 'olivia.wilson@example.com', 2, '+111222333'),
-(28, 'Lucas Anderson', '1996-06-18 00:00:00', 'lucas.anderson@example.com', 1, '+999555777'),
-(29, 'Ava Wilson', '1986-10-07 00:00:00', 'ava.wilson@example.com', 2, '+333888999'),
-(30, 'Mason Martinez', '1991-03-25 00:00:00', 'mason.martinez@example.com', 1, '+777444555');
+INSERT INTO `information` (`id`, `username`, `full_name`, `date_of_birth`, `email`, `gender`, `phone_number`) VALUES
+(1, 'user1', 'John Doe', '1990-01-15 00:00:00', 'john.doe@example.com', 1, '+123456789'),
+(2, 'user2', 'Jane Doe', '1985-05-22 00:00:00', 'jane.doe@example.com', 2, '+987654321'),
+(3, 'user3', 'Alice Smith', '1995-08-10 00:00:00', 'alice.smith@example.com', 2, '+111223344'),
+(4, 'user4', 'Bob Johnson', '1980-03-30 00:00:00', 'bob.johnson@example.com', 1, '+555666777'),
+(5, 'user5', 'Eva Williams', '1992-11-05 00:00:00', 'eva.williams@example.com', 2, '+999888777'),
+(6, 'user6', 'Michael Brown', '1993-04-18 00:00:00', 'michael.brown@example.com', 1, '+444333222'),
+(7, 'user7', 'Sophia Lee', '1988-09-12 00:00:00', 'sophia.lee@example.com', 2, '+123987654'),
+(8, 'user8', 'Daniel Taylor', '1998-07-25 00:00:00', 'daniel.taylor@example.com', 1, '+987123654'),
+(9, 'user9', 'Olivia Davis', '1987-12-08 00:00:00', 'olivia.davis@example.com', 2, '+555111222'),
+(10, 'user10', 'Matthew Evans', '1994-02-28 00:00:00', 'matthew.evans@example.com', 1, '+111222333'),
+(11, 'admin1', 'Ava Martinez', '1996-06-15 00:00:00', 'ava.martinez@example.com', 2, '+999555777'),
+(12, 'admin2', 'Jacob Wilson', '1986-10-04 00:00:00', 'jacob.wilson@example.com', 1, '+333888999'),
+(13, 'admin3', 'Emma Anderson', '1991-03-22 00:00:00', 'emma.anderson@example.com', 2, '+777444555'),
+(14, 'admin4', 'Alexander Nguyen', '1989-08-17 00:00:00', 'alexander.nguyen@example.com', 1, '+111999888'),
+(15, 'admin5', 'Mia Brown', '1997-01-11 00:00:00', 'mia.brown@example.com', 2, '+777111222'),
+(16, 'admin6', 'Liam Garcia', '1985-05-30 00:00:00', 'liam.garcia@example.com', 1, '+555333444'),
+(17, 'admin7', 'Amelia Kim', '1990-11-25 00:00:00', 'amelia.kim@example.com', 2, '+123789456'),
+(18, 'admin8', 'Ethan Patel', '1999-07-08 00:00:00', 'ethan.patel@example.com', 1, '+555777999'),
+(19, 'admin9', 'Olivia White', '1984-12-01 00:00:00', 'olivia.white@example.com', 2, '+999111222'),
+(20, 'admin10', 'Noah Lee', '1992-02-14 00:00:00', 'noah.lee@example.com', 1, '+444666777'),
+(21, 'admin11', 'Isabella Wilson', '1995-06-10 00:00:00', 'isabella.wilson@example.com', 2, '+123555999'),
+(22, 'admin12', 'James Martin', '1983-10-23 00:00:00', 'james.martin@example.com', 1, '+555444333'),
+(23, 'admin13', 'Sophia Kim', '1993-04-28 00:00:00', 'sophia.kim@example.com', 2, '+123456987'),
+(24, 'admin14', 'Jackson Smith', '1988-09-15 00:00:00', 'jackson.smith@example.com', 1, '+987654321'),
+(25, 'admin15', 'Emma Davis', '1998-07-28 00:00:00', 'emma.davis@example.com', 2, '+987123654'),
+(26, 'admin16', 'Aiden Taylor', '1987-12-11 00:00:00', 'aiden.taylor@example.com', 1, '+555111222'),
+(27, 'admin17', 'Olivia Wilson', '1994-03-01 00:00:00', 'olivia.wilson@example.com', 2, '+111222333'),
+(28, 'admin18', 'Lucas Anderson', '1996-06-18 00:00:00', 'lucas.anderson@example.com', 1, '+999555777'),
+(29, 'admin19', 'Ava Wilson', '1986-10-07 00:00:00', 'ava.wilson@example.com', 2, '+333888999'),
+(30, 'admin20', 'Mason Martinez', '1991-03-25 00:00:00', 'mason.martinez@example.com', 1, '+777444555');
 
 -- --------------------------------------------------------
 
