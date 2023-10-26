@@ -66,12 +66,40 @@
 
 <body>
     <?php
-    if (isset($_GET['error'])) {
-        echo '<p style="color: red;">' . htmlspecialchars($_GET['error']) . '</p>';
+    session_start(); // Khởi tạo phiên làm việc
+    $conn = new mysqli('localhost', 'root', '', 'shopping_online');
+
+    // Kiểm tra khi có sự kiện đăng nhập
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        // Lấy thông tin từ form đăng nhập
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        // Bảo vệ chống SQL injection
+        $username = $conn->real_escape_string($username);
+        $password = $conn->real_escape_string($password);
+
+        // Kiểm tra thông tin đăng nhập
+        $queryLogin  = "SELECT * FROM users WHERE username = '$username' AND password = '$password' AND role = 'admin'";
+        $result = $conn->query($queryLogin);
+
+        if ($result->num_rows == 1) {
+            // Đăng nhập thành công, lưu ID người dùng vào SESSION và chuyển hướng đến index.php
+            $admin = $result->fetch_assoc();
+            $_SESSION['username_admin'] = $admin['username'];
+            $_SESSION['password'] = $admin['password'];
+            header("Location: index.php");
+            exit();
+        } else {
+            // Đăng nhập không thành công, hiển thị alert
+            echo '<script>alert("Sai thông tin đăng nhập!");</script>';
+        }
     }
     ?>
+
     <div class="login">
-        <form class="login-form" action="/ADMIN/kt_admin.php" method="post">
+        <form class="login-form" action="" method="post">
             <h1>LOGIN</h1>
             <label for="username">Username</label>
             <br>
@@ -84,6 +112,7 @@
             <button type="submit">LOGIN</button>
         </form>
     </div>
+
 </body>
 
 </html>
