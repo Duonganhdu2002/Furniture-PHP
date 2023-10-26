@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $image = $conn->real_escape_string($_POST["image"]);
 
     // Xác định đường dẫn tuyệt đối đến thư mục upload
-    $folder = "../PUBLIC-PAGE/images/chairs";
+    $folder = "../../../PUBLIC-PAGE/images/chairs/";
 
     // Kiểm tra nếu tệp là hình ảnh và không phải là tệp độc hại
     $allowedTypes = ['image/jpg', 'image/png'];
@@ -28,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $image = basename($fileName); // Lấy tên tệp từ đường dẫn đầy đủ
             echo "<script>alert('Tệp đã được tải lên thành công: $image');</script>";
         } else {
-            echo "<script>alert('Lỗi khi tải lên tệp.');</script>";
-        }
+            echo "<script>alert('Lỗi khi di chuyển tệp: " . error_get_last()['message'] . "');</script>";
+        }        
     } else {
         $allowedTypesString = implode(', ', $allowedTypes);
     }
@@ -46,30 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         VALUES ($newId, '$catgoryId', '$brandId', '$productName','$productDescription', '$image', '$productPrice', '$productQuantity')";
         if ($conn->query($sql)) {
             $success = true;
-        }
+        } 
     }
 }
 ?>
-<script>
-    <?php
-    if ($success) {
-        echo "showNotification('Thêm thành công', 'success');";
-    } else {
-        echo "showNotification('Thêm không thành công', 'error');";
-    }
-    ?>
 
-    function showNotification(message, type) {
-        var notification = document.createElement('div');
-        notification.className = 'notification ' + type;
-        notification.textContent = message;
-        document.body.appendChild(notification);
-
-        setTimeout(function() {
-            notification.style.display = 'none';
-        }, 2000);
-    }
-</script>
 
 <style>
     .notification {
