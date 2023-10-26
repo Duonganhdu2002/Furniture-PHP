@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $brandId = $conn->real_escape_string($_POST["category"]);
     $catgoryId = $conn->real_escape_string($_POST["brand"]);
     // xác định vị trí thư mục lưu
-    $folder = "../PUBLIC-PAGE/images/chairs/";
+    $folder = "../../../PUBLIC-PAGE/images/chairs/";
     $fileName = $folder . $_FILES["image"]["name"];
     // chép hình ảnh vào thư mục
     move_uploaded_file($_FILES["image"]["tmp_name"], $fileName);

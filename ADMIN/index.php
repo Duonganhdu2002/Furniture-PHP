@@ -40,6 +40,7 @@
                                         break;
                                     case '2':
                                         include("component/product.php");
+                                        break;
                                     case '3':
                                         include("component/brand.php");
                                         break;
