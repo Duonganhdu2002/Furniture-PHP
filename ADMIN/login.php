@@ -113,17 +113,6 @@
         </form>
     </div>
 
-    <script>
-        // JavaScript to show alert if login fails
-        window.onload = function() {
-            <?php
-            // Check if alert needs to be shown
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && $result->num_rows != 1) {
-                echo 'alert("Sai thông tin đăng nhập!");';
-            }
-            ?>
-        }
-    </script>
 </body>
 
 </html>
