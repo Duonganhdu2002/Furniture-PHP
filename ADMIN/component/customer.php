@@ -8,12 +8,12 @@
                 <img style="width: 25px" src="../PUBLIC-PAGE/images/settingtr.svg">
             </th>
             <th style="text-align: center">Username</th>
-            <th style="text-align: center">Password</th>
             <th style="text-align: center">Name</th>
-            <th style="text-align: center">Birth</th>
             <th style="text-align: center">Email</th>
-            <th style="text-align: center">Gender</th>
             <th style="text-align: center">Phone</th>
+            <th style="text-align: center">Password</th>
+            <th style="text-align: center">Birth</th>
+            <th style="text-align: center">Gender</th>
             <th style="text-align: center">Avatar</th>
             <th style="text-align: center">Address</th>
         </tr>
@@ -25,6 +25,15 @@
                 </td>
                 <td style="text-align: center" colspan="2">
                     <input name="searchByIdCategory" id="searchByIdCategory">
+                </td>
+                <td style="text-align: center">
+                    <input name="searchByNameCategory" id="searchByNameCategory">
+                </td>
+                <td style="text-align: center">
+                    <input name="searchByNameCategory" id="searchByNameCategory">
+                </td>
+                <td style="text-align: center">
+                    <input name="searchByNameCategory" id="searchByNameCategory">
                 </td>
                 <td style="text-align: center">
                     <input name="searchByNameCategory" id="searchByNameCategory">
@@ -63,16 +72,16 @@
                         <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
                       </td>";
                 echo "<td style='width: 8%; padding: 10px 20px 10px 20px'>" . $rowUser["username"] . "</td>";
-                echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $rowUser["password"] . "</td>";
                 echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>" . $rowInformation["full_name"] . "</td>";
-                echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $rowInformation["date_of_birth"] . "</td>";
                 echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $rowInformation["email"] . "</td>";
+                echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>" . $rowInformation["phone_number"] . "</td>";
+                echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $rowUser["password"] . "</td>";
+                echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $rowInformation["date_of_birth"] . "</td>";
                 if ($rowInformation["gender"] === '1') {
                     echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>Nam</td>";
                 } else {
                     echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>Nữ</td>";
                 }
-                echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>" . $rowInformation["phone_number"] . "</td>";
                 echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>
                     <img style='width: 40px' src='../PUBLIC-PAGE/images/" . $rowInformation["avatar"] . "'>
                 </td>";
