@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $image = $conn->real_escape_string($_POST["image"]);
 
     // Xác định đường dẫn tuyệt đối đến thư mục upload
-    $folder = "../../../PUBLIC-PAGE/images/chairs";
+    $folder = "../PUBLIC-PAGE/images/chairs";
 
     // Kiểm tra nếu tệp là hình ảnh và không phải là tệp độc hại
     $allowedTypes = ['image/jpg', 'image/png'];
@@ -30,6 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "<script>alert('Lỗi khi tải lên tệp.');</script>";
         }
+    } else {
+        $allowedTypesString = implode(', ', $allowedTypes);
     }
 
     $checkExistenceQuery = "SELECT * FROM products WHERE product_name = '$productName' OR description = '$productDescription'";
