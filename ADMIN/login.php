@@ -88,6 +88,7 @@
             // Đăng nhập thành công, lưu ID người dùng vào SESSION và chuyển hướng đến index.php
             $admin = $result->fetch_assoc();
             $_SESSION['username_admin'] = $admin['username'];
+            $_SESSION['id_admin'] = $admin['id'];
             header("Location: index.php");
             exit();
         } else {
