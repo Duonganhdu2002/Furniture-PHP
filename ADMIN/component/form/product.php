@@ -10,16 +10,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $productPrice = intval($_POST["price"]);
     $productQuantity = intval($_POST["stockQuantity"]);
     $productDescription = $conn->real_escape_string($_POST["productDescription"]);
-    $brandId = $conn->real_escape_string($_POST["category"]);
-    $catgoryId = $conn->real_escape_string($_POST["brand"]);
-    // xác định vị trí thư mục lưu
-    $folder = "../../../PUBLIC-PAGE/images/chairs/";
-    $fileName = $folder . $_FILES["image"]["name"];
-    // chép hình ảnh vào thư mục
-    move_uploaded_file($_FILES["image"]["tmp_name"], $fileName);
-    $image = $_FILES["image"]["name"];
+    $brandId = $conn->real_escape_string($_POST["brand"]);
+    $catgoryId = $conn->real_escape_string($_POST["category"]);
+    $image = $conn->real_escape_string($_POST["image"]);
 
-    $checkExistenceQuery = "SELECT * FROM products WHERE product_name = '$categoryName' OR description = '$categoryDescription'";
+    // Xác định đường dẫn tuyệt đối đến thư mục upload
+    $folder = "../../../PUBLIC-PAGE/images/chairs";
+
+    // Kiểm tra nếu tệp là hình ảnh và không phải là tệp độc hại
+    $allowedTypes = ['image/jpg', 'image/png'];
+    if (isset($_FILES["image"]) && in_array($_FILES["image"]["type"], $allowedTypes)) {
+        // Tạo tên tệp duy nhất để tránh việc ghi đè lên các tệp đã tồn tại
+        $fileName = $folder . uniqid('image_') . '_' . $_FILES["image"]["name"];
+
+        // Di chuyển tệp đã tải lên vào thư mục đã chọn
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $fileName)) {
+            $image = basename($fileName); // Lấy tên tệp từ đường dẫn đầy đủ
+            echo "<script>alert('Tệp đã được tải lên thành công: $image');</script>";
+        } else {
+            echo "<script>alert('Lỗi khi tải lên tệp.');</script>";
+        }
+    }
+
+    $checkExistenceQuery = "SELECT * FROM products WHERE product_name = '$productName' OR description = '$productDescription'";
     $result = $conn->query($checkExistenceQuery);
 
     if ($result->num_rows == 0) {
@@ -29,9 +42,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $sql = "INSERT INTO products (id, category_id, brand_id, product_name, description, image, price, stock_quantity) 
         VALUES ($newId, '$catgoryId', '$brandId', '$productName','$productDescription', '$image', '$productPrice', '$productQuantity')";
+        if ($conn->query($sql)) {
+            $success = true;
+        }
     }
 }
 ?>
+<script>
+    <?php
+    if ($success) {
+        echo "showNotification('Thêm thành công', 'success');";
+    } else {
+        echo "showNotification('Thêm không thành công', 'error');";
+    }
+    ?>
+
+    function showNotification(message, type) {
+        var notification = document.createElement('div');
+        notification.className = 'notification ' + type;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(function() {
+            notification.style.display = 'none';
+        }, 2000);
+    }
+</script>
+
+<style>
+    .notification {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: 0.5s;
+        z-index: 999;
+    }
+
+    .success {
+        background-color: #3b5d50;
+    }
+
+    .error {
+        background-color: #ff3333;
+    }
+</style>
 <div style="display: flex; align-items: center; flex-direction: column;">
     <div style="width: 68%;" class="productFormContainer">
         <h1>Add Product</h1>
