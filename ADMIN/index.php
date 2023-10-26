@@ -21,8 +21,7 @@
             <div class="display-info">
                 <div class="data">
                     <?php
-
-                    if (isset($_SESSION["username"])) {
+                    if (isset($_SESSION["username_admin"])) {
                         if (isset($_GET['pid'])) {
                             $id = $_GET['pid'];
                             if ($id == '1' && isset($_GET['add-new'])) {
@@ -67,9 +66,11 @@
                         }
                     } else {
                         //echo '<script> alert("Bạn cần đăng nhập trước "); </script>';
-                        header("Location: /login.php");
+                        header("location: login.php");
+                        exit(); 
                     }
                     ?>
+
                 </div>
             </div>
 
