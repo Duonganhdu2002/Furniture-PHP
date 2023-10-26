@@ -7,7 +7,7 @@ $dbname = "shopping_online";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-$thu_muc = "../images/";
+$thu_muc = "../../../PUBLIC-PAGE/images/chairs/";
 
 if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
     // Kiểm tra xem có tệp hình ảnh được tải lên và không có lỗi
@@ -51,6 +51,66 @@ if (isset($_POST["product_name"]) && isset($_POST["description"]) && isset($_POS
 $conn->close();
 
 ?>
+
+
+
+
+<?php 
+// $conn = new mysqli('localhost', 'root', '', 'shopping_online');
+
+// if ($conn->connect_error) {
+//     die("Kết nối thất bại: " . $conn->connect_error);
+// }
+
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $productName = $conn->real_escape_string($_POST["productName"]);
+//     $productPrice = intval($_POST["price"]);
+//     $productQuantity = intval($_POST["stockQuantity"]);
+//     $productDescription = $conn->real_escape_string($_POST["productDescription"]);
+//     $brandId = $conn->real_escape_string($_POST["category"]);
+//     $catgoryId = $conn->real_escape_string($_POST["brand"]);
+
+//     $folder = "../../../PUBLIC-PAGE/images/chairs/";
+//     $image = $_FILES["image"]["name"];
+//     $fileName = $folder . $_FILES["image"]["name"];
+//     if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
+//         if (move_uploaded_file($_FILES["image"]["tmp_name"], $fileName)) {
+//             // Thành công: hiển thị thông báo JavaScript
+//             echo "<script>alert('Tải lên ảnh thành công');</script>";
+//         } else {
+//             // Lỗi: hiển thị thông báo JavaScript
+//             echo "<script>alert('Tải lên ảnh không thành công');</script>";
+//         }
+//     } else {
+//         // Không có tệp hình ảnh được tải lên: hiển thị thông báo JavaScript
+//         echo "<script>alert('Không có tệp hình ảnh được tải lên.');</script>";
+//     }
+
+//     $checkExistenceQuery = "SELECT * FROM products WHERE product_name = '$productName' OR description = '$productDescription'";
+//     $result = $conn->query($checkExistenceQuery);
+//     if ($result->num_rows == 0) {
+//         $maxIdResult = $conn->query("SELECT MAX(id) AS max_id FROM products");
+//         $maxId = $maxIdResult->fetch_assoc()['max_id'];
+//         $newId = $maxId + 1;
+
+//         $sql = "INSERT INTO products (id, category_id, brand_id, product_name, description, image, price, stock_quantity) 
+//         VALUES ($newId, '$catgoryId', '$brandId', '$productName','$productDescription', '$image', '$productPrice', '$productQuantity')";
+//         if ($conn->query($sql)) {
+//             // Gửi thành công: bạn có thể thực hiện các hành động khác sau khi thêm sản phẩm
+//         } else {
+//             // Lỗi: xử lý lỗi tại đây hoặc hiển thị thông báo lỗi
+//             echo "Lỗi khi thêm sản phẩm: " . $conn->error;
+//         }
+//     } else {
+//         echo "Sản phẩm đã tồn tại!";
+//     }
+// }
+?>
+
+
+
+
+
 
 
 
