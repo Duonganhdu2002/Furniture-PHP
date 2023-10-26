@@ -71,7 +71,7 @@
     }
     ?>
     <div class="login">
-        <form class="login-form" action="kt_admin.php" method="post">
+        <form class="login-form" action="/ADMIN/kt_admin.php" method="post">
             <h1>LOGIN</h1>
             <label for="username">Username</label>
             <br>

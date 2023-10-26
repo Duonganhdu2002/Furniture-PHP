@@ -8,7 +8,7 @@ $dbname = "shopping_online";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Lấy tất cả các bản ghi từ cơ sở dữ liệu
+// //Lấy tất cả các bản ghi từ cơ sở dữ liệu
 // $sql = "SELECT id, password FROM users WHERE role = 'admin'";
 // $result = $conn->query($sql);
 
@@ -43,7 +43,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             // Đăng nhập thành công
             session_start();
             $_SESSION['username'] = $row['username'];
-            header("Location: index.php");
+            header("Location: index.php?pid=8");
         } else {
             // Sai mật khẩu
             header("Location: login.php");

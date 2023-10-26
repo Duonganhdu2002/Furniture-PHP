@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<?php session_start();?>
 
 <body>
     <div class="container-main">
@@ -20,51 +21,58 @@
             <div class="display-info">
                 <div class="data">
                     <?php
-                    if (isset($_GET['pid'])) {
-                        $id = $_GET['pid'];
-                        if ($id == '1' && isset($_GET['add-new'])) {
-                            include("component/form/category.php");
-                        } else if ($id == '2' && isset($_GET['add-new'])) {
-                            include("component/form/product.php");
-                        } else if ($id == '3' && isset($_GET['add-new'])) {
-                            include("component/form/brand.php");
-                        } else if ($id == '3' && isset($_GET['add-new'])) {
-                            include("component/form/member.php");
-                        } else {
-                            switch ($id) {
-                                case '1':
-                                    include("component/category.php");
-                                    break;
-                                case '2':
-                                    include("component/product.php");
-                                    break;
-                                case '3':
-                                    include("component/brand.php");
-                                    break;
-                                case '4':
-                                    include("component/member.php");
-                                    break;
-                                case '5':
-                                    include("component/customer.php");
-                                    break;
-                                case '6':
-                                    include("component/order.php");
-                                    break;
-                                case '7':
-                                    include("component/revenue.php");
-                                    break;
-                                case '8':
-                                    include("component/profile.php");
-                                    break;
-                                default:
-                                    include("component/nova.php");
-                                    break;
+                    
+                    if (isset($_SESSION["username"])) {
+                        if (isset($_GET['pid'])) {
+                            $id = $_GET['pid'];
+                            if ($id == '1' && isset($_GET['add-new'])) {
+                                include("component/form/category.php");
+                            } else if ($id == '2' && isset($_GET['add-new'])) {
+                                include("component/form/product.php");
+                            } else if ($id == '3' && isset($_GET['add-new'])) {
+                                include("component/form/brand.php");
+                            } else if ($id == '3' && isset($_GET['add-new'])) {
+                                include("component/form/member.php");
+                            } else {
+                                switch ($id) {
+                                    case '1':
+                                        include("component/category.php");
+                                        break;
+                                    case '2':
+                                        include("component/product.php");
+                                    case '3':
+                                        include("component/brand.php");
+                                        break;
+                                    case '4':
+                                        include("component/member.php");
+                                        break;
+                                    case '5':
+                                        include("component/customer.php");
+                                        break;
+                                    case '6':
+                                        include("component/order.php");
+                                        break;
+                                    case '7':
+                                        include("component/revenue.php");
+                                        break;
+                                    case '8':
+                                        include("component/profile.php");
+                                        break;
+                                    default:
+                                        include("component/nova.php");
+                                        break;
+                                }
                             }
                         }
+                    } else {
+                        //echo '<script> alert("Bạn cần đăng nhập trước "); </script>';
+                        header("Location: login.php");
+                        // exit;
                     }
                     ?>
                 </div>
             </div>
+
         </div>
     </div>
 </body>

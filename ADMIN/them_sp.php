@@ -7,10 +7,12 @@ $dbname = "shopping_online";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-$thu_muc = "../../images/";
+$thu_muc = "../images/";
 
-if ($_FILES["image"]["error"] == 0) {
+if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
+    // Kiểm tra xem có tệp hình ảnh được tải lên và không có lỗi
     $ten_file = $thu_muc . $_FILES["image"]["name"];
+    move_uploaded_file($_FILES["image"]["tmp_name"], $ten_file);
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $ten_file)) {
         // Thành công: hiển thị thông báo JavaScript
         echo "<script>alert('Tải lên ảnh thành công');</script>";
