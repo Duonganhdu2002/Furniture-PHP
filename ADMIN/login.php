@@ -70,7 +70,7 @@
 
     // Kiểm tra nếu đã đăng nhập, chuyển hướng người dùng đến trang index.php
     if (isset($_SESSION['user_id'])) {
-        header("Location: /ADMIN/index.php");
+        header("Location: index.php");
         exit();
     }
 
@@ -105,11 +105,11 @@
             // Đăng nhập thành công, lưu ID người dùng vào SESSION và chuyển hướng đến index.php
             $row = $result->fetch_assoc();
             $_SESSION['user_id'] = $row['id'];
-            header("Location: /ADMIN/index.php");
+            header("Location: index.php");
             exit();
         } else {
             // Đăng nhập không thành công, chuyển hướng với thông báo lỗi
-            header("Location: /your_login_page.php?error=Invalid username or password");
+            header("Location: login.php");
             exit();
         }
 

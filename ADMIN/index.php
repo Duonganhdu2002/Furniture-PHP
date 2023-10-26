@@ -67,7 +67,7 @@
                         }
                     } else {
                         //echo '<script> alert("Bạn cần đăng nhập trước "); </script>';
-                        header("Location: /ADMIN/login.php");
+                        header("Location: /login.php");
                     }
                     ?>
                 </div>
