@@ -96,6 +96,10 @@
     </table>
 </div>
 
+<?php
+include "modal-update/catgory.php";
+?>
+
 <script>
     function showButtons(element) {
         var actionButtons = element.querySelector('.action-buttons');

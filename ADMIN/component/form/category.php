@@ -82,7 +82,7 @@ $conn->close();
             <input type="text" id="categoryName" name="categoryName" required><br>
             <label for="categoryDescription">Category Description</label><br>
             <textarea name="categoryDescription" id="categoryDescription" cols="30" rows="10"></textarea> <br>
-            <button type="submit">Submit</button>
+            <button type="submit">Add</button>
         </form>
     </div>
 </div>

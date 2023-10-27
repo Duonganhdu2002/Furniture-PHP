@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
+
 <script>
     <?php
     if ($success) {
@@ -45,7 +46,7 @@ $conn->close();
         <input type="text" id="brandName" name="brandName" required><br>
         <label for="brandDescription">Brand Description</label><br>
         <textarea name="brandDescription" id="brandDescription" cols="30" rows="10"></textarea> <br>
-        <button type="submit">Submit</button>
+        <button type="submit">Add</button>
     </form>
 </div>
 
