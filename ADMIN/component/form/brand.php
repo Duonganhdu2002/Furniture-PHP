@@ -38,15 +38,17 @@ $conn->close();
     ?>
 </script>
 
-<div style="width: 100%;">
-    <form method="post" class="brandForm" onsubmit="return submitbrandForm();">
-        <h1>Add new brand</h1>
-        <label for="brandName">Brand Name</label><br>
-        <input type="text" id="brandName" name="brandName" required><br>
-        <label for="brandDescription">Brand Description</label><br>
-        <textarea name="brandDescription" id="brandDescription" cols="30" rows="10"></textarea> <br>
-        <button type="submit">Submit</button>
-    </form>
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <div style="width: 50%;">
+        <form method="post" class="brandForm" onsubmit="return submitbrandForm();">
+            <h1>Add new brand</h1>
+            <label for="brandName">Brand Name</label><br>
+            <input type="text" id="brandName" name="brandName" required><br>
+            <label for="brandDescription">Brand Description</label><br>
+            <textarea name="brandDescription" id="brandDescription" cols="30" rows="10"></textarea> <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </div>
 
 <style>
