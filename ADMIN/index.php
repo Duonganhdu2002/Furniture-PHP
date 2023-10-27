@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,15 +66,12 @@
                             }
                         }
                     } else {
-                        //echo '<script> alert("Bạn cần đăng nhập trước "); </script>';
                         header("location: login.php");
-                        exit(); 
+                        exit();
                     }
                     ?>
-
                 </div>
             </div>
-
         </div>
     </div>
 </body>
@@ -108,3 +106,4 @@
 </style>
 
 </html>
+<?php ob_end_flush(); ?>

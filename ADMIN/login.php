@@ -92,7 +92,6 @@
             header("Location: index.php");
             exit();
         } else {
-            // Đăng nhập không thành công, hiển thị alert
             echo '<script>alert("Sai thông tin đăng nhập!");</script>';
         }
     }
