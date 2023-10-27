@@ -39,17 +39,6 @@ $conn->close();
     ?>
 </script>
 
-<<<<<<< HEAD
-<div style="width: 100%;">
-    <form method="post" class="brandForm" onsubmit="return submitbrandForm();">
-        <h1>Add new brand</h1>
-        <label for="brandName">Brand Name</label><br>
-        <input type="text" id="brandName" name="brandName" required><br>
-        <label for="brandDescription">Brand Description</label><br>
-        <textarea name="brandDescription" id="brandDescription" cols="30" rows="10"></textarea> <br>
-        <button type="submit">Add</button>
-    </form>
-=======
 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
     <div style="width: 50%;">
         <form method="post" class="brandForm" onsubmit="return submitbrandForm();">
@@ -61,7 +50,6 @@ $conn->close();
             <button type="submit">Submit</button>
         </form>
     </div>
->>>>>>> d20839b522faeef98ab02f871eafeb8b2fc6944b
 </div>
 
 <style>
