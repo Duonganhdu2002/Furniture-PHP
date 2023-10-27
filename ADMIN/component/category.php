@@ -48,9 +48,9 @@
                 echo "<td class='hover-cell'; style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
                         <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
                         <div class='action-buttons'>
-                            <button class='edit-button'>Update</button>
+                            <button onclick='updateModal()' class='edit-button'>Update</button>
                             <br>
-                            <button class='delete-button'>Delete</button>
+                            <button onclick='deteleCategory()' class='delete-button'>Delete</button>
                         </div>
                       </td>";
                 echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["category_name"] . "</td>";
@@ -118,7 +118,6 @@
         flex-direction: column;
         margin-left: 30px;
         margin-top: 0px;
-        border: 1px solid black;
         display: none;
     }
 
@@ -137,6 +136,7 @@
     .delete-button {
         border-radius: 0 0 10px 10px;
         border: none;
+        width: 100%;
     }
 
     .delete-button:hover {

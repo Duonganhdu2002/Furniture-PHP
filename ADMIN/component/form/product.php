@@ -12,26 +12,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $productDescription = $conn->real_escape_string($_POST["productDescription"]);
     $brandId = $conn->real_escape_string($_POST["brand"]);
     $catgoryId = $conn->real_escape_string($_POST["category"]);
-    $image = $conn->real_escape_string($_POST["image"]);
+    $image = $conn->real_escape_string($_FILES["image"]["name"]);
+    
 
-    // Xác định đường dẫn tuyệt đối đến thư mục upload
-    $folder = "../../../PUBLIC-PAGE/images/chairs/";
-
-    // Kiểm tra nếu tệp là hình ảnh và không phải là tệp độc hại
-    $allowedTypes = ['image/jpg', 'image/png'];
-    if (isset($_FILES["image"]) && in_array($_FILES["image"]["type"], $allowedTypes)) {
-        // Tạo tên tệp duy nhất để tránh việc ghi đè lên các tệp đã tồn tại
-        $fileName = $folder . uniqid('image_') . '_' . $_FILES["image"]["name"];
-
-        // Di chuyển tệp đã tải lên vào thư mục đã chọn
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $fileName)) {
-            $image = basename($fileName); // Lấy tên tệp từ đường dẫn đầy đủ
-            echo "<script>alert('Tệp đã được tải lên thành công: $image');</script>";
-        } else {
-            echo "<script>alert('Lỗi khi di chuyển tệp: " . error_get_last()['message'] . "');</script>";
-        }        
-    } else {
-        $allowedTypesString = implode(', ', $allowedTypes);
+    if (empty($_FILES) || !isset($_FILES)) {
+        exit("$_FILES is empty!");
+    }
+    
+    if ($_FILES["image"]["error"] !== UPLOAD_ERR_OK) {
+        switch ($_FILES["image"]["error"]) {
+            case UPLOAD_ERR_PARTIAL:
+                exit("File only partially uploaded");
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                exit("No file was uploaded");
+                break;
+            case UPLOAD_ERR_EXTENSION:
+                exit("File upload stopped by a PHP extension");
+                break;
+            case UPLOAD_ERR_FORM_SIZE:
+                exit("File exceeds MAX_FILE_SIZE in the HTML form");
+                break;
+            case UPLOAD_ERR_INI_SIZE:
+                exit("File exceeds upload_max_filesize in php.ini");
+                break;
+            case UPLOAD_ERR_NO_TMP_DIR:
+                exit("Temporaray folder not found");
+                break;
+            case UPLOAD_ERR_CANT_WRITE:
+                exit("Failed to write file");
+                break;
+            default:
+                exit("Unknown uploaded file");
+                break;
+        }
+    }
+    
+    if ($_FILES["image"]["size"] > 1048576) {
+        exit("File too large (max 1MB).");
+    }
+    
+    $fileName = $_FILES["image"]["name"];
+    
+    $destination = __DIR__ ."/../../../PUBLIC-PAGE/images/chairs/". $fileName;
+    
+    if (!move_uploaded_file($_FILES["image"]["tmp_name"], $destination)) {
+        exit("Can't move upload file");
     }
 
     $checkExistenceQuery = "SELECT * FROM products WHERE product_name = '$productName' OR description = '$productDescription'";
@@ -50,8 +76,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+<script>
+    <?php
+    if ($success) {
+        echo "showNotification('Thêm thành công', 'success');";
+    } else {
+        echo "showNotification('Thêm không thành công', 'error');";
+    }
+    ?>
 
+    function showNotification(message, type) {
+        var notification = document.createElement('div');
+        notification.className = 'notification ' + type;
+        notification.textContent = message;
+        document.body.appendChild(notification);
 
+        setTimeout(function() {
+            notification.style.display = 'none';
+        }, 2000);
+    }
+</script>
 <style>
     .notification {
         position: fixed;
@@ -80,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div style="display: flex; align-items: center; flex-direction: column;">
     <div style="width: 68%;" class="productFormContainer">
         <h1>Add Product</h1>
-        <form class="productForm" method="post" onsubmit="return submitProductForm();">
+        <form class="productForm" enctype="multipart/form-data" method="post" onsubmit="return submitProductForm();">
             <div style="display: flex; justify-content: space-between">
                 <div style="width: 30%;">
                     <label for="productName">Product Name:</label>
@@ -99,6 +143,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="productDescription">Description:</label>
                 <textarea id="productDescription" name="productDescription" rows="4" cols="50"></textarea><br>
             </div>
+
+            <!-- <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> -->
+
             <label for="image">Image:</label>
             <input style="border: none;" type="file" id="image" name="image"><br>
             <div style="display: flex;">
