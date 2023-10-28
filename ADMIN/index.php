@@ -33,6 +33,8 @@
                                 include("component/form/brand.php");
                             } else if ($id == '4' && isset($_GET['add-new'])) {
                                 include("component/form/member.php");
+                            } else if ($id == '1' && isset($_GET['update'])) {
+                                include("component/modal-update/category.php");
                             } else {
                                 switch ($id) {
                                     case '1':

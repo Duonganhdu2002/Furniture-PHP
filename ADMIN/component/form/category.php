@@ -5,34 +5,65 @@ if ($conn->connect_error) {
     die("Kết nối thất bại: " . $conn->connect_error);
 }
 
+$categoryName = "";
+$categoryDescription = "";
+
+$message = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $categoryName = $conn->real_escape_string($_POST["categoryName"]);
     $categoryDescription = $conn->real_escape_string($_POST["categoryDescription"]);
 
-    $checkExistenceQuery = "SELECT * FROM categories WHERE category_name = '$categoryName' OR description = '$categoryDescription'";
-    $result = $conn->query($checkExistenceQuery);
+    do {
+        if (empty($categoryName) || empty($categoryDescription)) {
+            $message = "All the fields are required";
+            break;
+        }
 
-    if ($result->num_rows == 0) {
+        $result = $conn->query("SELECT * FROM categories WHERE category_name = '$categoryName'");
+        
+        if ($result->num_rows > 0) {
+            $message = "Category already exists";
+            break;
+        }
+
         $maxIdResult = $conn->query("SELECT MAX(id) AS max_id FROM categories");
         $maxId = $maxIdResult->fetch_assoc()['max_id'];
         $newId = $maxId + 1;
 
-        $sql = "INSERT INTO categories (id, category_name, description) VALUES ($newId, '$categoryName', '$categoryDescription')";
-        if ($conn->query($sql)) {
-            $success = true;
-        }
-    }
-}
+        $stmt = $conn->prepare("INSERT INTO categories (id, category_name, description) VALUES (?, ?, ?)");
+        $stmt->bind_param("iss", $newId, $categoryName, $categoryDescription);
+        $stmt->execute();
 
-$conn->close();
+        if (!$stmt) {
+            $message = "Invalid query: " . $conn->error;
+            break;
+        }
+
+        $categoryName = "";
+        $categoryDescription = "";
+
+        $message = "Category added correctly";
+    } while (false);
+}
 ?>
 
 <script>
     <?php
-    if ($success) {
-        echo "showNotification('Thêm thành công', 'success');";
-    } else {
+    if ($message === "Invalid query: " . $conn->error) {
         echo "showNotification('Thêm không thành công', 'error');";
+    }
+
+    if ($message === "Category already exists") {
+        echo "showNotification('Tên danh mục đã tồn tại', 'error');";
+    }
+
+    if ($message === "All the fields are required") {
+        echo "showNotification('Thông tin chưa được điền đủ', 'error');";
+    }
+    
+    if ($message === "Category added correctly"){
+        echo "showNotification('Thêm thành công', 'success');";
     }
     ?>
 
@@ -47,6 +78,19 @@ $conn->close();
         }, 2000);
     }
 </script>
+
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <div style="width: 40%;">
+        <form method="post" action="" class="categoryForm" onsubmit="return submitCategoryForm();">
+            <h1>Add new category</h1>
+            <label for="categoryName">Category Name</label><br>
+            <input type="text" id="categoryName" name="categoryName" value="<?php echo $categoryName; ?>"><br>
+            <label for="categoryDescription">Category Description</label><br>
+            <input style="height: 100px;" name="categoryDescription" id="categoryDescription" value="<?php echo $categoryDescription; ?>"> <br>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+</div>
 
 <style>
     .notification {
@@ -73,20 +117,6 @@ $conn->close();
         background-color: #ff3333;
     }
 </style>
-
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-    <div style="width: 50%;">
-        <form method="post" action="" class="categoryForm" onsubmit="return submitCategoryForm();">
-            <h1>Add new category</h1>
-            <label for="categoryName">Category Name</label><br>
-            <input type="text" id="categoryName" name="categoryName" required><br>
-            <label for="categoryDescription">Category Description</label><br>
-            <textarea name="categoryDescription" id="categoryDescription" cols="30" rows="10"></textarea> <br>
-            <button type="submit">Add</button>
-        </form>
-    </div>
-</div>
-
 
 <style>
     .categoryForm h1 {

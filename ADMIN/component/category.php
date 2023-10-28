@@ -42,16 +42,17 @@
             $stt = $offset + 1;
 
             while ($row = $result->fetch_assoc()) {
+                $id = $row["id"];
                 echo "<tr>";
                 echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
                 echo "<td style='width:4%; text-align: center;'>" . $row["id"] . "</td>";
                 echo "<td class='hover-cell'; style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
                         <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
                         <div class='action-buttons'>
-                            <button onclick='updateModal()' class='edit-button'>Update</button>
+                            <a href='../ADMIN/index.php?pid=1&update&id=$id'><button class='edit-button'>Update</button></a>
                             <br>
-                            <button onclick='deteleCategory()' class='delete-button'>Delete</button>
-                        </div>
+                            <a href='../ADMIN/component/delete/category.php?id=$id'><button class='delete-button'>Delete</button></a>
+                            </div>
                       </td>";
                 echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["category_name"] . "</td>";
                 echo "<td style='width: 73%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["description"] . "</td>";
@@ -96,10 +97,6 @@
     </table>
 </div>
 
-<?php
-include "modal-update/catgory.php";
-?>
-
 <script>
     function showButtons(element) {
         var actionButtons = element.querySelector('.action-buttons');
@@ -107,6 +104,7 @@ include "modal-update/catgory.php";
             actionButtons.style.display = 'block';
         }
     }
+
     function hideButtons(element) {
         var actionButtons = element.querySelector('.action-buttons');
         if (actionButtons) {
