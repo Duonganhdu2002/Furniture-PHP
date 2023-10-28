@@ -72,6 +72,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             <label for="categoryDescription">Category Description</label><br>
             <input style="height: 100px;" name="categoryDescription" id="categoryDescription" value="<?php echo $categoryDescription; ?>"> <br>
             <button type="submit">Change</button>
+            <a style="text-decoration: none;">
+                <button type="button" style="background-color: #BB0000;" onclick="window.location.href='index.php?pid=1';">Back</button>
+            </a>
         </form>
     </div>
 </div>
