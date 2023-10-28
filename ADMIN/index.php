@@ -35,6 +35,8 @@
                                 include("component/form/member.php");
                             } else if ($id == '1' && isset($_GET['update'])) {
                                 include("component/modal-update/category.php");
+                            } else if ($id == '2' && isset($_GET['update'])) {
+                                include("component/modal-update/product.php");
                             } else {
                                 switch ($id) {
                                     case '1':
