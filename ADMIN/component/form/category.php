@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $result = $conn->query("SELECT * FROM categories WHERE category_name = '$categoryName'");
-        
+
         if ($result->num_rows > 0) {
             $message = "Category already exists";
             break;
@@ -61,8 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($message === "All the fields are required") {
         echo "showNotification('Thông tin chưa được điền đủ', 'error');";
     }
-    
-    if ($message === "Category added correctly"){
+
+    if ($message === "Category added correctly") {
         echo "showNotification('Thêm thành công', 'success');";
     }
     ?>
@@ -87,7 +87,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" id="categoryName" name="categoryName" value="<?php echo $categoryName; ?>"><br>
             <label for="categoryDescription">Category Description</label><br>
             <input style="height: 100px;" name="categoryDescription" id="categoryDescription" value="<?php echo $categoryDescription; ?>"> <br>
-            <button type="submit">Add</button>
+            <div>
+                <button type="submit">Add</button>
+                <a style="text-decoration: none;">
+                    <button type="button" style="background-color: #BB0000;" onclick="window.location.href='index.php?pid=1';">Back</button>
+                </a>
+            </div>
         </form>
     </div>
 </div>

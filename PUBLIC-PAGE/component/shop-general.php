@@ -41,8 +41,8 @@ foreach ($category_ids as $category_id) {
                         </a>
                         <h3 class="product-title"><?php echo $row2["product_name"]; ?></h3>
                         <strong class="product-price"><?php echo $row2["price"]; ?></strong>
-                        <span class="icon-cross">
-                            <a id="add-cart" href="cart.html"><img src="images/cross.svg"></a>
+                        <span class="icon-cross " >
+                            <a  class="add" data-id="<?php echo $row2["id"]; ?>"><img src="images/cross.svg"></a>
                         </span>
                     </div>
 
@@ -59,6 +59,36 @@ foreach ($category_ids as $category_id) {
     }
 }
 ?>
+
+
+
+<script>
+    var id = document.getElementsByClassName("add");
+    for (var i = 0; i < id.length; i++) {
+        id[i].addEventListener("click", function(event) {
+            var target = event.target;
+            var idd = target.getAttribute("data-id");
+            alert(idd);
+            
+        })
+    }
+</script>
+
+<script>
+    // var productElement = document.querySelector('.add');
+    // var productId = productElement.getAttribute('data-id');
+    // alert(productId);
+
+    // var xml = new XMLHttpRequest();
+    // xml.onreadystatechange = function() {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //         var data = JSON.parse(this.responseText);
+    //         target.innerHTML = data.in_cart;
+    //     }
+    // }
+    // xml.open("GET", "conection_cart.php?id=" + id_product, true);
+    // xml.send();
+</script>
 
 </div>
 <style>
