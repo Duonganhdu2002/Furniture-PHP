@@ -177,7 +177,7 @@
 </head>
 <body>
 <?php
-    session_start(); // Khởi tạo phiên làm việc
+    
     $conn = new mysqli('localhost', 'root', '', 'shopping_online');
 
     // Kiểm tra khi có sự kiện đăng nhập
