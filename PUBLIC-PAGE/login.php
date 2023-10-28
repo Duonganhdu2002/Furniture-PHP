@@ -23,7 +23,7 @@
             position: relative;
             height: 490px;
             border: 1px solid #ccc;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
             background-color: #fff;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -132,18 +132,24 @@
             margin: 15px 0 -15px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
 
-        .remember-forgot label {
+        /* .remember-forgot label {
             margin-top: -16px;
-        }
+        } */
         
         .remember-forgot label input {
             accent-color: #3b5d50;
             /* justify-content: center; */
             /* align-items: center; */
-            width: 20px;
-            height: 14px;
+            width: 40px;
+            height: 12px;
+        }
+
+        .remember-forgot input {
+            margin-left: -13px;
+            margin-right: -8px;
         }
         
         .remember-forgot a {
