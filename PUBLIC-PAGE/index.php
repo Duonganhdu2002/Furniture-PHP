@@ -13,7 +13,16 @@
         }
     </style>
 </head>
+<?php 
+session_start();
+if(!isset($_SESSION["somathang"])){
+    $_SESSION["somathang"] = 0;
 
+}
+if(!isset($_SESSION["soluonghang"])){
+    $_SESSION["soluonghang"] = 0;
+}
+?>
 <body style="background-color: #eff2f1;">
     <div style="background-color: #3b5d50;">
         <?php
