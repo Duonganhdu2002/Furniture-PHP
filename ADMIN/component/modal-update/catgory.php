@@ -23,7 +23,7 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <!-- Nội dung modal ở đây -->
-        <input type="hidden">
+        <input type="hidden" >
         <span onclick="closeModal()" style="float: right; cursor: pointer;">&times;</span>
         <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <div style="width: 90%;">
