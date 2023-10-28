@@ -1,6 +1,7 @@
 <script>
     const shopLink = document.getElementById('shop-link');
     const shopModule = document.getElementById('shop-module');
+    const userModule = document.getElementById('user-module');
 
     shopLink.addEventListener('mouseenter', () => {
         shopModule.style.display = 'block';
@@ -68,6 +69,10 @@ $result = $link->query($sql);
                 <a href="#">
                     <img src="../PUBLIC-PAGE/images/user.svg" alt="">
                 </a>
+                <div class="user-module">
+                    <div class="login-module"><a href="../PUBLIC-PAGE/login.php" style="text-align: center; opacity: 1.0; font-size: 18px;" >Login</a></div>
+                    <div class="register-module"><a href="../PUBLIC-PAGE/register.php" style="text-align: center; opacity: 1.0; font-size: 18px;" >Register</a></div>
+                </div>
             </div>
             <div class="cart-icon">
                 <a href="index.php?pid=6">
@@ -204,6 +209,102 @@ $result = $link->query($sql);
         display: block;
     }
 
+    .user-cart-icon a {
+        margin-left: 10px;
+        margin-top: 15px;
+        display: inline-block;
+        position: relative;
+        font-size: 16px;
+        font-weight: 300;
+        opacity: 0.6;
+        text-decoration: none;
+        color: #ffffff;
+        padding-bottom: 14px;
+        transition: color 0.3s ease, opacity 0.3s ease;
+    }
+
+    .user-module {
+        display: none;
+        position:absolute;
+        background-color: #3b5d50;
+        border: 2px solid white;
+        /* z-index: 2; */
+        width:5%;
+        /* height: 100px; */
+        border-radius: 10px;
+        /* top: 65px; */
+        /* left: 78%; */
+        
+    }
+
+    .user-icon div {
+        margin-left: 0px;
+    }
+
+    .user-icon:hover .user-module {
+        display: block;
+    }
+
+    .action-buttons {
+        z-index: 1.0;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        margin-left: 30px;
+        margin-top: 0px;
+        display: none;
+    }
+
+    .login-button {
+        border-radius: 10px 10px 0 0;
+        border-bottom: 1px solid white;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+    }
+
+    .login-button:hover {
+        opacity: 0.7;
+    }
+
+    .register-button {
+        border-radius: 0 0 10px 10px;
+        border: none;
+        width: 100%;
+    }
+
+    .register-button:hover {
+        opacity: 0.7;
+    }
+
+    .action-buttons button {
+        padding: 10px 28px 10px 28px;
+        background-color: #3b5d50;
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    /* .login-module {
+        text-align: center;
+    }
+
+    .register-module {
+        text-align: center;
+    } */
+
+    .login-module:hover {
+        background-color: #f9bf29;
+        color: #3b5d50;
+        border-radius: 8px;
+    }
+
+    .register-module:hover {
+        background-color: #f9bf29;
+        color: #3b5d50;
+        border-radius: 8px;
+    }
+
     @media (max-width: 400px) {
         .header {
             height: 80px;
@@ -235,6 +336,8 @@ $result = $link->query($sql);
             margin-right: 20px;
             opacity: 0.7;
         }
+
+        
     }
 
     @media (max-width: 768px) {
