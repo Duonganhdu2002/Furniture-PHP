@@ -183,7 +183,6 @@
 </head>
 <body>
 <?php
-    
     $conn = new mysqli('localhost', 'root', '', 'shopping_online');
 
     // Kiểm tra khi có sự kiện đăng nhập
@@ -243,7 +242,7 @@
                     <div class="login-register">
                     <p>
                         Don't have an account?
-                        <a href="#" class="register-link">Register</a>
+                        <a href="../PUBLIC-PAGE/register.php" class="register-link">Register</a>
                     </p>
                     </div>
                 </form>
