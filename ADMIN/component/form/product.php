@@ -5,6 +5,16 @@ if ($conn->connect_error) {
     die("Kết nối thất bại: " . $conn->connect_error);
 }
 
+$productName = "";
+$productPrice = "";
+$productQuantity = "";
+$productDescription = "";
+$brandId = "";
+$catgoryId = "";
+$image = "";
+
+$message = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $productName = $conn->real_escape_string($_POST["productName"]);
     $productPrice = intval($_POST["price"]);
@@ -13,75 +23,108 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $brandId = $conn->real_escape_string($_POST["brand"]);
     $catgoryId = $conn->real_escape_string($_POST["category"]);
     $image = $conn->real_escape_string($_FILES["image"]["name"]);
-    
 
-    if (empty($_FILES) || !isset($_FILES)) {
-        exit("$_FILES is empty!");
-    }
-    
-    if ($_FILES["image"]["error"] !== UPLOAD_ERR_OK) {
-        switch ($_FILES["image"]["error"]) {
-            case UPLOAD_ERR_PARTIAL:
-                exit("File only partially uploaded");
-                break;
-            case UPLOAD_ERR_NO_FILE:
-                exit("No file was uploaded");
-                break;
-            case UPLOAD_ERR_EXTENSION:
-                exit("File upload stopped by a PHP extension");
-                break;
-            case UPLOAD_ERR_FORM_SIZE:
-                exit("File exceeds MAX_FILE_SIZE in the HTML form");
-                break;
-            case UPLOAD_ERR_INI_SIZE:
-                exit("File exceeds upload_max_filesize in php.ini");
-                break;
-            case UPLOAD_ERR_NO_TMP_DIR:
-                exit("Temporaray folder not found");
-                break;
-            case UPLOAD_ERR_CANT_WRITE:
-                exit("Failed to write file");
-                break;
-            default:
-                exit("Unknown uploaded file");
-                break;
+    do {
+        // Thông báo nếu không điền đủ thông tin sản phẩm
+        if (empty($brandId) || empty($catgoryId) || empty($image) || empty($productDescription) || empty($productName) || empty($productPrice) || empty($productQuantity)) {
+            $message = "All the fields are required";
+            break;
         }
-    }
-    
-    if ($_FILES["image"]["size"] > 1048576) {
-        exit("File too large (max 1MB).");
-    }
-    
-    $fileName = $_FILES["image"]["name"];
-    
-    $destination = __DIR__ ."/../../../PUBLIC-PAGE/images/chairs/". $fileName;
-    
-    if (!move_uploaded_file($_FILES["image"]["tmp_name"], $destination)) {
-        exit("Can't move upload file");
-    }
+        // Xử lí ảnh
+        if ($_FILES["image"]["error"] !== UPLOAD_ERR_OK) {
+            switch ($_FILES["image"]["error"]) {
+                case UPLOAD_ERR_PARTIAL:
+                    exit("File only partially uploaded");
+                    break;
+                case UPLOAD_ERR_NO_FILE:
+                    exit("No file was uploaded");
+                    break;
+                case UPLOAD_ERR_EXTENSION:
+                    exit("File upload stopped by a PHP extension");
+                    break;
+                case UPLOAD_ERR_FORM_SIZE:
+                    exit("File exceeds MAX_FILE_SIZE in the HTML form");
+                    break;
+                case UPLOAD_ERR_INI_SIZE:
+                    exit("File exceeds upload_max_filesize in php.ini");
+                    break;
+                case UPLOAD_ERR_NO_TMP_DIR:
+                    exit("Temporaray folder not found");
+                    break;
+                case UPLOAD_ERR_CANT_WRITE:
+                    exit("Failed to write file");
+                    break;
+                default:
+                    exit("Unknown uploaded file");
+                    break;
+            }
+        }
 
-    $checkExistenceQuery = "SELECT * FROM products WHERE product_name = '$productName' OR description = '$productDescription'";
-    $result = $conn->query($checkExistenceQuery);
+        // Tối đa kích thuớc ảnh 1MB đảm bảo ảnh load nhanh 
 
-    if ($result->num_rows == 0) {
+        if ($_FILES["image"]["size"] > 1048576) {
+            exit("File too large (max 1MB).");
+        }
+
+        $fileName = $_FILES["image"]["name"];
+
+        $destination = __DIR__ . "/../../../PUBLIC-PAGE/images/chairs/" . $fileName;
+
+        // Thông báo nếu không lưu được ảnh vào đường dẫn 
+        if (!move_uploaded_file($_FILES["image"]["tmp_name"], $destination)) {
+            exit("Can't move upload file");
+        }
+
+        $result = $conn->query("SELECT * FROM products WHERE product_name = '$productName'");
+
+        if ($result->num_rows > 0) {
+            $message = "Product already exists";
+            break;
+        }
+
         $maxIdResult = $conn->query("SELECT MAX(id) AS max_id FROM products");
         $maxId = $maxIdResult->fetch_assoc()['max_id'];
         $newId = $maxId + 1;
 
-        $sql = "INSERT INTO products (id, category_id, brand_id, product_name, description, image, price, stock_quantity) 
-        VALUES ($newId, '$catgoryId', '$brandId', '$productName','$productDescription', '$image', '$productPrice', '$productQuantity')";
-        if ($conn->query($sql)) {
-            $success = true;
-        } 
-    }
+        $stmt = $conn->prepare("INSERT INTO products (id, category_id, brand_id, product_name, description, image, price, stock_quantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("iissdsii", $newId, $catgoryId, $brandId, $productName, $productDescription, $image, $productPrice, $productQuantity);
+        $stmt->execute();
+
+        if (!$stmt) {
+            $message = "Invalid query: " . $conn->error;
+            break;
+        }
+
+        //Trả giá trị về rỗng
+        $productName = "";
+        $productPrice = "";
+        $productQuantity = "";
+        $productDescription = "";
+        $brandId = "";
+        $catgoryId = "";
+        $image = "";
+
+        $message = "Category added correctly";
+
+    } while (false);
 }
 ?>
 <script>
     <?php
-    if ($success) {
-        echo "showNotification('Thêm thành công', 'success');";
-    } else {
+    if ($message === "Invalid query: " . $conn->error) {
         echo "showNotification('Thêm không thành công', 'error');";
+    }
+
+    if ($message === "Category already exists") {
+        echo "showNotification('Tên danh mục đã tồn tại', 'error');";
+    }
+
+    if ($message === "All the fields are required") {
+        echo "showNotification('Thông tin chưa được điền đủ', 'error');";
+    }
+
+    if ($message === "Category added correctly") {
+        echo "showNotification('Thêm thành công', 'success');";
     }
     ?>
 
@@ -121,37 +164,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         background-color: #ff3333;
     }
 </style>
+
 <div style="display: flex; align-items: center; flex-direction: column;">
     <div style="width: 68%;" class="productFormContainer">
-        <h1>Add Product</h1>
         <form class="productForm" enctype="multipart/form-data" method="post" onsubmit="return submitProductForm();">
+            <h1>Add Product</h1>
             <div style="display: flex; justify-content: space-between">
                 <div style="width: 30%;">
                     <label for="productName">Product Name:</label>
-                    <input type="text" id="productName" name="productName" required><br>
+                    <input type="text" id="productName" name="productName" value="<?php echo $productName; ?>"><br>
                 </div>
                 <div style="width: 20%;">
                     <label for="price">Price:</label>
-                    <input type="number" id="price" name="price"><br>
+                    <input type="number" id="price" name="price" value="<?php echo $productPrice; ?>"><br>
                 </div>
                 <div style="width: 20%;">
                     <label for="stockQuantity">Stock Quantity:</label>
-                    <input type="number" id="stockQuantity" name="stockQuantity"><br>
+                    <input type="number" id="stockQuantity" name="stockQuantity" value="<?php echo $productQuantity; ?>"><br>
                 </div>
             </div>
             <div>
                 <label for="productDescription">Description:</label>
-                <textarea id="productDescription" name="productDescription" rows="4" cols="50"></textarea><br>
+                <textarea id="productDescription" name="productDescription" rows="4" cols="50" value="<?php echo $productDescription; ?>"></textarea><br>
             </div>
 
             <!-- <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> -->
 
             <label for="image">Image:</label>
-            <input style="border: none;" type="file" id="image" name="image"><br>
+            <input style="border: none;" type="file" id="image" name="image" value="<?php echo $image; ?>"><br>
             <div style="display: flex;">
                 <div>
                     <label for="category">Category:</label>
-                    <select id="category" name="category">
+                    <select id="category" name="category" value="<?php echo $catgoryId; ?>">
                         <?php
                         $categorySql = "SELECT id, category_name FROM categories";
                         $categoryResult = $conn->query($categorySql);
@@ -166,7 +210,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div>
                     <label for="brand">Brand:</label>
-                    <select id="brand" name="brand">
+                    <select id="brand" name="brand" value="<?php echo $brandId; ?>">
                         <?php
                         $brandSql = "SELECT id, brand_name FROM brands";
                         $brandResult = $conn->query($brandSql);
@@ -180,7 +224,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </select><br>
                 </div>
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit">Add</button>
         </form>
     </div>
 </div>

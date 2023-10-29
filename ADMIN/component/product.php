@@ -65,6 +65,7 @@
             $stt = $offset + 1;
 
             while ($row = $result->fetch_assoc()) {
+                $id = $row["id"];
                 echo "<tr>";
                 echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
                 echo "<td style='width:4%; text-align: center;'>" . $row["id"] . "</td>";
