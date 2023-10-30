@@ -14,12 +14,12 @@
             height: 100vh;
         }
 
-        .login {
+        .register {
             text-align: center;
             width: 70%;
         }
 
-        .login-form {
+        .register-form {
             position: relative;
             height: 760px;
             border: 1px solid #ccc;
@@ -29,11 +29,11 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
-        .login-form h1 {
+        .register-form h1 {
             color: #3b5d50;
         }
 
-        .login-form label {
+        .register-form label {
             font-size: 16px;
             font-weight: bold;
             float: left;
@@ -62,7 +62,7 @@
             cursor: pointer;
         }
 
-        .Form-login {
+        .Form-register {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -186,41 +186,10 @@
 <body>
     <!-- Sửa code cho thêm dữ liệu vừa nhập vào database và sử dụng điều kiện khi
     nhập mật khẩu đúng thì lưu và vào trang login đăng nhập lại, còn không đúng thì nhập lại mật khẩu
-<?php
-    
-    $conn = new mysqli('localhost', 'root', '', 'shopping_online');
-
-    // Kiểm tra khi có sự kiện đăng nhập
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        // Lấy thông tin từ form đăng nhập
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        // Bảo vệ chống SQL injection
-        $username = $conn->real_escape_string($username);
-        $password = $conn->real_escape_string($password);
-
-        // Kiểm tra thông tin đăng nhập
-        $queryLogin  = "SELECT * FROM users WHERE username = '$username' AND password = '$password' AND role = 'user'";
-        $result = $conn->query($queryLogin);
-
-        if ($result->num_rows == 1) {
-            // Đăng nhập thành công, lưu ID người dùng vào SESSION và chuyển hướng đến index.php
-            $user = $result->fetch_assoc();
-            $_SESSION['username_user'] = $user['username'];
-            $_SESSION['id_user'] = $user['id'];
-            header("Location: index.php");
-            exit();
-        } else {
-            echo '<script>alert("Tài khoản hoặc mật khẩu không đúng, xin vui lòng thử lại!");</script>';
-        }
-    }
-    ?>
     -->
     <div style="background-color: #3b5d50; width: 100%; height: 100%; display:flex">
 
-        <div style="width: 50%; height: 100vh; display:flex; flex-direction: column; " class="Form-login">
+        <div style="width: 50%; height: 100vh; display:flex; flex-direction: column; " class="Form-register">
                 <div style="margin-bottom: 30px;" class="logo-brand">
                         <div class="logo">
                             <a href="../PUBLIC-PAGE/index.php">
@@ -229,8 +198,8 @@
                         </div>
                         <a href="../PUBLIC-PAGE/index.php">Nova<span>.</span></a>
                 </div>
-            <div class="login">
-                <form class="login-form" action="" method="post" oninput="checkForm()">
+            <div class="register">
+                <form class="register-form" action="" method="post" oninput="checkForm()">
                     <h1>REGISTER</h1>
                     <label for="full-name">Full Name</label>
                     <br>
