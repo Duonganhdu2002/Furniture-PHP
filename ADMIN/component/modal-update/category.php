@@ -33,9 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo "No row";
         exit;
     }
+
     $categoryName = $row["category_name"];
     $categoryDescription = $row["description"];
+
 } else {
+
     $id = $_POST["id"];
     $categoryName = $_POST["categoryName"];
     $categoryDescription = $_POST["categoryDescription"];
@@ -68,7 +71,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     <div style="width: 40%;">
         <form method="post" action="" class="categoryForm" onsubmit="return submitCategoryForm();">
             <h1>Update category</h1>
+
             <input type="hidden" name="id" value="<?php echo $id; ?>">
+            
             <label for="categoryName">Category Name</label><br>
             <input type="text" id="categoryName" name="categoryName" value="<?php echo $categoryName; ?>"><br>
             <label for="categoryDescription">Category Description</label><br>

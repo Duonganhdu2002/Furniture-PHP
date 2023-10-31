@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $newId = $maxId + 1;
 
         $stmt = $conn->prepare("INSERT INTO products (id, category_id, brand_id, product_name, description, image, price, stock_quantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("iissdsii", $newId, $catgoryId, $brandId, $productName, $productDescription, $image, $productPrice, $productQuantity);
+        $stmt->bind_param("iissssii", $newId, $catgoryId, $brandId, $productName, $productDescription, $image, $productPrice, $productQuantity);
         $stmt->execute();
 
         if (!$stmt) {
@@ -185,10 +185,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div>
                 <label for="productDescription">Description:</label>
-                <textarea id="productDescription" name="productDescription" rows="4" cols="50" value="<?php echo $productDescription; ?>"></textarea><br>
+                <input type="text" id="productDescription" name="productDescription" value="<?php echo $productDescription; ?>"><br>
             </div>
-
-            <!-- <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> -->
 
             <label for="image">Image:</label>
             <input style="border: none;" type="file" id="image" name="image" value="<?php echo $image; ?>"><br>

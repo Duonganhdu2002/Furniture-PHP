@@ -45,15 +45,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $brandId = $row["brand_id"];
     $categoryId = $row["category_id"];
     $image = $row["image"];
+
 } else {
+
     $id = $_POST["id"];
-    $categoryName = $_POST["productName"];
+    $productName = $_POST["productName"];
     $productPrice = $_POST["price"];
     $productQuantity = $_POST["stockQuantity"];
     $productDescription = $_POST["productDescription"];
     $brandId = $_POST["brand"];
     $categoryId = $_POST["category"];
-    $image = $_POST["image"];
+    $image = $_FILES["image"]["name"];
 
     do {
         if (empty($brandId) || empty($categoryId) || empty($image) || empty($productDescription) || empty($productName) || empty($productPrice) || empty($productQuantity)) {
@@ -61,9 +63,56 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             break;
         }
 
+        // Xử lí ảnh
+        if ($_FILES["image"]["error"] !== UPLOAD_ERR_OK) {
+            switch ($_FILES["image"]["error"]) {
+                case UPLOAD_ERR_PARTIAL:
+                    exit("File only partially uploaded");
+                    break;
+                case UPLOAD_ERR_NO_FILE:
+                    exit("No file was uploaded");
+                    break;
+                case UPLOAD_ERR_EXTENSION:
+                    exit("File upload stopped by a PHP extension");
+                    break;
+                case UPLOAD_ERR_FORM_SIZE:
+                    exit("File exceeds MAX_FILE_SIZE in the HTML form");
+                    break;
+                case UPLOAD_ERR_INI_SIZE:
+                    exit("File exceeds upload_max_filesize in php.ini");
+                    break;
+                case UPLOAD_ERR_NO_TMP_DIR:
+                    exit("Temporaray folder not found");
+                    break;
+                case UPLOAD_ERR_CANT_WRITE:
+                    exit("Failed to write file");
+                    break;
+                default:
+                    exit("Unknown uploaded file");
+                    break;
+            }
+        }
+
+        // Tối đa kích thuớc ảnh 1MB đảm bảo ảnh load nhanh 
+
+        if ($_FILES["image"]["size"] > 1048576) {
+            exit("File too large (max 1MB).");
+        }
+
+        $fileName = $_FILES["image"]["name"];
+
+        $destination = __DIR__ . "/../../../PUBLIC-PAGE/images/chairs/" . $fileName;
+
+        // Thông báo nếu không lưu được ảnh vào đường dẫn 
+        if (!is_uploaded_file($_FILES["image"]["tmp_name"])) {
+            exit("Invalid file upload");
+        }
+        
+        
+
         $sql = "UPDATE products SET category_id = ?, brand_id = ?, product_name = ?,  description = ?,  image = ?,  price = ?,  stock_quantity = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iissdsii", $categoryId, $brandId, $productName, $productDescription, $image, $productPrice, $productQuantity, $id);
+        $stmt->bind_param("iisssiii", $categoryId, $brandId, $productName, $productDescription, $image, $productPrice, $productQuantity, $id);
         $result = $stmt->execute();
 
         if (!$result) {
@@ -83,7 +132,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     <div style="width: 68%;" class="productFormContainer">
         <form class="productForm" enctype="multipart/form-data" method="post" onsubmit="return submitProductForm();">
             <h1>Add Product</h1>
+
             <input type="hidden" name="id" value="<?php echo $id; ?>">
+
             <div style="display: flex; justify-content: space-between">
                 <div style="width: 30%;">
                     <label for="productName">Product Name:</label>
@@ -100,13 +151,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             </div>
             <div>
                 <label for="productDescription">Description:</label>
-                <input style="height: 100px;" id="productDescription" name="productDescription" rows="4" cols="50" value="<?php echo $productDescription; ?>"></input><br>
+                <input style="height: 100px;" type="text" id="productDescription" name="productDescription" value="<?php echo $productDescription; ?>"></input><br>
             </div>
 
             <!-- <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> -->
 
             <label for="image">Image:</label>
-            <input style="border: none;" type="file" id="image" name="image" value="<?php echo $image; ?>"><br>
+            <input style="border: none;" type="file" id="image" name="image"><br>
+
             <div style="display: flex;">
                 <div>
                     <label for="category">Category:</label>
