@@ -97,12 +97,12 @@
 
             echo "<div class='pagination'>";
 
-            // Luôn hiển thị nuts Previous nha
-            echo "<a href='index.php?pid=2&page=" . max(1, $page - 1) . "'>Previous</a> ";
+            // Always show "First" button
+            echo "<a href='index.php?pid=2&page=1'>First</a> ";
 
             // Determine the first and last two pages to display
-            $startPage = max(1, $page - 2);
-            $endPage = min($totalPages, $page + 2);
+            $startPage = max(1, $page - 1);
+            $endPage = min($totalPages, $page + 1);
 
             // Show the page numbers
             for ($i = $startPage; $i <= $endPage; $i++) {
@@ -113,8 +113,8 @@
                 echo ">$i</a> ";
             }
 
-            // Always show "Next" button
-            echo "<a href='index.php?pid=2&page=" . min($totalPages, $page + 1) . "'>Next</a>";
+            // Always show "End" button
+            echo "<a href='index.php?pid=2&page=$totalPages'>End</a>";
 
             echo "</div>";
         } else {

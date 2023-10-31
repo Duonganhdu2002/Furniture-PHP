@@ -21,9 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $id = $_GET["id"];
 
     $sql = "SELECT * FROM categories WHERE id = ?";
+
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
+
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
@@ -72,9 +74,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             <label for="categoryDescription">Category Description</label><br>
             <input style="height: 100px;" name="categoryDescription" id="categoryDescription" value="<?php echo $categoryDescription; ?>"> <br>
             <button type="submit">Change</button>
-            <a style="text-decoration: none;">
-                <button type="button" style="background-color: #BB0000;" onclick="window.location.href='index.php?pid=1';">Back</button>
-            </a>
+            <div>
+                <button type="submit">Change</button>
+                <a style="text-decoration: none;">
+                    <button type="button" style="background-color: #BB0000;" onclick="window.location.href='index.php?pid=1';">Back</button>
+                </a>
+            </div>
         </form>
     </div>
 </div>

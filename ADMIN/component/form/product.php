@@ -224,7 +224,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </select><br>
                 </div>
             </div>
-            <button type="submit">Add</button>
+            <div>
+                <button type="submit">Add</button>
+                <a style="text-decoration: none;">
+                    <button type="button" style="background-color: #BB0000;" onclick="window.location.href='index.php?pid=2';">Back</button>
+                </a>
+            </div>
         </form>
     </div>
 </div>
