@@ -34,27 +34,29 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             <img src="images/chairs/<?php echo $image; ?>" alt="">
         </div>
         <div class="rightside">
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
             <h1><?php echo $productName; ?></h1>
             <p>
-               <?php echo $productDescription; ?>
+                <?php echo $productDescription; ?>
             </p>
 
-            <input value="1" type="number" name="quantity" id="quantity" min="1">
+            <form action="index.php?pid=6">
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                <input type="number" name="quantity">
 
-            <button>Add to card</button>
-            <button>Buy now</button>
-            <p>
-                <b><?php echo $productPrice; ?></b>
-            </p>
-            <p>
-                Available
-                <b><?php echo $productQuantity; ?></b>
-            </p>
+                <button type="submit">Add to card</button></a>
+                <button>Buy now</button>
+                <p>
+                    <b><?php echo $productPrice; ?></b>
+                </p>
+                <p>
+                    Available
+                    <b><?php echo $productQuantity; ?></b>
+                </p>
 
-            <a href="index.php?pid=1">
-                <button>Back to shop</button>
-            </a>
+                <a href="index.php?pid=1">
+                    <button>Back to shop</button>
+                </a>
+            </form>
         </div>
     </div>
 </div>
