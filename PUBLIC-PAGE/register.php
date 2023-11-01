@@ -190,6 +190,7 @@
 
             if ($message === "Category added correctly") {
                 echo "showNotification('Thêm thành công', 'success');";
+                echo "setTimeout(function() { window.location.href = 'login.php'; }, 2000);";
             }
 
             if ($message === "Password confirmation failed.") {
