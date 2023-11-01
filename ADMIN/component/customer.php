@@ -55,10 +55,10 @@
         $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'user' LIMIT $offset, $itemsPerPage";
         $resultUser = $conn->query($sqlUser);
         // SQL của bảng Information
-        $sqlInformation = "SELECT full_name, date_of_birth, email, gender, phone_number, avatar FROM information LIMIT $offset, $itemsPerPage";
+        $sqlInformation = "SELECT full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'user' LIMIT $offset, $itemsPerPage";
         $resultInformation = $conn->query($sqlInformation);
         // SQL của bảng Address
-        $sqlAddress = "SELECT country, province, district, commune, street, number FROM addresses LIMIT $offset, $itemsPerPage";
+        $sqlAddress = "SELECT country, province, district, commune, street, number FROM addresses WHERE role = 'user' LIMIT $offset, $itemsPerPage";
         $resultAddress = $conn->query($sqlAddress);
 
         if ($resultUser->num_rows > 0 && $resultInformation->num_rows > 0 && $resultAddress->num_rows > 0) {
@@ -79,8 +79,10 @@
                 echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $rowInformation["date_of_birth"] . "</td>";
                 if ($rowInformation["gender"] === '1') {
                     echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>Nam</td>";
-                } else {
+                } else if ($rowInformation["gender"] === '2') {
                     echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>Nữ</td>";
+                } else {
+                    echo "<td style='width: 5%; padding: 10px 20px 10px 20px'></td>";
                 }
                 echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>
                     <img style='width: 40px' src='../PUBLIC-PAGE/images/" . $rowInformation["avatar"] . "'>

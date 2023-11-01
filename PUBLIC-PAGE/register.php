@@ -58,17 +58,19 @@
         $maxId = $maxIdResult->fetch_assoc()['max_id'];
         $newId = $maxId + 1;
 
+        $role = 'user';
+
+
         $stmt1 = $conn->prepare("INSERT INTO users (id, username, password, role, created_at) VALUES (?, ?, ?, ?, NOW())");
         $stmt1->bind_param("isss", $newId, $username, $password, $role);
-        $role = 'user';
         $stmt1->execute();
 
-        $stmt2 = $conn->prepare("INSERT INTO information (id, username, full_name, date_of_birth, email, gender, phone_number) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt2->bind_param("issssis", $newId, $username, $fullName, $dateOfBirth, $email, $gender, $phone);
+        $stmt2 = $conn->prepare("INSERT INTO information (id, username, full_name, date_of_birth, email, gender, phone_number, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt2->bind_param("issssiss", $newId, $username, $fullName, $dateOfBirth, $email, $gender, $phone, $role);
         $stmt2->execute();
 
-        $stmt3 = $conn->prepare("INSERT INTO addresses (id, username) VALUES (?, ?)");
-        $stmt3->bind_param("is", $newId, $username);
+        $stmt3 = $conn->prepare("INSERT INTO addresses (id, username, role) VALUES (?, ?, ?)");
+        $stmt3->bind_param("iss", $newId, $username, $role);
         $stmt3->execute();
 
         if (!$stmt1 || !$stmt2 || !$stmt3) {
