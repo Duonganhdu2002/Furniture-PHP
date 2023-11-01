@@ -13,16 +13,16 @@
         }
     </style>
 </head>
-<?php 
+<?php
 session_start();
-if(!isset($_SESSION["somathang"])){
+if (!isset($_SESSION["somathang"])) {
     $_SESSION["somathang"] = 0;
-
 }
-if(!isset($_SESSION["soluonghang"])){
+if (!isset($_SESSION["soluonghang"])) {
     $_SESSION["soluonghang"] = 0;
 }
 ?>
+
 <body style="background-color: #eff2f1;">
     <div style="background-color: #3b5d50;">
         <?php
@@ -90,6 +90,10 @@ if(!isset($_SESSION["soluonghang"])){
                     $Content1IndexFontContent = "Our Products";
                     $Content1IndexPresentContent = "Thousand of products are waiting for new house.";
                     break;
+                case '10':
+                    $Content1IndexFontContent = "Product detail";
+                    $Content1IndexPresentContent = "Product detail";
+                    break;
             }
         } else {
             $Content1IndexFontContent = "Modern Interior <br> Design Studio";
@@ -131,7 +135,9 @@ if(!isset($_SESSION["soluonghang"])){
             case '9':
                 include("component/shop-detail.php");
                 break;
-            
+            case '10':
+                include("component/product-detail.php");
+                break;
         }
     } else {
         include("component/content-2.php");

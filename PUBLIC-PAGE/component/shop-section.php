@@ -14,7 +14,7 @@
                 if ($product) {
     ?>
                     <div class="product-item">
-                        <a href="product-detail.html">
+                        <a href="index.php?pid=10&id=<?php echo $product["id"]; ?>">
                             <img src="images/chairs/<?php echo $product['image']; ?>" class="product-thumbnail">
                         </a>
                         <h3 class="product-title"><?php echo $product['product_name']; ?></h3>
