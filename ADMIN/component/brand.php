@@ -67,29 +67,26 @@
         $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM brands"))['total'];
         $totalPages = ceil($totalItems / $itemsPerPage);
 
-        // Hiển thị nút chuyển trang và nút Next, Previous
         echo "<div class='pagination'>";
 
-        // Always show "Previous" button
-        echo "<a href='index.php?pid=3&page=" . max(1, $page - 1) . "'>Previous</a> ";
+        // Always show "First" button
+        echo "<a href='index.php?pid=3&page=1'>First</a> ";
 
         // Determine the first and last two pages to display
-        $startPage = max(1, $page - 2);
-        $endPage = min($totalPages, $page + 2);
+        $startPage = max(1, $page - 1);
+        $endPage = min($totalPages, $page + 1);
 
         // Show the page numbers
         for ($i = $startPage; $i <= $endPage; $i++) {
-            echo "<a href='index.php?pid=3&page=$i'";
+            echo "<a href='index.php?pid=2&page=$i'";
             if ($i == $page) {
                 echo " class='current'";
             }
             echo ">$i</a> ";
         }
 
-        // Always show "Next" button
-        echo "<a href='index.php?pid=3&page=" . min($totalPages, $page + 1) . "'>Next</a>";
-
-        echo "</div>";
+        // Always show "End" button
+        echo "<a href='index.php?pid=3&page=$totalPages'>End</a>";
 
         echo "</div>";
     } else {

@@ -36,7 +36,7 @@ foreach ($category_ids as $category_id) {
                 while ($row2 = $resultid1->fetch_assoc()) {
                 ?>
                     <div class="product-item">
-                        <a href="product-detail.html">
+                        <a href="index.php?pid=10&id=<?php echo $row2["id"]; ?>">
                             <img src="images/chairs/<?php echo $row2["image"]; ?>" class="product-thumbnail">
                         </a>
                         <h3 class="product-title"><?php echo $row2["product_name"]; ?></h3>

@@ -21,9 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $id = $_GET["id"];
 
     $sql = "SELECT * FROM categories WHERE id = ?";
+
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
+
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
@@ -31,9 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         echo "No row";
         exit;
     }
+
     $categoryName = $row["category_name"];
     $categoryDescription = $row["description"];
+
 } else {
+
     $id = $_POST["id"];
     $categoryName = $_POST["categoryName"];
     $categoryDescription = $_POST["categoryDescription"];
@@ -66,12 +71,20 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     <div style="width: 40%;">
         <form method="post" action="" class="categoryForm" onsubmit="return submitCategoryForm();">
             <h1>Update category</h1>
+
             <input type="hidden" name="id" value="<?php echo $id; ?>">
+            
             <label for="categoryName">Category Name</label><br>
             <input type="text" id="categoryName" name="categoryName" value="<?php echo $categoryName; ?>"><br>
             <label for="categoryDescription">Category Description</label><br>
             <input style="height: 100px;" name="categoryDescription" id="categoryDescription" value="<?php echo $categoryDescription; ?>"> <br>
             <button type="submit">Change</button>
+            <div>
+                <button type="submit">Change</button>
+                <a style="text-decoration: none;">
+                    <button type="button" style="background-color: #BB0000;" onclick="window.location.href='index.php?pid=1';">Back</button>
+                </a>
+            </div>
         </form>
     </div>
 </div>

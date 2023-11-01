@@ -1,4 +1,5 @@
 <?php
+
 $conn = new mysqli('localhost', 'root', '', 'shopping_online');
 
 if ($conn->connect_error) {
@@ -10,26 +11,58 @@ $productPrice = "";
 $productQuantity = "";
 $productDescription = "";
 $brandId = "";
-$catgoryId = "";
+$categoryId = "";
 $image = "";
 
 $message = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $productName = $conn->real_escape_string($_POST["productName"]);
-    $productPrice = intval($_POST["price"]);
-    $productQuantity = intval($_POST["stockQuantity"]);
-    $productDescription = $conn->real_escape_string($_POST["productDescription"]);
-    $brandId = $conn->real_escape_string($_POST["brand"]);
-    $catgoryId = $conn->real_escape_string($_POST["category"]);
-    $image = $conn->real_escape_string($_FILES["image"]["name"]);
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if (!isset($_GET["id"])) {
+        echo "No product ID has been chosen";
+        exit;
+    }
+
+    $id = $_GET["id"];
+
+    $sql = "SELECT * FROM products WHERE id = ?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    if (!$row) {
+        echo "No row";
+        exit;
+    }
+
+    $productName = $row["product_name"];
+    $productPrice = $row["price"];
+    $productQuantity = $row["stock_quantity"];
+    $productDescription = $row["description"];
+    $brandId = $row["brand_id"];
+    $categoryId = $row["category_id"];
+    $image = $row["image"];
+
+} else {
+
+    $id = $_POST["id"];
+    $productName = $_POST["productName"];
+    $productPrice = $_POST["price"];
+    $productQuantity = $_POST["stockQuantity"];
+    $productDescription = $_POST["productDescription"];
+    $brandId = $_POST["brand"];
+    $categoryId = $_POST["category"];
+    $image = $_FILES["image"]["name"];
 
     do {
-        // Thông báo nếu không điền đủ thông tin sản phẩm
-        if (empty($brandId) || empty($catgoryId) || empty($image) || empty($productDescription) || empty($productName) || empty($productPrice) || empty($productQuantity)) {
+        if (empty($brandId) || empty($categoryId) || empty($image) || empty($productDescription) || empty($productName) || empty($productPrice) || empty($productQuantity)) {
             $message = "All the fields are required";
             break;
         }
+
         // Xử lí ảnh
         if ($_FILES["image"]["error"] !== UPLOAD_ERR_OK) {
             switch ($_FILES["image"]["error"]) {
@@ -71,104 +104,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $destination = __DIR__ . "/../../../PUBLIC-PAGE/images/chairs/" . $fileName;
 
         // Thông báo nếu không lưu được ảnh vào đường dẫn 
-        if (!move_uploaded_file($_FILES["image"]["tmp_name"], $destination)) {
-            exit("Can't move upload file");
+        if (!is_uploaded_file($_FILES["image"]["tmp_name"])) {
+            exit("Invalid file upload");
         }
+        
+        
 
-        $result = $conn->query("SELECT * FROM products WHERE product_name = '$productName'");
+        $sql = "UPDATE products SET category_id = ?, brand_id = ?, product_name = ?,  description = ?,  image = ?,  price = ?,  stock_quantity = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iisssiii", $categoryId, $brandId, $productName, $productDescription, $image, $productPrice, $productQuantity, $id);
+        $result = $stmt->execute();
 
-        if ($result->num_rows > 0) {
-            $message = "Product already exists";
+        if (!$result) {
+            $message = "Invalid query: " . $stmt->error;
             break;
+        } else {
+            header("location: index.php?pid=2");
+            $message = "product updated correctly";
+            exit;
         }
-
-        $maxIdResult = $conn->query("SELECT MAX(id) AS max_id FROM products");
-        $maxId = $maxIdResult->fetch_assoc()['max_id'];
-        $newId = $maxId + 1;
-
-        $stmt = $conn->prepare("INSERT INTO products (id, category_id, brand_id, product_name, description, image, price, stock_quantity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("iissssii", $newId, $catgoryId, $brandId, $productName, $productDescription, $image, $productPrice, $productQuantity);
-        $stmt->execute();
-
-        if (!$stmt) {
-            $message = "Invalid query: " . $conn->error;
-            break;
-        }
-
-        //Trả giá trị về rỗng
-        $productName = "";
-        $productPrice = "";
-        $productQuantity = "";
-        $productDescription = "";
-        $brandId = "";
-        $catgoryId = "";
-        $image = "";
-
-        $message = "Category added correctly";
-
     } while (false);
 }
+
 ?>
-<script>
-    <?php
-    if ($message === "Invalid query: " . $conn->error) {
-        echo "showNotification('Thêm không thành công', 'error');";
-    }
-
-    if ($message === "Category already exists") {
-        echo "showNotification('Tên danh mục đã tồn tại', 'error');";
-    }
-
-    if ($message === "All the fields are required") {
-        echo "showNotification('Thông tin chưa được điền đủ', 'error');";
-    }
-
-    if ($message === "Category added correctly") {
-        echo "showNotification('Thêm thành công', 'success');";
-    }
-    ?>
-
-    function showNotification(message, type) {
-        var notification = document.createElement('div');
-        notification.className = 'notification ' + type;
-        notification.textContent = message;
-        document.body.appendChild(notification);
-
-        setTimeout(function() {
-            notification.style.display = 'none';
-        }, 2000);
-    }
-</script>
-<style>
-    .notification {
-        position: fixed;
-        top: 10px;
-        left: 50%;
-        top: 50%;
-        transform: translateX(-50%);
-        padding: 20px;
-        width: 300px;
-        text-align: center;
-        color: white;
-        font-weight: bold;
-        border-radius: 5px;
-        transition: 0.5s;
-        z-index: 999;
-    }
-
-    .success {
-        background-color: #3b5d50;
-    }
-
-    .error {
-        background-color: #ff3333;
-    }
-</style>
 
 <div style="display: flex; align-items: center; flex-direction: column;">
     <div style="width: 68%;" class="productFormContainer">
         <form class="productForm" enctype="multipart/form-data" method="post" onsubmit="return submitProductForm();">
             <h1>Add Product</h1>
+
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
+
             <div style="display: flex; justify-content: space-between">
                 <div style="width: 30%;">
                     <label for="productName">Product Name:</label>
@@ -185,37 +151,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div>
                 <label for="productDescription">Description:</label>
-                <input type="text" id="productDescription" name="productDescription" value="<?php echo $productDescription; ?>"><br>
+                <input style="height: 100px;" type="text" id="productDescription" name="productDescription" value="<?php echo $productDescription; ?>"></input><br>
             </div>
 
+            <!-- <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> -->
+
             <label for="image">Image:</label>
-            <input style="border: none;" type="file" id="image" name="image" value="<?php echo $image; ?>"><br>
+            <input style="border: none;" type="file" id="image" name="image"><br>
+
             <div style="display: flex;">
                 <div>
                     <label for="category">Category:</label>
-                    <select id="category" name="category" value="<?php echo $catgoryId; ?>">
+                    <select id="category" name="category">
                         <?php
                         $categorySql = "SELECT id, category_name FROM categories";
                         $categoryResult = $conn->query($categorySql);
 
                         if ($categoryResult->num_rows > 0) {
                             while ($row = $categoryResult->fetch_assoc()) {
-                                echo "<option value='" . $row['id'] . "'>" . $row['category_name'] . "</option>";
+                                $selected = ($row['id'] == $categoryId) ? 'selected' : '';
+                                echo "<option value='" . $row['id'] . "' $selected>" . $row['category_name'] . "</option>";
                             }
                         }
                         ?>
                     </select><br>
+
                 </div>
                 <div>
                     <label for="brand">Brand:</label>
-                    <select id="brand" name="brand" value="<?php echo $brandId; ?>">
+                    <select id="brand" name="brand">
                         <?php
                         $brandSql = "SELECT id, brand_name FROM brands";
                         $brandResult = $conn->query($brandSql);
 
                         if ($brandResult->num_rows > 0) {
                             while ($row = $brandResult->fetch_assoc()) {
-                                echo "<option value='" . $row['id'] . "'>" . $row['brand_name'] . "</option>";
+                                $selected = ($row['id'] == $brandId) ? 'selected' : '';
+                                echo "<option value='" . $row['id'] . "' $selected>" . $row['brand_name'] . "</option>";
                             }
                         }
                         ?>
@@ -223,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
             <div>
-                <button type="submit">Add</button>
+                <button type="submit">Change</button>
                 <a style="text-decoration: none;">
                     <button type="button" style="background-color: #BB0000;" onclick="window.location.href='index.php?pid=2';">Back</button>
                 </a>
@@ -231,11 +203,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 </div>
-
-<?php
-$conn->close();
-?>
-
 <style>
     .productFormContainer h1 {
         color: #3b5d50;

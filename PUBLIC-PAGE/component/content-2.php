@@ -10,7 +10,7 @@
 
         <!-- Product 1 -->
         <div class="product-item">
-            <a href="product-detail.html">
+            <a href="index.php?pid=10">
                 <img src="images/product-1.png" class="product-thumbnail">
             </a>
             <h3 class="product-title">Nordic Chair</h3>
@@ -22,7 +22,7 @@
 
         <!-- Product 2 -->
         <div class="product-item">
-            <a href="cart.html">
+            <a href="index.php?pid=10">
                 <img src="images/product-2.png" class="product-thumbnail">
             </a>
             <h3 class="product-title">Kruzo Aero Chair</h3>
@@ -34,7 +34,7 @@
 
         <!-- Product 3 -->
         <div class="product-item">
-            <a href="cart.html">
+            <a href="index.php?pid=10">
                 <img src="images/product-3.png" class="product-thumbnail">
             </a>
             <h3 class="product-title">Ergonomic Chair</h3>

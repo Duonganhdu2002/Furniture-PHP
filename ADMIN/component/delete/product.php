@@ -5,7 +5,7 @@ if (isset($_GET["id"])) {
     // Kết nối đến cơ sở dữ liệu
     $conn = new mysqli('localhost', 'root', '', 'shopping_online');
 
-    $sql = "DELETE FROM categories WHERE id=$id";
+    $sql = "DELETE FROM products WHERE id=$id";
 
     $conn->query($sql);
 
@@ -13,7 +13,7 @@ if (isset($_GET["id"])) {
     echo "<script>
             var result = confirm('Bạn có chắc chắn muốn xóa không?');
             if (result) {
-                window.location.href = '../../index.php?pid=1';
+                window.location.href = '../../index.php?pid=2';
             }
         </script>";
 }

@@ -1,45 +1,3 @@
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const cancelButtons = document.querySelectorAll(".cancel");
-        const quantityInput = document.getElementById("quantity");
-        const plusButton = document.getElementById("plus");
-        const minusButton = document.getElementById("minus");
-        const price = 49.00; // Replace with the actual price
-
-        function updateTotal() {
-            const total = parseFloat(quantityInput.value) * price;
-            document.getElementById("total").innerText = `$${total.toFixed(2)}`;
-        }
-
-        cancelButtons.forEach(function(cancelButton) {
-            cancelButton.addEventListener("click", function() {
-                const row = cancelButton.closest("tr");
-                row.remove();
-                updateTotal(); // Update total when an item is removed
-            });
-        });
-
-        // Add click event listener to the plus button
-        plusButton.addEventListener("click", function() {
-            // Increase the value by 1
-            quantityInput.value = parseInt(quantityInput.value) + 1;
-            updateTotal();
-        });
-
-        // Add click event listener to the minus button
-        minusButton.addEventListener("click", function() {
-            // Ensure the value does not go below 0
-            if (parseInt(quantityInput.value) > 0) {
-                // Decrease the value by 1
-                quantityInput.value = parseInt(quantityInput.value) - 1;
-                updateTotal();
-            }
-        });
-
-        // Update total when quantity changes
-        quantityInput.addEventListener("input", updateTotal);
-    });
-</script>
 <div class="content-9">
     <div class="container9">
         <table style="margin-top: 20px; width: 100%; " class="frst-child">
@@ -56,26 +14,9 @@
             </thead>
 
             <tbody>
-                <tr style="height: 300px; text-align: center; border-bottom: 1px solid black;">
-                    <td>
-                        <img style="width: 100%;" src="images/product-1.png" alt="Image" class="img-fluid">
-                    </td>
-                    <td>
-                        <h3>Product 1</h3>
-                    </td>
-                    <td>$49.00</td>
-                    <td>
-                        <div style="max-width: 120px; display: flex;">
-                            <button id="minus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">-</button>
-                            <input id="quantity" style="width: 50px; text-align: center; border: 1px solid gray; border-radius: 10px" type="text" value="1">
-                            <button id="plus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">+</button>
-                        </div>
-                    </td>
-                    <td id="total">$49.00</td>
-                    <td>
-                        <button class="cancel" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">X</button>
-                    </td>
-                </tr>
+                <?php
+                    include("component/added-product.php");
+                ?>
             </tbody>
         </table>
 

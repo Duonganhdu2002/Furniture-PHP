@@ -65,12 +65,18 @@
             $stt = $offset + 1;
 
             while ($row = $result->fetch_assoc()) {
+                $id = $row["id"];
                 echo "<tr>";
                 echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
                 echo "<td style='width:4%; text-align: center;'>" . $row["id"] . "</td>";
-                echo "<td style='width:4%; text-align: center;'> 
+                echo "<td class='hover-cell'; style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
                         <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
-                      </td>";
+                        <div class='action-buttons'>
+                            <a href='../ADMIN/index.php?pid=2&update&id=$id'><button class='edit-button'>Update</button></a>
+                            <br>
+                            <a href='../ADMIN/component/delete/product.php?id=$id'><button class='delete-button'>Delete</button></a>
+                            </div>
+                    </td>";
                 echo "<td style='width: 20%; padding: 10px 20px 10px 20px'>" . $row["product_name"] . "</td>";
                 echo "<td style='width: 40%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["description"] . "</td>";
                 echo "<td style='width: 6%;height:15%; text-align: center;'><img style='width: 65px; height: 92px;' src='../PUBLIC-PAGE/images/chairs/" . $row["image"] . "' style='width: 100px; height: auto;'></td>";
@@ -91,12 +97,12 @@
 
             echo "<div class='pagination'>";
 
-            // Luôn hiển thị nuts Previous nha
-            echo "<a href='index.php?pid=2&page=" . max(1, $page - 1) . "'>Previous</a> ";
+            // Always show "First" button
+            echo "<a href='index.php?pid=2&page=1'>First</a> ";
 
             // Determine the first and last two pages to display
-            $startPage = max(1, $page - 2);
-            $endPage = min($totalPages, $page + 2);
+            $startPage = max(1, $page - 1);
+            $endPage = min($totalPages, $page + 1);
 
             // Show the page numbers
             for ($i = $startPage; $i <= $endPage; $i++) {
@@ -107,12 +113,10 @@
                 echo ">$i</a> ";
             }
 
-            // Always show "Next" button
-            echo "<a href='index.php?pid=2&page=" . min($totalPages, $page + 1) . "'>Next</a>";
+            // Always show "End" button
+            echo "<a href='index.php?pid=2&page=$totalPages'>End</a>";
 
             echo "</div>";
-
-
         } else {
             echo "0 results";
         }
@@ -121,7 +125,64 @@
         ?>
     </table>
 </div>
+
+<script>
+    function showButtons(element) {
+        var actionButtons = element.querySelector('.action-buttons');
+        if (actionButtons) {
+            actionButtons.style.display = 'block';
+        }
+    }
+
+    function hideButtons(element) {
+        var actionButtons = element.querySelector('.action-buttons');
+        if (actionButtons) {
+            actionButtons.style.display = 'none';
+        }
+    }
+</script>
+
 <style>
+    .action-buttons {
+        z-index: 1.0;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        margin-left: 30px;
+        margin-top: 0px;
+        display: none;
+    }
+
+    .edit-button {
+        border-radius: 10px 10px 0 0;
+        border-bottom: 1px solid white;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+    }
+
+    .edit-button:hover {
+        opacity: 0.7;
+    }
+
+    .delete-button {
+        border-radius: 0 0 10px 10px;
+        border: none;
+        width: 100%;
+    }
+
+    .delete-button:hover {
+        opacity: 0.7;
+    }
+
+    .action-buttons button {
+        padding: 10px 28px 10px 28px;
+        background-color: #3b5d50;
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
     .product {
         width: 100%;
         margin-top: 20px;
