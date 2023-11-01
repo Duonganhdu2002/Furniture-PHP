@@ -94,6 +94,10 @@ if (!isset($_SESSION["soluonghang"])) {
                     $Content1IndexFontContent = "Product detail";
                     $Content1IndexPresentContent = "Product detail";
                     break;
+                case '11':
+                    $Content1IndexFontContent = "Your information";
+                    $Content1IndexPresentContent = "";
+                    break;
             }
         } else {
             $Content1IndexFontContent = "Modern Interior <br> Design Studio";
