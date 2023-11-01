@@ -15,6 +15,7 @@
 </head>
 <?php
 session_start();
+$_SESSION['username_user'] = $user['username'];
 if (!isset($_SESSION["somathang"])) {
     $_SESSION["somathang"] = 0;
 }
