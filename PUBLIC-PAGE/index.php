@@ -138,6 +138,9 @@ if (!isset($_SESSION["soluonghang"])) {
             case '10':
                 include("component/product-detail.php");
                 break;
+            case '11':
+                include("component/profile.php");
+                break;
         }
     } else {
         include("component/content-2.php");

@@ -101,14 +101,6 @@
             <div class="register">
                 <form class="register-form" action="" method="post" oninput="checkForm()">
                     <div style="display: flex; justify-content: space-between;">
-                        <div style="margin-bottom: 30px;" class="logo-brand">
-                            <div class="logo">
-                                <a href="../PUBLIC-PAGE/index.php">
-                                    <img src="../images/logo-black.svg" alt="">
-                                </a>
-                            </div>
-                            <a href="../PUBLIC-PAGE/index.php">Nova<span>.</span></a>
-                        </div>
                         <h1>REGISTER</h1>
                     </div>
                     <label for="full-name">Full Name</label> <br>
@@ -168,6 +160,14 @@
             </div>
         </div>
         <div style="width: 50%; display:flex; justify-content: center; align-items: center; height: 100vh;" class="images">
+            <div style="margin-bottom: 30px;" class="logo-brand">
+                    <div class="logo">
+                        <a href="../PUBLIC-PAGE/index.php">
+                            <img src="./images/logo.svg" alt="">
+                        </a>
+                    </div>
+                    <a href="../PUBLIC-PAGE/index.php">Nova<span>.</span></a>
+                </div>
             <div class="right-side-ct1">
 
                 <img class="chair" src="../PUBLIC-PAGE/images/couch.png" alt="">
@@ -323,16 +323,18 @@
         }
 
         .logo-brand {
-            width: 20%;
-            display: flex;
+            width: 13%;
+            display:flex;
             justify-content: center;
             align-items: center;
-            /* position: absolute;
+            position: absolute;
+            top: 25%;
+            /* 
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 2; */
-
+        ; */
+            z-index: 2;
         }
 
         .logo-brand a {
