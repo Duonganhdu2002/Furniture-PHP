@@ -1,4 +1,5 @@
 <?php
+
 // Kết nối đến cơ sở dữ liệu
 $conn = new mysqli('localhost', 'root', '', 'shopping_online');
 if ($conn->connect_error) {
@@ -10,8 +11,11 @@ if (isset($_SESSION["username_user"])) {
     $username = $_SESSION["username_user"];
 
     // Truy vấn thông tin cá nhân từ bảng Information dựa trên tên đăng nhập
-    $sqlInformation = "SELECT * FROM information WHERE username = '$username' ";
-    $resultInformation = $conn->query($sqlInformation);
+    $sqlInformation = "SELECT * FROM information WHERE username = ?";
+    $stmtInformation = $conn->prepare($sqlInformation);
+    $stmtInformation->bind_param("s", $username);
+    $stmtInformation->execute();
+    $resultInformation = $stmtInformation->get_result();
 
     if ($resultInformation->num_rows > 0) {
         $row = $resultInformation->fetch_assoc();
@@ -24,8 +28,11 @@ if (isset($_SESSION["username_user"])) {
     }
 
     // Truy vấn địa chỉ từ bảng Addresses dựa trên tên đăng nhập
-    $sqlAddress = "SELECT * FROM addresses WHERE username = '$username' ";
-    $resultAddress = $conn->query($sqlAddress);
+    $sqlAddress = "SELECT * FROM addresses WHERE username = ?";
+    $stmtAddress = $conn->prepare($sqlAddress);
+    $stmtAddress->bind_param("s", $username);
+    $stmtAddress->execute();
+    $resultAddress = $stmtAddress->get_result();
 
     if ($resultAddress->num_rows > 0) {
         $row = $resultAddress->fetch_assoc();
@@ -37,10 +44,14 @@ if (isset($_SESSION["username_user"])) {
 
         $address = "$number, $street, $commune, $district, $province";
     }
+} else {
+    echo "
+    <script>
+        alert('Bạn cần phải đăng nhập trước.');
+        window.location.href = 'index.php';
+    </script>";
+    exit; 
 }
-
-// Đóng kết nối đến cơ sở dữ liệu
-$conn->close();
 ?>
 
 <div class="profile">
