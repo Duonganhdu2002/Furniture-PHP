@@ -1,7 +1,5 @@
 <?php
 
-// Đảm bảo đã xác định người dùng đã đăng nhập và có thông tin đăng nhập
-
 // Kết nối đến cơ sở dữ liệu
 $conn = new mysqli('localhost', 'root', '', 'shopping_online');
 if ($conn->connect_error) {
@@ -9,46 +7,58 @@ if ($conn->connect_error) {
 }
 
 // Lấy tên đăng nhập của người dùng từ phiên làm việc
-$username = $_SESSION["username_admin"];
+if (isset($_SESSION["username_user"])) {
+    $username = $_SESSION["username_user"];
 
-// Truy vấn thông tin cá nhân từ bảng Information dựa trên tên đăng nhập
-$sqlInformation = "SELECT * FROM information WHERE username = '$username' ";
-$resultInformation = $conn->query($sqlInformation);
+    // Truy vấn thông tin cá nhân từ bảng Information dựa trên tên đăng nhập
+    $sqlInformation = "SELECT * FROM information WHERE username = ?";
+    $stmtInformation = $conn->prepare($sqlInformation);
+    $stmtInformation->bind_param("s", $username);
+    $stmtInformation->execute();
+    $resultInformation = $stmtInformation->get_result();
 
-if ($resultInformation->num_rows > 0) {
-    $row = $resultInformation->fetch_assoc();
-    $full_name = $row["full_name"];
-    $date_of_birth = $row["date_of_birth"];
-    $email = $row["email"];
-    $gender = $row["gender"];
-    $phone_number = $row["phone_number"];
-    $avatar = $row["avatar"];
+    if ($resultInformation->num_rows > 0) {
+        $row = $resultInformation->fetch_assoc();
+        $full_name = $row["full_name"];
+        $date_of_birth = $row["date_of_birth"];
+        $email = $row["email"];
+        $gender = $row["gender"];
+        $phone_number = $row["phone_number"];
+        $avatar = $row["avatar"];
+    }
+
+    // Truy vấn địa chỉ từ bảng Addresses dựa trên tên đăng nhập
+    $sqlAddress = "SELECT * FROM addresses WHERE username = ?";
+    $stmtAddress = $conn->prepare($sqlAddress);
+    $stmtAddress->bind_param("s", $username);
+    $stmtAddress->execute();
+    $resultAddress = $stmtAddress->get_result();
+
+    if ($resultAddress->num_rows > 0) {
+        $row = $resultAddress->fetch_assoc();
+        $province = $row["province"];
+        $district = $row["district"];
+        $commune = $row["commune"];
+        $street = $row["street"];
+        $number = $row["number"];
+
+        $address = "$number, $street, $commune, $district, $province";
+    }
+} else {
+    echo "
+    <script>
+        alert('Bạn cần phải đăng nhập trước.');
+        window.location.href = 'index.php';
+    </script>";
+    exit; 
 }
-
-$sqlAddress = "SELECT * FROM addresses WHERE username = '$username' ";
-$resultAddress = $conn->query($sqlAddress);
-
-if ($resultAddress->num_rows > 0) {
-    $row = $resultAddress->fetch_assoc();
-    $province = $row["province"];
-    $district = $row["district"];
-    $commune = $row["commune"];
-    $street = $row["street"];
-    $number = $row["number"];
-}
-
-$address = "$number, $street, $commune, $district, $province";
-
-// Đóng kết nối đến cơ sở dữ liệu
-$conn->close();
 ?>
-
 
 <div class="profile">
     <div class="header-profile">
         <div class="left-side">
             <div class="info-emloyee">
-                <img class="avatar-emloyee" src="../PUBLIC-PAGE/images/<?php echo $avatar?>" alt="">
+                <img class="avatar-emloyee" src="../PUBLIC-PAGE/images/<?php echo $avatar ?>" alt="">
             </div>
             <div class="name-employee">
                 <h1><?php echo $full_name; ?></h1>
@@ -85,14 +95,13 @@ $conn->close();
             <p><?php echo $phone_number; ?></p>
             <h3>Address</h3>
             <p>
-                <?php 
-                    echo $address;
+                <?php
+                echo $address;
                 ?>
             </p>
         </div>
     </div>
 </div>
-
 
 
 <style>

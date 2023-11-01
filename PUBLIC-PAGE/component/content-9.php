@@ -1,3 +1,25 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if (isset($_GET['id'])) {
+
+    if (isset($_GET['quantity'])) {
+        $quantity = $_GET['quantity'];
+    } else {
+        $quantity = 1;
+    }
+    $id = $_GET['id'];
+
+    $_SESSION['cart'][$id] = array('quantity' => $quantity);
+    header('index.php?pid=6');
+
+    echo '<pre>';
+    print_r($_SESSION['cart']);
+    echo '</pre>';
+}
+?>
+
 <div class="content-9">
     <div class="container9">
         <table style="margin-top: 20px; width: 100%; " class="frst-child">
@@ -14,13 +36,28 @@
             </thead>
 
             <tbody>
-                <?php
-                    include("component/added-product.php");
-                ?>
+                <tr style="height: 300px; text-align: center; border-bottom: 1px solid black;">
+                    <td>
+                        <img style="width: 100%;" src="images/product-1.png" alt="Image" class="img-fluid">
+                    </td>
+                    <td>
+                        <h3>Product 1</h3>
+                    </td>
+                    <td>$49.00</td>
+                    <td>
+                        <div style="max-width: 120px; display: flex;">
+                            <button id="minus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">-</button>
+                            <input id="quantity" style="width: 50px; text-align: center; border: 1px solid gray; border-radius: 10px" type="text" value="1">
+                            <button id="plus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">+</button>
+                        </div>
+                    </td>
+                    <td id="total">$49.00</td>
+                    <td>
+                        <button class="cancel" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">X</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
-
-
 
         <div class="second-child">
             <div class="left-side">

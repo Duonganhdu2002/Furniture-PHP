@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 28, 2023 lúc 08:54 AM
+-- Thời gian đã tạo: Th10 01, 2023 lúc 01:37 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -35,44 +35,46 @@ CREATE TABLE `addresses` (
   `district` varchar(50) DEFAULT '',
   `commune` varchar(50) DEFAULT '',
   `street` varchar(50) DEFAULT NULL,
-  `number` varchar(50) DEFAULT NULL
+  `number` varchar(50) DEFAULT NULL,
+  `role` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `addresses`
 --
 
-INSERT INTO `addresses` (`id`, `username`, `country`, `province`, `district`, `commune`, `street`, `number`) VALUES
-(1, 'user1', 'Vietnam', 'Hanoi', 'Ba Dinh', 'Quan Thanh', 'Phan Dinh Phung', '123'),
-(2, 'user2', 'USA', 'California', 'Los Angeles', 'Downtown', 'Main Street', '456'),
-(3, 'user3', 'UK', 'England', 'London', 'Westminster', 'Abbey Road', '789'),
-(4, 'user4', 'France', 'Île-de-France', 'Paris', '1st Arrondissement', 'Champs-Élysées', '101'),
-(5, 'user5', 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202'),
-(6, 'user6', 'Japan', 'Tokyo', 'Minato', 'Roppongi', 'Tokyo Tower Street', '303'),
-(7, 'user7', 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404'),
-(8, 'user8', 'Australia', 'New South Wales', 'Sydney', 'Central Business District', 'George Street', '505'),
-(9, 'user9', 'Brazil', 'Sao Paulo', 'Sao Paulo', 'Jardim Paulista', 'Paulista Avenue', '606'),
-(10, 'user10', 'South Korea', 'Seoul', 'Jung', 'Myeongdong', 'Myeongdong Street', '707'),
-(11, 'admin1', 'India', 'Maharashtra', 'Mumbai', 'Colaba', 'Gateway of India Road', '808'),
-(12, 'admin2', 'China', 'Beijing', 'Chaoyang', 'Guomao', 'Beijing CBD Street', '909'),
-(13, 'admin3', 'Italy', 'Lazio', 'Rome', 'Historic Center', 'Via del Corso', '1010'),
-(14, 'admin4', 'Mexico', 'Mexico City', 'Cuauhtémoc', 'Zona Rosa', 'Paseo de la Reforma', '1111'),
-(15, 'admin5', 'Spain', 'Madrid', 'Community of Madrid', 'Centro', 'Gran Vía', '1212'),
-(16, 'admin6', 'Russia', 'Moscow', 'Central Administrative Okrug', 'Tverskoy', 'Tverskaya Street', '1313'),
-(17, 'admin7', 'South Africa', 'Gauteng', 'Johannesburg', 'Sandton', 'Sandton Drive', '1414'),
-(18, 'admin8', 'Argentina', 'Buenos Aires', 'Buenos Aires', 'Recoleta', 'Avenida Alvear', '1515'),
-(19, 'admin9', 'Turkey', 'Istanbul', 'Istanbul', 'Beyoğlu', 'Istiklal Avenue', '1616'),
-(20, 'admin10', 'Thailand', 'Bangkok', 'Bangkok', 'Pathum Wan', 'Siam Square', '1717'),
-(21, 'admin11', 'Singapore', 'Singapore', 'Central Region', 'Orchard', 'Orchard Road', '1818'),
-(22, 'admin12', 'Netherlands', 'North Holland', 'Amsterdam', 'Centrum', 'Dam Square', '1919'),
-(23, 'admin13', 'Switzerland', 'Zurich', 'Zurich', 'Old Town', 'Bahnhofstrasse', '2020'),
-(24, 'admin14', 'Sweden', 'Stockholm', 'Stockholm County', 'Norrmalm', 'Drottninggatan', '2121'),
-(25, 'admin15', 'Norway', 'Oslo', 'Oslo', 'Sentrum', 'Karl Johans gate', '2222'),
-(26, 'admin16', 'Denmark', 'Copenhagen', 'Capital Region', 'Indre By', 'Strøget', '2323'),
-(27, 'admin17', 'Finland', 'Helsinki', 'Uusimaa', 'Kluuvi', 'Aleksanterinkatu', '2424'),
-(28, 'admin18', 'Portugal', 'Lisbon', 'Lisbon', 'Baixa', 'Rua Augusta', '2525'),
-(29, 'admin19', 'Ireland', 'Dublin', 'Leinster', 'City Centre', 'Grafton Street', '2626'),
-(30, 'admin20', 'Belgium', 'Brussels', 'Brussels-Capital Region', 'City of Brussels', 'Rue Neuve', '2727');
+INSERT INTO `addresses` (`id`, `username`, `country`, `province`, `district`, `commune`, `street`, `number`, `role`) VALUES
+(1, 'user1', 'Vietnam', 'Hanoi', 'Ba Dinh', 'Quan Thanh', 'Phan Dinh Phung', '123', 'user'),
+(2, 'user2', 'USA', 'California', 'Los Angeles', 'Downtown', 'Main Street', '456', 'user'),
+(3, 'user3', 'UK', 'England', 'London', 'Westminster', 'Abbey Road', '789', 'user'),
+(4, 'user4', 'France', 'Île-de-France', 'Paris', '1st Arrondissement', 'Champs-Élysées', '101', 'user'),
+(5, 'user5', 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', 'user'),
+(6, 'user6', 'Japan', 'Tokyo', 'Minato', 'Roppongi', 'Tokyo Tower Street', '303', 'user'),
+(7, 'user7', 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'user'),
+(8, 'user8', 'Australia', 'New South Wales', 'Sydney', 'Central Business District', 'George Street', '505', 'user'),
+(9, 'user9', 'Brazil', 'Sao Paulo', 'Sao Paulo', 'Jardim Paulista', 'Paulista Avenue', '606', 'user'),
+(10, 'user10', 'South Korea', 'Seoul', 'Jung', 'Myeongdong', 'Myeongdong Street', '707', 'user'),
+(11, 'admin1', 'India', 'Maharashtra', 'Mumbai', 'Colaba', 'Gateway of India Road', '808', 'admin'),
+(12, 'admin2', 'China', 'Beijing', 'Chaoyang', 'Guomao', 'Beijing CBD Street', '909', 'admin'),
+(13, 'admin3', 'Italy', 'Lazio', 'Rome', 'Historic Center', 'Via del Corso', '1010', 'admin'),
+(14, 'admin4', 'Mexico', 'Mexico City', 'Cuauhtémoc', 'Zona Rosa', 'Paseo de la Reforma', '1111', 'admin'),
+(15, 'admin5', 'Spain', 'Madrid', 'Community of Madrid', 'Centro', 'Gran Vía', '1212', 'admin'),
+(16, 'admin6', 'Russia', 'Moscow', 'Central Administrative Okrug', 'Tverskoy', 'Tverskaya Street', '1313', 'admin'),
+(17, 'admin7', 'South Africa', 'Gauteng', 'Johannesburg', 'Sandton', 'Sandton Drive', '1414', 'admin'),
+(18, 'admin8', 'Argentina', 'Buenos Aires', 'Buenos Aires', 'Recoleta', 'Avenida Alvear', '1515', 'admin'),
+(19, 'admin9', 'Turkey', 'Istanbul', 'Istanbul', 'Beyoğlu', 'Istiklal Avenue', '1616', 'admin'),
+(20, 'admin10', 'Thailand', 'Bangkok', 'Bangkok', 'Pathum Wan', 'Siam Square', '1717', 'admin'),
+(21, 'admin11', 'Singapore', 'Singapore', 'Central Region', 'Orchard', 'Orchard Road', '1818', 'admin'),
+(22, 'admin12', 'Netherlands', 'North Holland', 'Amsterdam', 'Centrum', 'Dam Square', '1919', 'admin'),
+(23, 'admin13', 'Switzerland', 'Zurich', 'Zurich', 'Old Town', 'Bahnhofstrasse', '2020', 'admin'),
+(24, 'admin14', 'Sweden', 'Stockholm', 'Stockholm County', 'Norrmalm', 'Drottninggatan', '2121', 'admin'),
+(25, 'admin15', 'Norway', 'Oslo', 'Oslo', 'Sentrum', 'Karl Johans gate', '2222', 'admin'),
+(26, 'admin16', 'Denmark', 'Copenhagen', 'Capital Region', 'Indre By', 'Strøget', '2323', 'admin'),
+(27, 'admin17', 'Finland', 'Helsinki', 'Uusimaa', 'Kluuvi', 'Aleksanterinkatu', '2424', 'admin'),
+(28, 'admin18', 'Portugal', 'Lisbon', 'Lisbon', 'Baixa', 'Rua Augusta', '2525', 'admin'),
+(29, 'admin19', 'Ireland', 'Dublin', 'Leinster', 'City Centre', 'Grafton Street', '2626', 'admin'),
+(30, 'admin20', 'Belgium', 'Brussels', 'Brussels-Capital Region', 'City of Brussels', 'Rue Neuve', '2727', 'admin'),
+(31, 'dawd', '', '', '', '', NULL, NULL, 'user');
 
 -- --------------------------------------------------------
 
@@ -92,7 +94,6 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `brand_name`, `description`, `logo`) VALUES
-(0, 'hihih', 'adhiahid', 'áodjoas'),
 (1, 'IKEA', 'Furniture Retailer', 'ikea-logo.png'),
 (2, 'Ashley Furniture', 'Furniture Manufacturer', 'ashley-logo.png'),
 (3, 'Wayfair', 'Online Furniture Retailer', 'wayfair-logo.png'),
@@ -112,9 +113,7 @@ INSERT INTO `brands` (`id`, `brand_name`, `description`, `logo`) VALUES
 (17, 'BoConcept', 'Modern Danish Design', 'boconcept-logo.png'),
 (18, 'Stanley Furniture', 'Quality Furniture Since 1924', 'stanleyfurniture-logo.png'),
 (19, 'Broyhill Furniture', 'Classic American Furniture', 'broyhill-logo.png'),
-(20, 'Sauder Furniture', 'Ready-to-Assemble Furniture', 'sauder-logo.png'),
-(21, 'ădawdaw', 'adwdaw', 'ădwd'),
-(22, 'ădwd', 'đawad', 'âs');
+(20, 'Sauder Furniture', 'Ready-to-Assemble Furniture', 'sauder-logo.png');
 
 -- --------------------------------------------------------
 
@@ -149,7 +148,7 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `parent_category_id`, `category_name`, `description`) VALUES
 (1, 1, 'Table', 'A table, be it for dining or work, is a practical centerpiece in any space. Its design and material contribute to the overall aesthetic, reflecting both function and style. Tables bring people together, facilitating meals, conversations, or work, and serv'),
-(2, 3, 'Chair', 'A chair is more than a seat; it\'s a design element and comfort hub. From dining to lounging, chairs merge style with function, inviting moments of relaxation and connection in any space.\r\n\r\n\r\n\r\n\r\n'),
+(2, 3, 'Chair', 'A chair is more than a seat; it\'s a design element and comfort hub. From dining to lounging, chairs merge style with function, inviting moments of relaxation and connection in any space.'),
 (3, NULL, 'Bathtub', 'Immerse yourself in maximum comfort with our luxurious bathtubs. Modern design, premium materials, and a convenient bathing experience. Relax in personal space.'),
 (4, NULL, 'Bed', 'Discover a wide range of comfortable and stylish beds for a restful night\'s sleep. From classic designs to modern styles, our Beds collection ensures quality and elegance. Transform your bedroom into a cozy haven with our premium Bed selection.'),
 (7, NULL, 'Led', 'Illuminate your space with cutting-edge LED lighting solutions. Our LED category offers a diverse range of energy-efficient lighting options suitable for various applications. From stylish LED fixtures for your home to robust industrial-grade lighting sol'),
@@ -175,44 +174,46 @@ CREATE TABLE `information` (
   `email` varchar(50) DEFAULT NULL,
   `gender` int(11) DEFAULT NULL,
   `phone_number` varchar(50) DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT NULL
+  `avatar` varchar(255) DEFAULT NULL,
+  `role` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `information`
 --
 
-INSERT INTO `information` (`id`, `username`, `full_name`, `date_of_birth`, `email`, `gender`, `phone_number`, `avatar`) VALUES
-(1, 'user1', 'John Doe', '1990-01-15', 'john.doe@example.com', 1, '+123456789', NULL),
-(2, 'user2', 'Jane Doe', '1985-05-22', 'jane.doe@example.com', 2, '+987654321', NULL),
-(3, 'user3', 'Alice Smith', '1995-08-10', 'alice.smith@example.com', 2, '+111223344', NULL),
-(4, 'user4', 'Bob Johnson', '1980-03-30', 'bob.johnson@example.com', 1, '+555666777', NULL),
-(5, 'user5', 'Eva Williams', '1992-11-05', 'eva.williams@example.com', 2, '+999888777', NULL),
-(6, 'user6', 'Michael Brown', '1993-04-18', 'michael.brown@example.com', 1, '+444333222', NULL),
-(7, 'user7', 'Sophia Lee', '1988-09-12', 'sophia.lee@example.com', 2, '+123987654', NULL),
-(8, 'user8', 'Daniel Taylor', '1998-07-25', 'daniel.taylor@example.com', 1, '+987123654', NULL),
-(9, 'user9', 'Olivia Davis', '1987-12-08', 'olivia.davis@example.com', 2, '+555111222', NULL),
-(10, 'user10', 'Matthew Evans', '1994-02-28', 'matthew.evans@example.com', 1, '+111222333', 'person_1.jpg'),
-(11, 'admin1', 'Ava Martinez', '1996-06-15', 'ava.martinez@example.com', 2, '+999555777', 'person_2.jpg'),
-(12, 'admin2', 'Jacob Wilson', '1986-10-04', 'jacob.wilson@example.com', 1, '+333888999', 'person_3.jpg'),
-(13, 'admin3', 'Emma Anderson', '1991-03-22', 'emma.anderson@example.com', 2, '+777444555', 'person_4.jpg'),
-(14, 'admin4', 'Alexander Nguyen', '1989-08-17', 'alexander.nguyen@example.com', 1, '+111999888', 'person_5.jpg'),
-(15, 'admin5', 'Mia Brown', '1997-01-11', 'mia.brown@example.com', 2, '+777111222', NULL),
-(16, 'admin6', 'Liam Garcia', '1985-05-30', 'liam.garcia@example.com', 1, '+555333444', NULL),
-(17, 'admin7', 'Amelia Kim', '1990-11-25', 'amelia.kim@example.com', 2, '+123789456', NULL),
-(18, 'admin8', 'Ethan Patel', '1999-07-08', 'ethan.patel@example.com', 1, '+555777999', NULL),
-(19, 'admin9', 'Olivia White', '1984-12-01', 'olivia.white@example.com', 2, '+999111222', NULL),
-(20, 'admin10', 'Noah Lee', '1992-02-14', 'noah.lee@example.com', 1, '+444666777', NULL),
-(21, 'admin11', 'Isabella Wilson', '1995-06-10', 'isabella.wilson@example.com', 2, '+123555999', NULL),
-(22, 'admin12', 'James Martin', '1983-10-23', 'james.martin@example.com', 1, '+555444333', NULL),
-(23, 'admin13', 'Sophia Kim', '1993-04-28', 'sophia.kim@example.com', 2, '+123456987', NULL),
-(24, 'admin14', 'Jackson Smith', '1988-09-15', 'jackson.smith@example.com', 1, '+987654321', NULL),
-(25, 'admin15', 'Emma Davis', '1998-07-28', 'emma.davis@example.com', 2, '+987123654', NULL),
-(26, 'admin16', 'Aiden Taylor', '1987-12-11', 'aiden.taylor@example.com', 1, '+555111222', NULL),
-(27, 'admin17', 'Olivia Wilson', '1994-03-01', 'olivia.wilson@example.com', 2, '+111222333', NULL),
-(28, 'admin18', 'Lucas Anderson', '1996-06-18', 'lucas.anderson@example.com', 1, '+999555777', NULL),
-(29, 'admin19', 'Ava Wilson', '1986-10-07', 'ava.wilson@example.com', 2, '+333888999', NULL),
-(30, 'admin20', 'Mason Martinez', '1991-03-25', 'mason.martinez@example.com', 1, '+777444555', NULL);
+INSERT INTO `information` (`id`, `username`, `full_name`, `date_of_birth`, `email`, `gender`, `phone_number`, `avatar`, `role`) VALUES
+(1, 'user1', 'John Doe', '1990-01-15', 'john.doe@example.com', 1, '+123456789', NULL, 'user'),
+(2, 'user2', 'Jane Doe', '1985-05-22', 'jane.doe@example.com', 2, '+987654321', NULL, 'user'),
+(3, 'user3', 'Alice Smith', '1995-08-10', 'alice.smith@example.com', 2, '+111223344', NULL, 'user'),
+(4, 'user4', 'Bob Johnson', '1980-03-30', 'bob.johnson@example.com', 1, '+555666777', NULL, 'user'),
+(5, 'user5', 'Eva Williams', '1992-11-05', 'eva.williams@example.com', 2, '+999888777', NULL, 'user'),
+(6, 'user6', 'Michael Brown', '1993-04-18', 'michael.brown@example.com', 1, '+444333222', NULL, 'user'),
+(7, 'user7', 'Sophia Lee', '1988-09-12', 'sophia.lee@example.com', 2, '+123987654', NULL, 'user'),
+(8, 'user8', 'Daniel Taylor', '1998-07-25', 'daniel.taylor@example.com', 1, '+987123654', NULL, 'user'),
+(9, 'user9', 'Olivia Davis', '1987-12-08', 'olivia.davis@example.com', 2, '+555111222', NULL, 'user'),
+(10, 'user10', 'Matthew Evans', '1994-02-28', 'matthew.evans@example.com', 1, '+111222333', 'person_1.jpg', 'user'),
+(11, 'admin1', 'Ava Martinez', '1996-06-15', 'ava.martinez@example.com', 2, '+999555777', 'person_2.jpg', 'admin'),
+(12, 'admin2', 'Jacob Wilson', '1986-10-04', 'jacob.wilson@example.com', 1, '+333888999', 'person_3.jpg', 'admin'),
+(13, 'admin3', 'Emma Anderson', '1991-03-22', 'emma.anderson@example.com', 2, '+777444555', 'person_4.jpg', 'admin'),
+(14, 'admin4', 'Alexander Nguyen', '1989-08-17', 'alexander.nguyen@example.com', 1, '+111999888', 'person_5.jpg', 'admin'),
+(15, 'admin5', 'Mia Brown', '1997-01-11', 'mia.brown@example.com', 2, '+777111222', NULL, 'admin'),
+(16, 'admin6', 'Liam Garcia', '1985-05-30', 'liam.garcia@example.com', 1, '+555333444', NULL, 'admin'),
+(17, 'admin7', 'Amelia Kim', '1990-11-25', 'amelia.kim@example.com', 2, '+123789456', NULL, 'admin'),
+(18, 'admin8', 'Ethan Patel', '1999-07-08', 'ethan.patel@example.com', 1, '+555777999', NULL, 'admin'),
+(19, 'admin9', 'Olivia White', '1984-12-01', 'olivia.white@example.com', 2, '+999111222', NULL, 'admin'),
+(20, 'admin10', 'Noah Lee', '1992-02-14', 'noah.lee@example.com', 1, '+444666777', NULL, 'admin'),
+(21, 'admin11', 'Isabella Wilson', '1995-06-10', 'isabella.wilson@example.com', 2, '+123555999', NULL, 'admin'),
+(22, 'admin12', 'James Martin', '1983-10-23', 'james.martin@example.com', 1, '+555444333', NULL, 'admin'),
+(23, 'admin13', 'Sophia Kim', '1993-04-28', 'sophia.kim@example.com', 2, '+123456987', NULL, 'admin'),
+(24, 'admin14', 'Jackson Smith', '1988-09-15', 'jackson.smith@example.com', 1, '+987654321', NULL, 'admin'),
+(25, 'admin15', 'Emma Davis', '1998-07-28', 'emma.davis@example.com', 2, '+987123654', NULL, 'admin'),
+(26, 'admin16', 'Aiden Taylor', '1987-12-11', 'aiden.taylor@example.com', 1, '+555111222', NULL, 'admin'),
+(27, 'admin17', 'Olivia Wilson', '1994-03-01', 'olivia.wilson@example.com', 2, '+111222333', NULL, 'admin'),
+(28, 'admin18', 'Lucas Anderson', '1996-06-18', 'lucas.anderson@example.com', 1, '+999555777', NULL, 'admin'),
+(29, 'admin19', 'Ava Wilson', '1986-10-07', 'ava.wilson@example.com', 2, '+333888999', NULL, 'admin'),
+(30, 'admin20', 'Mason Martinez', '1991-03-25', 'mason.martinez@example.com', 1, '+777444555', NULL, 'admin'),
+(31, 'dawd', 'DU BUI VAN', '2002-12-12', '2154810104@vaa.edu.vn', 1, '0896899384', NULL, 'user');
 
 -- --------------------------------------------------------
 
@@ -645,7 +646,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `created_at`, `image`
 (27, 'admin17', 'adminpass17', 'admin', '2023-10-17 04:14:09', NULL),
 (28, 'admin18', 'adminpass18', 'admin', '2023-10-17 04:14:09', NULL),
 (29, 'admin19', 'adminpass19', 'admin', '2023-10-17 04:14:09', NULL),
-(30, 'admin20', 'adminpass20', 'admin', '2023-10-17 04:14:09', NULL);
+(30, 'admin20', 'adminpass20', 'admin', '2023-10-17 04:14:09', NULL),
+(31, 'dawd', '1202', 'user', '2023-10-31 17:16:44', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ

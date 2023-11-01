@@ -70,13 +70,14 @@ $result = $link->query($sql);
                     <img src="../PUBLIC-PAGE/images/user.svg" alt="">
                 </a>
                 <div class="user-module">
-                    <div class="login-module"><a href="../PUBLIC-PAGE/login.php" style="text-align: center; opacity: 1.0; font-size: 18px;" >Login</a></div>
-                    <div class="register-module"><a href="../PUBLIC-PAGE/register.php" style="text-align: center; opacity: 1.0; font-size: 18px;" >Register</a></div>
+                    <div class="login-module"><a href="../PUBLIC-PAGE/login.php" style="text-align: center; opacity: 1.0; font-size: 18px;">Login</a></div>
+                    <div class="register-module"><a href="../PUBLIC-PAGE/register.php" style="text-align: center; opacity: 1.0; font-size: 18px;">Register</a></div>
                 </div>
             </div>
             <div class="cart-icon">
-                <a href="index.php?pid=6">
+                <a style="display: flex;" href="index.php?pid=6">
                     <img src="../PUBLIC-PAGE/images/cart.svg" alt="">
+                    <span style="background-color: crimson; padding: 5px 10px 5px 10px; border-radius: 30px; font-size: 12px; margin-bottom: 10px;">0</span>
                 </a>
             </div>
         </div>
@@ -225,16 +226,16 @@ $result = $link->query($sql);
 
     .user-module {
         display: none;
-        position:absolute;
+        position: absolute;
         background-color: #3b5d50;
         border: 2px solid white;
         /* z-index: 2; */
-        width:5%;
+        width: 5%;
         /* height: 100px; */
         border-radius: 10px;
         /* top: 65px; */
         /* left: 78%; */
-        
+
     }
 
     .user-icon div {
@@ -337,7 +338,7 @@ $result = $link->query($sql);
             opacity: 0.7;
         }
 
-        
+
     }
 
     @media (max-width: 768px) {
