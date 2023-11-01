@@ -139,7 +139,7 @@ if (!isset($_SESSION["soluonghang"])) {
                 include("component/product-detail.php");
                 break;
             case '11':
-                include("component/addToCart.php");
+                include("component/profile.php");
                 break;
         }
     } else {

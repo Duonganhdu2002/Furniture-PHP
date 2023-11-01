@@ -66,7 +66,7 @@ $result = $link->query($sql);
         </div>
         <div class="user-cart-icon">
             <div class="user-icon">
-                <a href="#">
+                <a href="index.php?pid=11">
                     <img src="../PUBLIC-PAGE/images/user.svg" alt="">
                 </a>
                 <div class="user-module">
