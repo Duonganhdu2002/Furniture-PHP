@@ -77,7 +77,15 @@ $result = $link->query($sql);
             <div class="cart-icon">
                 <a style="display: flex;" href="index.php?pid=6">
                     <img src="../PUBLIC-PAGE/images/cart.svg" alt="">
-                    <span style="background-color: crimson; padding: 5px 10px 5px 10px; border-radius: 30px; font-size: 12px; margin-bottom: 10px;">0</span>
+                    <span style="background-color: crimson; padding: 5px 10px 5px 10px; border-radius: 30px; font-size: 12px; margin-bottom: 10px;">
+                        <?php
+                        if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+                            $cartItemCount = count($_SESSION['cart']);
+                            echo "$cartItemCount";
+                        }
+                        ?>
+                    </span>
+
                 </a>
             </div>
         </div>

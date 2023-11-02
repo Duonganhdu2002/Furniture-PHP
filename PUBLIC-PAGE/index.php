@@ -1,3 +1,5 @@
+<?php ob_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,16 +15,7 @@
         }
     </style>
 </head>
-<?php
-session_start();
-if (!isset($_SESSION["somathang"])) {
-    $_SESSION["somathang"] = 0;
-}
-if (!isset($_SESSION["soluonghang"])) {
-    $_SESSION["soluonghang"] = 0;
-}
-?>
-
+<?php session_start(); ?>
 <body style="background-color: #eff2f1;">
     <div style="background-color: #3b5d50;">
         <?php
@@ -160,3 +153,5 @@ if (!isset($_SESSION["soluonghang"])) {
 </body>
 
 </html>
+
+<?php ob_end_flush(); ?>

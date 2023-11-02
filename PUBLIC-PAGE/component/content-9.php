@@ -1,25 +1,3 @@
-<?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-if (isset($_GET['id'])) {
-
-    if (isset($_GET['quantity'])) {
-        $quantity = $_GET['quantity'];
-    } else {
-        $quantity = 1;
-    }
-    $id = $_GET['id'];
-
-    $_SESSION['cart'][$id] = array('quantity' => $quantity);
-    header('index.php?pid=6');
-
-    echo '<pre>';
-    print_r($_SESSION['cart']);
-    echo '</pre>';
-}
-?>
-
 <div class="content-9">
     <div class="container9">
         <table style="margin-top: 20px; width: 100%; " class="frst-child">
@@ -36,26 +14,37 @@ if (isset($_GET['id'])) {
             </thead>
 
             <tbody>
-                <tr style="height: 300px; text-align: center; border-bottom: 1px solid black;">
-                    <td>
-                        <img style="width: 100%;" src="images/product-1.png" alt="Image" class="img-fluid">
-                    </td>
-                    <td>
-                        <h3>Product 1</h3>
-                    </td>
-                    <td>$49.00</td>
-                    <td>
-                        <div style="max-width: 120px; display: flex;">
-                            <button id="minus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">-</button>
-                            <input id="quantity" style="width: 50px; text-align: center; border: 1px solid gray; border-radius: 10px" type="text" value="1">
-                            <button id="plus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">+</button>
-                        </div>
-                    </td>
-                    <td id="total">$49.00</td>
-                    <td>
-                        <button class="cancel" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">X</button>
-                    </td>
-                </tr>
+                <?php
+
+                if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+                    foreach ($_SESSION['cart'] as $product) {
+                        echo '<tr style="height: 300px; text-align: center; border-bottom: 1px solid black;">';
+                        echo '<td>';
+                        echo '<img style="width: 100%;" src="images/chairs/' . $product[0] . '" alt="Image" class="img-fluid">';
+                        echo '</td>';
+                        echo '<td>';
+                        echo '<h3>' . $product[1] . '</h3>'; // Assuming $product[1] is the product name
+                        echo '</td>';
+                        echo '<td>$' . $product[2] . '</td>'; // Assuming $product[2] is the product price
+                        echo '<td>';
+                        echo '<div style="max-width: 120px; display: flex;">';
+                        echo '<button id="minus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">-</button>';
+                        echo '<input id="quantity" style="width: 50px; text-align: center; border: 1px solid gray; border-radius: 10px" type="text" value="1">';
+                        echo '<button id="plus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">+</button>';
+                        echo '</div>';
+                        echo '</td>';
+                        echo '<td id="total">$12</td>'; // Assuming $product[2] is the product price
+                        echo '<td>';
+                        echo '<button class="cancel" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">X</button>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo "<p>Your cart is empty.</p>";
+                }
+                
+                ?>
+                
             </tbody>
         </table>
 

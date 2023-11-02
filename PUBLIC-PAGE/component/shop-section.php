@@ -6,6 +6,7 @@
         $totalRows = ceil($totalProducts / $productsPerRow);
 
         for ($rowNumber = 1; $rowNumber <= $totalRows; $rowNumber++) {
+            echo '<form action="component/addToCart.php" method="post">';
             echo '<div class="row">';
 
             for ($productNumber = 1; $productNumber <= $productsPerRow; $productNumber++) {
@@ -20,7 +21,11 @@
                         <h3 class="product-title"><?php echo $product['product_name']; ?></h3>
                         <strong class="product-price"><?php echo $product['price']; ?></strong>
                         <span class="icon-cross">
-                            <a id="add-cart" href="cart.html"><img src="images/cross.svg"></a>
+                            <a class="add">
+                                <button name="submit" style="background-color: #2f2f2f; border: none;" type="submit">
+                                    <img src="images/cross.svg">
+                                </button>
+                            </a>
                         </span>
                     </div>
 
@@ -31,6 +36,7 @@
             }
 
             echo '</div>';
+            echo '</form>';
         }
     } else {
         echo "Không có sản phẩm trong danh mục này.";
