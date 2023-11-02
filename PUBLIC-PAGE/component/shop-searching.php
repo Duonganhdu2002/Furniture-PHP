@@ -20,14 +20,32 @@
                 if ($product) {
     ?>
                     <div class="product-item">
-                        <a href="index.php?pid=10&id=<?php echo $row2["id"]; ?>">
-                            <img src="images/chairs/<?php echo $product['image']; ?>" class="product-thumbnail">
-                        </a>
-                        <h3 class="product-title"><?php echo $product['product_name']; ?></h3>
-                        <strong class="product-price"><?php echo $product['price']; ?></strong>
-                        <span class="icon-cross">
-                            <a id="add-cart" href="cart.html"><img src="images/cross.svg"></a>
-                        </span>
+                        <form action="component/ctrl-cart/addToCart.php" method="post">
+
+                            <input type="hidden" name="id" value="<?php echo $product["id"]; ?>">
+
+                            <a href="index.php?pid=10&id=<?php echo $product["id"]; ?>">
+
+                                <input type="hidden" name="image" value="<?php echo $product["image"]; ?>">
+                                <img src="images/chairs/<?php echo $product["image"]; ?>" class="product-thumbnail">
+
+                            </a>
+
+                            <input type="hidden" name="product_name" value="<?php echo $product["product_name"]; ?>">
+                            <h3 class="product-title"><?php echo $product["product_name"]; ?></h3>
+
+                            <input type="hidden" name="price" value="<?php echo $product["price"]; ?>">
+                            <strong class="product-price"><?php echo $product["price"]; ?></strong>
+
+                            <span class="icon-cross">
+                                <a class="add" id="<?php echo $product["id"]; ?>">
+                                    <button name="submit" style="background-color: #2f2f2f; border: none;" type="submit">
+                                        <img src="images/cross.svg">
+                                    </button>
+                                </a>
+                            </span>
+
+                        </form>
                     </div>
     <?php
                 } else {
