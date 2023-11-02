@@ -37,18 +37,21 @@ foreach ($category_ids as $category_id) {
                 ?>
                     <div class="product-item">
 
-                        <form action="component/addToCart.php" method="post">
-                            
+                        <form action="component/ctrl-cart/addToCart.php" method="post">
+
                             <input type="hidden" name="id" value="<?php echo $row2["id"]; ?>">
 
                             <a href="index.php?pid=10&id=<?php echo $row2["id"]; ?>">
 
+                                <input type="hidden" name="image" value="<?php echo $row2["image"]; ?>">
                                 <img src="images/chairs/<?php echo $row2["image"]; ?>" class="product-thumbnail">
 
                             </a>
 
+                            <input type="hidden" name="product_name" value="<?php echo $row2["product_name"]; ?>">
                             <h3 class="product-title"><?php echo $row2["product_name"]; ?></h3>
 
+                            <input type="hidden" name="price" value="<?php echo $row2["price"]; ?>">
                             <strong class="product-price"><?php echo $row2["price"]; ?></strong>
 
                             <span class="icon-cross">

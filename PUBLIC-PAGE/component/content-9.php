@@ -23,9 +23,9 @@
                         echo '<img style="width: 100%;" src="images/chairs/' . $product[0] . '" alt="Image" class="img-fluid">';
                         echo '</td>';
                         echo '<td>';
-                        echo '<h3>' . $product[1] . '</h3>'; // Assuming $product[1] is the product name
+                        echo '<h3>' . $product[1] . '</h3>'; 
                         echo '</td>';
-                        echo '<td>$' . $product[2] . '</td>'; // Assuming $product[2] is the product price
+                        echo '<td>$' . $product[2] . '</td>'; 
                         echo '<td>';
                         echo '<div style="max-width: 120px; display: flex;">';
                         echo '<button id="minus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">-</button>';
@@ -33,7 +33,7 @@
                         echo '<button id="plus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">+</button>';
                         echo '</div>';
                         echo '</td>';
-                        echo '<td id="total">$12</td>'; // Assuming $product[2] is the product price
+                        echo '<td id="total">$12</td>';
                         echo '<td>';
                         echo '<button class="cancel" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">X</button>';
                         echo '</td>';

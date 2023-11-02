@@ -14,9 +14,8 @@ if (isset($_POST["submit"])) {
         $_SESSION["cart"] = array();
     }
 
-    array_push($_SESSION["cart"], $productArray);
     $_SESSION["cart"][] = $productArray;
 
-    header("Location: ../index.php?pid=6");
+    header("Location: ../../index.php?pid=6");
     exit();
 }
