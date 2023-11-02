@@ -278,6 +278,7 @@
             border-radius: 10px;
             border: #3b5d50 solid 1px;
             height: 50px;
+            font-size: larger;
         }
 
         button {
@@ -413,6 +414,7 @@
             width: 100%;
             height: 50px;
             border-color: #3b5d50;
+            font-size: larger;
         }
     </style>
 </body>

@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             <div style="display: flex; margin-top: 40px; margin-bottom: 40px">
                 
                 <div style="display:flex; align-items: center; width:50%;">
-                <input value="1" type="number" name="quantity" id="quantity" min="1">
+                <input value="1" type="number" name="quantity" id="quantity" min="1" max="<?php echo $productQuantity; ?>">
                 </div>
                 <div style="display: flex; width:100%; align-items: center; margin-left: 30px">
                 <p>
@@ -57,17 +57,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
             <div style="display:flex; margin-top: 40px; margin-bottom: 40px; ">
                 <div style="margin-right: 20px;">
-                    <button class="button">
-                    <img src="../PUBLIC-PAGE/images/cart.svg" alt="" style="margin-right:8px">
+                    <button class="button" id="cartButton">
+                    <img src="../PUBLIC-PAGE/images/cart.svg" alt="" style="margin-right:8px" id="cartImage">
                     Add to card
                     </button>
                 </div>
                 <div>
-                    <button class="button">Buy now</button>
+                    <button class="button" id="buyNowButton">Buy now</button>
                 </div>
             </div>
             <div style="position: relative; height: 150px; /* Chiều cao của phần tử chứa */">
-                <a href="index.php?pid=1" style="position: absolute; bottom: 0; right: 0;">
+                <a href="index.php?pid=1" style="position: absolute; bottom: 0; text-decoration:none; " >
                     <button class="button">Back to shop</button>
                 </a>
             </div>
@@ -138,6 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         align-items: center;
         justify-content: center;
         font-weight: bold;
+        transition: background-color 0.3s ease-in-out; /* Thêm dòng này */
     }
 
     .button:hover {
@@ -148,4 +149,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     .button:active {
         opacity: 0.5;
     }
+
+    #cartButton {
+  position: relative;
+}
+
+#cartImage {
+  /* transition: filter 0.3s ease-in-out; */
+}
+
+#cartButton:hover #cartImage {
+  filter: grayscale(100%) invert(100%);
+}
+
 </style>
