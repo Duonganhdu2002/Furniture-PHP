@@ -77,15 +77,16 @@ $result = $link->query($sql);
             <div class="cart-icon">
                 <a style="display: flex;" href="index.php?pid=6">
                     <img src="../PUBLIC-PAGE/images/cart.svg" alt="">
-                    <span style="background-color: crimson; padding: 5px 10px 5px 10px; border-radius: 30px; font-size: 12px; margin-bottom: 10px;">
-                        <?php
-                        if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-                            $cartItemCount = count($_SESSION['cart']);
+                    <?php
+                    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+                        $cartItemCount = count($_SESSION['cart']);
+                        if ($cartItemCount > 0) {
+                            echo '<span style="background-color: crimson; padding: 5px 10px 5px 10px; border-radius: 30px; font-size: 12px; margin-bottom: 10px; color: #ffffff">';
                             echo "$cartItemCount";
+                            echo '</span>';
                         }
-                        ?>
-                    </span>
-
+                    }
+                    ?>
                 </a>
             </div>
         </div>
@@ -108,8 +109,6 @@ $result = $link->query($sql);
         position: fixed;
         top: 0;
     }
-
-
 
     .header-child {
         display: flex;

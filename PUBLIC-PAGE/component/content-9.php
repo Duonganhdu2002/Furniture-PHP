@@ -17,15 +17,15 @@
                 <?php
 
                 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-                    foreach ($_SESSION['cart'] as $product) {
+                    foreach ($_SESSION['cart'] as $index => $product) {
                         echo '<tr style="height: 300px; text-align: center; border-bottom: 1px solid black;">';
                         echo '<td>';
                         echo '<img style="width: 100%;" src="images/chairs/' . $product[0] . '" alt="Image" class="img-fluid">';
                         echo '</td>';
                         echo '<td>';
-                        echo '<h3>' . $product[1] . '</h3>'; 
+                        echo '<h3>' . $product[1] . '</h3>'; // Assuming $product[1] is the product name
                         echo '</td>';
-                        echo '<td>$' . $product[2] . '</td>'; 
+                        echo '<td>$' . $product[2] . '</td>'; // Assuming $product[2] is the product price
                         echo '<td>';
                         echo '<div style="max-width: 120px; display: flex;">';
                         echo '<button id="minus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">-</button>';
@@ -33,18 +33,23 @@
                         echo '<button id="plus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">+</button>';
                         echo '</div>';
                         echo '</td>';
-                        echo '<td id="total">$12</td>';
+                        echo '<td id="total">$' . $product[2] . '</td>'; // Assuming $product[2] is the product price
                         echo '<td>';
-                        echo '<button class="cancel" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">X</button>';
+                        echo '<button class="cancel" onclick="deleteProduct(' . $index . ')" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">X</button>';
                         echo '</td>';
                         echo '</tr>';
                     }
-                } else {
-                    echo "<p>Your cart is empty.</p>";
                 }
-                
+
                 ?>
-                
+
+                <script>
+                    function deleteProduct(index) {
+                        // Redirect to a PHP script that handles the deletion
+                        window.location.href = 'component/ctrl-cart/delete_product.php?index=' + index;
+                    }
+                </script>
+
             </tbody>
         </table>
 
