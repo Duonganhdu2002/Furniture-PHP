@@ -20,7 +20,7 @@ foreach ($category_ids as $category_id) {
     if ($result1->num_rows > 0) {
         $row1 = $result1->fetch_assoc();
 ?>
-        <divs class="product-section">
+        <div class="product-section">
             <div class="row">
                 <div>
                     <h2 class="section-title"><?php echo $row1["category_name"]; ?></h2>
@@ -36,16 +36,32 @@ foreach ($category_ids as $category_id) {
                 while ($row2 = $resultid1->fetch_assoc()) {
                 ?>
                     <div class="product-item">
-                        <a href="index.php?pid=10&id=<?php echo $row2["id"]; ?>">
-                            <img src="images/chairs/<?php echo $row2["image"]; ?>" class="product-thumbnail">
-                        </a>
-                        <h3 class="product-title"><?php echo $row2["product_name"]; ?></h3>
-                        <strong class="product-price"><?php echo $row2["price"]; ?></strong>
-                        <span class="icon-cross " >
-                            <a  class="add" id="<?php echo $row2["id"]; ?>"><img src="images/cross.svg"></a>
-                        </span>
-                    </div>
 
+                        <form action="component/addToCart.php" method="post">
+                            
+                            <input type="hidden" name="id" value="<?php echo $row2["id"]; ?>">
+
+                            <a href="index.php?pid=10&id=<?php echo $row2["id"]; ?>">
+
+                                <img src="images/chairs/<?php echo $row2["image"]; ?>" class="product-thumbnail">
+
+                            </a>
+
+                            <h3 class="product-title"><?php echo $row2["product_name"]; ?></h3>
+
+                            <strong class="product-price"><?php echo $row2["price"]; ?></strong>
+
+                            <span class="icon-cross">
+                                <a class="add" id="<?php echo $row2["id"]; ?>">
+                                    <button name="submit" style="background-color: #2f2f2f; border: none;" type="submit">
+                                        <img src="images/cross.svg">
+                                    </button>
+                                </a>
+                            </span>
+
+                        </form>
+
+                    </div>
                 <?php
                     $i++;
                     if ($i >= 3) {
@@ -54,11 +70,12 @@ foreach ($category_ids as $category_id) {
                 }
                 ?>
             </div>
-        </divs>
+        </div>
 <?php
     }
 }
 ?>
+
 
 
 </div>
