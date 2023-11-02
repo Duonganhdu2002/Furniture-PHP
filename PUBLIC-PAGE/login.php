@@ -131,6 +131,7 @@
             border-radius: 10px;
             border: #3b5d50 solid 1px;
             height: 50px;
+            font-size: large;
         }
 
         button {
