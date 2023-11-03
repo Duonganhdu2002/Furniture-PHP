@@ -15,6 +15,10 @@
 
             <tbody>
                 <?php
+                echo "<pre>";
+                echo var_dump($_SESSION["cart"]);
+                echo "<pre>";
+
                 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     $totalPrice = 0;
                     foreach ($_SESSION['cart'] as $index => $product) {
@@ -49,7 +53,6 @@
                 }
                 ?>
                 <script>
-                    
                     var products = <?php echo json_encode($_SESSION['cart']); ?>;
                     var grandTotalElement = document.getElementById('grandTotal');
 
@@ -97,10 +100,11 @@
                             }
                         };
                         xhr.send('index=' + index + '&quantity=' + quantityInput.value);
+                        location.reload();
                     }
 
                     //Hàm xóa sản phẩm dựa trên index của mảng giỏ hàng
-                    //Xem mảng giỏ hàng bằng echo var_dum($_SESSION["cart"]);
+                    //Xem mảng giỏ hàng bằng echo var_dump($_SESSION["cart"]);
                     function deleteProduct(index) {
                         window.location.href = 'component/ctrl-cart/delete_product.php?index=' + index;
                     }
@@ -112,11 +116,20 @@
         <div class="second-child">
             <div class="left-side">
                 <div style="display: flex;">
-                    <div style="margin-right: 160px;">
-                        <button>Update Cart</button>
-                    </div>
                     <div>
-                        <button>Continue Shopping</button>
+                        <a id="goBackBtn">
+                            <button>Continue Shopping</button>
+                        </a>
+                        <script>
+                            document.getElementById('goBackBtn').addEventListener('click', function() {
+                                goBack();
+                            });
+
+                            function goBack() {
+                                // Go back to the previous page
+                                window.history.back();
+                            }
+                        </script>
                     </div>
                 </div>
                 <div style="margin: 40px 0 40px 0">

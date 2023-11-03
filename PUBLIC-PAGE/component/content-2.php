@@ -10,37 +10,32 @@
 
         <!-- Product 1 -->
         <div class="product-item">
-            <a href="index.php?pid=10">
-                <img src="images/product-1.png" class="product-thumbnail">
-            </a>
+            <img src="images/product-1.png" class="product-thumbnail">
             <h3 class="product-title">Nordic Chair</h3>
             <strong class="product-price">$50.00</strong>
             <span class="icon-cross">
-                <a href="cart.html"><img src="images/cross.svg"></a>
+                <img src="images/cross.svg">
             </span>
         </div>
 
         <!-- Product 2 -->
         <div class="product-item">
-            <a href="index.php?pid=10">
-                <img src="images/product-2.png" class="product-thumbnail">
-            </a>
+            <img src="images/product-2.png" class="product-thumbnail">
             <h3 class="product-title">Kruzo Aero Chair</h3>
             <strong class="product-price">$78.00</strong>
             <span class="icon-cross">
-                <a href="cart.html"><img src="images/cross.svg"></a>
+                <img src="images/cross.svg">
             </span>
         </div>
 
         <!-- Product 3 -->
         <div class="product-item">
-            <a href="index.php?pid=10">
-                <img src="images/product-3.png" class="product-thumbnail">
-            </a>
+            <img src="images/product-3.png" class="product-thumbnail">
+
             <h3 class="product-title">Ergonomic Chair</h3>
             <strong class="product-price">$43.00</strong>
             <span class="icon-cross">
-                <a href="cart.html"><img src="images/cross.svg"></a>
+                <img src="images/cross.svg">
             </span>
         </div>
 
