@@ -35,7 +35,7 @@
             <h3 class="product-title">Ergonomic Chair</h3>
             <strong class="product-price">$43.00</strong>
             <span class="icon-cross">
-                <img src="images/cross.svg">
+                <img src="images/cross.svg">`
             </span>
         </div>
 
