@@ -43,7 +43,7 @@
                         $totalPrice += ($product[2] * $product[4]);
                     }
 
-                    echo '<tr>';
+                    echo '<tr style="display: none">';
                     echo '<td colspan="5" style="text-align: right; font-weight: bold;">Total:</td>';
                     echo '<td id="grandTotal">$' . $totalPrice . '</td>';
                     echo '</tr>';
@@ -144,18 +144,37 @@
                 </div>
                 <div style="display: flex; margin: 20px 0 20px 0">
                     <div style="width: 50%;">
-                        <p style="font-size: 16px">Subtotal</p>
+                        <!-- <p style="font-size: 16px">Shipping fee</p> -->
                         <p style="font-size: 16px">Total</p>
                     </div>
                     <div style="width: 50%;">
-                        <p style="font-weight: bold; font-size: 18px">$230.00</p>
-                        <p style="font-weight: bold; font-size: 18px">$230.00</p>
+                        <!-- <p id="shippingFee" style="font-weight: bold; font-size: 18px">$30.00</p> -->
+                        <p style="font-weight: bold; font-size: 18px">
+                            <?php
+                            if (!isset($_SESSION['cart']) || empty($_SESSION['cart']) || count($_SESSION['cart']) === 0) {
+                                echo '<td>$ 0</td>';
+                            } else {
+                                echo '<td>$' . $totalPrice . '</td>';
+                            }
+                            ?>
+
+                        </p>
                     </div>
                 </div>
                 <div>
-                    <a href="index.php?pid=7">
-                        <button style="font-size: 18px; cursor: pointer">Procced to checkout</button>
-                    </a>
+                    <button onclick="CheckUsername()" style="font-size: 18px; cursor: pointer">Procced to checkout</button>
+                    <script>
+                        function CheckUsername() {
+
+                            var usernameExists = "<?php echo isset($_SESSION['username_user']); ?>";
+
+                            if (usernameExists) {
+                                window.location.href = 'index.php?pid=7';
+                            } else {
+                                alert("You need to login first")
+                            }
+                        }
+                    </script>
                 </div>
             </div>
         </div>

@@ -93,6 +93,7 @@
         $confirmPassword = '';
 
         $message = "Category added correctly";
+        
     } while (false);
 
     ?>

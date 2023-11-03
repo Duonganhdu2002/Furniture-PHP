@@ -6,6 +6,7 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
     $brandName = $conn->real_escape_string($_POST["brandName"]);
     $brandDescription = $conn->real_escape_string($_POST["brandDescription"]);
 

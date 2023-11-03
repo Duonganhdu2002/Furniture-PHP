@@ -36,13 +36,14 @@ if (isset($_SESSION["username_user"])) {
 
     if ($resultAddress->num_rows > 0) {
         $row = $resultAddress->fetch_assoc();
+        $country = $row["country"];
         $province = $row["province"];
         $district = $row["district"];
         $commune = $row["commune"];
         $street = $row["street"];
         $number = $row["number"];
 
-        $address = "$number, $street, $commune, $district, $province";
+        $address = "$number, $street, $commune, $district, $province, $country";
     }
 } else {
     echo "
@@ -109,6 +110,7 @@ if (isset($_SESSION["username_user"])) {
         padding-left: 200px;
         padding-right: 50px;
         padding-top: 30px;
+        margin-bottom: 200px;
     }
 
     .header-profile {
