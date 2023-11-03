@@ -103,6 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         echo "New record created successfully";
+        header("Location: index.php?pid=8");
     } else {
         echo "Error: " . $sql1 . "<br>" . $conn->error;
     }
