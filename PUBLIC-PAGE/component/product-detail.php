@@ -30,48 +30,56 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 <div class="product-detail">
     <div class="product-datil-child">
-        <div class="leftside">
-            <img src="images/chairs/<?php echo $image; ?>" alt="">
-        </div>
-        <div class="rightside">
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
-            <h1><?php echo $productName; ?></h1>
-            <p>
-                <?php echo $productDescription; ?>
-            </p>
-            <div style="width:50%; height: 60px; align-items: center; background-color:#ebebeb; display:flex; margin-top: 40px">
-                    <b style="font-size: 45px; margin-left: 20px;"><?php echo $productPrice; ?> $</b>
+        <form style="display: flex;" action="component/ctrl-cart/addToCart.php" method="post">
+            <div class="leftside">
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                <input type="hidden" name="image" value="<?php echo $image; ?>">
+                <img src="images/chairs/<?php echo $image; ?>" alt="">
             </div>
-            <div style="display: flex; margin-top: 40px; margin-bottom: 40px">
-                
-                <div style="display:flex; align-items: center; width:50%;">
-                <input value="1" type="number" name="quantity" id="quantity" min="1" max="<?php echo $productQuantity; ?>">
-                </div>
-                <div style="display: flex; width:100%; align-items: center; margin-left: 30px">
+            <div class="rightside">
+                <input type="hidden" name="product_name" value="<?php echo $productName; ?>">
+                <h1>
+                    <?php echo $productName; ?>
+                </h1>
                 <p>
-                    Available:
-                    <b><?php echo $productQuantity; ?></b>
+                    <?php echo $productDescription; ?>
                 </p>
+                <div style="width:50%; height: 60px; align-items: center; background-color:#ebebeb; display:flex; margin-top: 40px">
+                    <input type="hidden" name="price" value="<?php echo $productPrice; ?>">
+                    <b style="font-size: 45px; margin-left: 20px;"><?php echo $productPrice; ?> $</b>
                 </div>
-            </div>
+                <div style="display: flex; margin-top: 40px; margin-bottom: 40px">
 
-            <div style="display:flex; margin-top: 40px; margin-bottom: 40px; ">
-                <div style="margin-right: 20px;">
-                    <button class="button" id="cartButton">
-                    <img src="../PUBLIC-PAGE/images/cart.svg" alt="" style="margin-right:8px" id="cartImage">
-                    Add to card
-                    </button>
+                    <div style="display:flex; align-items: center; width:50%;">
+                        <input value="1" type="number" name="quantity" id="quantity" min="1" max="<?php echo $productQuantity; ?>">
+                    </div>
+                    <div style="display: flex; width:100%; align-items: center; margin-left: 30px">
+                        <p>
+                            Available:
+                            <b><?php echo $productQuantity; ?></b>
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <button class="button" id="buyNowButton">Buy now</button>
+
+                <div style="display:flex; margin-top: 40px; margin-bottom: 40px; ">
+                    <div style="margin-right: 20px;">
+                        <button type="submit" name="submit" id="<?php echo $id; ?>" class="button" id="cartButton">
+                            <img src="../PUBLIC-PAGE/images/cart.svg" alt="" style="margin-right:8px" id="cartImage">
+                            Add to cart
+                        </button>
+
+                    </div>
+                    <div>
+                        <button class="button" id="buyNowButton">Buy now</button>
+                    </div>
+                </div>
+                <div style="position: relative; height: 150px; /* Chiều cao của phần tử chứa */">
+                    <a href="index.php?pid=1" style="position: absolute; bottom: 0; text-decoration:none; ">
+                        <button class="button">Back to shop</button>
+                    </a>
                 </div>
             </div>
-            <div style="position: relative; height: 150px; /* Chiều cao của phần tử chứa */">
-                <a href="index.php?pid=1" style="position: absolute; bottom: 0; text-decoration:none; " >
-                    <button class="button">Back to shop</button>
-                </a>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 
@@ -120,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
 
     .product-detail .product-datil-child .rightside input {
-        width:100%;
+        width: 100%;
         height: 30px;
         font-size: x-large;
         text-align: center;
@@ -134,11 +142,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         background-color: black;
         border: none;
         color: #fff;
-        cursor:pointer;
+        cursor: pointer;
         align-items: center;
         justify-content: center;
         font-weight: bold;
-        transition: background-color 0.3s ease-in-out; /* Thêm dòng này */
+        transition: background-color 0.3s ease-in-out;
+        /* Thêm dòng này */
     }
 
     .button:hover {
@@ -151,15 +160,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
 
     #cartButton {
-  position: relative;
-}
+        position: relative;
+    }
 
-#cartImage {
-  /* transition: filter 0.3s ease-in-out; */
-}
+    #cartImage {
+        /* transition: filter 0.3s ease-in-out; */
+    }
 
-#cartButton:hover #cartImage {
-  filter: grayscale(100%) invert(100%);
-}
-
+    #cartButton:hover #cartImage {
+        filter: grayscale(100%) invert(100%);
+    }
 </style>

@@ -23,17 +23,17 @@
                         echo '<img style="width: 100%;" src="images/chairs/' . $product[0] . '" alt="Image" class="img-fluid">';
                         echo '</td>';
                         echo '<td>';
-                        echo '<h3>' . $product[1] . '</h3>'; // Assuming $product[1] is the product name
+                        echo '<h3>' . $product[1] . '</h3>'; 
                         echo '</td>';
-                        echo '<td>$' . $product[2] . '</td>'; // Assuming $product[2] is the product price
+                        echo '<td>$' . $product[2] . '</td>';
                         echo '<td>';
                         echo '<div style="max-width: 120px; display: flex;">';
-                        echo '<button id="minus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">-</button>';
-                        echo '<input id="quantity" style="width: 50px; text-align: center; border: 1px solid gray; border-radius: 10px" type="text" value="1">';
-                        echo '<button id="plus" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">+</button>';
+                        echo '<button id="minus" onclick="updateQuantity(' . $index . ', \'decrease\')" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">-</button>';
+                        echo '<input id="quantity_' . $index . '" style="width: 50px; text-align: center; border: 1px solid gray; border-radius: 10px" type="text" value="' . $product[4] . '">';
+                        echo '<button id="plus" onclick="updateQuantity(' . $index . ', \'increase\')" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">+</button>';
                         echo '</div>';
                         echo '</td>';
-                        echo '<td id="total">$' . $product[2] . '</td>'; // Assuming $product[2] is the product price
+                        echo '<td id="total">$' . $product[2] * $product[4] . '</td>';
                         echo '<td>';
                         echo '<button class="cancel" onclick="deleteProduct(' . $index . ')" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">X</button>';
                         echo '</td>';
@@ -41,7 +41,38 @@
                     }
                 }
 
+                echo "<pre>";
+                echo var_dump($_SESSION['cart']);
+                echo "</pre>";
+
                 ?>
+                <script>
+                    function updateQuantity(index, action) {
+
+                        var quantityInput = document.getElementById('quantity_' + index);
+                        var currentQuantity = parseInt(quantityInput.value);
+
+                        if (action === 'increase') {
+                            quantityInput.value = currentQuantity + 1;
+                        } else if (action === 'decrease' && currentQuantity > 1) {
+                            quantityInput.value = currentQuantity - 1;
+                        }
+
+                        // Send the updated quantity to the server using AJAX
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', 'component/ctrl-cart/update_quantity.php', true);
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                var response = JSON.parse(xhr.responseText);
+                                if (!response.success) {
+                                    console.error('Failed to update quantity: ' + response.message);
+                                }
+                            }
+                        };
+                        xhr.send('index=' + index + '&quantity=' + quantityInput.value);
+                    }
+                </script>
 
                 <script>
                     function deleteProduct(index) {
@@ -52,6 +83,7 @@
 
             </tbody>
         </table>
+        
 
         <div class="second-child">
             <div class="left-side">

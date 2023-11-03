@@ -7,8 +7,12 @@ if (isset($_POST["submit"])) {
     $product_name = $_POST["product_name"];
     $price = $_POST["price"];
     $id = $_POST["id"];
+    $quantity = $_POST["quantity"];
+    if (!isset($quantity)) {
+        $quantity = 1;
+    }
 
-    $productArray = array($image, $product_name, $price, $id);
+    $productArray = array($image, $product_name, $price, $id, $quantity);
 
     if (!isset($_SESSION["cart"])) {
         $_SESSION["cart"] = array();
