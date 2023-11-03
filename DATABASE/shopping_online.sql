@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 01, 2023 lúc 01:37 PM
+-- Thời gian đã tạo: Th10 03, 2023 lúc 12:13 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -74,7 +74,8 @@ INSERT INTO `addresses` (`id`, `username`, `country`, `province`, `district`, `c
 (28, 'admin18', 'Portugal', 'Lisbon', 'Lisbon', 'Baixa', 'Rua Augusta', '2525', 'admin'),
 (29, 'admin19', 'Ireland', 'Dublin', 'Leinster', 'City Centre', 'Grafton Street', '2626', 'admin'),
 (30, 'admin20', 'Belgium', 'Brussels', 'Brussels-Capital Region', 'City of Brussels', 'Rue Neuve', '2727', 'admin'),
-(31, 'dawd', '', '', '', '', NULL, NULL, 'user');
+(31, 'dawd', '', '', '', '', NULL, NULL, 'user'),
+(32, 'bvdu', '', '', '', '', NULL, NULL, 'user');
 
 -- --------------------------------------------------------
 
@@ -128,6 +129,19 @@ CREATE TABLE `cart_items` (
   `quantity` int(11) DEFAULT NULL,
   `user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `cart_items`
+--
+
+INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`, `user`) VALUES
+(1, 1, 42, 1, 3),
+(2, 2, 42, 1, 3),
+(3, 3, 42, 1, 3),
+(4, 4, 42, 1, 3),
+(5, 5, 42, 1, 3),
+(6, 6, 41, 2, 3),
+(7, 6, 42, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -213,7 +227,8 @@ INSERT INTO `information` (`id`, `username`, `full_name`, `date_of_birth`, `emai
 (28, 'admin18', 'Lucas Anderson', '1996-06-18', 'lucas.anderson@example.com', 1, '+999555777', NULL, 'admin'),
 (29, 'admin19', 'Ava Wilson', '1986-10-07', 'ava.wilson@example.com', 2, '+333888999', NULL, 'admin'),
 (30, 'admin20', 'Mason Martinez', '1991-03-25', 'mason.martinez@example.com', 1, '+777444555', NULL, 'admin'),
-(31, 'dawd', 'DU BUI VAN', '2002-12-12', '2154810104@vaa.edu.vn', 1, '0896899384', NULL, 'user');
+(31, 'dawd', 'DU BUI VAN', '2002-12-12', '2154810104@vaa.edu.vn', 1, '0896899384', NULL, 'user'),
+(32, 'bvdu', 'DU BUI VAN', '2022-12-12', '2154810104@vaa.edu.vn', 2, '0896899384', NULL, 'user');
 
 -- --------------------------------------------------------
 
@@ -525,19 +540,6 @@ INSERT INTO `products` (`id`, `category_id`, `brand_id`, `product_name`, `descri
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product_variations`
---
-
-CREATE TABLE `product_variations` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `variation_type` varchar(255) DEFAULT NULL,
-  `variation_value` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `promotions`
 --
 
@@ -597,6 +599,18 @@ CREATE TABLE `shopping_carts` (
   `status` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `shopping_carts`
+--
+
+INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`) VALUES
+(1, 3, '2023-11-03 11:07:56', 'Chờ xác nhận'),
+(2, 3, '2023-11-03 11:10:04', 'Chờ xác nhận'),
+(3, 3, '2023-11-03 11:10:11', 'Chờ xác nhận'),
+(4, 3, '2023-11-03 11:10:16', 'Chờ xác nhận'),
+(5, 3, '2023-11-03 11:12:32', 'Chờ xác nhận'),
+(6, 3, '2023-11-03 11:13:08', 'Chờ xác nhận');
+
 -- --------------------------------------------------------
 
 --
@@ -647,7 +661,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `created_at`, `image`
 (28, 'admin18', 'adminpass18', 'admin', '2023-10-17 04:14:09', NULL),
 (29, 'admin19', 'adminpass19', 'admin', '2023-10-17 04:14:09', NULL),
 (30, 'admin20', 'adminpass20', 'admin', '2023-10-17 04:14:09', NULL),
-(31, 'dawd', '1202', 'user', '2023-10-31 17:16:44', NULL);
+(31, 'dawd', '1202', 'user', '2023-10-31 17:16:44', NULL),
+(32, 'bvdu', '1212', 'user', '2023-11-01 12:39:48', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -719,13 +734,6 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `category_id` (`category_id`),
   ADD KEY `brand_id` (`brand_id`);
-
---
--- Chỉ mục cho bảng `product_variations`
---
-ALTER TABLE `product_variations`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `product_id` (`product_id`);
 
 --
 -- Chỉ mục cho bảng `promotions`
@@ -819,12 +827,6 @@ ALTER TABLE `payment_methods`
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`);
-
---
--- Các ràng buộc cho bảng `product_variations`
---
-ALTER TABLE `product_variations`
-  ADD CONSTRAINT `product_variations_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Các ràng buộc cho bảng `promotions`
