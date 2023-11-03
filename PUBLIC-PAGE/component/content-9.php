@@ -15,38 +15,54 @@
 
             <tbody>
                 <?php
-
                 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+                    $totalPrice = 0;
                     foreach ($_SESSION['cart'] as $index => $product) {
                         echo '<tr style="height: 300px; text-align: center; border-bottom: 1px solid black;">';
                         echo '<td>';
-                        echo '<img style="width: 100%;" src="images/chairs/' . $product[0] . '" alt="Image" class="img-fluid">';
+                        echo '<img style="width: 75%;" src="images/chairs/' . $product[0] . '" alt="Image" class="img-fluid">';
                         echo '</td>';
                         echo '<td>';
-                        echo '<h3>' . $product[1] . '</h3>'; 
+                        echo '<h3>' . $product[1] . '</h3>';
                         echo '</td>';
                         echo '<td>$' . $product[2] . '</td>';
                         echo '<td>';
                         echo '<div style="max-width: 120px; display: flex;">';
                         echo '<button id="minus" onclick="updateQuantity(' . $index . ', \'decrease\')" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">-</button>';
-                        echo '<input id="quantity_' . $index . '" style="width: 50px; text-align: center; border: 1px solid gray; border-radius: 10px" type="text" value="' . $product[4] . '">';
+                        echo '<input id="quantity_' . $index . '" onchange="updateQuantity(' . $index . ', \'change\')" style="width: 50px; text-align: center; border: 1px solid gray; border-radius: 10px" type="text" value="' . $product[4] . '">';
                         echo '<button id="plus" onclick="updateQuantity(' . $index . ', \'increase\')" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">+</button>';
                         echo '</div>';
                         echo '</td>';
-                        echo '<td id="total">$' . $product[2] * $product[4] . '</td>';
+                        echo '<td class="total" id="total_' . $index . '">$' . ($product[2] * $product[4]) . '</td>';
                         echo '<td>';
                         echo '<button class="cancel" onclick="deleteProduct(' . $index . ')" style="border: none; background-color: #eff2f1; color: #2f2f2f; font-size: 22px; cursor: pointer;" type="button">X</button>';
                         echo '</td>';
                         echo '</tr>';
+
+                        $totalPrice += ($product[2] * $product[4]);
                     }
+
+                    echo '<tr>';
+                    echo '<td colspan="5" style="text-align: right; font-weight: bold;">Total:</td>';
+                    echo '<td id="grandTotal">$' . $totalPrice . '</td>';
+                    echo '</tr>';
                 }
-
-                echo "<pre>";
-                echo var_dump($_SESSION['cart']);
-                echo "</pre>";
-
                 ?>
                 <script>
+                    
+                    var products = <?php echo json_encode($_SESSION['cart']); ?>;
+                    var grandTotalElement = document.getElementById('grandTotal');
+
+                    //Hàm tính tổng giá tất cả sản phẩm có trong giỏ
+                    function calculateTotal() {
+                        var total = 0;
+                        for (var i = 0; i < products.length; i++) {
+                            total += products[i][2] * products[i][4];
+                        }
+                        return total;
+                    }
+
+                    //Hàm cập nhật số lượng, giá của từng sản phẩm riêng biệt 
                     function updateQuantity(index, action) {
 
                         var quantityInput = document.getElementById('quantity_' + index);
@@ -57,6 +73,16 @@
                         } else if (action === 'decrease' && currentQuantity > 1) {
                             quantityInput.value = currentQuantity - 1;
                         }
+
+                        // Update the quantity in the products array
+                        products[index][4] = parseInt(quantityInput.value);
+
+                        // Update total price for the specific product
+                        var totalElement = document.getElementById('total_' + index);
+                        totalElement.textContent = '$' + (products[index][2] * products[index][4]).toFixed(2);
+
+                        // Recalculate and update grand total
+                        grandTotalElement.textContent = '$' + calculateTotal().toFixed(2);
 
                         // Send the updated quantity to the server using AJAX
                         var xhr = new XMLHttpRequest();
@@ -72,18 +98,16 @@
                         };
                         xhr.send('index=' + index + '&quantity=' + quantityInput.value);
                     }
-                </script>
 
-                <script>
+                    //Hàm xóa sản phẩm dựa trên index của mảng giỏ hàng
+                    //Xem mảng giỏ hàng bằng echo var_dum($_SESSION["cart"]);
                     function deleteProduct(index) {
-                        // Redirect to a PHP script that handles the deletion
                         window.location.href = 'component/ctrl-cart/delete_product.php?index=' + index;
                     }
                 </script>
-
             </tbody>
         </table>
-        
+
 
         <div class="second-child">
             <div class="left-side">
