@@ -72,7 +72,7 @@ $result = $link->query($sql);
                 <div class="user-module">
                     <div class="login-module"><a href="../PUBLIC-PAGE/login.php" style="width:100% ;text-align: center; font-size: 18px;">Login</a></div>
                     <div class="register-module"><a href="../PUBLIC-PAGE/register.php" style="text-align: center; font-size: 18px;">Register</a></div>
-                    <div class="logout-module"><a href="#" style="text-align: center; font-size: 18px;">Logout</a></div>
+                    <div class="logout-module"><a href="../PUBLIC-PAGE/logout.php" style="text-align: center; font-size: 18px;">Logout</a></div>
                 </div>
             </div>
             <div class="cart-icon">
@@ -265,7 +265,7 @@ $result = $link->query($sql);
         display: none;
     }
 
-    .login-button {
+    /* .login-button {
         border-radius: 10px 10px 0 0;
         border-bottom: 1px solid white;
         border-top: none;
@@ -285,7 +285,7 @@ $result = $link->query($sql);
 
     .register-button:hover {
         opacity: 0.7;
-    }
+    } */
 
     .action-buttons button {
         padding: 10px 28px 10px 28px;
@@ -298,6 +298,7 @@ $result = $link->query($sql);
     .login-module,
     .register-module,
     .logout-module {
+        position:relative;
         /* background-color: #f9bf29; */
         /* color: #f9bf29; */
         opacity: 0.6;
@@ -335,21 +336,18 @@ $result = $link->query($sql);
         opacity: 1;
         background-color: #f9bf29;
         color: #3b5d50;
-        border-radius: 8px;
     }
 
     .register-module:hover {
         opacity: 1;
         background-color: #f9bf29;
         color: #3b5d50;
-        border-radius: 8px;
     }
 
     .logout-module:hover {
         opacity: 1;
         background-color: #f9bf29;
         color: #3b5d50;
-        border-radius: 8px;
     }
 
     @media (max-width: 400px) {
