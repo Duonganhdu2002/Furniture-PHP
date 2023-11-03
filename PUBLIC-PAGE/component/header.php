@@ -70,8 +70,9 @@ $result = $link->query($sql);
                     <img src="../PUBLIC-PAGE/images/user.svg" alt="">
                 </a>
                 <div class="user-module">
-                    <div class="login-module"><a href="../PUBLIC-PAGE/login.php" style="text-align: center; opacity: 1.0; font-size: 18px;">Login</a></div>
-                    <div class="register-module"><a href="../PUBLIC-PAGE/register.php" style="text-align: center; opacity: 1.0; font-size: 18px;">Register</a></div>
+                    <div class="login-module"><a href="../PUBLIC-PAGE/login.php" style="width:100% ;text-align: center; font-size: 18px;">Login</a></div>
+                    <div class="register-module"><a href="../PUBLIC-PAGE/register.php" style="text-align: center; font-size: 18px;">Register</a></div>
+                    <div class="logout-module"><a href="#" style="text-align: center; font-size: 18px;">Logout</a></div>
                 </div>
             </div>
             <div class="cart-icon">
@@ -242,7 +243,7 @@ $result = $link->query($sql);
         border-radius: 10px;
         /* top: 65px; */
         /* left: 78%; */
-
+        
     }
 
     .user-icon div {
@@ -251,6 +252,7 @@ $result = $link->query($sql);
 
     .user-icon:hover .user-module {
         display: block;
+        box-shadow: 0 0 10px #ffffff;
     }
 
     .action-buttons {
@@ -293,21 +295,58 @@ $result = $link->query($sql);
         cursor: pointer;
     }
 
-    /* .login-module {
-        text-align: center;
+    .login-module,
+    .register-module,
+    .logout-module {
+        /* background-color: #f9bf29; */
+        /* color: #f9bf29; */
+        opacity: 0.6;
+        border-radius: 8px;
+        transition: background-color 0.5s, width 0.5s ease;
     }
 
-    .register-module {
+    .login-module,
+    .register-module,
+    .logout-module {
+        display: flex; /* Sử dụng display: flex để căn giữa các thẻ con theo chiều dọc */
+        align-items: center; /* Đảm bảo các thẻ con nằm giữa theo chiều dọc */
+        justify-content: center; /* Đảm bảo các thẻ con nằm giữa theo chiều ngang */
+        height: 50px;
+    }
+
+    .login-module a,
+    .register-module a,
+    .logout-module a{
+        padding: 0; /* Loại bỏ padding */
+        opacity: 1;
+        display:flex;
+        margin-left: 0px;
+        margin-bottom: auto;
+        margin-top: auto;
+        width: 100%;
+        height: 100%;
+        /* background-color: black; */
         text-align: center;
-    } */
+        justify-content: center;
+        align-items: center;
+    }
 
     .login-module:hover {
+        opacity: 1;
         background-color: #f9bf29;
         color: #3b5d50;
         border-radius: 8px;
     }
 
     .register-module:hover {
+        opacity: 1;
+        background-color: #f9bf29;
+        color: #3b5d50;
+        border-radius: 8px;
+    }
+
+    .logout-module:hover {
+        opacity: 1;
         background-color: #f9bf29;
         color: #3b5d50;
         border-radius: 8px;
