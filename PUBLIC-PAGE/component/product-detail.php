@@ -70,12 +70,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
                     </div>
                     <div>
-                        <button class="button" id="buyNowButton">Buy now</button>
+                        <button type="button" class="button" id="buyNowButton">Buy now</button>
                     </div>
                 </div>
                 <div style="position: relative; height: 150px; /* Chiều cao của phần tử chứa */">
                     <a href="index.php?pid=1" style="position: absolute; bottom: 0; text-decoration:none; ">
-                        <button class="button">Back to shop</button>
+                        <button type="button" class="button">Back to shop</button>
                     </a>
                 </div>
             </div>
