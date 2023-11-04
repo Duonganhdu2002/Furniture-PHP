@@ -55,7 +55,7 @@ if (isset($_SESSION["username_user"])) {
 }
 ?>
 
-<div style="display: flex; justify-content: center; margin-bottom: 100px;">
+<div style="display: flex; justify-content: center; margin-bottom: 150px; margin-top: 100px; background-color: #ffffff; height: 600px">
     <div class="profile">
         <div class="header-profile">
             <div class="left-side">
@@ -74,7 +74,7 @@ if (isset($_SESSION["username_user"])) {
             <h2>Information</h2>
         </div>
         <div class="detail-information">
-            <div class="detail">
+            <div class="detail" style="border-right: 2px solid gray;">
                 <h3>Username</h3>
                 <p><?php echo $username; ?></p>
                 <h3>Date of birth</h3>
@@ -82,7 +82,7 @@ if (isset($_SESSION["username_user"])) {
                 <h3>Email</h3>
                 <p><?php echo $email; ?></p>
             </div>
-            <div class="detail">
+            <div class="detail" style="padding-left: 100px">
                 <h3>Gender</h3>
                 <p>
                     <?php
@@ -146,7 +146,7 @@ if (isset($_SESSION["username_user"])) {
 
     .detail-information {
         width: 100%;
-        height: 70%;
+        height: 65%;
         display: flex;
     }
 
@@ -164,7 +164,7 @@ if (isset($_SESSION["username_user"])) {
 
     .detail-information .detail {
         width: 50%;
-        height: 100%;
+        height: 80%;
         line-height: 1.5;
 
     }
