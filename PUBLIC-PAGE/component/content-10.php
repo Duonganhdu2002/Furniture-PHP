@@ -43,8 +43,13 @@ if (isset($_SESSION["username_user"])) {
         $street = $row["street"];
         $number = $row["number"];
         $id = $row["id"];
+        // $province = $row["province"];
+        // $district = $row["district"];
+        // $commune = $row["commune"];
+        // $street = $row["street"];
+        // $number = $row["number"];
 
-        $address = "$number, $street, $commune, $district, $province, $country";
+        // $address = "$number, $street, $commune, $district, $province, $country";
     }
 }
 
@@ -145,9 +150,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <label for="company_name">Company Name</label>
                             <input type="text" id="company_name">
                         </div>
-                        <div>
-                            <label for="address">Address <span>*</span></label>
-                            <input value="<?php echo "$address"; ?>" style="margin-bottom: 20px;" placeholder="Street address" type="text" id="address" required>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div style="width: 32%;">
+                                <label for="province">Province <span>*</span></label>
+                                <input value="<?php echo "$province" ?>" type="text" id="province" required>
+                            </div>
+                            <div style="width: 32%;">
+                                <label for="district">District <span>*</span></label>
+                                <input value="<?php echo "$district" ?>" type="text" id="disttrict" required>
+                            </div>
+                            <div style="width: 32%;">
+                                <label for="commune">Commune <span>*</span></label>
+                                <input value="<?php echo "$commune" ?>" type="text" id="commune" required>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div style="width: 48%;">
+                                <label for="street">Street <span>*</span></label>
+                                <input value="<?php echo "$street" ?>" type="text" id="street" required>
+                            </div>
+                            <div style="width: 48%;">
+                                <label for="number">Number <span>*</span></label>
+                                <input value="<?php echo "$number" ?>" type="number" id="number" min="1" required>
+                            </div>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
                             <div style="width: 48%;">
@@ -221,7 +246,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             } else {
                                 echo "0";
                             }
-                             ?></p>
+                            ?></p>
                         </div>
                         <hr>
 
