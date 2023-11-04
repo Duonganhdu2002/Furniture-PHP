@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $newId = $maxId + 1;
 
     // Insert into shopping_carts
-    $sql1 = "INSERT INTO shopping_carts (id, user_id, created_at, status) VALUES ($newId, '$idUser', NOW(), '$status')";
+    $sql1 = "INSERT INTO shopping_carts (id, user_id, created_at, status, ship_method) VALUES ($newId, '$idUser', NOW(), 1, 1)";
 
     if ($conn->query($sql1) === TRUE) {
 
