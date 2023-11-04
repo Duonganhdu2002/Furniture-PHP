@@ -1,6 +1,14 @@
 <div class="user-cart">
     <div class="user-cart-child">
-        hihi
+        <h2>Your cart</h2>
+        <table>
+            <tr></tr>
+        </table>
+        <?php
+            if(isset($_SESSION["username_user"])) {
+                echo "".$_SESSION["username_user"]."";
+            }
+        ?>
     </div>
 </div>
 <style>
