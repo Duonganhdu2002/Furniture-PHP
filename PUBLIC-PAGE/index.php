@@ -137,6 +137,7 @@
                 break;
             case '11':
                 include("component/profile.php");
+                include("component/cart-user.php");
                 break;
         }
     } else {

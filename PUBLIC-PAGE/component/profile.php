@@ -51,55 +51,57 @@ if (isset($_SESSION["username_user"])) {
         alert('Bạn cần phải đăng nhập trước.');
         window.location.href = 'index.php';
     </script>";
-    exit; 
+    exit;
 }
 ?>
 
-<div class="profile">
-    <div class="header-profile">
-        <div class="left-side">
-            <div class="info-emloyee">
-                <img class="avatar-emloyee" src="../PUBLIC-PAGE/images/<?php echo $avatar ?>" alt="">
+<div style="display: flex; justify-content: center; margin-bottom: 150px; margin-top: 100px; background-color: #ffffff; height: 600px">
+    <div class="profile">
+        <div class="header-profile">
+            <div class="left-side">
+                <div class="info-emloyee">
+                    <img class="avatar-emloyee" src="../PUBLIC-PAGE/images/<?php echo $avatar ?>" alt="">
+                </div>
+                <div class="name-employee">
+                    <h1><?php echo $full_name; ?></h1>
+                </div>
             </div>
-            <div class="name-employee">
-                <h1><?php echo $full_name; ?></h1>
+            <div class="right-side">
+                <button class="button-edit">Edit</button>
             </div>
         </div>
-        <div class="right-side">
-            <button class="button-edit">Edit</button>
+        <div class="personality-information">
+            <h2>Information</h2>
         </div>
-    </div>
-    <div class="personality-information">
-        <h2>Information</h2>
-    </div>
-    <div class="detail-information">
-        <div class="detail">
-            <h3>Username</h3>
-            <p><?php echo $username; ?></p>
-            <h3>Date of birth</h3>
-            <p><?php echo $date_of_birth; ?></p>
-            <h3>Email</h3>
-            <p><?php echo $email; ?></p>
-        </div>
-        <div class="detail">
-            <h3>Gender</h3>
-            <p>
-                <?php
-                if ($gender == 1) {
-                    echo "Male";
-                } else {
-                    echo "Female";
-                }
-                ?>
-            </p>
-            <h3>Phone number</h3>
-            <p><?php echo $phone_number; ?></p>
-            <h3>Address</h3>
-            <p>
-                <?php
-                echo $address;
-                ?>
-            </p>
+        <div class="detail-information">
+            <div class="detail" style="border-right: 2px solid gray;">
+                <h3>Username</h3>
+                <p><?php echo $username; ?></p>
+                <h3>Date of birth</h3>
+                <p><?php echo $date_of_birth; ?></p>
+                <h3>Email</h3>
+                <p><?php echo $email; ?></p>
+            </div>
+            <div class="detail" style="padding-left: 100px">
+                <h3>Gender</h3>
+                <p>
+                    <?php
+                    if ($gender == 1) {
+                        echo "Male";
+                    } else {
+                        echo "Female";
+                    }
+                    ?>
+                </p>
+                <h3>Phone number</h3>
+                <p><?php echo $phone_number; ?></p>
+                <h3>Address</h3>
+                <p>
+                    <?php
+                    echo $address;
+                    ?>
+                </p>
+            </div>
         </div>
     </div>
 </div>
@@ -110,7 +112,7 @@ if (isset($_SESSION["username_user"])) {
         padding-left: 200px;
         padding-right: 50px;
         padding-top: 30px;
-        margin-bottom: 200px;
+        width: 68%;
     }
 
     .header-profile {
@@ -144,7 +146,7 @@ if (isset($_SESSION["username_user"])) {
 
     .detail-information {
         width: 100%;
-        height: 70%;
+        height: 65%;
         display: flex;
     }
 
@@ -162,7 +164,7 @@ if (isset($_SESSION["username_user"])) {
 
     .detail-information .detail {
         width: 50%;
-        height: 100%;
+        height: 80%;
         line-height: 1.5;
 
     }
