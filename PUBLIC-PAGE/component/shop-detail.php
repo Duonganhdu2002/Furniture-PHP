@@ -228,8 +228,8 @@ $resultProducts = $link->query($sqlProducts);
 
     .product-thumbnail {
         top: -25px;
-        border-radius: 25px;
-        box-shadow: 2px 2px 8px #222222;
+        border-radius: 20px;
+        box-shadow: 0px 10px 20px #949494;
     }
 
     .product-thumbnail:hover {

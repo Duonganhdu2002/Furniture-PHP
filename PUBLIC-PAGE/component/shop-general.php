@@ -164,8 +164,8 @@ foreach ($category_ids as $category_id) {
         -webkit-transition: .3s all ease;
         -o-transition: .3s all ease;
         transition: .3s all ease;
-        border-radius: 25px;
-        box-shadow: 2px 2px 8px #222222;
+        border-radius: 20px;
+        box-shadow: 0px 10px 20px #949494;
     }
 
     .product-thumbnail:hover {
