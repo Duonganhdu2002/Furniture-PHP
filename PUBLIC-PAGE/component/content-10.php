@@ -53,7 +53,10 @@ if (isset($_SESSION["username_user"])) {
     }
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+
+    unset($_SESSION['cart']);
+
     $idUser = isset($_POST["id"]) ? mysqli_real_escape_string($conn, $_POST["id"]) : '';
     $idProducts = isset($_POST["idProduct"]) ? $_POST["idProduct"] : [];
     $quantities = isset($_POST["quantity"]) ? $_POST["quantity"] : [];
@@ -107,11 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . $sql1 . "<br>" . $conn->error;
     }
-
-    // ...
-
 }
-
 
 ?>
 
@@ -245,23 +244,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <hr>
 
-                        <button type="submit" onclick="orderComplete()" style="font-size: 22px; margin-top: 20px; cursor: pointer;">
+                        <button name="submit" type="submit" onclick="orderComplete()" style="font-size: 22px; margin-top: 20px; cursor: pointer;">
                             Place Order
                         </button>
 
-                        <script>
-                            function orderComplete() {
-                                var cartExists = <?php echo isset($_SESSION['cart']) ? 'true' : 'false'; ?>;
-
-                                if (cartExists) {
-                                    // Clear or unset the cart in PHP
-                                    <?php unset($_SESSION['cart']); ?>
-
-                                    // Redirect to the specified page
-                                    window.location.href = 'index.php?pid=8';
-                                }
-                            }
-                        </script>
+                        
 
 
                     </div>

@@ -163,10 +163,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         position: relative;
     }
 
-    #cartImage {
-        /* transition: filter 0.3s ease-in-out; */
-    }
-
     #cartButton:hover #cartImage {
         filter: grayscale(100%) invert(100%);
     }
