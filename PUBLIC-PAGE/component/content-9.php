@@ -16,6 +16,11 @@
             <tbody>
                 <?php
 
+                echo "<pre>";
+                echo var_dump($_SESSION["cart"]);
+                echo "</pre>";
+
+
                 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     $totalPrice = 0;
                     foreach ($_SESSION['cart'] as $index => $product) {

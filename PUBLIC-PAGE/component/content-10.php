@@ -60,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $idUser = isset($_POST["id"]) ? mysqli_real_escape_string($conn, $_POST["id"]) : '';
     $idProducts = isset($_POST["idProduct"]) ? $_POST["idProduct"] : [];
     $quantities = isset($_POST["quantity"]) ? $_POST["quantity"] : [];
+    $prices = isset($_POST["price"]) ? $_POST["price"] : [];
     $status = isset($_POST["status"]) ? mysqli_real_escape_string($conn, $_POST["status"]) : '';
 
     // Get the maximum ID from shopping_carts
@@ -71,13 +72,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $sql1 = "INSERT INTO shopping_carts (id, user_id, created_at, status) VALUES ($newId, '$idUser', NOW(), '$status')";
 
     if ($conn->query($sql1) === TRUE) {
+
         // Get the cart_id after successful insertion
         $cartId = $newId;
 
         // Loop through the products and insert into cart_items
         for ($i = 0; $i < count($idProducts); $i++) {
+            
             $idProduct = mysqli_real_escape_string($conn, $idProducts[$i]);
             $quantity = mysqli_real_escape_string($conn, $quantities[$i]);
+            $product_price = mysqli_real_escape_string($conn, $prices[$i]);
 
             // Get the maximum ID from cart_items
             $maxIdResultProduct = $conn->query("SELECT MAX(id) AS max_id FROM cart_items");
@@ -92,8 +96,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             $resultCartIdCheck = $stmtCartIdCheck->get_result();
 
             if ($resultCartIdCheck->num_rows > 0) {
-                // Insert into cart_items
-                $sql2 = "INSERT INTO cart_items (id, cart_id, product_id, quantity, user) VALUES ('$newIdProduct', '$cartId', '$idProduct', '$quantity', '$idUser')";
+
+                $sql2 = "INSERT INTO cart_items (id, cart_id, product_id, quantity, user, price) VALUES ('$newIdProduct', '$cartId', '$idProduct', '$quantity', '$idUser', '$product_price')";
 
                 // Use prepared statement for the query
                 $stmt2 = $conn->prepare($sql2);
@@ -118,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 <div class="content-10">
     <form class="container10" action="" method="post" onsubmit="return submitcontainer10();">
         <input type="hidden" name="id" value="<?php echo $id ?>">
-        <input type="hidden" name="status" value="Chờ xác nhận">
+        <input type="hidden" name="status" value="1">
         <?php
         if (!isset($_SESSION["username_user"])) {
             echo "
@@ -224,6 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             foreach ($_SESSION['cart'] as $product) {
                                 echo "<div style='display: flex; height: 40px' class='section-price-product'>";
                                 echo "<input type='hidden' name='idProduct[]' value='" . $product[3] . "'>";
+                                echo "<input type='hidden' name='price[]' value='" . $product[2] . "'>";
                                 echo "<input type='hidden' name='quantity[]' value='" . $product[4] . "'>";
                                 echo "<p style='width: 70%;'>" . $product[1] . "<span style='font-weight: bold; color: black;'> x</span> <span style='color: black;'>" . $product[4] . "</span></p>";
                                 echo "<p><span style='color: black'>$</span>" . ($product[2] * $product[4]) . "</p>";
@@ -247,10 +252,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                         <button name="submit" type="submit" onclick="orderComplete()" style="font-size: 22px; margin-top: 20px; cursor: pointer;">
                             Place Order
                         </button>
-
-                        
-
-
                     </div>
                 </div>
             </div>
