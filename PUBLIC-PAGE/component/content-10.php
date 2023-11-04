@@ -62,11 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insert into shopping_carts
     $sql1 = "INSERT INTO shopping_carts (id, user_id, created_at, status) VALUES ($newId, '$idUser', NOW(), '$status')";
 
-    // ...
-
-    // Insert into shopping_carts
-    $sql1 = "INSERT INTO shopping_carts (id, user_id, created_at, status) VALUES ($newId, '$idUser', NOW(), '$status')";
-
     if ($conn->query($sql1) === TRUE) {
         // Get the cart_id after successful insertion
         $cartId = $newId;
