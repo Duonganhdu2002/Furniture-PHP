@@ -43,15 +43,24 @@ if (isset($_SESSION["username_user"])) {
         $street = $row["street"];
         $number = $row["number"];
         $id = $row["id"];
+        // $province = $row["province"];
+        // $district = $row["district"];
+        // $commune = $row["commune"];
+        // $street = $row["street"];
+        // $number = $row["number"];
 
-        $address = "$number, $street, $commune, $district, $province, $country";
+        // $address = "$number, $street, $commune, $district, $province, $country";
     }
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+
+    unset($_SESSION['cart']);
+
     $idUser = isset($_POST["id"]) ? mysqli_real_escape_string($conn, $_POST["id"]) : '';
     $idProducts = isset($_POST["idProduct"]) ? $_POST["idProduct"] : [];
     $quantities = isset($_POST["quantity"]) ? $_POST["quantity"] : [];
+    $prices = isset($_POST["price"]) ? $_POST["price"] : [];
     $status = isset($_POST["status"]) ? mysqli_real_escape_string($conn, $_POST["status"]) : '';
 
     // Get the maximum ID from shopping_carts
@@ -62,19 +71,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insert into shopping_carts
     $sql1 = "INSERT INTO shopping_carts (id, user_id, created_at, status) VALUES ($newId, '$idUser', NOW(), '$status')";
 
-    // ...
-
-    // Insert into shopping_carts
-    $sql1 = "INSERT INTO shopping_carts (id, user_id, created_at, status) VALUES ($newId, '$idUser', NOW(), '$status')";
-
     if ($conn->query($sql1) === TRUE) {
+
         // Get the cart_id after successful insertion
         $cartId = $newId;
 
         // Loop through the products and insert into cart_items
         for ($i = 0; $i < count($idProducts); $i++) {
+            
             $idProduct = mysqli_real_escape_string($conn, $idProducts[$i]);
             $quantity = mysqli_real_escape_string($conn, $quantities[$i]);
+            $product_price = mysqli_real_escape_string($conn, $prices[$i]);
 
             // Get the maximum ID from cart_items
             $maxIdResultProduct = $conn->query("SELECT MAX(id) AS max_id FROM cart_items");
@@ -89,8 +96,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $resultCartIdCheck = $stmtCartIdCheck->get_result();
 
             if ($resultCartIdCheck->num_rows > 0) {
-                // Insert into cart_items
-                $sql2 = "INSERT INTO cart_items (id, cart_id, product_id, quantity, user) VALUES ('$newIdProduct', '$cartId', '$idProduct', '$quantity', '$idUser')";
+
+                $sql2 = "INSERT INTO cart_items (id, cart_id, product_id, quantity, user, price) VALUES ('$newIdProduct', '$cartId', '$idProduct', '$quantity', '$idUser', '$product_price')";
 
                 // Use prepared statement for the query
                 $stmt2 = $conn->prepare($sql2);
@@ -107,11 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . $sql1 . "<br>" . $conn->error;
     }
-
-    // ...
-
 }
-
 
 ?>
 
@@ -119,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="content-10">
     <form class="container10" action="" method="post" onsubmit="return submitcontainer10();">
         <input type="hidden" name="id" value="<?php echo $id ?>">
-        <input type="hidden" name="status" value="Chờ xác nhận">
+        <input type="hidden" name="status" value="1">
         <?php
         if (!isset($_SESSION["username_user"])) {
             echo "
@@ -145,9 +148,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <label for="company_name">Company Name</label>
                             <input type="text" id="company_name">
                         </div>
-                        <div>
-                            <label for="address">Address <span>*</span></label>
-                            <input value="<?php echo "$address"; ?>" style="margin-bottom: 20px;" placeholder="Street address" type="text" id="address" required>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div style="width: 32%;">
+                                <label for="province">Province <span>*</span></label>
+                                <input value="<?php echo "$province" ?>" type="text" id="province" required>
+                            </div>
+                            <div style="width: 32%;">
+                                <label for="district">District <span>*</span></label>
+                                <input value="<?php echo "$district" ?>" type="text" id="disttrict" required>
+                            </div>
+                            <div style="width: 32%;">
+                                <label for="commune">Commune <span>*</span></label>
+                                <input value="<?php echo "$commune" ?>" type="text" id="commune" required>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div style="width: 48%;">
+                                <label for="street">Street <span>*</span></label>
+                                <input value="<?php echo "$street" ?>" type="text" id="street" required>
+                            </div>
+                            <div style="width: 48%;">
+                                <label for="number">Number <span>*</span></label>
+                                <input value="<?php echo "$number" ?>" type="number" id="number" min="1" required>
+                            </div>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
                             <div style="width: 48%;">
@@ -205,6 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             foreach ($_SESSION['cart'] as $product) {
                                 echo "<div style='display: flex; height: 40px' class='section-price-product'>";
                                 echo "<input type='hidden' name='idProduct[]' value='" . $product[3] . "'>";
+                                echo "<input type='hidden' name='price[]' value='" . $product[2] . "'>";
                                 echo "<input type='hidden' name='quantity[]' value='" . $product[4] . "'>";
                                 echo "<p style='width: 70%;'>" . $product[1] . "<span style='font-weight: bold; color: black;'> x</span> <span style='color: black;'>" . $product[4] . "</span></p>";
                                 echo "<p><span style='color: black'>$</span>" . ($product[2] * $product[4]) . "</p>";
@@ -221,29 +245,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             } else {
                                 echo "0";
                             }
-                             ?></p>
+                            ?></p>
                         </div>
                         <hr>
 
-                        <button type="submit" onclick="orderComplete()" style="font-size: 22px; margin-top: 20px; cursor: pointer;">
+                        <button name="submit" type="submit" onclick="orderComplete()" style="font-size: 22px; margin-top: 20px; cursor: pointer;">
                             Place Order
                         </button>
-
-                        <script>
-                            function orderComplete() {
-                                var cartExists = <?php echo isset($_SESSION['cart']) ? 'true' : 'false'; ?>;
-
-                                if (cartExists) {
-                                    // Clear or unset the cart in PHP
-                                    <?php unset($_SESSION['cart']); ?>
-
-                                    // Redirect to the specified page
-                                    window.location.href = 'index.php?pid=8';
-                                }
-                            }
-                        </script>
-
-
                     </div>
                 </div>
             </div>

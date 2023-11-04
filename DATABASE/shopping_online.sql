@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 03, 2023 lúc 12:13 PM
+-- Thời gian đã tạo: Th10 04, 2023 lúc 09:54 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -135,13 +135,8 @@ CREATE TABLE `cart_items` (
 --
 
 INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`, `user`) VALUES
-(1, 1, 42, 1, 3),
-(2, 2, 42, 1, 3),
-(3, 3, 42, 1, 3),
-(4, 4, 42, 1, 3),
-(5, 5, 42, 1, 3),
-(6, 6, 41, 2, 3),
-(7, 6, 42, 5, 3);
+(1, 1, 41, 11, 7),
+(2, 1, 45, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -197,38 +192,38 @@ CREATE TABLE `information` (
 --
 
 INSERT INTO `information` (`id`, `username`, `full_name`, `date_of_birth`, `email`, `gender`, `phone_number`, `avatar`, `role`) VALUES
-(1, 'user1', 'John Doe', '1990-01-15', 'john.doe@example.com', 1, '+123456789', NULL, 'user'),
-(2, 'user2', 'Jane Doe', '1985-05-22', 'jane.doe@example.com', 2, '+987654321', NULL, 'user'),
-(3, 'user3', 'Alice Smith', '1995-08-10', 'alice.smith@example.com', 2, '+111223344', NULL, 'user'),
-(4, 'user4', 'Bob Johnson', '1980-03-30', 'bob.johnson@example.com', 1, '+555666777', NULL, 'user'),
-(5, 'user5', 'Eva Williams', '1992-11-05', 'eva.williams@example.com', 2, '+999888777', NULL, 'user'),
-(6, 'user6', 'Michael Brown', '1993-04-18', 'michael.brown@example.com', 1, '+444333222', NULL, 'user'),
-(7, 'user7', 'Sophia Lee', '1988-09-12', 'sophia.lee@example.com', 2, '+123987654', NULL, 'user'),
-(8, 'user8', 'Daniel Taylor', '1998-07-25', 'daniel.taylor@example.com', 1, '+987123654', NULL, 'user'),
-(9, 'user9', 'Olivia Davis', '1987-12-08', 'olivia.davis@example.com', 2, '+555111222', NULL, 'user'),
-(10, 'user10', 'Matthew Evans', '1994-02-28', 'matthew.evans@example.com', 1, '+111222333', 'person_1.jpg', 'user'),
-(11, 'admin1', 'Ava Martinez', '1996-06-15', 'ava.martinez@example.com', 2, '+999555777', 'person_2.jpg', 'admin'),
-(12, 'admin2', 'Jacob Wilson', '1986-10-04', 'jacob.wilson@example.com', 1, '+333888999', 'person_3.jpg', 'admin'),
-(13, 'admin3', 'Emma Anderson', '1991-03-22', 'emma.anderson@example.com', 2, '+777444555', 'person_4.jpg', 'admin'),
-(14, 'admin4', 'Alexander Nguyen', '1989-08-17', 'alexander.nguyen@example.com', 1, '+111999888', 'person_5.jpg', 'admin'),
-(15, 'admin5', 'Mia Brown', '1997-01-11', 'mia.brown@example.com', 2, '+777111222', NULL, 'admin'),
-(16, 'admin6', 'Liam Garcia', '1985-05-30', 'liam.garcia@example.com', 1, '+555333444', NULL, 'admin'),
-(17, 'admin7', 'Amelia Kim', '1990-11-25', 'amelia.kim@example.com', 2, '+123789456', NULL, 'admin'),
-(18, 'admin8', 'Ethan Patel', '1999-07-08', 'ethan.patel@example.com', 1, '+555777999', NULL, 'admin'),
-(19, 'admin9', 'Olivia White', '1984-12-01', 'olivia.white@example.com', 2, '+999111222', NULL, 'admin'),
-(20, 'admin10', 'Noah Lee', '1992-02-14', 'noah.lee@example.com', 1, '+444666777', NULL, 'admin'),
-(21, 'admin11', 'Isabella Wilson', '1995-06-10', 'isabella.wilson@example.com', 2, '+123555999', NULL, 'admin'),
-(22, 'admin12', 'James Martin', '1983-10-23', 'james.martin@example.com', 1, '+555444333', NULL, 'admin'),
-(23, 'admin13', 'Sophia Kim', '1993-04-28', 'sophia.kim@example.com', 2, '+123456987', NULL, 'admin'),
-(24, 'admin14', 'Jackson Smith', '1988-09-15', 'jackson.smith@example.com', 1, '+987654321', NULL, 'admin'),
-(25, 'admin15', 'Emma Davis', '1998-07-28', 'emma.davis@example.com', 2, '+987123654', NULL, 'admin'),
-(26, 'admin16', 'Aiden Taylor', '1987-12-11', 'aiden.taylor@example.com', 1, '+555111222', NULL, 'admin'),
-(27, 'admin17', 'Olivia Wilson', '1994-03-01', 'olivia.wilson@example.com', 2, '+111222333', NULL, 'admin'),
-(28, 'admin18', 'Lucas Anderson', '1996-06-18', 'lucas.anderson@example.com', 1, '+999555777', NULL, 'admin'),
-(29, 'admin19', 'Ava Wilson', '1986-10-07', 'ava.wilson@example.com', 2, '+333888999', NULL, 'admin'),
-(30, 'admin20', 'Mason Martinez', '1991-03-25', 'mason.martinez@example.com', 1, '+777444555', NULL, 'admin'),
-(31, 'dawd', 'DU BUI VAN', '2002-12-12', '2154810104@vaa.edu.vn', 1, '0896899384', NULL, 'user'),
-(32, 'bvdu', 'DU BUI VAN', '2022-12-12', '2154810104@vaa.edu.vn', 2, '0896899384', NULL, 'user');
+(1, 'user1', 'John Doe', '1990-01-15', 'john.doe@example.com', 1, '+123456789', 'person_1.jpg', 'user'),
+(2, 'user2', 'Jane Doe', '1985-05-22', 'jane.doe@example.com', 2, '+987654321', 'person_2.jpg', 'user'),
+(3, 'user3', 'Alice Smith', '1995-08-10', 'alice.smith@example.com', 2, '+111223344', 'person_3.jpg', 'user'),
+(4, 'user4', 'Bob Johnson', '1980-03-30', 'bob.johnson@example.com', 1, '+555666777', 'person_4.jpg', 'user'),
+(5, 'user5', 'Eva Williams', '1992-11-05', 'eva.williams@example.com', 2, '+999888777', 'person_5.jpg', 'user'),
+(6, 'user6', 'Michael Brown', '1993-04-18', 'michael.brown@example.com', 1, '+444333222', 'person_6.jpg', 'user'),
+(7, 'user7', 'Sophia Lee', '1988-09-12', 'sophia.lee@example.com', 2, '+123987654', 'person_7.jpg', 'user'),
+(8, 'user8', 'Daniel Taylor', '1998-07-25', 'daniel.taylor@example.com', 1, '+987123654', 'person_8.jpg', 'user'),
+(9, 'user9', 'Olivia Davis', '1987-12-08', 'olivia.davis@example.com', 2, '+555111222', 'person_9.jpg', 'user'),
+(10, 'user10', 'Matthew Evans', '1994-02-28', 'matthew.evans@example.com', 1, '+111222333', 'person_10.jpg', 'user'),
+(11, 'admin1', 'Ava Martinez', '1996-06-15', 'ava.martinez@example.com', 2, '+999555777', 'person_11.jpg', 'admin'),
+(12, 'admin2', 'Jacob Wilson', '1986-10-04', 'jacob.wilson@example.com', 1, '+333888999', 'person_12.jpg', 'admin'),
+(13, 'admin3', 'Emma Anderson', '1991-03-22', 'emma.anderson@example.com', 2, '+777444555', 'person_13.jpg', 'admin'),
+(14, 'admin4', 'Alexander Nguyen', '1989-08-17', 'alexander.nguyen@example.com', 1, '+111999888', 'person_14.jpg', 'admin'),
+(15, 'admin5', 'Mia Brown', '1997-01-11', 'mia.brown@example.com', 2, '+777111222', 'person_15.jpg', 'admin'),
+(16, 'admin6', 'Liam Garcia', '1985-05-30', 'liam.garcia@example.com', 1, '+555333444', 'person_16.jpg', 'admin'),
+(17, 'admin7', 'Amelia Kim', '1990-11-25', 'amelia.kim@example.com', 2, '+123789456', 'person_17.jpg', 'admin'),
+(18, 'admin8', 'Ethan Patel', '1999-07-08', 'ethan.patel@example.com', 1, '+555777999', 'person_18.jpg', 'admin'),
+(19, 'admin9', 'Olivia White', '1984-12-01', 'olivia.white@example.com', 2, '+999111222', 'person_19.jpg', 'admin'),
+(20, 'admin10', 'Noah Lee', '1992-02-14', 'noah.lee@example.com', 1, '+444666777', 'person_20.jpg', 'admin'),
+(21, 'admin11', 'Isabella Wilson', '1995-06-10', 'isabella.wilson@example.com', 2, '+123555999', 'person_21.jpg', 'admin'),
+(22, 'admin12', 'James Martin', '1983-10-23', 'james.martin@example.com', 1, '+555444333', 'person_22.jpg', 'admin'),
+(23, 'admin13', 'Sophia Kim', '1993-04-28', 'sophia.kim@example.com', 2, '+123456987', 'person_23.jpg', 'admin'),
+(24, 'admin14', 'Jackson Smith', '1988-09-15', 'jackson.smith@example.com', 1, '+987654321', 'person_24.jpg', 'admin'),
+(25, 'admin15', 'Emma Davis', '1998-07-28', 'emma.davis@example.com', 2, '+987123654', 'person_25.jpg', 'admin'),
+(26, 'admin16', 'Aiden Taylor', '1987-12-11', 'aiden.taylor@example.com', 1, '+555111222', 'person_26.jpg', 'admin'),
+(27, 'admin17', 'Olivia Wilson', '1994-03-01', 'olivia.wilson@example.com', 2, '+111222333', 'person_27.jpg', 'admin'),
+(28, 'admin18', 'Lucas Anderson', '1996-06-18', 'lucas.anderson@example.com', 1, '+999555777', 'person_28.jpg', 'admin'),
+(29, 'admin19', 'Ava Wilson', '1986-10-07', 'ava.wilson@example.com', 2, '+333888999', 'person_29.jpg', 'admin'),
+(30, 'admin20', 'Mason Martinez', '1991-03-25', 'mason.martinez@example.com', 1, '+777444555', 'person_30.jpg', 'admin'),
+(31, 'dawd', 'DU BUI VAN', '2002-12-12', '2154810104@vaa.edu.vn', 1, '0896899384', 'person_1.jpg', 'user'),
+(32, 'bvdu', 'DU BUI VAN', '2022-12-12', '2154810104@vaa.edu.vn', 2, '0896899384', 'person_1.jpg', 'user');
 
 -- --------------------------------------------------------
 
@@ -604,12 +599,7 @@ CREATE TABLE `shopping_carts` (
 --
 
 INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`) VALUES
-(1, 3, '2023-11-03 11:07:56', 'Chờ xác nhận'),
-(2, 3, '2023-11-03 11:10:04', 'Chờ xác nhận'),
-(3, 3, '2023-11-03 11:10:11', 'Chờ xác nhận'),
-(4, 3, '2023-11-03 11:10:16', 'Chờ xác nhận'),
-(5, 3, '2023-11-03 11:12:32', 'Chờ xác nhận'),
-(6, 3, '2023-11-03 11:13:08', 'Chờ xác nhận');
+(1, 7, '2023-11-04 06:36:24', 'Chờ xác nhận');
 
 -- --------------------------------------------------------
 
