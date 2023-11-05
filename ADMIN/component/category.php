@@ -20,7 +20,9 @@
                 </form>
             </td>
             <td style="text-align: center">
-                <input name="searchByNameCategory" id="searchByNameCategory">
+            <form action="index.php?pid=1&categoryId=0" method="post" id="myForm">
+                <input name="searchByNameCategory" placeholder="Find category Name" type="text" id="searchByNameCategory">
+            </form>
             </td>
         </tr>
 
@@ -42,12 +44,12 @@
         if (isset($_GET['categoryId'])) {
             $categoryId = $_GET['categoryId'];
             if ($categoryId == '0') {
-                include "seaching/category-seaching.php";
+                include "searching/category-searching.php";
             } else {
-                include "seaching/hihi.php";
+                include "searching/category-detail.php";
             }
         } else {
-            include "seaching/hihi.php";
+            include "searching/category-detail.php";
         }
 
         ?>
