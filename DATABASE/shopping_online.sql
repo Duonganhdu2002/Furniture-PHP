@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 04, 2023 lúc 09:54 AM
+-- Thời gian đã tạo: Th10 04, 2023 lúc 02:37 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -127,16 +127,9 @@ CREATE TABLE `cart_items` (
   `cart_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
-  `user` int(11) DEFAULT NULL
+  `user` int(11) DEFAULT NULL,
+  `price` float(11,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `cart_items`
---
-
-INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`, `user`) VALUES
-(1, 1, 41, 11, 7),
-(2, 1, 45, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -224,36 +217,6 @@ INSERT INTO `information` (`id`, `username`, `full_name`, `date_of_birth`, `emai
 (30, 'admin20', 'Mason Martinez', '1991-03-25', 'mason.martinez@example.com', 1, '+777444555', 'person_30.jpg', 'admin'),
 (31, 'dawd', 'DU BUI VAN', '2002-12-12', '2154810104@vaa.edu.vn', 1, '0896899384', 'person_1.jpg', 'user'),
 (32, 'bvdu', 'DU BUI VAN', '2022-12-12', '2154810104@vaa.edu.vn', 2, '0896899384', 'person_1.jpg', 'user');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `orders`
---
-
-CREATE TABLE `orders` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `order_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `status` varchar(255) DEFAULT NULL,
-  `shipping_method_id` int(11) DEFAULT NULL,
-  `billing_address_id` int(11) DEFAULT NULL,
-  `shipping_address_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `order_items`
---
-
-CREATE TABLE `order_items` (
-  `id` int(11) NOT NULL,
-  `order_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -577,9 +540,7 @@ CREATE TABLE `shipping_methods` (
 --
 
 INSERT INTO `shipping_methods` (`id`, `method_name`, `standard_price`) VALUES
-(1, 'Standard Shipping', 9.99),
-(2, 'Express Shipping', 19.99),
-(3, 'Free Shipping', 0.00);
+(1, 'standard', 22.99);
 
 -- --------------------------------------------------------
 
@@ -591,15 +552,30 @@ CREATE TABLE `shopping_carts` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `status` varchar(255) DEFAULT NULL
+  `status` int(11) DEFAULT NULL,
+  `ship_method` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `status_cart`
+--
+
+CREATE TABLE `status_cart` (
+  `id` int(11) NOT NULL,
+  `name_status` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `shopping_carts`
+-- Đang đổ dữ liệu cho bảng `status_cart`
 --
 
-INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`) VALUES
-(1, 7, '2023-11-04 06:36:24', 'Chờ xác nhận');
+INSERT INTO `status_cart` (`id`, `name_status`) VALUES
+(1, 'Waiting for confirm'),
+(2, 'Confirmed'),
+(3, 'Delivering'),
+(4, 'Delivered');
 
 -- --------------------------------------------------------
 
@@ -693,24 +669,6 @@ ALTER TABLE `information`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Chỉ mục cho bảng `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `shipping_method_id` (`shipping_method_id`),
-  ADD KEY `billing_address_id` (`billing_address_id`),
-  ADD KEY `shipping_address_id` (`shipping_address_id`);
-
---
--- Chỉ mục cho bảng `order_items`
---
-ALTER TABLE `order_items`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `order_id` (`order_id`),
-  ADD KEY `product_id` (`product_id`);
-
---
 -- Chỉ mục cho bảng `payment_methods`
 --
 ALTER TABLE `payment_methods`
@@ -751,7 +709,15 @@ ALTER TABLE `shipping_methods`
 --
 ALTER TABLE `shopping_carts`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `FK_shopping_carts_shipping_methods_2` (`ship_method`),
+  ADD KEY `FK_shopping_carts_status_cart` (`status`);
+
+--
+-- Chỉ mục cho bảng `status_cart`
+--
+ALTER TABLE `status_cart`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `users`
@@ -790,22 +756,6 @@ ALTER TABLE `information`
   ADD CONSTRAINT `information_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
 
 --
--- Các ràng buộc cho bảng `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`shipping_method_id`) REFERENCES `shipping_methods` (`id`),
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`billing_address_id`) REFERENCES `information` (`id`),
-  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`shipping_address_id`) REFERENCES `information` (`id`);
-
---
--- Các ràng buộc cho bảng `order_items`
---
-ALTER TABLE `order_items`
-  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
-  ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
-
---
 -- Các ràng buộc cho bảng `payment_methods`
 --
 ALTER TABLE `payment_methods`
@@ -835,7 +785,9 @@ ALTER TABLE `reviews`
 -- Các ràng buộc cho bảng `shopping_carts`
 --
 ALTER TABLE `shopping_carts`
-  ADD CONSTRAINT `shopping_carts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `FK_shopping_carts_shipping_methods` FOREIGN KEY (`ship_method`) REFERENCES `shipping_methods` (`id`),
+  ADD CONSTRAINT `FK_shopping_carts_shipping_methods_2` FOREIGN KEY (`ship_method`) REFERENCES `shipping_methods` (`id`),
+  ADD CONSTRAINT `FK_shopping_carts_status_cart` FOREIGN KEY (`status`) REFERENCES `status_cart` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

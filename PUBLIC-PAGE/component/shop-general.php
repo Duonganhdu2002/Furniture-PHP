@@ -145,6 +145,18 @@ foreach ($category_ids as $category_id) {
         cursor: pointer;
     }
 
+    @keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-40px);
+    }
+    100% {
+        transform: translateY(-40px);
+    }
+    }
+
     .product-thumbnail {
         margin-bottom: 30px;
         position: relative;
@@ -152,6 +164,12 @@ foreach ($category_ids as $category_id) {
         -webkit-transition: .3s all ease;
         -o-transition: .3s all ease;
         transition: .3s all ease;
+        border-radius: 20px;
+        box-shadow: 0px 10px 20px #949494;
+    }
+
+    .product-thumbnail:hover {
+        animation: bounce 1s forwards;
     }
 
     .product-item h3 {

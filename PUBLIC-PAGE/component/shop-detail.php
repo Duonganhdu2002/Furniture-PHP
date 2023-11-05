@@ -214,8 +214,26 @@ $resultProducts = $link->query($sqlProducts);
         transition: .3s all ease;
     }
 
+    @keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-40px);
+    }
+    100% {
+        transform: translateY(-40px);
+    }
+    }
+
     .product-thumbnail {
         top: -25px;
+        border-radius: 20px;
+        box-shadow: 0px 10px 20px #949494;
+    }
+
+    .product-thumbnail:hover {
+        animation: bounce 1s forwards;
     }
 
     .product-item:hover .icon-cross {
