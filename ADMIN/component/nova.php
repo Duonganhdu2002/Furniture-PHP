@@ -8,8 +8,4 @@
         <h2>HISTORY BEGIN</h2>
         <p>Born from the idea of ​​making a difference, Nova has maintained and developed to become a leading position in the Vietnamese furniture market. Up to now, Nova has many large-scale and professional stores in big cities such as Hanoi, Ho Chi Minh City, and Binh Duong.</p>
     </div>
-    <?php
-                    include("component/content-1.php");
-                    include("component/content-2.php");
-        ?>
 </div>
