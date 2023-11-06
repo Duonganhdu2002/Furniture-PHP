@@ -8,7 +8,7 @@ function getMenuImage($pid)
         4 => 'member.svg',
         5 => 'customer.svg',
         6 => 'order.svg',
-        7 => 'revenue.svg',
+        7 => 'statistics.svg',
     );
     return $menuImages[$pid];
 }
@@ -22,7 +22,7 @@ function getMenuText($pid)
         4 => 'Member',
         5 => 'Customer',
         6 => 'Order',
-        7 => 'Revenue',
+        7 => 'Statistics',
     );
     return $menuTexts[$pid];
 }

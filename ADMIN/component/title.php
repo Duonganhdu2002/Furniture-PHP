@@ -23,7 +23,7 @@
                 $nameCategory = 'Order';
                 break;
             case '7':
-                $nameCategory = 'Revenue';
+                $nameCategory = 'Statistics';
                 break;
             case '8':
                 $nameCategory = 'Personal information';
