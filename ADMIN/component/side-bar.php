@@ -62,8 +62,8 @@ $background_color = array_key_exists($current_page, $page_colors) ? $page_colors
             </div>
         <?php endfor; ?>
 
-        <div onclick="window.location.href='index.php';" style="background-color: <?php echo ($current_page === 0) ? $background_color : 'transparent'; ?>" class="menu-link">
-            <a href="index.php" class="menu-content">
+        <div onclick="window.location.href='index.php?pid=0';" style="background-color: <?php echo ($current_page === 0) ? $background_color : 'transparent'; ?>" class="menu-link">
+            <a href="index.php?pid=0" class="menu-content">
                 <img src="../PUBLIC-PAGE/images/logo-black.svg" alt="" class="image-menu">
                 <span class="text-menu">Nova.</span>
             </a>
