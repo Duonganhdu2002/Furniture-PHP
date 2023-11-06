@@ -89,7 +89,7 @@
             $admin = $result->fetch_assoc();
             $_SESSION['username_admin'] = $admin['username'];
             $_SESSION['id_admin'] = $admin['id'];
-            header("Location: index.php");
+            header("Location: index.php?pid=0");
             exit();
         } else {
             echo '<script>alert("Sai thông tin đăng nhập!");</script>';
