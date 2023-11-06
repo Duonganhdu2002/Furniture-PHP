@@ -16,6 +16,7 @@
     </style>
 </head>
 <?php session_start(); ?>
+
 <body style="background-color: #eff2f1;">
     <div style="background-color: #3b5d50;">
         <?php
@@ -124,8 +125,15 @@
                 include("component/content-9.php");
                 break;
             case '7':
-                include("component/content-10.php");
-                break;
+                if (isset($_SESSION['username_user'])) {
+                    include("component/content-10.php");
+                } else {
+                    echo "<script>
+                            alert('You need to login first');
+                            window.location.href = 'login.php';
+                          </script>";
+                    exit();
+                }
             case '8':
                 include("component/content-11.php");
                 break;
@@ -136,9 +144,17 @@
                 include("component/product-detail.php");
                 break;
             case '11':
-                include("component/profile.php");
-                include("component/cart-user.php");
-                break;
+                if (isset($_SESSION['username_user'])) {
+                    include("component/profile.php");
+                    include("component/cart-user.php");
+                    break;
+                } else {
+                    echo "<script>
+                            alert('You need to login first');
+                            window.location.href = 'login.php';
+                          </script>";
+                    exit();
+                }
         }
     } else {
         include("component/content-2.php");

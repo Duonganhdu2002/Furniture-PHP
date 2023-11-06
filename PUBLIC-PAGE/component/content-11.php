@@ -11,6 +11,7 @@
         <p><a href="index.php?pid=1" class="btn">Back to shop</a></p>
     </div>
 </div>
+
 <style>
     .thankyou-icon {
         position: relative;

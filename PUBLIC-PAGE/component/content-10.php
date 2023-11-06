@@ -43,25 +43,31 @@ if (isset($_SESSION["username_user"])) {
         $street = $row["street"];
         $number = $row["number"];
         $id = $row["id"];
-        // $province = $row["province"];
-        // $district = $row["district"];
-        // $commune = $row["commune"];
-        // $street = $row["street"];
-        // $number = $row["number"];
-
-        // $address = "$number, $street, $commune, $district, $province, $country";
     }
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['shippingMethod'])) {
+    $shippingMethodOut = $_POST['shippingMethod'];
+    // Store the value in a session variable
+    $_SESSION['shippingMethodOut'] = $shippingMethodOut;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+
+    if (isset($_SESSION['shippingMethodOut'])) {
+        $shippingMethodOutFromSession = $_SESSION['shippingMethodOut'];
+    }
 
     unset($_SESSION['cart']);
 
     $idUser = isset($_POST["id"]) ? mysqli_real_escape_string($conn, $_POST["id"]) : '';
     $idProducts = isset($_POST["idProduct"]) ? $_POST["idProduct"] : [];
+
     $quantities = isset($_POST["quantity"]) ? $_POST["quantity"] : [];
     $prices = isset($_POST["price"]) ? $_POST["price"] : [];
     $status = isset($_POST["status"]) ? mysqli_real_escape_string($conn, $_POST["status"]) : '';
+    $orderNotes = isset($_POST["order_notes"]) ? mysqli_real_escape_string($conn, $_POST["order_notes"]) : '';
+
 
     // Get the maximum ID from shopping_carts
     $maxIdResult = $conn->query("SELECT MAX(id) AS max_id FROM shopping_carts");
@@ -69,16 +75,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $newId = $maxId + 1;
 
     // Insert into shopping_carts
-    $sql1 = "INSERT INTO shopping_carts (id, user_id, created_at, status, ship_method) VALUES ($newId, '$idUser', NOW(), 1, 1)";
+    $sql1 = "INSERT INTO shopping_carts (id, user_id, created_at, status, ship_method, note) VALUES ($newId, '$idUser', NOW(), 1, $shippingMethodOutFromSession, '$orderNotes')";
+
 
     if ($conn->query($sql1) === TRUE) {
 
         // Get the cart_id after successful insertion
         $cartId = $newId;
 
+        $country = isset($_POST["state"]) ? mysqli_real_escape_string($conn, $_POST["state"]) : '';
+        $province = isset($_POST["province"]) ? mysqli_real_escape_string($conn, $_POST["province"]) : '';
+        $district = isset($_POST["disttrict"]) ? mysqli_real_escape_string($conn, $_POST["disttrict"]) : '';
+        $commune = isset($_POST["commune"]) ? mysqli_real_escape_string($conn, $_POST["commune"]) : '';
+        $street = isset($_POST["street"]) ? mysqli_real_escape_string($conn, $_POST["street"]) : '';
+        $number = isset($_POST["number"]) ? mysqli_real_escape_string($conn, $_POST["number"]) : '';
+
+        $sqlAddress = "INSERT INTO address_cart (id_cart, username, country, province, district, commune, street, number) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmtAddress = $conn->prepare($sqlAddress);
+        $stmtAddress->bind_param("issssssi", $cartId, $idUser, $country, $province, $district, $commune, $street, $number);
+        if ($stmtAddress->execute() !== TRUE) {
+            echo "Error: " . $sqlAddress . "<br>" . $stmtAddress->error;
+        }
+        
         // Loop through the products and insert into cart_items
         for ($i = 0; $i < count($idProducts); $i++) {
-            
+
             $idProduct = mysqli_real_escape_string($conn, $idProducts[$i]);
             $quantity = mysqli_real_escape_string($conn, $quantities[$i]);
             $product_price = mysqli_real_escape_string($conn, $prices[$i]);
@@ -108,7 +129,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                 echo "Error: Cart ID does not exist in shopping_carts.";
             }
         }
-
         echo "New record created successfully";
         header("Location: index.php?pid=8");
     } else {
@@ -122,7 +142,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 <div class="content-10">
     <form class="container10" action="" method="post" onsubmit="return submitcontainer10();">
         <input type="hidden" name="id" value="<?php echo $id ?>">
-        <input type="hidden" name="status" value="1">
         <?php
         if (!isset($_SESSION["username_user"])) {
             echo "
@@ -141,41 +160,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     <div style="width: 90%; margin: 40px 0 40px 0;" id="billingForm">
                         <div>
                             <label for="first_name">Full Name <span>*</span></label>
-                            <input value="<?php echo "$full_name"; ?>" type="text" id="first_name" aria-describedby="first_name_help" required>
-
-                        </div>
-                        <div>
-                            <label for="company_name">Company Name</label>
-                            <input type="text" id="company_name">
+                            <input value="<?php echo "$full_name"; ?>" type="text" name="first_name" aria-describedby="first_name_help" required>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
                             <div style="width: 32%;">
                                 <label for="province">Province <span>*</span></label>
-                                <input value="<?php echo "$province" ?>" type="text" id="province" required>
+                                <input value="<?php echo "$province" ?>" type="text" name="province" required>
                             </div>
                             <div style="width: 32%;">
                                 <label for="district">District <span>*</span></label>
-                                <input value="<?php echo "$district" ?>" type="text" id="disttrict" required>
+                                <input value="<?php echo "$district" ?>" type="text" name="disttrict" required>
                             </div>
                             <div style="width: 32%;">
                                 <label for="commune">Commune <span>*</span></label>
-                                <input value="<?php echo "$commune" ?>" type="text" id="commune" required>
+                                <input value="<?php echo "$commune" ?>" type="text" name="commune" required>
                             </div>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
                             <div style="width: 48%;">
                                 <label for="street">Street <span>*</span></label>
-                                <input value="<?php echo "$street" ?>" type="text" id="street" required>
+                                <input value="<?php echo "$street" ?>" type="text" name="street" required>
                             </div>
                             <div style="width: 48%;">
                                 <label for="number">Number <span>*</span></label>
-                                <input value="<?php echo "$number" ?>" type="number" id="number" min="1" required>
+                                <input value="<?php echo "$number" ?>" type="number" name="number" min="1" required>
                             </div>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
                             <div style="width: 48%;">
                                 <label for="state">State / Country <span>*</span></label>
-                                <input value="<?php echo "$country"; ?>" type="text" id="state" required>
+                                <input value="<?php echo "$country"; ?>" type="text" name="state" required>
                             </div>
                             <div style="width: 48%;">
                                 <label for="posta">Posta / Zip</label>
@@ -185,18 +199,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                         <div style="display: flex; justify-content: space-between;">
                             <div style="width: 48%;">
                                 <label for="email">Email Address <span>*</span></label>
-                                <input value="<?php echo "$email"; ?>" type="email" id="email" required>
+                                <input value="<?php echo "$email"; ?>" type="email" name="email" required>
                             </div>
                             <div style="width: 48%;">
                                 <label for="phone">Phone <span>*</span></label>
-                                <input value="<?php echo "$phone_number"; ?>" type="text" id="phone" required>
+                                <input value="<?php echo "$phone_number"; ?>" type="text" name="phone" required>
                             </div>
                         </div>
 
                         <div>
                             <label style="font-size: 15px;" for="order_notes">Order Notes</label>
                             <br>
-                            <textarea placeholder="Write your notes here..." id="order_notes"></textarea>
+                            <input type="hidden" name="order_notes" value="<?php echo $orderNotes; ?>">
+                            <input placeholder="Write your notes here..." name="order_notes">
                         </div>
                     </div>
                 </div>
@@ -241,17 +256,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                         <div style="display: flex; height: 40px;" class="section-price-product">
                             <p style="width: 70%; font-weight: bold;">Order Total</p>
                             <p><span style="color: black">$ </span><?php if (isset($totalPrice)) {
-                                echo "$totalPrice";
-                            } else {
-                                echo "0";
-                            }
-                            ?></p>
+                                                                        echo "$totalPrice";
+                                                                    } else {
+                                                                        echo "0";
+                                                                    }
+                                                                    ?></p>
                         </div>
                         <hr>
 
-                        <button name="submit" type="submit" onclick="orderComplete()" style="font-size: 22px; margin-top: 20px; cursor: pointer;">
+                        <button name="submit" type="submit" style="font-size: 22px; margin-top: 20px; cursor: pointer;">
                             Place Order
                         </button>
+
                     </div>
                 </div>
             </div>

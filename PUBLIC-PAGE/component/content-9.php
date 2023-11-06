@@ -15,6 +15,15 @@
 
             <tbody>
                 <?php
+
+                // echo "<pre>";
+                // if (isset($_SESSION["cart"])) {
+                //     echo var_dump($_SESSION["cart"]);
+                // } else {
+                //     echo "";
+                // }
+                // echo "</pre>";
+
                 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     $totalPrice = 0;
                     foreach ($_SESSION['cart'] as $index => $product) {
@@ -109,74 +118,72 @@
         </table>
 
 
-        <div class="second-child">
-            <div class="left-side">
-                <div style="display: flex;">
+        <form action="index.php?pid=7" method="post">
+            <div style="margin: 20px 0 0 0; display: flex; align-items: center; justify-content: end;">
+                <label style="font-size: 18px; font-weight: bold; opacity: 0.8; margin-right: 20px" for="shippingMethod">SHIPPING METHOD</label>
+                <select style="width: 120px; font-size: 16px; border-radius: 10px; padding: 10px" name="shippingMethod" id="shippingMethod">
+                    <option value="1">Fast</option>
+                    <option value="2">Standard</option>
+                </select>
+            </div>
+
+
+            <div class="second-child">
+                <div class="left-side">
+                    <div style="display: flex;">
+                        <div>
+                            <a id="goBackBtn">
+                                <button>Continue Shopping</button>
+                            </a>
+                            <script>
+                                document.getElementById('goBackBtn').addEventListener('click', function() {
+                                    goBack();
+                                });
+
+                                function goBack() {
+                                    window.history.back();
+                                }
+                            </script>
+                        </div>
+                    </div>
+                    <div style="margin: 40px 0 40px 0">
+                        <p style="font-size: 20px; font-weight: bold">Coupon</p>
+                        <p>Enter your coupon code if you have one.</p>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <input class="input-code" placeholder="Cupon code" type="text" name="code" id="code">
+                        <button style="font-size: 16px">Apply Coupon</button>
+                    </div>
+                </div>
+                <div class="right-side">
                     <div>
-                        <a id="goBackBtn">
-                            <button>Continue Shopping</button>
+                        <p style="font-size: 18px; font-weight: bold;">CART TOTALS</p>
+                    </div>
+                    <div style="display: flex; margin: 20px 0 20px 0">
+                        <div style="width: 50%;">
+                            <p style="font-size: 16px">Total</p>
+                        </div>
+                        <div style="width: 50%;">
+                            <p style="font-weight: bold; font-size: 18px">
+                                <?php
+                                if (!isset($_SESSION['cart']) || empty($_SESSION['cart']) || count($_SESSION['cart']) === 0) {
+                                    echo '<td>$ 0</td>';
+                                } else {
+                                    echo '<td>$' . $totalPrice . '</td>';
+                                }
+                                ?>
+
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="index.php?pid=7">
+                            <button type="submit" style="font-size: 18px; cursor: pointer">Procced to checkout</button>
                         </a>
-                        <script>
-                            document.getElementById('goBackBtn').addEventListener('click', function() {
-                                goBack();
-                            });
-
-                            function goBack() {
-                                // Go back to the previous page
-                                window.history.back();
-                            }
-                        </script>
                     </div>
-                </div>
-                <div style="margin: 40px 0 40px 0">
-                    <p style="font-size: 20px; font-weight: bold">Coupon</p>
-                    <p>Enter your coupon code if you have one.</p>
-                </div>
-                <div style="display: flex; align-items: center;">
-                    <input class="input-code" placeholder="Cupon code" type="text" name="code" id="code">
-                    <button style="font-size: 16px">Apply Coupon</button>
                 </div>
             </div>
-            <div class="right-side">
-                <div>
-                    <p style="font-size: 18px; font-weight: bold;">CART TOTALS</p>
-                </div>
-                <div style="display: flex; margin: 20px 0 20px 0">
-                    <div style="width: 50%;">
-                        <!-- <p style="font-size: 16px">Shipping fee</p> -->
-                        <p style="font-size: 16px">Total</p>
-                    </div>
-                    <div style="width: 50%;">
-                        <!-- <p id="shippingFee" style="font-weight: bold; font-size: 18px">$30.00</p> -->
-                        <p style="font-weight: bold; font-size: 18px">
-                            <?php
-                            if (!isset($_SESSION['cart']) || empty($_SESSION['cart']) || count($_SESSION['cart']) === 0) {
-                                echo '<td>$ 0</td>';
-                            } else {
-                                echo '<td>$' . $totalPrice . '</td>';
-                            }
-                            ?>
-
-                        </p>
-                    </div>
-                </div>
-                <div>
-                    <button onclick="CheckUsername()" style="font-size: 18px; cursor: pointer">Procced to checkout</button>
-                    <script>
-                        function CheckUsername() {
-
-                            var usernameExists = "<?php echo isset($_SESSION['username_user']); ?>";
-
-                            if (usernameExists) {
-                                window.location.href = 'index.php?pid=7';
-                            } else {
-                                alert("You need to login first")
-                            }
-                        }
-                    </script>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 <style>
