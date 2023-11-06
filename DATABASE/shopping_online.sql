@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 04, 2023 lúc 02:37 PM
+-- Thời gian đã tạo: Th10 06, 2023 lúc 05:37 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -73,9 +73,31 @@ INSERT INTO `addresses` (`id`, `username`, `country`, `province`, `district`, `c
 (27, 'admin17', 'Finland', 'Helsinki', 'Uusimaa', 'Kluuvi', 'Aleksanterinkatu', '2424', 'admin'),
 (28, 'admin18', 'Portugal', 'Lisbon', 'Lisbon', 'Baixa', 'Rua Augusta', '2525', 'admin'),
 (29, 'admin19', 'Ireland', 'Dublin', 'Leinster', 'City Centre', 'Grafton Street', '2626', 'admin'),
-(30, 'admin20', 'Belgium', 'Brussels', 'Brussels-Capital Region', 'City of Brussels', 'Rue Neuve', '2727', 'admin'),
-(31, 'dawd', '', '', '', '', NULL, NULL, 'user'),
-(32, 'bvdu', '', '', '', '', NULL, NULL, 'user');
+(30, 'admin20', 'Belgium', 'Brussels', 'Brussels-Capital Region', 'City of Brussels', 'Rue Neuve', '2727', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `address_cart`
+--
+
+CREATE TABLE `address_cart` (
+  `id_cart` int(11) DEFAULT NULL,
+  `username` int(11) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL,
+  `province` varchar(50) DEFAULT NULL,
+  `district` varchar(50) DEFAULT NULL,
+  `commune` varchar(50) DEFAULT NULL,
+  `street` varchar(50) DEFAULT NULL,
+  `number` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `address_cart`
+--
+
+INSERT INTO `address_cart` (`id_cart`, `username`, `country`, `province`, `district`, `commune`, `street`, `number`) VALUES
+(1, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202');
 
 -- --------------------------------------------------------
 
@@ -130,6 +152,13 @@ CREATE TABLE `cart_items` (
   `user` int(11) DEFAULT NULL,
   `price` float(11,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `cart_items`
+--
+
+INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`, `user`, `price`) VALUES
+(1, 1, 41, 1, 5, 899.99);
 
 -- --------------------------------------------------------
 
@@ -199,7 +228,7 @@ INSERT INTO `information` (`id`, `username`, `full_name`, `date_of_birth`, `emai
 (12, 'admin2', 'Jacob Wilson', '1986-10-04', 'jacob.wilson@example.com', 1, '+333888999', 'person_12.jpg', 'admin'),
 (13, 'admin3', 'Emma Anderson', '1991-03-22', 'emma.anderson@example.com', 2, '+777444555', 'person_13.jpg', 'admin'),
 (14, 'admin4', 'Alexander Nguyen', '1989-08-17', 'alexander.nguyen@example.com', 1, '+111999888', 'person_14.jpg', 'admin'),
-(15, 'admin5', 'Mia Brown', '1997-01-11', 'mia.brown@example.com', 2, '+777111222', 'person_15.jpg', 'admin'),
+(15, 'admin5', 'Mia Brown', '1997-01-11', 'mia.brown@example.com', 2, '+777111222', 'person_14.jpg', 'admin'),
 (16, 'admin6', 'Liam Garcia', '1985-05-30', 'liam.garcia@example.com', 1, '+555333444', 'person_16.jpg', 'admin'),
 (17, 'admin7', 'Amelia Kim', '1990-11-25', 'amelia.kim@example.com', 2, '+123789456', 'person_17.jpg', 'admin'),
 (18, 'admin8', 'Ethan Patel', '1999-07-08', 'ethan.patel@example.com', 1, '+555777999', 'person_18.jpg', 'admin'),
@@ -540,7 +569,9 @@ CREATE TABLE `shipping_methods` (
 --
 
 INSERT INTO `shipping_methods` (`id`, `method_name`, `standard_price`) VALUES
-(1, 'standard', 22.99);
+(1, 'Fast', 22.99),
+(2, 'Standard', 19.99),
+(3, 'Free ship', 0.00);
 
 -- --------------------------------------------------------
 
@@ -553,8 +584,16 @@ CREATE TABLE `shopping_carts` (
   `user_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `status` int(11) DEFAULT NULL,
-  `ship_method` int(11) NOT NULL
+  `ship_method` int(11) NOT NULL,
+  `note` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `shopping_carts`
+--
+
+INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`, `ship_method`, `note`) VALUES
+(1, 5, '2023-11-06 11:35:25', 1, 2, 'HIIHIHIH');
 
 -- --------------------------------------------------------
 
@@ -639,6 +678,13 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `created_at`, `image`
 --
 ALTER TABLE `addresses`
   ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Chỉ mục cho bảng `address_cart`
+--
+ALTER TABLE `address_cart`
+  ADD KEY `FK_address_cart_shopping_carts` (`id_cart`),
+  ADD KEY `FK_address_cart_shopping_carts_2` (`username`);
 
 --
 -- Chỉ mục cho bảng `brands`
@@ -733,7 +779,14 @@ ALTER TABLE `users`
 -- Các ràng buộc cho bảng `addresses`
 --
 ALTER TABLE `addresses`
-  ADD CONSTRAINT `fk_addresses_information` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `FK_addresses_users` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+
+--
+-- Các ràng buộc cho bảng `address_cart`
+--
+ALTER TABLE `address_cart`
+  ADD CONSTRAINT `FK_address_cart_shopping_carts` FOREIGN KEY (`id_cart`) REFERENCES `shopping_carts` (`id`),
+  ADD CONSTRAINT `FK_address_cart_shopping_carts_2` FOREIGN KEY (`username`) REFERENCES `shopping_carts` (`user_id`);
 
 --
 -- Các ràng buộc cho bảng `cart_items`
