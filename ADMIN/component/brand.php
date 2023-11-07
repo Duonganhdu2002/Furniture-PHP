@@ -1,5 +1,5 @@
 <div class="brand">
-    <table class='brand-data-table'>";
+    <table class='brand-data-table'>
 
         <tr>
             <th style='text-align: center;'>STT</th>

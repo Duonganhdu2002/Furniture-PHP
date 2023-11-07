@@ -8,19 +8,20 @@ if ($result->num_rows > 0) {
         echo "<tr>";
         echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
         echo "<td style='width:6%; text-align: center;'>" . $row["id"] . "</td>";
-        echo "<td style='width:4%; text-align: center;'>" . $row["username"] . "</td>";
+        echo "<td style='width:6%; text-align: center;'>" . $row["username"] . "</td>";
         echo "<td class='hover-cell'; style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
                 <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
                 <div class='action-buttons'>
-                    <a href='../ADMIN/index.php?pid=2&update&id=$id'><button class='edit-button'>Update</button></a>
+                    <a href='../ADMIN/index.php?pid=2&update&id=$id'><button class='edit-button'>Detail</button></a>
                     <br>
                     <a href='../ADMIN/component/delete/product.php?id=$id'><button class='delete-button'>Delete</button></a>
                     </div>
             </td>";
         echo "<td style='width: 18%; padding: 10px 20px 10px 20px'>" . $row["created_at"] . "</td>";
-        echo "<td style='width: 20%; padding: 10px 20px 10px 20px'>" . $row["name_status"] . "</td>";
-        echo "<td style='width: 20%; padding: 10px 20px 10px 20px'>" . $row["method_name"] . "</td>";
-        echo "<td style='width: 20%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["note"] . "</td>";
+        echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["name_status"] . "</td>";
+        echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $row["method_name"] . "</td>";
+        echo "<td style='width: 23%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["note"] . "</td>";
+        echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'><button>Confirm</button></td>";
         echo "</tr>";
     
         $stt++;
@@ -35,7 +36,7 @@ if ($result->num_rows > 0) {
     echo "<div class='pagination'>";
 
     // Always show "First" button
-    echo "<a href='index.php?pid=2&page=1'>First</a> ";
+    echo "<a href='index.php?pid=6&page=1'>First</a> ";
 
     // Determine the first and last two pages to display
     $startPage = max(1, $page - 1);
@@ -43,7 +44,7 @@ if ($result->num_rows > 0) {
 
     // Show the page numbers
     for ($i = $startPage; $i <= $endPage; $i++) {
-        echo "<a href='index.php?pid=2&page=$i'";
+        echo "<a href='index.php?pid=6&page=$i'";
         if ($i == $page) {
             echo " class='current'";
         }
@@ -51,7 +52,7 @@ if ($result->num_rows > 0) {
     }
 
     // Always show "End" button
-    echo "<a href='index.php?pid=2&page=$totalPages'>End</a>";
+    echo "<a href='index.php?pid=6&page=$totalPages'>End</a>";
 
     echo "</div>";
 } else {
@@ -59,3 +60,4 @@ if ($result->num_rows > 0) {
 }
 
 ?>
+

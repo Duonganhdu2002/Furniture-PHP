@@ -6,8 +6,8 @@
             <th style="text-align: center">ID</th>
             <th style="text-align: center">Username</th>
             <th style="text-align: center">Name</th>
-            <th style="text-align: center">Email</th>
             <th style="text-align: center">Phone</th>
+            <th style="text-align: center">Email</th>
             <th style="text-align: center">Birth</th>
             <th style="text-align: center">Gender</th>
             <th style="text-align: center">Avatar</th>

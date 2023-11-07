@@ -38,6 +38,8 @@
     <?php
     if (isset($_GET['pid']) && in_array($_GET['pid'], [1, 2, 3, 4])) {
         include "component/add-new.php";
+    } else if (isset($_GET["pid"]) && in_array($_GET["pid"], [6])) {
+        include "component/filter-order.php";
     }
     ?>
 </div>

@@ -11,6 +11,7 @@
             <th style="text-align: center">Status</th>
             <th style="text-align: center">Ship MT</th>
             <th style="text-align: center">Note</th>
+            <th style="text-align: center">Confirm</th>
         </tr>
 
         <tr>
@@ -97,6 +98,7 @@
         border-top: none;
         border-left: none;
         border-right: none;
+        width: 100%;
     }
 
     .edit-button:hover {

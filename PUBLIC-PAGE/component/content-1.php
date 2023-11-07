@@ -18,7 +18,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href="index.php?pid=9&categoryId=3">
+                    <a href="index.php?pid=9&categoryId=1">
                         <button class="explore">Explore</button>
                     </a>
                 </div>

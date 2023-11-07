@@ -1,46 +1,27 @@
 <?php
 $link = new mysqli("localhost", "root", "", "shopping_online");
 
-$sqlIdArray = "SELECT id FROM categories";
-$resultIdArray = $link->query($sqlIdArray);
-$category_ids = array();
+$sqlCategory = "SELECT * FROM categories";
+$resultCategory = $link->query($sqlCategory);
 
-if ($resultIdArray->num_rows > 0) {
-    while ($row = $resultIdArray->fetch_assoc()) {
-        $category_ids[] = $row["id"];
-    }
-} else {
-    echo "Không có dữ liệu trong bảng categories";
-}
+$categoryID = isset($_GET["categoryId"]) ? $_GET["categoryId"] : NULL;
 
-if (isset($_GET['categoryId'])) {
-    $category_id = $_GET['categoryId'];
-} else {
-    $category_id = $category_ids[0];
-}
-
-$sqlProducts = "SELECT id, product_name, image, price FROM products WHERE category_id = $category_id";
+$sqlProducts = "SELECT * FROM products WHERE category_id = $categoryID";
 $resultProducts = $link->query($sqlProducts);
+
 ?>
 <div class="shop-detail">
     <div class="product-section">
+
         <div style="width: 25%; margin-top: 50px;" class="categories-column">
             <ul style="list-style: none; padding-right: 40px; padding-left: 0px;">
                 <?php
-                foreach ($category_ids as $cat_id) {
-                    $sqlCategories = "SELECT id, category_name FROM categories WHERE id = $cat_id";
-                    $resultCategories = $link->query($sqlCategories);
-
-                    if ($resultCategories->num_rows > 0) {
-                        $row = $resultCategories->fetch_assoc();
-                        $categoryId = $row["id"];
-
-                        $currentCategory = isset($_GET['categoryId']) ? $_GET['categoryId'] : null;
-                        $activeClass = ($currentCategory == $categoryId) ? 'active-category' : '';
+                if ($resultCategory->num_rows > 0) {
+                    while ($row = $resultCategory->fetch_assoc()) {
                 ?>
                         <li style="margin-bottom: 30px;">
                             <a style="color: #f9bf29; text-decoration: none; text-transform: uppercase;
-                    font-size: 18px; font-weight: 600; color: #3b5d50 <?php echo $activeClass; ?>" href="index.php?pid=9&categoryId=<?php echo $categoryId; ?>">
+                        font-size: 18px; font-weight: 600; color: #3b5d50" href="index.php?pid=9&categoryId=<?php echo $row["id"]; ?>">
                                 <?php echo $row["category_name"]; ?>
                             </a>
                         </li>
@@ -51,19 +32,15 @@ $resultProducts = $link->query($sqlProducts);
             </ul>
         </div>
 
-
         <div style="width: 75%; margin-top: 50px;" class="products-column">
             <?php
-            if (isset($_GET['categoryId'])) {
-                $categoryId = $_GET['categoryId'];
-                if ($categoryId == '0') {
-                    include "shop-searching.php";
-                } else {
-                    include "shop-section.php";
-                }
+            $categoryId = $_GET['categoryId'];
+            if ($categoryId == '0') {
+                include "shop-searching.php";
             } else {
                 include "shop-section.php";
             }
+
             ?>
         </div>
     </div>
@@ -71,14 +48,8 @@ $resultProducts = $link->query($sqlProducts);
 
 <style>
     .products-column {
-        display: flex;
-        justify-content: center;
+        align-items: center;
     }
-
-    .products-column div {
-        width: 100%;
-    }
-
     .shop-detail {
         display: flex;
         justify-content: center;
@@ -112,7 +83,7 @@ $resultProducts = $link->query($sqlProducts);
         font-size: 14px;
         opacity: 0.7;
         line-height: 2.0;
-        margin-bottom: 50px;
+        margin-bottom: 100px;
     }
 
     .product-section {
@@ -124,25 +95,17 @@ $resultProducts = $link->query($sqlProducts);
         margin-bottom: 80px;
     }
 
-
-    .row {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 50px;
-    }
-
-    .row div {
-        width: 33%;
-    }
-
     .product-item {
+        height: 520px;
+        display: flex;
+        float: left;
+        width: 33%;
         text-align: center;
         text-decoration: none;
-        display: block;
         position: relative;
         padding-bottom: 50px;
         cursor: pointer;
+        margin-bottom: 100px;
     }
 
     .product-thumbnail {
@@ -215,15 +178,17 @@ $resultProducts = $link->query($sqlProducts);
     }
 
     @keyframes bounce {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-40px);
-    }
-    100% {
-        transform: translateY(-40px);
-    }
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-40px);
+        }
+
+        100% {
+            transform: translateY(-40px);
+        }
     }
 
     .product-thumbnail {

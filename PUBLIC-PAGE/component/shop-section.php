@@ -1,51 +1,31 @@
-<div>
-    <?php
-    if ($resultProducts->num_rows > 0) {
-        $totalProducts = $resultProducts->num_rows;
-        $productsPerRow = 3;
-        $totalRows = ceil($totalProducts / $productsPerRow);
+<?php
+if ($resultProducts->num_rows > 0) {
+    while ($row = $resultProducts->fetch_assoc()) {
+?>
+        <div class="product-item">
+            <form action="component/ctrl-cart/addToCart.php" method="post">
+                <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+                <a href="index.php?pid=10&id=<?php echo $row["id"]; ?>">
+                    <input type="hidden" name="image" value="<?php echo $row["image"]; ?>">
+                    <img src="images/chairs/<?php echo $row["image"]; ?>" class="product-thumbnail">
+                </a>
 
-        for ($rowNumber = 1; $rowNumber <= $totalRows; $rowNumber++) {
-            echo '<div class="row">';
-            
-            for ($productNumber = 1; $productNumber <= $productsPerRow; $productNumber++) {
-                $product = $resultProducts->fetch_assoc();
+                <input type="hidden" name="product_name" value="<?php echo $row["product_name"]; ?>">
+                <h3 class="product-title"><?php echo $row["product_name"]; ?></h3>
 
-                if ($product) {
-    ?>
-                    <div class="product-item">
-                        <form action="component/ctrl-cart/addToCart.php" method="post">
-                            <input type="hidden" name="id" value="<?php echo $product["id"]; ?>">
-                            <a href="index.php?pid=10&id=<?php echo $product["id"]; ?>">
-                                <input type="hidden" name="image" value="<?php echo $product["image"]; ?>">
-                                <img src="images/chairs/<?php echo $product["image"]; ?>" class="product-thumbnail">
-                            </a>
+                <input type="hidden" name="price" value="<?php echo $row["price"]; ?>">
+                <strong class="product-price"><?php echo $row["price"]; ?></strong>
 
-                            <input type="hidden" name="product_name" value="<?php echo $product["product_name"]; ?>">
-                            <h3 class="product-title"><?php echo $product["product_name"]; ?></h3>
-
-                            <input type="hidden" name="price" value="<?php echo $product["price"]; ?>">
-                            <strong class="product-price"><?php echo $product["price"]; ?></strong>
-
-                            <span class="icon-cross">
-                                <a class="add" id="<?php echo $product["id"]; ?>">
-                                    <button name="submit" style="background-color: #2f2f2f; border: none;" type="submit">
-                                        <img src="images/cross.svg">
-                                    </button>
-                                </a>
-                            </span>
-                        </form>
-                    </div>
-    <?php
-                } else {
-                    break;
-                }
-            }
-
-            echo '</div>';
-        }
-    } else {
-        echo "Không có sản phẩm trong danh mục này.";
+                <span class="icon-cross">
+                    <a class="add" id="<?php echo $row["id"]; ?>">
+                        <button name="submit" style="background-color: #2f2f2f; border: none;" type="submit">
+                            <img src="images/cross.svg">
+                        </button>
+                    </a>
+                </span>
+            </form>
+        </div>
+<?php
     }
-    ?>
-</div>
+}
+?>
