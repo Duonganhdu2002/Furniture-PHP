@@ -40,16 +40,15 @@
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page - 1) * $itemsPerPage;
 
-        $sql = "SELECT shopping_carts.id, shopping_carts.user_id, users.username, shopping_carts.created_at, status_cart.name_status, shopping_methods.method_name, shopping_carts.note
+        $sql = "SELECT shopping_carts.id, shopping_carts.user_id, users.username, shopping_carts.created_at, status_cart.name_status, shipping_methods.method_name, shopping_carts.note
         FROM shopping_carts
         JOIN users ON shopping_carts.user_id = users.id
-        JOIN shopping_methods ON shopping_carts.ship_method = shopping_methods.id
+        JOIN shipping_methods ON shopping_carts.ship_method = shipping_methods.id
         JOIN status_cart ON shopping_carts.status = status_cart.id
         LIMIT $offset, $itemsPerPage";
 
         $result = $conn->query($sql);
 
-        // ------------------
         if (isset($_GET['categoryId'])) {
             $categoryId = $_GET['categoryId'];
             if ($categoryId == '0') {
