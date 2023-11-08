@@ -17,12 +17,12 @@
             </td>
             <td style='text-align: center' colspan='2'>
                 <form action="index.php?pid=3&brandId=0" method="post" id="myForm">
-                    <input name="searchByIdBrand" id='searchByIdBrand' placeholder="Find brand ID" type="text">
+                    <input name="searchByIdBrand" id='searchByIdBrand' type="text">
                 </form>
             </td>
             <td style='text-align: center'>
                 <form action="index.php?pid=3&brandId=0" method="post" id="myForm">
-                    <input name="searchByNameBrand" id='searchByNameBrand' placeholder="Find brand Name" type="text">
+                    <input name="searchByNameBrand" id='searchByNameBrand'type="text">
                 </form>
             </td>
         </tr>

@@ -22,12 +22,12 @@
                 </td>
                 <td style="text-align: center" colspan="2">
                 <form action="index.php?pid=2&productId=0" method="post" id="myForm">
-                    <input name="searchByIdproduct" placeholder="Find product ID" type="text" id="searchByIdproduct">
+                    <input name="searchByIdproduct" type="text" id="searchByIdproduct">
                 </form>
                 </td>
                 <td style="text-align: center">
                 <form action="index.php?pid=2&productId=0" method="post" id="myForm">
-                    <input name="searchByNameproduct" placeholder="Find product Name" type="text" id="searchByNameproduct">
+                    <input name="searchByNameproduct" type="text" id="searchByNameproduct">
                 </form>
                 </td>
                 <td style="text-align: center">
@@ -161,7 +161,7 @@
 
     .product-data-table tr td input {
         width: 80%;
-        height: 60%;
+        height: 30%;
         padding: 3px 8px;
         border: #3b5d50 1px solid;
         border-radius: 6px;

@@ -16,12 +16,12 @@
             </td>
             <td style="text-align: center" colspan="2">
                 <form action="index.php?pid=1&categoryId=0" method="post" id="myForm">
-                    <input name="searchByIdCategory" placeholder="Find category ID" type="text" id="searchByIdCategory">
+                    <input name="searchByIdCategory" type="text" id="searchByIdCategory">
                 </form>
             </td>
             <td style="text-align: center">
             <form action="index.php?pid=1&categoryId=0" method="post" id="myForm">
-                <input name="searchByNameCategory" placeholder="Find category Name" type="text" id="searchByNameCategory">
+                <input name="searchByNameCategory"type="text" id="searchByNameCategory">
             </form>
             </td>
         </tr>
