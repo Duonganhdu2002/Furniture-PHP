@@ -32,9 +32,8 @@ $resultProducts = $link->query($sqlProducts);
                 if ($resultCategory->num_rows > 0) {
                     while ($row = $resultCategory->fetch_assoc()) {
                 ?>
-                        <li style="margin-bottom: 30px;">
-                            <a style="color: #f9bf29; text-decoration: none; text-transform: uppercase;
-                        font-size: 18px; font-weight: 600; color: #3b5d50" href="index.php?pid=9&categoryId=<?php echo $row["id"]; ?>">
+                        <li style="margin-bottom: 10px; width:200px; height:40px;">
+                            <a class="categories-column-a" href="index.php?pid=9&categoryId=<?php echo $row["id"]; ?>">
                                 <?php echo $row["category_name"]; ?>
                             </a>
                         </li>
@@ -101,15 +100,21 @@ $resultProducts = $link->query($sqlProducts);
     /* styles.css */
 
     .pagination {
+        margin-top: 20px;
         display: flex;
         justify-content: center;
+
     }
 
     .pagination a {
         color: #333;
-        padding: 8px 16px;
+        padding: 15px 20px;
         text-decoration: none;
         transition: background-color 0.3s;
+        border-radius: 20%;
+        font-weight: 600;
+        margin-left: 2px;
+        margin-right: 2px;
     }
 
     .pagination a:hover {
@@ -118,9 +123,29 @@ $resultProducts = $link->query($sqlProducts);
 
     .pagination a.active {
         background-color: #f9bf29;
-        color: #fff;
+        color: #2f2f2f;
     }
 
+    .categories-column-a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 600;
+    color: #3b5d50;
+    width: 200px;
+    height:35px;
+    display:flex;
+    align-items: center;
+    }
+
+    .categories-column-a:hover {
+        background-color: #cfcfcf;
+    }
+
+    .categories-column-a.active {
+        color: #f9bf29;
+        background-color: #2f2f2f;
+    }
     .products-column {
         display: flex;
         flex-direction: column;
@@ -173,16 +198,16 @@ $resultProducts = $link->query($sqlProducts);
     }
 
     .product-item {
-        height: 500px;
+        height: 550px;
         display: flex;
         float: left;
         width: 33%;
         text-align: center;
         text-decoration: none;
         position: relative;
-        padding-bottom: 50px;
+        padding-bottom: 40px;
         cursor: pointer;
-        margin-bottom: 100px;
+        margin-bottom: 80px;
     }
 
     .product-thumbnail {
@@ -253,7 +278,6 @@ $resultProducts = $link->query($sqlProducts);
         -o-transition: .3s all ease;
         transition: .3s all ease;
     }
-
     @keyframes bounce {
         0% {
             transform: translateY(0);
@@ -329,4 +353,6 @@ $resultProducts = $link->query($sqlProducts);
             height: auto;
         }
     }
+
+
 </style>

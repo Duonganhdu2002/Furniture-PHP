@@ -25,27 +25,27 @@
                 </td>
                 <td style="text-align: center" colspan="2">
                 <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
-                    <input name="searchByIdCustomer" id="searchByIdCustomer" placeholder="Find customer ID" type="text">
+                    <input name="searchByIdCustomer" id="searchByIdCustomer"type="text">
                 </form>
                 </td>
                 <td style="text-align: center">
                 <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
-                    <input name="searchByUsernameCustomer" id="searchByUsernameCustomer" placeholder="Find customer Username" type="text">
+                    <input name="searchByUsernameCustomer" id="searchByUsernameCustomer"type="text">
                 </form>
                 </td>
                 <td style="text-align: center">
                 <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
-                    <input name="searchByNameCustomer" id="searchByNameCustomer" placeholder="Find customer Name" type="text">
+                    <input name="searchByNameCustomer" id="searchByNameCustomer"type="text">
                 </form>
                 </td>
                 <td style="text-align: center">
                 <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
-                    <input name="searchByEmailCustomer" id="searchByEmailCustomer" placeholder="Find customer Email" type="text">
+                    <input name="searchByEmailCustomer" id="searchByEmailCustomer" type="text">
                 </form>
                 </td>
                 <td style="text-align: center">
                 <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
-                    <input name="searchByPhoneCustomer" id="searchByPhoneCustomer" placeholder="Find customer Phone" type="text">
+                    <input name="searchByPhoneCustomer" id="searchByPhoneCustomer" type="text">
                 </form>
                 </td>
             </tr>
@@ -109,7 +109,7 @@
 
     .category-data-table tr td input {
         width: 80%;
-        height: 60%;
+        height: 30%;
         padding: 3px 8px;
         border: #3b5d50 1px solid;
         border-radius: 6px;
