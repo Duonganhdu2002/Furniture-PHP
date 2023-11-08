@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 06, 2023 lúc 05:37 PM
+-- Thời gian đã tạo: Th10 08, 2023 lúc 12:03 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -97,7 +97,12 @@ CREATE TABLE `address_cart` (
 --
 
 INSERT INTO `address_cart` (`id_cart`, `username`, `country`, `province`, `district`, `commune`, `street`, `number`) VALUES
-(1, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202');
+(1, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202'),
+(2, 1, 'Vietnam', 'Hanoi', 'Ba Dinh', 'Quan Thanh', 'Phan Dinh Phung', '123'),
+(3, 1, 'Vietnam', 'Hanoi', 'Ba Dinh', 'Quan Thanh', 'Phan Dinh Phung', '123'),
+(4, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202'),
+(5, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202'),
+(6, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202');
 
 -- --------------------------------------------------------
 
@@ -158,7 +163,13 @@ CREATE TABLE `cart_items` (
 --
 
 INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`, `user`, `price`) VALUES
-(1, 1, 41, 1, 5, 899.99);
+(1, 1, 41, 1, 5, 899.99),
+(2, 2, 41, 1, 1, 899.99),
+(3, 3, 41, 1, 1, 899.99),
+(4, 3, 47, 1, 1, 899.99),
+(5, 4, 1, 1, 5, 499.99),
+(6, 5, 41, 1, 5, 899.99),
+(7, 6, 1, 12, 5, 499.99);
 
 -- --------------------------------------------------------
 
@@ -585,15 +596,21 @@ CREATE TABLE `shopping_carts` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `status` int(11) DEFAULT NULL,
   `ship_method` int(11) NOT NULL,
-  `note` varchar(255) DEFAULT NULL
+  `note` varchar(255) DEFAULT NULL,
+  `total_price` float(11,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `shopping_carts`
 --
 
-INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`, `ship_method`, `note`) VALUES
-(1, 5, '2023-11-06 11:35:25', 1, 2, 'HIIHIHIH');
+INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`, `ship_method`, `note`, `total_price`) VALUES
+(1, 5, '2023-11-06 11:35:25', 1, 2, 'HIIHIHIH', NULL),
+(2, 1, '2023-11-06 16:47:01', 1, 1, '', NULL),
+(3, 1, '2023-11-08 09:50:05', 1, 2, 'Tadaaa', NULL),
+(4, 5, '2023-11-08 10:56:58', 1, 1, '0', 0.00),
+(5, 5, '2023-11-08 10:57:24', 1, 1, '0', 922.98),
+(6, 5, '2023-11-08 10:57:50', 1, 2, '0', 6019.87);
 
 -- --------------------------------------------------------
 
