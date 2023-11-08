@@ -13,11 +13,11 @@ $sqlCountProducts = "SELECT COUNT(*) AS total FROM products WHERE category_id = 
 $resultCountProducts = $link->query($sqlCountProducts);
 $totalProducts = ($resultCountProducts) ? $resultCountProducts->fetch_assoc()['total'] : 0;
 
+// Đếm tổng số page
 $totalPages = ceil($totalProducts / $productsPerPage);
 
 $sqlCategory = "SELECT * FROM categories";
 $resultCategory = $link->query($sqlCategory);
-
 
 $sqlProducts = "SELECT * FROM products WHERE category_id = $categoryID LIMIT $offset, $productsPerPage";
 $resultProducts = $link->query($sqlProducts);
