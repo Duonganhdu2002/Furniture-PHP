@@ -1,4 +1,5 @@
 <?php
+
 if ($resultProducts->num_rows > 0) {
     while ($row = $resultProducts->fetch_assoc()) {
 ?>

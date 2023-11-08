@@ -1,12 +1,25 @@
 <?php
 $link = new mysqli("localhost", "root", "", "shopping_online");
 
+$categoryID = isset($_GET["categoryId"]) ? $_GET["categoryId"] : NULL;
+
+//Phân trang
+$productsPerPage = 9;
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$offset = ($current_page - 1) * $productsPerPage;
+
+// Đếm tổng số sản phẩm
+$sqlCountProducts = "SELECT COUNT(*) AS total FROM products WHERE category_id = $categoryID";
+$resultCountProducts = $link->query($sqlCountProducts);
+$totalProducts = ($resultCountProducts) ? $resultCountProducts->fetch_assoc()['total'] : 0;
+
+$totalPages = ceil($totalProducts / $productsPerPage);
+
 $sqlCategory = "SELECT * FROM categories";
 $resultCategory = $link->query($sqlCategory);
 
-$categoryID = isset($_GET["categoryId"]) ? $_GET["categoryId"] : NULL;
 
-$sqlProducts = "SELECT * FROM products WHERE category_id = $categoryID";
+$sqlProducts = "SELECT * FROM products WHERE category_id = $categoryID LIMIT $offset, $productsPerPage";
 $resultProducts = $link->query($sqlProducts);
 
 ?>
@@ -33,23 +46,87 @@ $resultProducts = $link->query($sqlProducts);
         </div>
 
         <div style="width: 75%; margin-top: 50px;" class="products-column">
-            <?php
-            $categoryId = $_GET['categoryId'];
-            if ($categoryId == '0') {
-                include "shop-searching.php";
-            } else {
-                include "shop-section.php";
-            }
 
-            ?>
+            <div>
+                <?php
+                $categoryId = $_GET['categoryId'];
+                if ($categoryId == '0') {
+                    include "shop-searching.php";
+                } else {
+                    include "shop-section.php";
+                }
+
+                ?>
+            </div>
+
+            <div class="pagination">
+                <?php
+                // Hiển thị nút "First" nếu không ở trang đầu
+                if ($current_page > 1) {
+                    echo '<a href="?pid=9&categoryId=' . $categoryID . '&page=1">First</a>';
+                }
+
+                // Hiển thị tối đa 3 trang trước trang hiện tại
+                for ($i = max(1, $current_page - 3); $i < $current_page; $i++) {
+                    echo '<a href="?pid=9&categoryId=' . $categoryID . '&page=' . $i . '">' . $i . '</a>';
+                }
+
+                // Hiển thị trang hiện tại với lớp active
+                echo '<a href="?pid=9&categoryId=' . $categoryID . '&page=' . $current_page . '" class="active">' . $current_page . '</a>';
+
+                // Hiển thị tối đa 3 trang sau trang hiện tại
+                for ($i = $current_page + 1; $i <= min($totalPages, $current_page + 3); $i++) {
+                    echo '<a href="?pid=9&categoryId=' . $categoryID . '&page=' . $i . '">' . $i . '</a>';
+                }
+
+                // Hiển thị nút "End" nếu không ở trang cuối
+                if ($current_page < $totalPages) {
+                    echo '<a href="?pid=9&categoryId=' . $categoryID . '&page=' . $totalPages . '">End</a>';
+                }
+
+                // Hiển thị dấu chấm chấm nếu có nhiều trang hơn
+                if ($totalPages > $current_page + 3) {
+                    echo '<span>...</span>';
+                }
+                ?>
+            </div>
+
+
+
         </div>
     </div>
 </div>
 
 <style>
+    /* styles.css */
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination a {
+        color: #333;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .pagination a:hover {
+        background-color: #ddd;
+    }
+
+    .pagination a.active {
+        background-color: #f9bf29;
+        color: #fff;
+    }
+
     .products-column {
+        display: flex;
+        flex-direction: column;
         align-items: center;
     }
+
     .shop-detail {
         display: flex;
         justify-content: center;
@@ -96,7 +173,7 @@ $resultProducts = $link->query($sqlProducts);
     }
 
     .product-item {
-        height: 520px;
+        height: 500px;
         display: flex;
         float: left;
         width: 33%;
