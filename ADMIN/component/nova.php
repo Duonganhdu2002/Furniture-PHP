@@ -12,7 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <footer class="footer-section">
         <div style="margin-top: 0px;" class="relative">
-            <div style="display: flex; margin-bottom: 60px">
+            <div style="display: flex;">
                     <div style="width: 30%;">
                         <div style="font-weight: bold;" class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Nova<span>.</span></a></div>
                         <p style="line-height: 1.8; font-size: 14px; opacity: 0.7" class="mb-4">Welcome to Nova - where sophistication meets comfort. Discover a curated selection of exquisite furniture pieces, from cozy chairs to stylish tables, all tailored to elevate every living space. Step into a new realm of living with Nova - where furniture comes to life with vibrancy and allure.</p>
@@ -78,7 +78,6 @@
 
     .footer-section .relative {
         position: relative;
-        padding-bottom: 15px;
         width: 96%;
     }
 

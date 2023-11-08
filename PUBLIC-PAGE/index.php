@@ -134,6 +134,7 @@
                           </script>";
                     exit();
                 }
+            break;
             case '8':
                 include("component/content-11.php");
                 break;
