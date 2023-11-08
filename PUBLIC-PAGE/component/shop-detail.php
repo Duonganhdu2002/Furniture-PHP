@@ -136,10 +136,12 @@ $resultProducts = $link->query($sqlProducts);
     height:35px;
     display:flex;
     align-items: center;
+    padding-left: 20px;
     }
 
     .categories-column-a:hover {
-        background-color: #cfcfcf;
+        background-color: #ddd;
+        transition: 0.3s;
     }
 
     .categories-column-a.active {
