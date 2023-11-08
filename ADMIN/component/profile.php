@@ -93,8 +93,6 @@ $conn->close();
     </div>
 </div>
 
-
-
 <style>
     .profile {
         padding-left: 200px;

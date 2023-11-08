@@ -106,7 +106,6 @@ if (isset($_SESSION["username_user"])) {
     </div>
 </div>
 
-
 <style>
     .profile {
         padding-left: 200px;
