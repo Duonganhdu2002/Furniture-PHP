@@ -6,7 +6,7 @@ if (isset($_SESSION["id_user"])) {
     $userId = $_SESSION["id_user"];
 }
 
-$sql = "SELECT shopping_carts.id, shopping_carts.created_at, status_cart.name_status, shipping_methods.method_name, shopping_carts.note
+$sql = "SELECT shopping_carts.id, shopping_carts.created_at, status_cart.name_status, shipping_methods.method_name, shopping_carts.note, shopping_carts.total_price
         FROM shopping_carts
         JOIN users ON shopping_carts.user_id = users.id
         JOIN shipping_methods ON shopping_carts.ship_method = shipping_methods.id
@@ -27,6 +27,7 @@ $result = $link->query($sql);
                 <th>Day order</th>
                 <th>Order status</th>
                 <th>Shipping method</th>
+                <th>Total price</th>
                 <th>Your note</th>
             </tr>
             <?php
@@ -39,6 +40,7 @@ $result = $link->query($sql);
                     <td><?php echo $row['created_at']; ?></td>
                     <td><?php echo $row['name_status']; ?></td>
                     <td><?php echo $row['method_name']; ?></td>
+                    <td><?php echo $row['total_price']; ?></td>
                     <td><?php echo $row['note']; ?></td>
                 </tr>
             <?php

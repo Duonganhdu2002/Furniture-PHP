@@ -66,6 +66,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $quantities = isset($_POST["quantity"]) ? $_POST["quantity"] : [];
     $prices = isset($_POST["price"]) ? $_POST["price"] : [];
     $status = isset($_POST["status"]) ? mysqli_real_escape_string($conn, $_POST["status"]) : '';
+
+    $totalPrice = isset($_POST['totalPrice']) ? $_POST["totalPrice"] : 0;
     $orderNotes = isset($_POST["order_notes"]) ? mysqli_real_escape_string($conn, $_POST["order_notes"]) : '';
 
 
@@ -75,10 +77,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $newId = $maxId + 1;
 
     // Insert into shopping_carts
-    $sql1 = "INSERT INTO shopping_carts (id, user_id, created_at, status, ship_method, note) VALUES ($newId, '$idUser', NOW(), 1, $shippingMethodOutFromSession, '$orderNotes')";
+    $sql1 = "INSERT INTO shopping_carts (id, user_id, created_at, status, ship_method, note, total_price) 
+         VALUES (?, ?, NOW(), 1, ?, ?, ?)";
 
+    // Sử dụng prepared statement để tránh lỗi SQL injection
+    $stmt1 = $conn->prepare($sql1);
+    $stmt1->bind_param("isssd", $newId, $idUser, $shippingMethodOutFromSession, $orderNotes, $totalPrice);
 
-    if ($conn->query($sql1) === TRUE) {
+    if ($stmt1->execute() === TRUE) {
 
         // Get the cart_id after successful insertion
         $cartId = $newId;
@@ -96,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         if ($stmtAddress->execute() !== TRUE) {
             echo "Error: " . $sqlAddress . "<br>" . $stmtAddress->error;
         }
-        
+
         // Loop through the products and insert into cart_items
         for ($i = 0; $i < count($idProducts); $i++) {
 
@@ -240,6 +246,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                         <?php
                         if (isset($_SESSION["cart"])) {
                             $totalPrice = 0;
+
+                            // Calculate total price of products in the cart
                             foreach ($_SESSION['cart'] as $product) {
                                 echo "<div style='display: flex; height: 40px' class='section-price-product'>";
                                 echo "<input type='hidden' name='idProduct[]' value='" . $product[3] . "'>";
@@ -251,16 +259,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                                 echo "<hr>";
                                 $totalPrice += ($product[2] * $product[4]);
                             }
+
+                            // Add shipping fee to the total price
+                            if (isset($_SESSION["shippingMethodOut"])) {
+                                $shipId = $_SESSION["shippingMethodOut"];
+                                $sql = "SELECT standard_price FROM shipping_methods WHERE id = $shipId";
+                                $result = mysqli_query($conn, $sql);
+
+                                if ($result) {
+                                    $row = mysqli_fetch_assoc($result);
+                                    $shippingFee = $row['standard_price'];
+
+                                    // Display shipping fee
+                                    echo "<div style='display: flex; height: 40px' class='section-price-product'>";
+                                    echo "<p style='width: 70%;'>Shipping Fee</p>";
+                                    echo "<p><span style='color: black'>$</span>" . $shippingFee . "</p>";
+                                    echo "</div>";
+
+                                    // Add shipping fee to the total price
+                                    $totalPrice += $shippingFee;
+                                } else {
+                                    echo "Error in query: " . mysqli_error($conn);
+                                }
+                            }
                         }
                         ?>
+
+
+                        <hr>
                         <div style="display: flex; height: 40px;" class="section-price-product">
                             <p style="width: 70%; font-weight: bold;">Order Total</p>
-                            <p><span style="color: black">$ </span><?php if (isset($totalPrice)) {
-                                                                        echo "$totalPrice";
-                                                                    } else {
-                                                                        echo "0";
-                                                                    }
-                                                                    ?></p>
+                            <p><span style="color: black">$ </span>
+                                <?php if (isset($totalPrice)) {
+                                    echo "$totalPrice";
+                                } else {
+                                    echo "0";
+                                }
+                                ?></p>
+                            <input type="hidden" name="totalPrice" value="<?php echo $totalPrice; ?>">
                         </div>
                         <hr>
 
@@ -274,6 +310,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         </div>
     </form>
 </div>
+
 <style>
     .content-10 {
         display: flex;
