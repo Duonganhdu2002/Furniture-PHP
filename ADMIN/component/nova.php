@@ -105,7 +105,7 @@
         font-size: 32px;
         font-weight: 500;
         text-decoration: none;
-        color: #3b5d50;
+        color: black;
     }
 
     .footer-section .custom-social {
@@ -123,13 +123,13 @@
         text-align: center;
         line-height: 40px;
         display: inline-block;
-        background: #dce5e4;
-        color: #3b5d50;
+        background: #f2f2f2;
+        color: black;
         border-radius: 50%;
     }
 
     .footer-section .custom-social li a:hover {
-        background: #3b5d50;
+        background: black;
         color: #ffffff;
     }
 
