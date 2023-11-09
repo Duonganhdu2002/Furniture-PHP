@@ -20,14 +20,8 @@
                         <img type="image" style="width: 25px" src="../PUBLIC-PAGE/images/filter.svg">
                 </td>
                 <td style="text-align: center;">
-                <form action="index.php?pid=4&memberId=0" method="post" id="myForm">
-                    <input style="width: 50%;" name="searchByIdmember" id="searchByIdmember" type="text">
-                </form>
                 </td>
                 <td style="text-align: center">
-                <form action="index.php?pid=4&memberId=0" method="post" id="myForm">
-                    <input name="searchByUsernamemember" id="searchByUsernamemember" type="text">
-                </form>
                 </td>
                 <td style="text-align: center">
                 <form action="index.php?pid=4&memberId=0" method="post" id="myForm">
@@ -35,13 +29,10 @@
                 </form>
                 </td>
                 <td style="text-align: center">
-                <form action="index.php?pid=4&memberId=0" method="post" id="myForm">
-                    <input name="searchByEmailmember" id="searchByEmailmember" type="text">
-                </form>
                 </td>
                 <td style="text-align: center">
                 <form action="index.php?pid=4&memberId=0" method="post" id="myForm">
-                    <input name="searchByPhonemember" id="searchByPhonemember" type="text">
+                    <input name="searchByEmailmember" id="searchByEmailmember" type="text">
                 </form>
                 </td>
             </tr>
@@ -61,10 +52,10 @@
         $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'admin' LIMIT $offset, $itemsPerPage";
         $resultUser = $conn->query($sqlUser);
         // SQL của bảng Information
-        $sqlInformation = "SELECT full_name, date_of_birth, email, gender, phone_number, avatar FROM information LIMIT $offset, $itemsPerPage";
+        $sqlInformation = "SELECT username, full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'admin' LIMIT $offset, $itemsPerPage";
         $resultInformation = $conn->query($sqlInformation);
         // SQL của bảng Address
-        $sqlAddress = "SELECT country, province, district, commune, street, number FROM addresses LIMIT $offset, $itemsPerPage";
+        $sqlAddress = "SELECT username, country, province, district, commune, street, number FROM addresses WHERE role = 'admin' LIMIT $offset, $itemsPerPage";
         $resultAddress = $conn->query($sqlAddress);
 
         if (isset($_GET['memberId'])) {

@@ -18,20 +18,14 @@
             <th style="text-align: center">Address</th>
         </tr>
         <!-- Form chổ tìm kiếm đóa anh chị -->
-        <form id="myForm" action="#" method="post">
+        <form id="myForm" action="" method="post">
             <tr>
                 <td style="text-align: center">
                     <img type="image" style="width: 25px" src="../PUBLIC-PAGE/images/filter.svg">
                 </td>
                 <td style="text-align: center" colspan="2">
-                <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
-                    <input name="searchByIdCustomer" id="searchByIdCustomer"type="text">
-                </form>
                 </td>
                 <td style="text-align: center">
-                <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
-                    <input name="searchByUsernameCustomer" id="searchByUsernameCustomer"type="text">
-                </form>
                 </td>
                 <td style="text-align: center">
                 <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
@@ -44,9 +38,6 @@
                 </form>
                 </td>
                 <td style="text-align: center">
-                <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
-                    <input name="searchByPhoneCustomer" id="searchByPhoneCustomer" type="text">
-                </form>
                 </td>
             </tr>
         </form>
@@ -65,7 +56,7 @@
         $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'user' LIMIT $offset, $itemsPerPage";
         $resultUser = $conn->query($sqlUser);
         // SQL của bảng Information
-        $sqlInformation = "SELECT full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'user' LIMIT $offset, $itemsPerPage";
+        $sqlInformation = "SELECT username, full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'user' LIMIT $offset, $itemsPerPage";
         $resultInformation = $conn->query($sqlInformation);
         // SQL của bảng Address
         $sqlAddress = "SELECT country, province, district, commune, street, number FROM addresses WHERE role = 'user' LIMIT $offset, $itemsPerPage";

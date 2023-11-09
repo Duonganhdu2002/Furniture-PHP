@@ -5,58 +5,27 @@
     $resultAddress = null; // Khởi tạo biến $resultAddress
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['searchByIdmember'])) {
-            $searchTerm = $_POST['searchByIdmember'];
-            $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'admin' and id LIKE '%$searchTerm' ";
-            $resultUser = $conn->query($sqlUser);
-            // SQL của bảng Information
-            $sqlInformation = "SELECT full_name, date_of_birth, email, gender, phone_number, avatar FROM information ";
-            $resultInformation = $conn->query($sqlInformation);
-            // SQL của bảng Address (địa chỉ)
-            $sqlAddress = "SELECT province, district, commune, street, number FROM addresses ";
-            $resultAddress = $conn->query($sqlAddress);
-        } elseif (isset($_POST['searchByUsernamemember'])) {
-            $searchTerm = $_POST['searchByUsernamemember'];
-            $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'admin' and username LIKE '%$searchTerm'";
-            $resultUser = $conn->query($sqlUser);
-            // SQL của bảng Information
-            $sqlInformation = "SELECT full_name, date_of_birth, email, gender, phone_number, avatar FROM information ";
-            $resultInformation = $conn->query($sqlInformation);
-            // SQL của bảng Address (địa chỉ)
-            $sqlAddress = "SELECT province, district, commune, street, number FROM addresses ";
-            $resultAddress = $conn->query($sqlAddress);
-        } elseif (isset($_POST['searchByNamemember'])) {
+        if (isset($_POST['searchByNamemember'])) {
             $searchTerm = $_POST['searchByNamemember'];
             // SQL của bảng Information
-            $sqlInformation = "SELECT full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE full_name LIKE '%$searchTerm'";
+            $sqlInformation = "SELECT username,full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'admin' AND full_name LIKE '%$searchTerm'";
             $resultInformation = $conn->query($sqlInformation);
             // SQL của bảng Users
-            $sqlUser = "SELECT id, username, password, image FROM users ";
+            $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'admin'";
             $resultUser = $conn->query($sqlUser);
             // SQL của bảng Address (địa chỉ)
-            $sqlAddress = "SELECT province, district, commune, street, number FROM addresses";
+            $sqlAddress = "SELECT username,province, district, commune, street, number FROM addresses WHERE role = 'admin'";
             $resultAddress = $conn->query($sqlAddress);
         } elseif (isset($_POST['searchByEmailmember'])) {
             $searchTerm = $_POST['searchByEmailmember'];
             // SQL của bảng Information
-            $sqlInformation = "SELECT full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE email LIKE '%$searchTerm'";
+            $sqlInformation = "SELECT username,full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'admin' AND email LIKE '%$searchTerm'";
             $resultInformation = $conn->query($sqlInformation);
             // SQL của bảng Users
-            $sqlUser = "SELECT id, username, password, image FROM users ";
+            $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'admin'";
             $resultUser = $conn->query($sqlUser);
             // SQL của bảng Address (địa chỉ)
-            $sqlAddress = "SELECT province, district, commune, street, number FROM addresses ";
-            $resultAddress = $conn->query($sqlAddress);
-        } elseif (isset($_POST['searchByPhonemember'])) {
-            $searchTerm = $_POST['searchByPhonemember'];
-            // SQL của bảng Information
-            $sqlInformation = "SELECT full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE phone_number LIKE '%$searchTerm'";
-            $resultInformation = $conn->query($sqlInformation);
-            // SQL của bảng Users
-            $sqlUser = "SELECT id, username, password, image FROM users";
-            $resultUser = $conn->query($sqlUser);
-            // SQL của bảng Address (địa chỉ)
-            $sqlAddress = "SELECT province, district, commune, street, number FROM addresses ";
+            $sqlAddress = "SELECT username, province, district, commune, street, number FROM addresses WHERE role = 'admin'";
             $resultAddress = $conn->query($sqlAddress);
         }
     }
