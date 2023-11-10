@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 08, 2023 lúc 12:03 PM
+-- Thời gian đã tạo: Th10 10, 2023 lúc 04:31 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.1.17
+-- Phiên bản PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -89,20 +89,36 @@ CREATE TABLE `address_cart` (
   `district` varchar(50) DEFAULT NULL,
   `commune` varchar(50) DEFAULT NULL,
   `street` varchar(50) DEFAULT NULL,
-  `number` varchar(50) DEFAULT NULL
+  `number` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `address_cart`
 --
 
-INSERT INTO `address_cart` (`id_cart`, `username`, `country`, `province`, `district`, `commune`, `street`, `number`) VALUES
-(1, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202'),
-(2, 1, 'Vietnam', 'Hanoi', 'Ba Dinh', 'Quan Thanh', 'Phan Dinh Phung', '123'),
-(3, 1, 'Vietnam', 'Hanoi', 'Ba Dinh', 'Quan Thanh', 'Phan Dinh Phung', '123'),
-(4, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202'),
-(5, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202'),
-(6, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202');
+INSERT INTO `address_cart` (`id_cart`, `username`, `country`, `province`, `district`, `commune`, `street`, `number`, `email`, `phone`) VALUES
+(1, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', NULL, NULL),
+(2, 1, 'Vietnam', 'Hanoi', 'Ba Dinh', 'Quan Thanh', 'Phan Dinh Phung', '123', NULL, NULL),
+(3, 1, 'Vietnam', 'Hanoi', 'Ba Dinh', 'Quan Thanh', 'Phan Dinh Phung', '123', NULL, NULL),
+(4, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', NULL, NULL),
+(5, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', NULL, NULL),
+(6, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', NULL, NULL),
+(7, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
+(8, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
+(9, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
+(10, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
+(11, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
+(12, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
+(13, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
+(14, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
+(15, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
+(16, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
+(17, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
+(18, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
+(19, 7, 'Canadaaaa', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street3333', '40434', NULL, NULL),
+(20, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -169,7 +185,34 @@ INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`, `user`, `pr
 (4, 3, 47, 1, 1, 899.99),
 (5, 4, 1, 1, 5, 499.99),
 (6, 5, 41, 1, 5, 899.99),
-(7, 6, 1, 12, 5, 499.99);
+(7, 6, 1, 12, 5, 499.99),
+(8, 7, 201, 11, 7, 899.99),
+(9, 8, 7, 1, 7, 299.99),
+(10, 10, 41, 1, 7, 899.99),
+(11, 11, 41, 4, 7, 899.99),
+(12, 12, 42, 1, 7, 1199.99),
+(13, 12, 43, 1, 7, 1099.99),
+(14, 12, 61, 1, 7, 1599.99),
+(15, 13, 41, 1, 7, 899.99),
+(16, 14, 41, 3, 7, 899.99),
+(17, 15, 3, 1, 7, 599.99),
+(18, 16, 41, 1, 7, 899.99),
+(19, 16, 42, 1, 7, 1199.99),
+(20, 16, 61, 1, 7, 1599.99),
+(21, 16, 123, 1, 7, 89.99),
+(22, 17, 63, 1, 7, 1399.99),
+(23, 18, 43, 1, 7, 1099.99),
+(24, 19, 42, 1, 7, 1199.99),
+(25, 19, 63, 6, 7, 1399.99),
+(26, 19, 121, 1, 7, 699.99),
+(27, 19, 162, 5, 7, 44.99),
+(28, 20, 42, 1, 7, 1199.99),
+(29, 20, 9, 1, 7, 899.99),
+(30, 20, 181, 1, 7, 229.99),
+(31, 20, 262, 1, 7, 899.99),
+(32, 20, 260, 1, 7, 699.99),
+(33, 20, 264, 1, 7, 449.99),
+(34, 20, 201, 1, 7, 899.99);
 
 -- --------------------------------------------------------
 
@@ -593,24 +636,39 @@ INSERT INTO `shipping_methods` (`id`, `method_name`, `standard_price`) VALUES
 CREATE TABLE `shopping_carts` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NULL DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `ship_method` int(11) NOT NULL,
   `note` varchar(255) DEFAULT NULL,
-  `total_price` float(11,2) DEFAULT NULL
+  `total_price` float(11,2) DEFAULT NULL,
+  `canceled_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `shopping_carts`
 --
 
-INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`, `ship_method`, `note`, `total_price`) VALUES
-(1, 5, '2023-11-06 11:35:25', 1, 2, 'HIIHIHIH', NULL),
-(2, 1, '2023-11-06 16:47:01', 1, 1, '', NULL),
-(3, 1, '2023-11-08 09:50:05', 1, 2, 'Tadaaa', NULL),
-(4, 5, '2023-11-08 10:56:58', 1, 1, '0', 0.00),
-(5, 5, '2023-11-08 10:57:24', 1, 1, '0', 922.98),
-(6, 5, '2023-11-08 10:57:50', 1, 2, '0', 6019.87);
+INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`, `ship_method`, `note`, `total_price`, `canceled_at`) VALUES
+(1, 5, '2023-11-06 11:35:25', 1, 2, 'HIIHIHIH', NULL, NULL),
+(2, 1, '2023-11-06 16:47:01', 1, 1, '', NULL, NULL),
+(3, 1, '2023-11-08 09:50:05', 1, 2, 'Tadaaa', NULL, NULL),
+(4, 5, '2023-11-08 10:56:58', 1, 1, '0', 0.00, NULL),
+(5, 5, '2023-11-08 10:57:24', 1, 1, '0', 922.98, NULL),
+(6, 5, '2023-11-08 10:57:50', 1, 2, '0', 6019.87, NULL),
+(7, 7, '2023-11-08 11:11:00', 1, 1, '', 9922.88, NULL),
+(8, 7, '2023-11-10 07:43:53', 1, 1, '', 322.98, NULL),
+(9, 7, '2023-11-10 08:11:10', 1, 1, '', 0.00, NULL),
+(10, 7, '2023-11-10 08:18:20', 1, 1, '', 922.98, NULL),
+(11, 7, '2023-11-10 08:11:10', 1, 1, '', 3622.95, NULL),
+(12, 7, '2023-11-10 08:18:08', 1, 1, '', 3922.96, NULL),
+(13, 7, '2023-11-10 08:15:05', 1, 1, '', 922.98, NULL),
+(14, 7, '2023-11-10 08:21:43', 1, 1, '', 2722.96, NULL),
+(15, 7, '2023-11-10 09:59:47', 5, 1, '', 622.98, '2023-11-10 12:43:06'),
+(16, 7, '2023-11-10 11:50:07', 1, 1, '', 3812.95, NULL),
+(17, 7, '2023-11-10 12:45:25', 1, 1, '', 1422.98, NULL),
+(18, 7, '2023-11-10 13:36:09', 5, 1, '', 1122.98, '2023-11-10 13:36:21'),
+(19, 7, '2023-11-10 13:37:07', 5, 1, '', 10547.86, '2023-11-10 15:19:55'),
+(20, 7, '2023-11-10 15:30:10', 1, 1, '', 5302.92, NULL);
 
 -- --------------------------------------------------------
 
@@ -631,7 +689,8 @@ INSERT INTO `status_cart` (`id`, `name_status`) VALUES
 (1, 'Waiting for confirm'),
 (2, 'Confirmed'),
 (3, 'Delivering'),
-(4, 'Delivered');
+(4, 'Delivered'),
+(5, 'Cancelled');
 
 -- --------------------------------------------------------
 

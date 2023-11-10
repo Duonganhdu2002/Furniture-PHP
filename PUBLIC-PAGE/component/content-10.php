@@ -78,7 +78,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
     // Insert into shopping_carts
     $sql1 = "INSERT INTO shopping_carts (id, user_id, created_at, status, ship_method, note, total_price) 
-         VALUES (?, ?, NOW(), 1, ?, ?, ?)";
+        VALUES (?, ?, NOW(), 1, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE
+        created_at = IF(status = 1 AND created_at IS NULL, VALUES(created_at), created_at)";
 
     // Sử dụng prepared statement để tránh lỗi SQL injection
     $stmt1 = $conn->prepare($sql1);
