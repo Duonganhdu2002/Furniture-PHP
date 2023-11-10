@@ -57,6 +57,10 @@ $conn->close();
         <div class="right-side">
             <button class="button-edit">Edit</button>
         </div>
+        <div >
+                <button type="submit" name="logout" class="logout-button">Logout</button>
+        </div>
+
     </div>
     <div class="personality-information">
         <h2>Information</h2>
@@ -167,6 +171,18 @@ $conn->close();
         margin: auto;
         position: relative;
 
+    }
+
+    .logout-button {
+        margin-left: 20%;
+        width: 70px;
+        height: 40px;
+        color: #F0F7FF;
+        cursor: pointer;
+        font-size: 1em;
+        background: #9c3b3b;
+        border: none;
+        border-radius: 5px;
     }
 </style>
 

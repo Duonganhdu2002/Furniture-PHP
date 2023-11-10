@@ -95,7 +95,7 @@ if(isset($_GET['order_id'])) {
                         <?= $orderDetails['name_status']; ?>
                         </td>
                         <td><?= $orderDetails['method_name']; ?></td>
-                        <td colspan="2" style="background: #d1d1d1; font-size: 2.4em; font-weight: bold; border: 6px solid black;" ><?= $orderDetails['total_price']; ?> $</td>
+                        <td colspan="2" style="background: #d1d1d1; font-size: 2em; font-weight: bold; border: 3px solid black" ><?= $orderDetails['total_price']; ?> $</td>
                     </tr>
 
                 </table>
@@ -167,7 +167,7 @@ $link->close(); // Đóng kết nối cơ sở dữ liệu
 
     .user-cart-child th,
     .user-cart-child td {
-        border: 2px solid black;
+        border: 1px gray solid;
         padding: 8px;
         text-align: left;
         justify-content: center;
