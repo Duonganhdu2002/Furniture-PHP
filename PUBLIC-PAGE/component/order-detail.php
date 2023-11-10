@@ -97,7 +97,7 @@ if(isset($_GET['order_id'])) {
                         <?= $orderDetails['name_status']; ?>
                         </td>
                         <td><?= $orderDetails['method_name']; ?></td>
-                        <td colspan="2" style="background: #d1d1d1; font-size: 2em; font-weight: bold; border: 1px solid black" ><?= $orderDetails['total_price']; ?> $</td>
+                        <td colspan="2" style="background: #d1d1d1; font-size: 2em; font-weight: bold; border: 3px solid black" ><?= $orderDetails['total_price']; ?> $</td>
                     </tr>
 
                 </table>
