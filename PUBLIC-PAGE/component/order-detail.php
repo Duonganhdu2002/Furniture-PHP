@@ -10,9 +10,9 @@ if(isset($_GET['order_id'])) {
     $sql = "SELECT shopping_carts.id, shopping_carts.created_at, shopping_carts.canceled_at, status_cart.name_status, shipping_methods.method_name, shipping_methods.standard_price,
     shopping_carts.status, shopping_carts.note,
     shopping_carts.total_price,
-    information.full_name, information.phone_number, information.email, cart_items.product_id, cart_items.quantity, cart_items.price, products.product_name, products.image,
+    information.full_name, information.phone_number, cart_items.product_id, cart_items.quantity, cart_items.price, products.product_name, products.image,
     address_cart.country, address_cart.province, address_cart.district, address_cart.commune,
-    address_cart.street, address_cart.number
+    address_cart.street, address_cart.number, address_cart.phone , address_cart.email
             FROM shopping_carts
             JOIN users ON shopping_carts.user_id = users.id
             JOIN shipping_methods ON shopping_carts.ship_method = shipping_methods.id
@@ -48,6 +48,8 @@ if(isset($_GET['order_id'])) {
                     'commune' => $row['commune'],
                     'street' => $row['street'],
                     'number' => $row['number'],
+                    'phone' => $row['phone'],
+                    'email' => $row['email'],
                 ];
                 $shipping_methods =[
                     'standard_price' => $row['standard_price'],
@@ -66,9 +68,9 @@ if(isset($_GET['order_id'])) {
                     </tr>
                     <tr>
                         <td><?= $orderDetails['full_name']; ?></td>
-                        <td><?= $orderDetails['phone_number']; ?></td>
+                        <td><?= $address_cart['phone']; ?></td>
                         <td colspan="2">
-                            <?= $orderDetails['email']; ?>
+                            <?= $address_cart['email']; ?>
                         </td>
                     </tr>
                     <tr>
@@ -95,7 +97,7 @@ if(isset($_GET['order_id'])) {
                         <?= $orderDetails['name_status']; ?>
                         </td>
                         <td><?= $orderDetails['method_name']; ?></td>
-                        <td colspan="2" style="background: #d1d1d1; font-size: 2em; font-weight: bold; border: 3px solid black" ><?= $orderDetails['total_price']; ?> $</td>
+                        <td colspan="2" style="background: #d1d1d1; font-size: 2em; font-weight: bold; border: 1px solid black" ><?= $orderDetails['total_price']; ?> $</td>
                     </tr>
 
                 </table>
