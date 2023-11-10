@@ -7,11 +7,11 @@ if ($link->connect_error) {
 
 if(isset($_GET['order_id'])) {
     $orderId = $_GET['order_id'];
-    $sql = "SELECT shopping_carts.id, shopping_carts.created_at, shopping_carts.canceled_at, status_cart.name_status, shipping_methods.method_name, 
+    $sql = "SELECT shopping_carts.id, shopping_carts.created_at, shopping_carts.canceled_at, status_cart.name_status, shipping_methods.method_name, shipping_methods.standard_price,
     shopping_carts.status, shopping_carts.note,
     shopping_carts.total_price,
     information.full_name, information.phone_number, information.email, cart_items.product_id, cart_items.quantity, cart_items.price, products.product_name, products.image,
-    address_cart.country, address_cart.province, address_cart.district, address_cart.commune, 
+    address_cart.country, address_cart.province, address_cart.district, address_cart.commune,
     address_cart.street, address_cart.number
             FROM shopping_carts
             JOIN users ON shopping_carts.user_id = users.id
@@ -48,6 +48,9 @@ if(isset($_GET['order_id'])) {
                     'commune' => $row['commune'],
                     'street' => $row['street'],
                     'number' => $row['number'],
+                ];
+                $shipping_methods =[
+                    'standard_price' => $row['standard_price'],
                 ];
             }
         ?>
@@ -101,7 +104,8 @@ if(isset($_GET['order_id'])) {
                 </div>
                 <table style="font-size: 1.2em;">
                     <tr>
-                        <th colspan="4">Product name id.<?= $orderDetails['id']; ?></th>
+                        <th colspan="3">Product name id.<?= $orderDetails['id']; ?></th>
+                        <th style="color: #dea104;">Shipping fee: +<?= $shipping_methods['standard_price']; ?> $</th>
                     </tr>
                     <tr>
                         <th>Image</th>
