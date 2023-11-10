@@ -95,10 +95,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $commune = isset($_POST["commune"]) ? mysqli_real_escape_string($conn, $_POST["commune"]) : '';
         $street = isset($_POST["street"]) ? mysqli_real_escape_string($conn, $_POST["street"]) : '';
         $number = isset($_POST["number"]) ? mysqli_real_escape_string($conn, $_POST["number"]) : '';
+        $email = isset($_POST["email"]) ? mysqli_real_escape_string($conn, $_POST["email"]) : '';
+        $phone = isset($_POST["phone"]) ? mysqli_real_escape_string($conn, $_POST["phone"]) : '';
 
-        $sqlAddress = "INSERT INTO address_cart (id_cart, username, country, province, district, commune, street, number) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sqlAddress = "INSERT INTO address_cart (id_cart, username, country, province, district, commune, street, number, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmtAddress = $conn->prepare($sqlAddress);
-        $stmtAddress->bind_param("issssssi", $cartId, $idUser, $country, $province, $district, $commune, $street, $number);
+        $stmtAddress->bind_param("issssssiss", $cartId, $idUser, $country, $province, $district, $commune, $street, $number, $email, $phone);
         if ($stmtAddress->execute() !== TRUE) {
             echo "Error: " . $sqlAddress . "<br>" . $stmtAddress->error;
         }

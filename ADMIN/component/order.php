@@ -1,34 +1,41 @@
 <div class="category">
     <table class="category-data-table">
+        <?php
+        if (!isset($_GET["id"])) {
+            echo "
         <tr>
-            <th style="text-align: center;">STT</th>
-            <th style="text-align: center">Order ID</th>
-            <th style="text-align: center">User</th>
-            <th style="text-align: center">
-                <img style="width: 25px" src="../PUBLIC-PAGE/images/settingtr.svg">
+            <th style='text-align: center;'>STT</th>
+            <th style='text-align: center;'>Order ID</th>
+            <th style='text-align: center;'>User</th>
+            <th style='text-align: center;'>
+                <img style='width: 25px' src='../PUBLIC-PAGE/images/settingtr.svg'>
             </th>
-            <th style="text-align: center">Time</th>
-            <th style="text-align: center">Status</th>
-            <th style="text-align: center">Ship MT</th>
-            <th style="text-align: center">Note</th>
-            <th style="text-align: center">Confirm</th>
+            <th style='text-align: center;'>Time</th>
+            <th style='text-align: center;'>Status</th>
+            <th style='text-align: center;'>Ship MT</th>
+            <th style='text-align: center;'>Note</th>
+            <th style='text-align: center;'>Confirm</th>
         </tr>
 
         <tr>
-            <td style="text-align: center">
-                <img type="image" style="width: 25px" src="../PUBLIC-PAGE/images/filter.svg">
+            <td style='text-align: center'>
+                <img type='image' style='width: 25px' src='../PUBLIC-PAGE/images/filter.svg'>
             </td>
-            <td style="text-align: center" >
-                <form action="index.php?pid=1&categoryId=0" method="post" id="myForm">
-                    <input name="searchByIdCategory" type="text" id="searchByIdCategory">
+            <td style='text-align: center'>
+                <form action='index.php?pid=1&categoryId=0' method='post' id='myForm'>
+                    <input name='searchByIdCategory' type='text' id='searchByIdCategory'>
                 </form>
             </td>
-            <td style="text-align: center" colspan = 2>
-                <form action="index.php?pid=1&categoryId=0" method="post" id="myForm">
-                    <input name="searchByNameCategory" type="text" id="searchByNameCategory">
+            <td style='text-align: center' colspan=2>
+                <form action='index.php?pid=1&categoryId=0' method='post' id='myForm'>
+                    <input name='searchByNameCategory' type='text' id='searchByNameCategory'>
                 </form>
             </td>
         </tr>
+        ";
+        }
+        ?>
+
 
         <?php
         $conn = new mysqli('localhost', 'root', '', 'shopping_online');
@@ -50,7 +57,34 @@
 
         $result = $conn->query($sql);
 
-        if (isset($_GET['categoryId'])) {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+
+            $sql1 = "SELECT products.product_name, cart_items.price, cart_items.quantity
+            FROM cart_items 
+            JOIN products ON cart_items.product_id = products.id
+            WHERE cart_id = $id
+            LIMIT $offset, $itemsPerPage";
+
+            $result1 = $conn->query($sql1);
+
+            $sql2 = "SELECT shipping_methods.standard_price
+            FROM shopping_carts
+            JOIN shipping_methods ON shopping_carts.ship_method = shipping_methods.id
+            WHERE shopping_carts.id = $id
+            LIMIT $offset, $itemsPerPage";
+
+            $sql3 = "SELECT * FROM shopping_carts WHERE id = $id";
+
+            $sql4 = "SELECT * FROM address_cart WHERE id_cart = $id";
+
+            $result1 = $conn->query($sql1);
+            $result2 = $conn->query($sql2);
+            $result3 = $conn->query($sql3);
+            $result4 = $conn->query($sql4);
+
+            include "component/order-detail.php";
+        } else if (isset($_GET['categoryId'])) {
             $categoryId = $_GET['categoryId'];
             if ($categoryId == '0') {
                 include "searching/order-searching.php";
@@ -60,7 +94,6 @@
         } else {
             include "searching/order-detail.php";
         }
-
         ?>
     </table>
 </div>

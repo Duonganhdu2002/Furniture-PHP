@@ -1,32 +1,34 @@
-<?php 
+<?php
 
 if ($result->num_rows > 0) {
     $stt = $offset + 1;
 
     while ($row = $result->fetch_assoc()) {
         $id = $row["id"];
+        // echo "<form action='' method='post'>";
+        echo "<input type='hidden' name='cartID' value='" . $row["id"] . "'>";
         echo "<tr>";
         echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
         echo "<td style='width:6%; text-align: center;'>" . $row["id"] . "</td>";
         echo "<td style='width:6%; text-align: center;'>" . $row["username"] . "</td>";
-        echo "<td class='hover-cell'; style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
+        echo "<td class='hover-cell' style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
                 <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
                 <div class='action-buttons'>
-                    <a href='../ADMIN/index.php?pid=2&update&id=$id'><button class='edit-button'>Detail</button></a>
+                    <a href='index.php?pid=6&id=$id'><button class='edit-button'>Detail</button></a>
                     <br>
                     <a href='../ADMIN/component/delete/product.php?id=$id'><button class='delete-button'>Delete</button></a>
-                    </div>
+                </div>
             </td>";
         echo "<td style='width: 18%; padding: 10px 20px 10px 20px'>" . $row["created_at"] . "</td>";
         echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["name_status"] . "</td>";
         echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $row["method_name"] . "</td>";
         echo "<td style='width: 23%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["note"] . "</td>";
-        echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'><button>Confirm</button></td>";
+        echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'><button type='submit'>Confirm</button></td>";
         echo "</tr>";
-    
+        // echo "</form>";
+
         $stt++;
     }
-    
 
     echo "</table>";
 
@@ -58,6 +60,3 @@ if ($result->num_rows > 0) {
 } else {
     echo "0 results";
 }
-
-?>
-

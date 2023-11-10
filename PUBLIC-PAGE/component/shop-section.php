@@ -5,6 +5,7 @@ if ($resultProducts->num_rows > 0) {
 ?>
         <div class="product-item">
             <form action="component/ctrl-cart/addToCart.php" method="post">
+                
                 <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
                 <a href="index.php?pid=10&id=<?php echo $row["id"]; ?>">
                     <input type="hidden" name="image" value="<?php echo $row["image"]; ?>">
