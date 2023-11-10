@@ -92,6 +92,9 @@
                     $Content1IndexFontContent = "Your information";
                     $Content1IndexPresentContent = "";
                     break;
+                case '12':
+                    $Content1IndexFontContent = "Order details";
+                    $Content1IndexPresentContent = "";
             }
         } else {
             $Content1IndexFontContent = "Modern Interior <br> Design Studio";
@@ -156,6 +159,9 @@
                           </script>";
                     exit();
                 }
+            case '12':
+                include("component/order-detail.php");
+                break;
         }
     } else {
         include("component/content-2.php");
