@@ -28,14 +28,14 @@
                 <td style="text-align: center">
                 </td>
                 <td style="text-align: center">
-                <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
-                    <input name="searchByNameCustomer" id="searchByNameCustomer"type="text">
-                </form>
+                    <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
+                        <input name="searchByNameCustomer" id="searchByNameCustomer" type="text">
+                    </form>
                 </td>
                 <td style="text-align: center">
-                <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
-                    <input name="searchByEmailCustomer" id="searchByEmailCustomer" type="text">
-                </form>
+                    <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
+                        <input name="searchByEmailCustomer" id="searchByEmailCustomer" type="text">
+                    </form>
                 </td>
                 <td style="text-align: center">
                 </td>
@@ -75,7 +75,62 @@
         ?>
     </table>
 </div>
+<script>
+    function showButtons(element) {
+        var actionButtons = element.querySelector('.action-buttons');
+        if (actionButtons) {
+            actionButtons.style.display = 'block';
+        }
+    }
+
+    function hideButtons(element) {
+        var actionButtons = element.querySelector('.action-buttons');
+        if (actionButtons) {
+            actionButtons.style.display = 'none';
+        }
+    }
+</script>
+
 <style>
+    .action-buttons {
+        z-index: 1.0;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        margin-left: 30px;
+        margin-top: 0px;
+        display: none;
+    }
+
+    .edit-button {
+        border-radius: 10px 10px 0 0;
+        border-bottom: 1px solid white;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+    }
+
+    .edit-button:hover {
+        opacity: 0.7;
+    }
+
+    .delete-button {
+        border-radius: 0 0 10px 10px;
+        border: none;
+        width: 100%;
+    }
+
+    .delete-button:hover {
+        opacity: 0.7;
+    }
+
+    .action-buttons button {
+        padding: 10px 28px 10px 28px;
+        background-color: #3b5d50;
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+    }
     .category {
         width: 100%;
         margin-top: 20px;

@@ -9,10 +9,10 @@ if ($result->num_rows > 0) {
         echo "<td style='width:4%; text-align: center;'>" . $row["id"] . "</td>";
         echo "<td class='hover-cell'; style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
                 <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
-                <div class='action-buttons'>
-                    <a href='../ADMIN/index.php?pid=1&update&id=$id'><button class='edit-button'>Update</button></a>
-                    <br>
-                    <a href='../ADMIN/component/delete/category.php?id=$id'><button class='delete-button'>Delete</button></a>
+                    <div class='action-buttons'>
+                        <a href='../ADMIN/index.php?pid=1&update&id=$id'><button class='edit-button'>Update</button></a>
+                        <br>
+                        <a href='../ADMIN/component/delete/category.php?id=$id'><button class='delete-button'>Delete</button></a>
                     </div>
               </td>";
         echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["category_name"] . "</td>";

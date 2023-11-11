@@ -33,14 +33,14 @@ foreach ($category_ids as $category_id) {
                 $resultid1 = $link->query($sqlid1);
 
                 $i = 0;
-                while ($row2 = $resultid1->fetch_assoc()) {
+                while ($row1 = $resultid1->fetch_assoc()) {
                 ?>
                     <div class="product-item">
                         <a href="product-detail.html">
-                            <img src="../images/chairs/<?php echo $row2["image"]; ?>" class="product-thumbnail">
+                            <img src="../images/chairs/<?php echo $row1["image"]; ?>" class="product-thumbnail">
                         </a>
-                        <h3 class="product-title"><?php echo $row2["product_name"]; ?></h3>
-                        <strong class="product-price"><?php echo $row2["price"]; ?></strong>
+                        <h3 class="product-title"><?php echo $row1["product_name"]; ?></h3>
+                        <strong class="product-price"><?php echo $row1["price"]; ?></strong>
                         <span class="icon-cross">
                             <button class="add" data-id="<?php echo $row["id"]; ?>"><img src="images/cross.svg"></button>
                             <!-- <a class="add" data-id="< //?php echo $row["id"]; ?>" href="democart.php"><img src="images/cross.svg"></a> -->

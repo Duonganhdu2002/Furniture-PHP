@@ -78,7 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             <input type="text" id="categoryName" name="categoryName" value="<?php echo $categoryName; ?>"><br>
             <label for="categoryDescription">Category Description</label><br>
             <input style="height: 100px;" name="categoryDescription" id="categoryDescription" value="<?php echo $categoryDescription; ?>"> <br>
-            <button type="submit">Change</button>
             <div>
                 <button type="submit">Change</button>
                 <a style="text-decoration: none;">
