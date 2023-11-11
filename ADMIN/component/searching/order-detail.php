@@ -33,6 +33,10 @@ if ($result->num_rows > 0) {
                 </td>";
         } else if ($row["name_status"] === "Delivering") {
             echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                    <button name='submit3' type='submit'>Delivered</button>
+                </td>";
+        } else if ($row["name_status"] === "Delivered") {
+            echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
                     <button name='submit2' type='submit'>Cancle</button>
                 </td>";
         } else {

@@ -35,6 +35,23 @@ if (isset($_POST["submit"])) {
         $message = "Category updated correctly";
         exit;
     }
+} else if (isset($_POST["submit3"])) {
+    $id = $_POST["id"];
+    $status = 4;
+    echo $id;
+
+    $sql = "UPDATE shopping_carts SET status = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $status, $id);
+    $result = $stmt->execute();
+
+    if (!$result) {
+        $message = "Invalid query: " . $stmt->error;
+    } else {
+        header("location: ../index.php?pid=6");
+        $message = "Category updated correctly";
+        exit;
+    }
 } else if (isset($_POST["submit2"])) {
     $id = $_POST["id"];
     $status = 5;
