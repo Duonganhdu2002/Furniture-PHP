@@ -148,7 +148,12 @@
                 include("component/product-detail.php");
                 break;
             case '11':
+
                 if (isset($_SESSION['username_user'])) {
+                    if (isset($_GET['edit'])) {
+                        include("component/edit-pro5.php");
+                        break;
+                    }
                     include("component/profile.php");
                     include("component/cart-user.php");
                     break;

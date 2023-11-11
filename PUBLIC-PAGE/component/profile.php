@@ -36,6 +36,7 @@ if (isset($_SESSION["username_user"])) {
 
     if ($resultAddress->num_rows > 0) {
         $row = $resultAddress->fetch_assoc();
+        $id = $row["id"];
         $country = $row["country"];
         $province = $row["province"];
         $district = $row["district"];
@@ -67,7 +68,7 @@ if (isset($_SESSION["username_user"])) {
                 </div>
             </div>
             <div class="right-side">
-                <button class="button-edit">Edit</button>
+                <button class="button-edit" onclick="editProfile(<?php echo $id ?>)">Edit</button>
             </div>
         </div>
         <div class="personality-information">
@@ -183,5 +184,11 @@ if (isset($_SESSION["username_user"])) {
 
     }
 </style>
+
+<script>
+    function editProfile(pr5_id) {
+        window.location.href = '../PUBLIC-PAGE/index.php?pid=11&edit';
+    }
+</script>
 
 </html>
