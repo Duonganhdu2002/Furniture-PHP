@@ -10,8 +10,8 @@
             <th style='text-align: center;'>
                 <img style='width: 25px' src='../PUBLIC-PAGE/images/settingtr.svg'>
             </th>
-            <th style='text-align: center;'>Time</th>
             <th style='text-align: center;'>Status</th>
+            <th style='text-align: center;'>Time</th>
             <th style='text-align: center;'>Ship MT</th>
             <th style='text-align: center;'>Note</th>
             <th style='text-align: center;'>Confirm</th>
@@ -84,10 +84,12 @@
             $result4 = $conn->query($sql4);
 
             include "component/order-detail.php";
-        } else if (isset($_GET['categoryId'])) {
-            $categoryId = $_GET['categoryId'];
-            if ($categoryId == '0') {
+        } else if (isset($_GET['orderId'])) {
+            $orderId = $_GET['orderId'];
+            if ($orderId == '0') {
                 include "searching/order-searching.php";
+            } else if (isset($_GET["update&id=$id"])) {
+                include "modal-update/order.php";
             } else {
                 include "searching/order-detail.php";
             }
@@ -142,6 +144,16 @@
         border-radius: 0 0 10px 10px;
         border: none;
         width: 100%;
+    }
+
+    .update-button {
+        border: none;
+        width: 100%;
+        border-bottom: 1px solid white;
+    }
+
+    .update-button:hover {
+        opacity: 0.7;
     }
 
     .delete-button:hover {

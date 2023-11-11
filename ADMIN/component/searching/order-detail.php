@@ -14,13 +14,15 @@ if ($result->num_rows > 0) {
         echo "<td class='hover-cell' style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
                 <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
                 <div class='action-buttons'>
-                    <a href='index.php?pid=6&id=$id'><button class='edit-button'>Detail</button></a>
+                    <a href='index.php?pid=6&detail&id=$id'><button class='edit-button'>Detail</button></a>
                     <br>
-                    <a href='../ADMIN/component/delete/product.php?id=$id'><button class='delete-button'>Delete</button></a>
+                    <a href='index.php?pid=6&update&id=$id'><button class='update-button'>Update</button></a>
+                    <br>
+                    <a href='../ADMIN/component/delete/order.php?id=$id'><button class='delete-button'>Delete</button></a>
                 </div>
             </td>";
-        echo "<td style='width: 18%; padding: 10px 20px 10px 20px'>" . $row["created_at"] . "</td>";
         echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["name_status"] . "</td>";
+        echo "<td style='width: 18%; padding: 10px 20px 10px 20px'>" . $row["created_at"] . "</td>";
         echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $row["method_name"] . "</td>";
         echo "<td style='width: 23%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["note"] . "</td>";
         echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'><button type='submit'>Confirm</button></td>";
@@ -32,7 +34,7 @@ if ($result->num_rows > 0) {
 
     echo "</table>";
 
-    $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM products"))['total'];
+    $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM shopping_carts"))['total'];
     $totalPages = ceil($totalItems / $itemsPerPage);
 
     echo "<div class='pagination'>";

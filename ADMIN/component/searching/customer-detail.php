@@ -10,7 +10,7 @@ if ($resultUser->num_rows > 0 && $resultInformation->num_rows > 0 && $resultAddr
         echo "<td class='hover-cell'; style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
                 <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
                 <div class='action-buttons'>
-                        <a href='../ADMIN/index.php?pid=1&update&id=$id'><button class='edit-button'>Update</button></a>
+                        <a href='../ADMIN/index.php?pid=5&update&id=$id'><button class='edit-button'>Update</button></a>
                         <br>
                         <a href='../ADMIN/component/delete/customer.php?id=$id'><button class='delete-button'>Delete</button></a>
                     </div>
