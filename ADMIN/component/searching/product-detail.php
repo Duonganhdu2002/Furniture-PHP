@@ -14,7 +14,7 @@ if ($result->num_rows > 0) {
                     <a href='../ADMIN/index.php?pid=2&update&id=$id'><button class='edit-button'>Update</button></a>
                     <br>
                     <a href='../ADMIN/component/delete/product.php?id=$id'><button class='delete-button'>Delete</button></a>
-                    </div>
+                </div>
             </td>";
         echo "<td style='width: 20%; padding: 10px 20px 10px 20px'>" . $row["product_name"] . "</td>";
         echo "<td style='width: 40%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["description"] . "</td>";

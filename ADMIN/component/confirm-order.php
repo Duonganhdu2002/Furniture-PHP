@@ -40,7 +40,7 @@ if (isset($_POST["submit"])) {
     $status = 5;
     echo $id;
 
-    $sql = "UPDATE shopping_carts SET status = ? WHERE id = ?";
+    $sql = "UPDATE shopping_carts SET status = ?, canceled_at = NOW() WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $status, $id);
     $result = $stmt->execute();
@@ -52,5 +52,4 @@ if (isset($_POST["submit"])) {
         $message = "Category updated correctly";
         exit;
     }
-} 
-
+}
