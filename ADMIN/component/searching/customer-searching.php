@@ -76,7 +76,7 @@
         echo "<div class='pagination'>";
 
         // Always show "Previous" button
-        echo "<a href='index.php?pid=1&page=" . max(1, $page - 1) . "'>Previous</a> ";
+        echo "<a href='index.php?pid=5&page=" . max(1, $page - 1) . "'>Previous</a> ";
 
         // Determine the first and last two pages to display
         $startPage = max(1, $page - 2);
