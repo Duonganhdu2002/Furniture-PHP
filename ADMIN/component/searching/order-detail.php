@@ -16,8 +16,6 @@ if ($result->num_rows > 0) {
                 <div class='action-buttons'>
                     <a href='index.php?pid=6&detail&id=$id'><button class='edit-button'>Detail</button></a>
                     <br>
-                    <a href='index.php?pid=6&update&id=$id'><button class='update-button'>Update</button></a>
-                    <br>
                     <a href='../ADMIN/component/delete/order.php?id=$id'><button class='delete-button'>Delete</button></a>
                 </div>
             </td>";

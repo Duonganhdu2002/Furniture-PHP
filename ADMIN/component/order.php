@@ -88,8 +88,6 @@
             $orderId = $_GET['orderId'];
             if ($orderId == '0') {
                 include "searching/order-searching.php";
-            } else if (isset($_GET["update&id=$id"])) {
-                include "modal-update/order.php";
             } else {
                 include "searching/order-detail.php";
             }
@@ -144,16 +142,6 @@
         border-radius: 0 0 10px 10px;
         border: none;
         width: 100%;
-    }
-
-    .update-button {
-        border: none;
-        width: 100%;
-        border-bottom: 1px solid white;
-    }
-
-    .update-button:hover {
-        opacity: 0.7;
     }
 
     .delete-button:hover {
