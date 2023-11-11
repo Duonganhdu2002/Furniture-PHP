@@ -58,7 +58,7 @@ $conn->close();
             <button class="button-edit">Edit</button>
         </div>
         <div >
-                <button type="submit" name="logout" class="logout-button">Logout</button>
+                <a href="../ADMIN/logout.php"><button type="submit" name="logout" class="logout-button">Logout</button></a>
         </div>
 
     </div>
@@ -183,6 +183,7 @@ $conn->close();
         background: #9c3b3b;
         border: none;
         border-radius: 5px;
+        text-decoration: none;
     }
 </style>
 
