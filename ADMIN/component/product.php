@@ -39,10 +39,10 @@
                 <td style="text-align: center">
                 </td>
                 <td style="text-align: center">
-                    <input name="searchByCategoryproduct" id="searchByCategoryproduct">
+                
                 </td>
                 <td style="text-align: center">
-                    <input name="searchByBrandproduct" id="searchByBrandproduct">
+                
                 </td>
             </tr>
         </form>
