@@ -3,6 +3,7 @@ if ($resultUser->num_rows > 0 && $resultInformation->num_rows > 0 && $resultAddr
     $stt = $offset + 1;
 
     while (($rowUser = $resultUser->fetch_assoc()) && ($rowInformation = $resultInformation->fetch_assoc()) && ($rowAddress = $resultAddress->fetch_assoc())) {
+        $id = $rowUser["id"];
         echo "<tr>";
         echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
         echo "<td style='width:4%; text-align: center;'>" . $rowUser["id"] . "</td>";
@@ -11,7 +12,7 @@ if ($resultUser->num_rows > 0 && $resultInformation->num_rows > 0 && $resultAddr
                 <div class='action-buttons'>
                         <a href='../ADMIN/index.php?pid=1&update&id=$id'><button class='edit-button'>Update</button></a>
                         <br>
-                        <a href='../ADMIN/component/delete/category.php?id=$id'><button class='delete-button'>Delete</button></a>
+                        <a href='../ADMIN/component/delete/customer.php?id=$id'><button class='delete-button'>Delete</button></a>
                     </div>
               </td>";
         echo "<td style='width: 8%; padding: 10px 20px 10px 20px'>" . $rowUser["username"] . "</td>";
