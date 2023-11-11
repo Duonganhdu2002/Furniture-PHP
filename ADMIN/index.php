@@ -37,6 +37,8 @@
                                 include("component/modal-update/category.php");
                             } else if ($id == '2' && isset($_GET['update'])) {
                                 include("component/modal-update/product.php");
+                            } else if ($id == '3' && isset($_GET['update'])) {
+                                include("component/modal-update/brand.php");
                             } else {
                                 switch ($id) {
                                     case '1':

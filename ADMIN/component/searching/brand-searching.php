@@ -18,10 +18,18 @@
         $stt = $offset + 1; // Biến đếm STT
 
         while ($row = $result->fetch_assoc()) {
+            $id = $row["id"];
             echo "<tr>";
             echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
             echo "<td style='width:4%; text-align: center;'>" . $row["id"] . "</td>";
-            echo "<td style='width:4%; text-align: center;'> <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'> </td>";
+            echo "<td class='hover-cell'; style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
+                    <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
+                    <div class='action-buttons'>
+                        <a href='../ADMIN/index.php?pid=3&update&id=$id'><button class='edit-button'>Update</button></a>
+                        <br>
+                        <a href='../ADMIN/component/delete/brand.php?id=$id'><button class='delete-button'>Delete</button></a>
+                        </div>
+                  </td>";
             echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["brand_name"] . "</td>";
             echo "<td style='width: 73%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["description"] . "</td>";
             echo "</tr>";
@@ -35,7 +43,7 @@
         $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM brands"))['total'];
         $totalPages = ceil($totalItems / $itemsPerPage);
 
-        echo "<div class 'pagination'>";
+        echo "<div class='pagination'>";
 
         // Always show "First" button
         echo "<a href='index.php?pid=3&page=1'>First</a> ";
@@ -61,7 +69,6 @@
         echo "<script>
         alert('No results found for the given search term: $searchTerm');
         </script>";
-    
     }
     ?>
 </div>
