@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doanh thu 12 tháng</title>
+</head>
+<body>
+    <canvas id="revenueChart" width="400" height="200"></canvas>
+
+    <script>
+        // Dữ liệu doanh thu của 12 tháng (ví dụ)
+        const monthlyRevenueData = [1000, 1200, 800, 1500, 2000, 1800, 1600, 1700, 1400, 1200, 1100, 1300];
+
+        // Lấy thẻ canvas
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+
+        // Tạo biểu đồ đường
+        const revenueChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                datasets: [{
+                    label: 'Doanh thu',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    data: monthlyRevenueData,
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -114,6 +114,9 @@ $background_color = array_key_exists($current_page, $page_colors) ? $page_colors
         border-right: 1px solid transparent;
         box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.3);
         overflow: hidden;
+        z-index: 1;
+        position: fixed;
+        height: 100vh;
     }
 
     .menu-bar {
