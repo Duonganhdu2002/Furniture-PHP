@@ -7,7 +7,6 @@ if ($conn->connect_error) {
 }
 
 $id = "";
-<<<<<<< HEAD
 $customerUserName = "";
 $customerName = "";
 $customerEmail = "";
@@ -22,30 +21,18 @@ $customerAddressCommune = "";
 $customerAddressDistrict = "";
 $customerAddressProvince = "";
 $customerAddressCountry = "";
-=======
-$categoryName = "";
-$categoryDescription = "";
->>>>>>> eaaf72daed220a0900c8b676a410e12f26405b54
 
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (!isset($_GET["id"])) {
-<<<<<<< HEAD
         echo "No customer ID has been chosen";
-=======
-        echo "No category ID has been chosen";
->>>>>>> eaaf72daed220a0900c8b676a410e12f26405b54
         exit;
     }
 
     $id = $_GET["id"];
 
-<<<<<<< HEAD
     $sql = "SELECT * FROM information WHERE id = ?";
-=======
-    $sql = "SELECT * FROM categories WHERE id = ?";
->>>>>>> eaaf72daed220a0900c8b676a410e12f26405b54
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
@@ -54,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
-<<<<<<< HEAD
     // Additional data from 'addresses' table
     $sqlAddresses = "SELECT * FROM addresses WHERE id = ?";
     $stmtAddresses = $conn->prepare($sqlAddresses);
@@ -73,14 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 
     if (!$row && !$rowUsers && !$rowAddresses) {
-=======
-    if (!$row) {
->>>>>>> eaaf72daed220a0900c8b676a410e12f26405b54
         echo "No row";
         exit;
     }
 
-<<<<<<< HEAD
     $customerUserName = $row["username"];
     $customerName = $row["full_name"];
     $customerEmail = $row["email"];
@@ -191,34 +173,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         } else {
             header("location: index.php?pid=5");
             $message = "Customer updated correctly";
-=======
-    $categoryName = $row["category_name"];
-    $categoryDescription = $row["description"];
-
-} else {
-
-    $id = $_POST["id"];
-    $categoryName = $_POST["categoryName"];
-    $categoryDescription = $_POST["categoryDescription"];
-
-    do {
-        if (empty($categoryName) || empty($categoryDescription)) {
-            $message = "All the fields are required";
-            break;
-        }
-
-        $sql = "UPDATE categories SET category_name = ?, description = ? WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssi", $categoryName, $categoryDescription, $id);
-        $result = $stmt->execute();
-
-        if (!$result) {
-            $message = "Invalid query: " . $stmt->error;
-            break;
-        } else {
-            header("location: index.php?pid=1");
-            $message = "Category updated correctly";
->>>>>>> eaaf72daed220a0900c8b676a410e12f26405b54
             exit;
         }
     } while (false);
@@ -226,7 +180,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 ?>
 
-<<<<<<< HEAD
 <div style="display: flex; align-items: center; flex-direction: column;">
     <div style="width: 68%;" class="customerFormContainer">
         <form class="customerForm" enctype="multipart/form-data" method="post" onsubmit="return submitcustomerForm();">
@@ -316,35 +269,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
 
     .customerFormContainer input {
-=======
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-    <div style="width: 40%;">
-        <form method="post" action="" class="categoryForm" onsubmit="return submitCategoryForm();">
-            <h1>Update category</h1>
-
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
-            
-            <label for="categoryName">Category Name</label><br>
-            <input type="text" id="categoryName" name="categoryName" value="<?php echo $categoryName; ?>"><br>
-            <label for="categoryDescription">Category Description</label><br>
-            <input style="height: 100px;" name="categoryDescription" id="categoryDescription" value="<?php echo $categoryDescription; ?>"> <br>
-            <div>
-                <button type="submit">Change</button>
-                <a style="text-decoration: none;">
-                    <button type="button" style="background-color: #BB0000;" onclick="window.location.href='index.php?pid=1';">Back</button>
-                </a>
-            </div>
-        </form>
-    </div>
-</div>
-
-<style>
-    .categoryForm h1 {
-        color: #3b5d50;
-    }
-
-    .categoryForm input {
->>>>>>> eaaf72daed220a0900c8b676a410e12f26405b54
         width: 99%;
         height: 30px;
         border: 1px solid #3b5d50;
@@ -352,37 +276,22 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         padding: 5px 10px 5px 10px;
     }
 
-<<<<<<< HEAD
     .customerFormContainer textarea {
         resize: none;
         width: 99%;
         height: 150px;
-=======
-    .categoryForm textarea {
-        resize: none;
-        width: 99%;
-        height: 200px;
->>>>>>> eaaf72daed220a0900c8b676a410e12f26405b54
         border-radius: 10px;
         padding: 5px 10px 5px 10px;
         border: 1px solid #3b5d50;
     }
 
-<<<<<<< HEAD
     .customerFormContainer label {
-=======
-    .categoryForm label {
->>>>>>> eaaf72daed220a0900c8b676a410e12f26405b54
         margin-top: 20px;
         margin-bottom: 20px;
         line-height: 4.0;
     }
 
-<<<<<<< HEAD
     .customerFormContainer button {
-=======
-    .categoryForm button {
->>>>>>> eaaf72daed220a0900c8b676a410e12f26405b54
         width: 80px;
         height: 40px;
         border: none;
