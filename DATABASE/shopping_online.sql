@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 10, 2023 lúc 04:31 PM
+-- Thời gian đã tạo: Th10 11, 2023 lúc 09:42 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.2.4
+-- Phiên bản PHP: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -101,7 +101,6 @@ CREATE TABLE `address_cart` (
 INSERT INTO `address_cart` (`id_cart`, `username`, `country`, `province`, `district`, `commune`, `street`, `number`, `email`, `phone`) VALUES
 (1, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', NULL, NULL),
 (2, 1, 'Vietnam', 'Hanoi', 'Ba Dinh', 'Quan Thanh', 'Phan Dinh Phung', '123', NULL, NULL),
-(3, 1, 'Vietnam', 'Hanoi', 'Ba Dinh', 'Quan Thanh', 'Phan Dinh Phung', '123', NULL, NULL),
 (4, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', NULL, NULL),
 (5, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', NULL, NULL),
 (6, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', NULL, NULL),
@@ -117,8 +116,7 @@ INSERT INTO `address_cart` (`id_cart`, `username`, `country`, `province`, `distr
 (16, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
 (17, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
 (18, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(19, 7, 'Canadaaaa', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street3333', '40434', NULL, NULL),
-(20, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL);
+(19, 7, 'Canadaaaa', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street3333', '40434', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -181,8 +179,6 @@ CREATE TABLE `cart_items` (
 INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`, `user`, `price`) VALUES
 (1, 1, 41, 1, 5, 899.99),
 (2, 2, 41, 1, 1, 899.99),
-(3, 3, 41, 1, 1, 899.99),
-(4, 3, 47, 1, 1, 899.99),
 (5, 4, 1, 1, 5, 499.99),
 (6, 5, 41, 1, 5, 899.99),
 (7, 6, 1, 12, 5, 499.99),
@@ -205,14 +201,7 @@ INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`, `user`, `pr
 (24, 19, 42, 1, 7, 1199.99),
 (25, 19, 63, 6, 7, 1399.99),
 (26, 19, 121, 1, 7, 699.99),
-(27, 19, 162, 5, 7, 44.99),
-(28, 20, 42, 1, 7, 1199.99),
-(29, 20, 9, 1, 7, 899.99),
-(30, 20, 181, 1, 7, 229.99),
-(31, 20, 262, 1, 7, 899.99),
-(32, 20, 260, 1, 7, 699.99),
-(33, 20, 264, 1, 7, 449.99),
-(34, 20, 201, 1, 7, 899.99);
+(27, 19, 162, 5, 7, 44.99);
 
 -- --------------------------------------------------------
 
@@ -297,9 +286,7 @@ INSERT INTO `information` (`id`, `username`, `full_name`, `date_of_birth`, `emai
 (27, 'admin17', 'Olivia Wilson', '1994-03-01', 'olivia.wilson@example.com', 2, '+111222333', 'person_27.jpg', 'admin'),
 (28, 'admin18', 'Lucas Anderson', '1996-06-18', 'lucas.anderson@example.com', 1, '+999555777', 'person_28.jpg', 'admin'),
 (29, 'admin19', 'Ava Wilson', '1986-10-07', 'ava.wilson@example.com', 2, '+333888999', 'person_29.jpg', 'admin'),
-(30, 'admin20', 'Mason Martinez', '1991-03-25', 'mason.martinez@example.com', 1, '+777444555', 'person_30.jpg', 'admin'),
-(31, 'dawd', 'DU BUI VAN', '2002-12-12', '2154810104@vaa.edu.vn', 1, '0896899384', 'person_1.jpg', 'user'),
-(32, 'bvdu', 'DU BUI VAN', '2022-12-12', '2154810104@vaa.edu.vn', 2, '0896899384', 'person_1.jpg', 'user');
+(30, 'admin20', 'Mason Martinez', '1991-03-25', 'mason.martinez@example.com', 1, '+777444555', 'person_30.jpg', 'admin');
 
 -- --------------------------------------------------------
 
@@ -651,7 +638,6 @@ CREATE TABLE `shopping_carts` (
 INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`, `ship_method`, `note`, `total_price`, `canceled_at`) VALUES
 (1, 5, '2023-11-06 11:35:25', 1, 2, 'HIIHIHIH', NULL, NULL),
 (2, 1, '2023-11-06 16:47:01', 1, 1, '', NULL, NULL),
-(3, 1, '2023-11-08 09:50:05', 1, 2, 'Tadaaa', NULL, NULL),
 (4, 5, '2023-11-08 10:56:58', 1, 1, '0', 0.00, NULL),
 (5, 5, '2023-11-08 10:57:24', 1, 1, '0', 922.98, NULL),
 (6, 5, '2023-11-08 10:57:50', 1, 2, '0', 6019.87, NULL),
@@ -667,8 +653,7 @@ INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`, `ship_met
 (16, 7, '2023-11-10 11:50:07', 1, 1, '', 3812.95, NULL),
 (17, 7, '2023-11-10 12:45:25', 1, 1, '', 1422.98, NULL),
 (18, 7, '2023-11-10 13:36:09', 5, 1, '', 1122.98, '2023-11-10 13:36:21'),
-(19, 7, '2023-11-10 13:37:07', 5, 1, '', 10547.86, '2023-11-10 15:19:55'),
-(20, 7, '2023-11-10 15:30:10', 1, 1, '', 5302.92, NULL);
+(19, 7, '2023-11-10 13:37:07', 5, 1, '', 10547.86, '2023-11-10 15:19:55');
 
 -- --------------------------------------------------------
 
@@ -741,9 +726,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `created_at`, `image`
 (27, 'admin17', 'adminpass17', 'admin', '2023-10-17 04:14:09', NULL),
 (28, 'admin18', 'adminpass18', 'admin', '2023-10-17 04:14:09', NULL),
 (29, 'admin19', 'adminpass19', 'admin', '2023-10-17 04:14:09', NULL),
-(30, 'admin20', 'adminpass20', 'admin', '2023-10-17 04:14:09', NULL),
-(31, 'dawd', '1202', 'user', '2023-10-31 17:16:44', NULL),
-(32, 'bvdu', '1212', 'user', '2023-11-01 12:39:48', NULL);
+(30, 'admin20', 'adminpass20', 'admin', '2023-10-17 04:14:09', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -862,7 +845,7 @@ ALTER TABLE `addresses`
 --
 ALTER TABLE `address_cart`
   ADD CONSTRAINT `FK_address_cart_shopping_carts` FOREIGN KEY (`id_cart`) REFERENCES `shopping_carts` (`id`),
-  ADD CONSTRAINT `FK_address_cart_shopping_carts_2` FOREIGN KEY (`username`) REFERENCES `shopping_carts` (`user_id`);
+  ADD CONSTRAINT `FK_address_cart_shopping_carts_2` FOREIGN KEY (`username`) REFERENCES `shopping_carts` (`id`);
 
 --
 -- Các ràng buộc cho bảng `cart_items`

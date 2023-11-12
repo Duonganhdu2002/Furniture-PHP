@@ -25,7 +25,7 @@ foreach ($category_ids as $category_id) {
                 <div>
                     <h2 class="section-title"><?php echo $row1["category_name"]; ?></h2>
                     <p style="" class="section-decrition"><?php echo $row1["description"]; ?></p>
-                    <p><a href="index.php?pid=9" class="btn">Explore</a></p>
+                    <p><a href="index.php?pid=9&categoryId=<?php echo $row1["id"]; ?>" class="btn">Explore</a></p>
                 </div>
 
                 <?php

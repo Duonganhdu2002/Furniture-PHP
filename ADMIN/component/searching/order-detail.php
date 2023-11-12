@@ -1,12 +1,11 @@
 <?php
-
 if ($result->num_rows > 0) {
     $stt = $offset + 1;
 
     while ($row = $result->fetch_assoc()) {
         $id = $row["id"];
-        // echo "<form action='' method='post'>";
-        echo "<input type='hidden' name='cartID' value='" . $row["id"] . "'>";
+        echo "<form action='component/confirm-order.php' method='post'>";
+        echo "<input type='hidden' name='id' value='$id'>";
         echo "<tr>";
         echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
         echo "<td style='width:6%; text-align: center;'>" . $row["id"] . "</td>";
@@ -14,25 +13,43 @@ if ($result->num_rows > 0) {
         echo "<td class='hover-cell' style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
                 <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
                 <div class='action-buttons'>
-                    <a href='index.php?pid=6&id=$id'><button class='edit-button'>Detail</button></a>
+                    <a href='index.php?pid=6&detail&id=$id'><button type='button' class='edit-button'>Detail</button></a>
                     <br>
-                    <a href='../ADMIN/component/delete/product.php?id=$id'><button class='delete-button'>Delete</button></a>
+                    <a href='../ADMIN/component/delete/order.php?id=$id'><button type='button' class='delete-button'>Delete</button></a>
                 </div>
             </td>";
-        echo "<td style='width: 18%; padding: 10px 20px 10px 20px'>" . $row["created_at"] . "</td>";
         echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["name_status"] . "</td>";
+        echo "<td style='width: 18%; padding: 10px 20px 10px 20px'>" . $row["created_at"] . "</td>";
         echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $row["method_name"] . "</td>";
         echo "<td style='width: 23%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["note"] . "</td>";
-        echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'><button type='submit'>Confirm</button></td>";
+        if ($row["name_status"] === "Waiting for confirm") {
+            echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                    <button name='submit' type='submit'>Confirm</button>
+                </td>";
+        } else  if ($row["name_status"] === "Confirmed") {
+            echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                    <button name='submit1' type='submit'>Delivering</button>
+                </td>";
+        } else if ($row["name_status"] === "Delivering") {
+            echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                    <button name='submit3' type='submit'>Delivered</button>
+                </td>";
+        } else if ($row["name_status"] === "Delivered") {
+            echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                    <button name='submit2' type='submit'>Cancle</button>
+                </td>";
+        } else {
+            echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'></td>";
+        }
         echo "</tr>";
-        // echo "</form>";
+        echo "</form>";
 
         $stt++;
     }
 
     echo "</table>";
 
-    $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM products"))['total'];
+    $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM shopping_carts"))['total'];
     $totalPages = ceil($totalItems / $itemsPerPage);
 
     echo "<div class='pagination'>";

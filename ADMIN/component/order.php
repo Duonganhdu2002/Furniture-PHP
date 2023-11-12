@@ -10,8 +10,8 @@
             <th style='text-align: center;'>
                 <img style='width: 25px' src='../PUBLIC-PAGE/images/settingtr.svg'>
             </th>
-            <th style='text-align: center;'>Time</th>
             <th style='text-align: center;'>Status</th>
+            <th style='text-align: center;'>Time</th>
             <th style='text-align: center;'>Ship MT</th>
             <th style='text-align: center;'>Note</th>
             <th style='text-align: center;'>Confirm</th>
@@ -48,11 +48,16 @@
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page - 1) * $itemsPerPage;
 
+        if (isset($_SESSION["selectedValue"])) {
+            $selectedValue = $_SESSION["selectedValue"];
+        }        
+
         $sql = "SELECT shopping_carts.id, shopping_carts.user_id, users.username, shopping_carts.created_at, status_cart.name_status, shipping_methods.method_name, shopping_carts.note
         FROM shopping_carts
         JOIN users ON shopping_carts.user_id = users.id
         JOIN shipping_methods ON shopping_carts.ship_method = shipping_methods.id
         JOIN status_cart ON shopping_carts.status = status_cart.id
+        WHERE status_cart.name_status = '$selectedValue'
         LIMIT $offset, $itemsPerPage";
 
         $result = $conn->query($sql);
@@ -84,9 +89,9 @@
             $result4 = $conn->query($sql4);
 
             include "component/order-detail.php";
-        } else if (isset($_GET['categoryId'])) {
-            $categoryId = $_GET['categoryId'];
-            if ($categoryId == '0') {
+        } else if (isset($_GET['orderId'])) {
+            $orderId = $_GET['orderId'];
+            if ($orderId == '0') {
                 include "searching/order-searching.php";
             } else {
                 include "searching/order-detail.php";

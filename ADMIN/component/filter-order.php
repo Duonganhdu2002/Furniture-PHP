@@ -1,13 +1,38 @@
-<div class="filter-order">
-    <select name="filter-order">
-        <option value="1">Chưa xác nhận</option>
-        <option value="2">Đã xác nhận</option>
-        <option value="3">Đang giao</option>
-        <option value="4">Đã giao</option>
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["filter-order"])) {
+        $selectedValue = $_POST["filter-order"];
+        $_SESSION["selectedValue"] = $selectedValue;
+    }
+}
+?>
+
+<form method="post" action="" id="filterForm">
+    <select name="filter-order" onchange="document.getElementById('filterForm').submit()">
+        <?php
+        $conn = new mysqli('localhost', 'root', '', 'shopping_online');
+        $sql = "SELECT * FROM status_cart";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $optionText = $row["name_status"];
+                echo "<option value='".$optionText."'";
+                if (isset($_SESSION["selectedValue"]) && $_SESSION["selectedValue"] == $optionText) {
+                    echo " selected";
+                }
+                echo ">".$optionText."</option>";
+            }
+        }
+
+        $conn->close();
+        ?>
     </select>
-</div>
+</form>
+
 <style>
-    .filter-order {
+    #filterForm {
         margin-right: 5%;
     }
 </style>
