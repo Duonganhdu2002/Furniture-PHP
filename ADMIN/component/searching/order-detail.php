@@ -1,5 +1,4 @@
 <?php
-
 if ($result->num_rows > 0) {
     $stt = $offset + 1;
 
