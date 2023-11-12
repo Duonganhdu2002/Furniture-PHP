@@ -9,6 +9,16 @@ include('sql/amountOrder.php');
 include('sql/cancleOrder.php');
 include('sql/sales.php');
 include('sql/shipMethod.php');
+include('sql/countryOrder.php');
+
+// while ($row = $result->fetch_assoc()) {
+//     echo "Quốc gia: " . $row['country'] . " - Số lượng đơn hàng: " . $row['order_count'] . " - Tổng giá trị đơn hàng: " . $row['total_value'] . "<br>";
+// }
+// while ($row1 = $result1->fetch_assoc()) {
+//     echo "Quốc gia: " . $row1['country'] . " - Số lượng đơn hàng: " . $row1['order_count'] . " - Tổng giá trị đơn hàng: " . $row1['last_total_value'] . "<br>";
+// }
+
+// echo $percentIncreaseCountry;
 ?>
 
 <div class="revenue">
@@ -27,7 +37,6 @@ include('sql/shipMethod.php');
                     ?>
                     since yesterday
                 </h4>
-
             </div>
             <div style="display: flex; align-items: center; justify-content: center;">
                 <img src="../PUBLIC-PAGE/images/icon/money.svg" alt="" class="image-icon">
@@ -173,15 +182,51 @@ include('sql/shipMethod.php');
     </div>
 
     <div class="revenue3">
-        <div style="width: 50%" class="byCountry">
-            byCountry
+        <div style="width: 55%" class="byCountry">
+            <h3>Sale by country</h3>
+            <table class="tableCountry">
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                </tr>
+            </table>
         </div>
-        <div style="width: 40%;" class="byCategory">
+        <div style="width: 35%;" class="byCategory">
             byCategory
         </div>
     </div>
 </div>
 <style>
+    .tableCountry {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .tableCountry,
+    .tableCountry th,
+    .tableCountry td {
+        border: 1px solid #ddd;
+    }
+
+    .tableCountry th,
+    .tableCountry td {
+        padding: 8px;
+        text-align: center;
+    }
+
+    .tableCountry th {
+        background-color: #f2f2f2;
+    }
+
+    /* Apply styling to alternate rows for better readability */
+    .tableCountry tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
     .revenue1 {
         display: flex;
         justify-content: space-between;
@@ -214,7 +259,7 @@ include('sql/shipMethod.php');
     }
 
     .revenue2 {
-        margin-top: 50px;
+        margin-top: 30px;
         width: 100%;
         display: flex;
         border-radius: 18px;
@@ -236,10 +281,10 @@ include('sql/shipMethod.php');
 
     .revenue3 div {
         height: 200px;
-        background-color: lightblue;
         border: none;
-        border-radius: 20px;
         padding: 20px;
+        border-radius: 18px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
 
     .image-icon {

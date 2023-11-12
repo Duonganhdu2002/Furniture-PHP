@@ -22,6 +22,9 @@ for ($methodId = 1; $methodId <= 3; $methodId++) {
 }
 
 for ($methodId = 1; $methodId <= 3; $methodId++) {
-    $shippingMethodCount[$methodId] = round(($shippingMethodCount[$methodId]/$totalOrders)*100, 0);
+    if ($totalOrders != 0) {
+        $shippingMethodCount[$methodId] = round(($shippingMethodCount[$methodId] / $totalOrders) * 100, 0);
+    } else {
+        $shippingMethodCount[$methodId] = 100;
+    }
 }
-?>

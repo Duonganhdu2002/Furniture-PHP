@@ -48,6 +48,7 @@
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page - 1) * $itemsPerPage;
 
+        $selectedValue = '';
         if (isset($_SESSION["selectedValue"])) {
             $selectedValue = $_SESSION["selectedValue"];
         }        
