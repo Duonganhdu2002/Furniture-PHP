@@ -151,7 +151,7 @@
 
                 if (isset($_SESSION['username_user'])) {
                     if (isset($_GET['edit'])) {
-                        include("component/edit-pro5.php");
+                        include("component/edit-profile.php");
                         break;
                     }
                     include("component/profile.php");
