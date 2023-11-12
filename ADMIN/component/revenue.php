@@ -131,6 +131,7 @@
         display: flex;
         justify-content: space-between;
         margin-top: 50px;
+        padding-bottom: 50px;
     }
 
     .revenue3 div {
