@@ -4,19 +4,27 @@
     <div class="revenue1">
         <div class="revenue1-child">
             <div>Today money</div>
-            <div>Icon here</div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+            <img src="../PUBLIC-PAGE/images/icon/money.svg" alt="" class="image-icon">
+            </div>
         </div>
         <div class="revenue1-child">
             <div>New user</div> 
-            <div>Icon here</div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <img src="../PUBLIC-PAGE/images/icon/user.svg" alt="" class="image-icon">
+            </div>
         </div>
         <div class="revenue1-child">
             <div>New order</div>
-            <div>Icon here</div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <img src="../PUBLIC-PAGE/images/icon/order.svg" alt="" class="image-icon">
+            </div>
         </div>
         <div class="revenue1-child">
             <div>Today</div>
-            <div>Icon here</div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <img src="../PUBLIC-PAGE/images/icon/today.svg" alt="" class="image-icon">
+            </div>
         </div>
     </div>
 
@@ -140,5 +148,14 @@
         border: none;
         border-radius: 20px;
         padding: 20px;
+    }
+
+    .image-icon {
+        /* display: flex;
+        align-items: center;
+        justify-content: center; */
+        /* margin: 10px; */
+        width: 40px;
+        /* height: 20px; */
     }
 </style>
