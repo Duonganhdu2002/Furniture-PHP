@@ -1,27 +1,91 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<?php
+$conn = new mysqli('localhost', 'root', '', 'shopping_online');
+
+include('sql/todayMoney.php');
+include('sql/amountUser.php');
+include('sql/amountOrder.php');
+include('sql/cancleOrder.php');
+include('sql/sales.php');
+include('sql/shipMethod.php');
+?>
+
 <div class="revenue">
     <div class="revenue1">
         <div class="revenue1-child">
-            <div>Today money</div>
+            <div>
+                <h4>TODAY'S MONEY</h4>
+                <h3><?php echo $totalAmountToday ?> $</h3>
+                <h4>
+                    <?php
+                    if ($percentIncrease > 0) {
+                        echo "<span style='color: green'>+$percentIncrease%</span>";
+                    } else {
+                        echo "<span style='color: red'>$percentIncrease%</span>";
+                    }
+                    ?>
+                    since yesterday
+                </h4>
+
+            </div>
             <div style="display: flex; align-items: center; justify-content: center;">
-            <img src="../PUBLIC-PAGE/images/icon/money.svg" alt="" class="image-icon">
+                <img src="../PUBLIC-PAGE/images/icon/money.svg" alt="" class="image-icon">
             </div>
         </div>
         <div class="revenue1-child">
-            <div>New user</div> 
+            <div>
+                <h4>NEW USER</h4>
+                <h3><?php echo $totalAccout ?></h3>
+                <h4>
+                    <?php
+                    if ($percentIncreaseAccount > 0) {
+                        echo "<span style='color: green'>+$percentIncreaseAccount%</span>";
+                    } else {
+                        echo "<span style='color: red'>$percentIncreaseAccount%</span>";
+                    }
+                    ?>
+                    since yesterday
+                </h4>
+            </div>
             <div style="display: flex; align-items: center; justify-content: center;">
                 <img src="../PUBLIC-PAGE/images/icon/user.svg" alt="" class="image-icon">
             </div>
         </div>
         <div class="revenue1-child">
-            <div>New order</div>
+            <div>
+                <h4>NEW ORDER</h4>
+                <h3><?php echo $totalAmountOrder ?></h3>
+                <h4>
+                    <?php
+                    if ($percentIncreaseOrder > 0) {
+                        echo "<span style='color: green'>+$percentIncreaseOrder%</span>";
+                    } else {
+                        echo "<span style='color: red'>$percentIncreaseOrder%</span>";
+                    }
+                    ?>
+                    since yesterday
+                </h4>
+            </div>
             <div style="display: flex; align-items: center; justify-content: center;">
                 <img src="../PUBLIC-PAGE/images/icon/order.svg" alt="" class="image-icon">
             </div>
         </div>
         <div class="revenue1-child">
-            <div>Today</div>
+            <div>
+                <h4>CANCLED ORDER</h4>
+                <h3><?php echo $totalAmountCancle ?></h3>
+                <h4>
+                    <?php
+                    if ($percentIncreaseCancel <= 0) {
+                        echo "<span style='color: green'>$percentIncreaseCancel%</span>";
+                    } else {
+                        echo "<span style='color: red'>$percentIncreaseCancel%</span>";
+                    }
+                    ?>
+                    since yesterday
+                </h4>
+            </div>
             <div style="display: flex; align-items: center; justify-content: center;">
                 <img src="../PUBLIC-PAGE/images/icon/today.svg" alt="" class="image-icon">
             </div>
@@ -34,7 +98,14 @@
             <canvas id="revenueChart" width="400" height="400"></canvas>
             <script>
                 // Dữ liệu doanh thu của 12 tháng (ví dụ)
-                const monthlyRevenueData = [1000, 1200, 800, 1500, 2000, 1800, 1600, 1700, 1400, 1200, 1100, 1300];
+                const monthlyRevenueData = [
+                    <?php
+                    for ($month = 1; $month <= 12; $month++) {
+                        echo round($salesByMonth[$month], 2);
+                        echo ", ";
+                    }
+                    ?>
+                ];
 
                 // Lấy thẻ canvas
                 const ctx1 = document.getElementById('revenueChart').getContext('2d');
@@ -45,9 +116,9 @@
                     data: {
                         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                         datasets: [{
-                            label: 'Revenue',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            label: 'Sales overview',
+                            borderColor: 'rgba(59, 93, 80, 1)',
+                            backgroundColor: 'rgba(59, 93, 80, 0.2)',
                             data: monthlyRevenueData,
                             fill: true,
                         }]
@@ -65,16 +136,23 @@
             </script>
         </div>
 
-        <div style="width: 50%;" class="char2">
+        <div style="width: 40%;" class="char2">
             <canvas id="pieChart" width="400" height="200"></canvas>
 
             <script>
                 // Dữ liệu ví dụ cho biểu đồ tròn
                 const data = {
-                    labels: ['Category 1', 'Category 2', 'Category 3', 'Category 4'],
+                    labels: ['Fast', 'Standard', 'Free ship'],
                     datasets: [{
-                        data: [30, 20, 25, 25],
-                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50'],
+                        data: [
+                            <?php
+                            for ($methodId = 1; $methodId <= 3; $methodId++) {
+                                echo $shippingMethodCount[$methodId];
+                                echo ", ";
+                            }
+                            ?>
+                        ],
+                        backgroundColor: ['#3b5d50', '#3b5d12   ', '#3b5d65'],
                     }]
                 };
 
@@ -110,29 +188,43 @@
     }
 
     .revenue1-child div:nth-child(1) {
-        width: 70%;
+        width: 90%;
         padding: 20px;
     }
 
     .revenue1-child div:nth-child(2) {
-        width: 30%;
+        width: 10%;
         padding: 20px;
     }
 
     .revenue1-child {
         display: flex;
         width: 20%;
-        height: 120px;
-        background-color: lightblue;
-        border: none;
+        height: fit-content;
         border-radius: 18px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .revenue1-child div h4 {
+        color: #67748E;
+    }
+
+    .revenue1-child div h3 {
+        color: #344767;
     }
 
     .revenue2 {
-        margin-top: 100px;
+        margin-top: 50px;
         width: 100%;
         display: flex;
         border-radius: 18px;
+        justify-content: space-between;
+    }
+
+    .revenue2 div {
+        border-radius: 18px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        padding: 20px;
     }
 
     .revenue3 {
