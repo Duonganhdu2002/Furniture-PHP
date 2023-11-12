@@ -34,8 +34,8 @@ if ($resultUser->num_rows > 0 && $resultInformation->num_rows > 0 && $resultAddr
 
 
 
-$totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM categories"))['total'];
-$totalPages = ceil($totalItems / $itemsPerPage);
+    $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'admin'"))['total'];
+    $totalPages = ceil($totalItems / $itemsPerPage);
 
 echo "<div class='pagination'>";
 

@@ -131,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 <div style="display: flex; align-items: center; flex-direction: column;">
     <div style="width: 68%;" class="productFormContainer">
         <form class="productForm" enctype="multipart/form-data" method="post" onsubmit="return submitProductForm();">
-            <h1>Add Product</h1>
+            <h1>Update Product</h1>
 
             <input type="hidden" name="id" value="<?php echo $id; ?>">
 
