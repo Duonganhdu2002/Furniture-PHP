@@ -1,3 +1,24 @@
+<?php 
+// Kết nối đến cơ sở dữ liệu
+$conn = new mysqli('localhost', 'root', '', 'shopping_online');
+if ($conn->connect_error) {
+    die("Kết nối thất bại: " . $conn->connect_error);
+}
+
+// Lấy tên đăng nhập của người dùng từ phiên làm việc
+$username = $_SESSION["username_user"];
+
+// Truy vấn thông tin cá nhân từ bảng Information dựa trên tên đăng nhập
+$sqlInformation = "SELECT * FROM information WHERE username = '$username' ";
+$resultInformation = $conn->query($sqlInformation);
+
+if ($resultInformation->num_rows > 0) {
+    $row = $resultInformation->fetch_assoc();
+    $username = $row["username"];
+}
+
+?>
+
 <script>
     const shopLink = document.getElementById('shop-link');
     const shopModule = document.getElementById('shop-module');
@@ -65,10 +86,30 @@ $result = $link->query($sql);
             <div><a style="<?php echo $headerHomeContactUsLinkCss ?>" class="menu-link" href="index.php?pid=5">Contact us</a></div>
         </div>
         <div class="user-cart-icon">
+
             <div class="user-icon">
-                <a href="index.php?pid=11">
-                    <img src="../PUBLIC-PAGE/images/user.svg" alt="">
-                </a>
+                <?php
+                    if (isset($_SESSION['username_user'])) {
+                        ?>
+                        <div class="user-info">
+                        
+                        <a href="index.php?pid=11">
+                            <img src="../PUBLIC-PAGE/images/user.svg" alt="">
+                        </a>
+                        <?php
+                        // Nếu tồn tại username trong phiên làm việc
+                        echo '<div class="greeting"><a href="index.php?pid=11">' . $username . '</a></div>';
+                        ?>
+                        </div>
+                    <?php
+                    } else { ?>
+                        <a href="index.php?pid=11">
+                            <img src="../PUBLIC-PAGE/images/user.svg" alt="">
+                        </a>
+                    <?php
+                    }
+                    ?>
+
                 <div class="user-module">
                     <?php
                     if (isset($_SESSION['username_user'])) {
@@ -121,7 +162,7 @@ $result = $link->query($sql);
     .header-child {
         display: flex;
         align-items: center;
-        width: 72%;
+        width: 70%;
         justify-content: center;
     }
 
@@ -140,17 +181,17 @@ $result = $link->query($sql);
 
 
     .search-products {
-        width: 30%;
+        width: 35%;
     }
 
     .menu {
-        width: 47%;
+        width: 60%;
         display: flex;
         justify-content: end;
     }
 
     .menu a {
-        margin-left: 42px;
+        margin-left: 38px;
         margin-top: 15px;
         display: inline-block;
         position: relative;
@@ -185,14 +226,14 @@ $result = $link->query($sql);
     }
 
     .user-cart-icon {
-        width: 15%;
+        width: 25%;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
     .user-cart-icon div {
-        margin-left: 50px;
+        margin-left: 30px;
     }
 
     .menu-icon {
@@ -269,28 +310,6 @@ $result = $link->query($sql);
         display: none;
     }
 
-    /* .login-button {
-        border-radius: 10px 10px 0 0;
-        border-bottom: 1px solid white;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-    }
-
-    .login-button:hover {
-        opacity: 0.7;
-    }
-
-    .register-button {
-        border-radius: 0 0 10px 10px;
-        border: none;
-        width: 100%;
-    }
-
-    .register-button:hover {
-        opacity: 0.7;
-    } */
-
     .action-buttons button {
         padding: 10px 28px 10px 28px;
         background-color: #3b5d50;
@@ -352,6 +371,20 @@ $result = $link->query($sql);
         color: #ffffff;
     }
 
+    .greeting {
+        /* display: flex; */
+        width: 100%
+        
+    }
+
+    .greeting a {
+        cursor: pointer;
+    }
+
+    .user-info {
+    display: flex;
+    align-items: center;
+}
     @media (max-width: 400px) {
         .header {
             height: 80px;
