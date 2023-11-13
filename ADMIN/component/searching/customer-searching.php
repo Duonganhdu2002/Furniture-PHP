@@ -73,28 +73,6 @@
         $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM categories"))['total'];
         $totalPages = ceil($totalItems / $itemsPerPage);
 
-        echo "<div class='pagination'>";
-
-        // Always show "Previous" button
-        echo "<a href='index.php?pid=5&page=" . max(1, $page - 1) . "'>Previous</a> ";
-
-        // Determine the first and last two pages to display
-        $startPage = max(1, $page - 2);
-        $endPage = min($totalPages, $page + 2);
-
-        // Show the page numbers
-        for ($i = $startPage; $i <= $endPage; $i++) {
-            echo "<a href='index.php?pid=5&page=$i'";
-            if ($i == $page) {
-                echo " class='current'";
-            }
-            echo ">$i</a> ";
-        }
-
-        // Always show "Next" button
-        echo "<a href='index.php?pid=5&page=" . min($totalPages, $page + 1) . "'>Next</a>";
-
-        echo "</div>";
     } else {
         echo "<script>
         alert('No results found for the given search term: $searchTerm');
