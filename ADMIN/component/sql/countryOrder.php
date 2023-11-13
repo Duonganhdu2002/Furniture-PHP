@@ -22,7 +22,9 @@ $sql1 = "SELECT address_cart.country, COUNT(*) AS order_count, SUM(shopping_cart
 $result1 = $conn->query($sql1);
 $row1 = $result1->fetch_assoc();
 $totalCountryPreviousYear = $row1['last_total_value'];
+if ($totalCountryPreviousYear === null) {
+        $totalCountryPreviousYear = 0;
+}
 
 $percentIncreaseCountry = ($totalCountryPreviousYear != 0) ? (($totalCountry / $totalCountryPreviousYear) * 100) : 0;
 $percentIncreaseCountry = round($percentIncreaseCountry,0);
-?>
