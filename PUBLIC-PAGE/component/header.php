@@ -114,6 +114,8 @@ $result = $link->query($sql);
                     <?php
                     if (isset($_SESSION['username_user'])) {
                         // Nếu tồn tại username trong phiên làm việc
+                        echo '<div class="login-module"><a href="index.php?pid=11">Profile</a></div>';
+                        echo '<div class="login-module"><a href="index.php?pid=11&changepassword">Change Password</a></div>';
                         echo '<div class="logout-module"><a href="../PUBLIC-PAGE/logout.php">Logout</a></div>';
                     } else {
                         // Nếu không tồn tại username trong phiên làm việc
@@ -453,3 +455,9 @@ $result = $link->query($sql);
         }
     }
 </style>
+
+<script>
+    function changePassword(pw_id) {
+        window.location.href = '../PUBLIC-PAGE/index.php?pid=11&changepassword';
+    }
+</script>
