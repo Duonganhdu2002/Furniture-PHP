@@ -70,9 +70,16 @@ $result = $link->query($sql);
                     <img src="../PUBLIC-PAGE/images/user.svg" alt="">
                 </a>
                 <div class="user-module">
-                    <div class="login-module"><a href="../PUBLIC-PAGE/login.php" style="width:100% ;text-align: center; font-size: 18px;">Login</a></div>
-                    <div class="register-module"><a href="../PUBLIC-PAGE/register.php" style="text-align: center; font-size: 18px;">Register</a></div>
-                    <div class="logout-module"><a href="../PUBLIC-PAGE/logout.php" style="text-align: center; font-size: 18px;">Logout</a></div>
+                    <?php
+                    if (isset($_SESSION['username_user'])) {
+                        // Nếu tồn tại username trong phiên làm việc
+                        echo '<div class="logout-module"><a href="../PUBLIC-PAGE/logout.php">Logout</a></div>';
+                    } else {
+                        // Nếu không tồn tại username trong phiên làm việc
+                        echo '<div class="login-module"><a href="../PUBLIC-PAGE/login.php">Login</a></div>';
+                        echo '<div class="register-module"><a href="../PUBLIC-PAGE/register.php">Register</a></div>';
+                    }
+                    ?>
                 </div>
             </div>
             <div class="cart-icon">
@@ -235,14 +242,11 @@ $result = $link->query($sql);
     .user-module {
         display: none;
         position: absolute;
-        background-color: #3b5d50;
-        border: 2px solid white;
-        /* z-index: 2; */
+        background: rgba(59, 93, 80, 0.8);
+        border: 1px solid white;
         width: 5%;
-        /* height: 100px; */
         border-radius: 10px;
-        /* top: 65px; */
-        /* left: 78%; */
+
         
     }
 
@@ -252,7 +256,7 @@ $result = $link->query($sql);
 
     .user-icon:hover .user-module {
         display: block;
-        box-shadow: 0 0 10px #ffffff;
+        box-shadow: 0 0 8px #ffffff;
     }
 
     .action-buttons {
@@ -299,20 +303,18 @@ $result = $link->query($sql);
     .register-module,
     .logout-module {
         position:relative;
-        /* background-color: #f9bf29; */
-        /* color: #f9bf29; */
-        opacity: 0.6;
         border-radius: 8px;
         transition: background-color 0.5s, width 0.5s ease;
-    }
-
-    .login-module,
-    .register-module,
-    .logout-module {
         display: flex; /* Sử dụng display: flex để căn giữa các thẻ con theo chiều dọc */
         align-items: center; /* Đảm bảo các thẻ con nằm giữa theo chiều dọc */
         justify-content: center; /* Đảm bảo các thẻ con nằm giữa theo chiều ngang */
         height: 50px;
+    }
+
+    .login-module a,
+    .register-module a,
+    .logout-module a {
+        border-radius: 8px;
     }
 
     .login-module a,
@@ -332,22 +334,22 @@ $result = $link->query($sql);
         align-items: center;
     }
 
-    .login-module:hover {
+    .login-module a:hover {
         opacity: 1;
-        background-color: #f9bf29;
-        color: #3b5d50;
+        background: #f9bf29;
+        color: #2f2f2f;
     }
 
-    .register-module:hover {
+    .register-module a:hover {
         opacity: 1;
         background-color: #f9bf29;
-        color: #3b5d50;
+        color: #2f2f2f;
     }
 
-    .logout-module:hover {
+    .logout-module a:hover {
         opacity: 1;
-        background-color: #f9bf29;
-        color: #3b5d50;
+        background-color: #B22222;
+        color: #ffffff;
     }
 
     @media (max-width: 400px) {
