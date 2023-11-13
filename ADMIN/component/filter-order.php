@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <form method="post" action="" id="filterForm">
-    <select name="filter-order" onchange="document.getElementById('filterForm').submit()">
+    <select name="filter-order" onchange="document.getElementById('filterForm').submit()" style="width:180px; height:35px; font-size: 1em; border-radius: 7px">
         <?php
         $conn = new mysqli('localhost', 'root', '', 'shopping_online');
         $sql = "SELECT * FROM status_cart";

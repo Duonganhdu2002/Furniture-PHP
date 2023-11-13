@@ -98,6 +98,9 @@
 
     #right-side {
         width: 85%;
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 
     .display-info {

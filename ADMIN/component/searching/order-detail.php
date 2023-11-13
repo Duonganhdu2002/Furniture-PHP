@@ -23,23 +23,23 @@ if ($result->num_rows > 0) {
         echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $row["method_name"] . "</td>";
         echo "<td style='width: 23%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["note"] . "</td>";
         if ($row["name_status"] === "Waiting for confirm") {
-            echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
-                    <button name='submit' type='submit'>Confirm</button>
+            echo "<td style='width: 0%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                    <button name='submit' type='submit' style='width: 90px; height:40px; background: #3b5d50; color: #ffffff' class='button-order'>Confirm</button>
                 </td>";
         } else  if ($row["name_status"] === "Confirmed") {
-            echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
-                    <button name='submit1' type='submit'>Delivering</button>
+            echo "<td style='width: 0%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                    <button name='submit1' type='submit' style='width: 90px; height:40px; background: #d0aa0f; color: #ffffff' class='button-order'>Delivering</button>
                 </td>";
         } else if ($row["name_status"] === "Delivering") {
-            echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
-                    <button name='submit3' type='submit'>Delivered</button>
+            echo "<td style='width: 0%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                    <button name='submit3' type='submit' style='width: 90px; height:40px; background: #58913e; color: #ffffff' class='button-order'>Delivered</button>
                 </td>";
         } else if ($row["name_status"] === "Delivered") {
-            echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
-                    <button name='submit2' type='submit'>Cancle</button>
+            echo "<td style='width: 0%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                    <button name='submit2' type='submit' style='width: 90px; height:40px; background: #cc0500; color: #ffffff' class='button-order'>Cancle</button>
                 </td>";
         } else {
-            echo "<td style='width: 10%; padding: 10px 20px 10px 20px; line-height: 1.5;'></td>";
+            echo "<td style='width: 8%; padding: 10px 20px 10px 20px; line-height: 1.5;'></td>";
         }
         echo "</tr>";
         echo "</form>";
@@ -77,3 +77,16 @@ if ($result->num_rows > 0) {
 } else {
     echo "0 results";
 }
+?>
+<style>
+    .button-order {
+        border-radius: 8px;
+        border: 0;
+        cursor: pointer !important;
+    }
+
+    .button-order:hover {
+        opacity: 0.5;
+    }
+
+</style>
