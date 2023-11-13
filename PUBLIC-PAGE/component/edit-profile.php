@@ -65,7 +65,7 @@ if (isset($_SESSION["username_user"])) {
 ?>
 
 <div id="myForm" style="display: flex; justify-content: center; margin-bottom: 150px; margin-top: 100px; background-color: #ffffff; height: 700px">
-    <form action="../PUBLIC-PAGE/component/ctrl_edit_profile.php" method="post" class="form-edit-profile">
+    <form action="../PUBLIC-PAGE/component/ctrl_edit_profile.php" method="post" class="form-edit-profile" id="editSection">
         
         <div class="form-edit-profile-div-1" style="height: 30%; display:flex; align-items: center; justify-content: center;">
         <label for="customerAvatar" style="font-size: large;">Customer Avatar:</label>
@@ -297,22 +297,18 @@ if (isset($_SESSION["username_user"])) {
         window.location.href = '../PUBLIC-PAGE/index.php?pid=11&edit=' + pr5_id;
     }
     
-    document.addEventListener("DOMContentLoaded", function() {
-        setTimeout(function() {
-            var formElement = document.getElementById('myForm');
-            var elementPosition = formElement.getBoundingClientRect().top;
-            var offsetPosition = elementPosition + window.scrollY;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            });
-        }, 1000); // Dùng setTimeout để chậm việc cuộn xuống
+    window.addEventListener('beforeunload', function() {
+        sessionStorage.setItem('scrollPosition', window.scrollY);
     });
 
+    document.addEventListener('DOMContentLoaded', function() {
+        var scrollPosition = sessionStorage.getItem('scrollPosition');
 
-
-
+        if (scrollPosition) {
+            window.scrollTo(0, scrollPosition);
+            sessionStorage.removeItem('scrollPosition'); // Xóa vị trí đã lưu
+        }
+    });
 
 </script>
 
