@@ -14,29 +14,28 @@
             <th style="text-align: center">Address</th>
         </tr>
         <!-- Form chổ tìm kiếm đóa anh chị -->
-        <form id="myForm" action="#" method="post">
-            <tr>
-                <td style="text-align: center">
-                        <img type="image" style="width: 25px" src="../PUBLIC-PAGE/images/filter.svg">
-                </td>
-                <td style="text-align: center;">
-                </td>
-                <td style="text-align: center">
-                </td>
-                <td style="text-align: center">
-                <form action="index.php?pid=4&memberId=0" method="post" id="myForm">
-                    <input name="searchByNamemember" id="searchByNamemember" type="text">
+        <tr>
+            <td style="text-align: center">
+                <img type="image" style="width: 25px" src="../PUBLIC-PAGE/images/filter.svg">
+            </td>
+            <td style="text-align: center;">
+            </td>
+            <td style="text-align: center">
+                <form action="index.php?pid=4&memberId=0" method="post">
+                    <input name="searchByUsernameMember" type="text">
                 </form>
-                </td>
-                <td style="text-align: center">
-                </td>
-                <td style="text-align: center">
-                <form action="index.php?pid=4&memberId=0" method="post" id="myForm">
-                    <input name="searchByEmailmember" id="searchByEmailmember" type="text">
+            </td>
+            <td style="text-align: center">
+
+            </td>
+            <td style="text-align: center">
+            </td>
+            <td style="text-align: center">
+                <form action="index.php?pid=4&memberId=0" method="post">
+                    <input name="searchByEmailMember" type="text">
                 </form>
-                </td>
-            </tr>
-        </form>
+            </td>
+        </tr>
 
         <?php
         $conn = new mysqli('localhost', 'root', '', 'shopping_online');
@@ -60,7 +59,7 @@
 
         if (isset($_GET['memberId'])) {
             $memberId = $_GET['memberId'];
-            if ($memberId == '0') {
+            if ($memberId === '0') {
                 include "searching/member-searching.php";
             } else {
                 include "searching/member-detail.php";

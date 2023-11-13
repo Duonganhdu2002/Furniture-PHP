@@ -44,8 +44,9 @@
         $totalPages = ceil($totalItems / $itemsPerPage);
     } else {
         echo "<script>
-        alert('No results found for the given search term: $searchTerm');
-        </script>";
+                alert('No results found for the given search term: $searchTerm');
+                window.location.href = 'index.php?pid=3';
+              </script>";
     }
     ?>
 </div>

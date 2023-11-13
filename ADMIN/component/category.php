@@ -15,14 +15,14 @@
                 <img type="image" style="width: 25px" src="../PUBLIC-PAGE/images/filter.svg">
             </td>
             <td style="text-align: center" colspan="2">
-                <form action="index.php?pid=1&categoryId=0" method="post" id="myForm">
+                <form action="index.php?pid=1&categoryId=0" method="post">
                     <input name="searchByIdCategory" type="text" id="searchByIdCategory">
                 </form>
             </td>
             <td style="text-align: center">
-            <form action="index.php?pid=1&categoryId=0" method="post" id="myForm">
-                <input name="searchByNameCategory"type="text" id="searchByNameCategory">
-            </form>
+                <form action="index.php?pid=1&categoryId=0" method="post">
+                    <input name="searchByNameCategory" type="text" id="searchByNameCategory">
+                </form>
             </td>
         </tr>
 

@@ -15,37 +15,35 @@
             <th style="text-align: center">Brand</th>
         </tr>
 
-        <form id="myForm" action="#" method="post">
-            <tr>
-                <td style="text-align: center">
-                    <img type="image" style="width: 25px" src="../PUBLIC-PAGE/images/filter.svg">
-                </td>
-                <td style="text-align: center" colspan="2">
-                <form action="index.php?pid=2&productId=0" method="post" id="myForm">
-                    <input name="searchByIdproduct" type="text" id="searchByIdproduct">
+        <tr>
+            <td style="text-align: center">
+                <img type="image" style="width: 25px" src="../PUBLIC-PAGE/images/filter.svg">
+            </td>
+            <td style="text-align: center" colspan="2">
+                <form action="index.php?pid=2&productId=0" method="post">
+                    <input name="searchByIdproduct" type="text">
                 </form>
-                </td>
-                <td style="text-align: center">
-                <form action="index.php?pid=2&productId=0" method="post" id="myForm">
-                    <input name="searchByNameproduct" type="text" id="searchByNameproduct">
+            </td>
+            <td style="text-align: center">
+                <form action="index.php?pid=2&productId=0" method="post">
+                    <input name="searchByNameproduct" type="text">
                 </form>
-                </td>
-                <td style="text-align: center">
-                </td>
-                <td style="text-align: center">
-                </td>
-                <td style="text-align: center">
-                </td>
-                <td style="text-align: center">
-                </td>
-                <td style="text-align: center">
-                
-                </td>
-                <td style="text-align: center">
-                
-                </td>
-            </tr>
-        </form>
+            </td>
+            <td style="text-align: center">
+            </td>
+            <td style="text-align: center">
+            </td>
+            <td style="text-align: center">
+            </td>
+            <td style="text-align: center">
+            </td>
+            <td style="text-align: center">
+
+            </td>
+            <td style="text-align: center">
+
+            </td>
+        </tr>
 
         <?php
         $conn = new mysqli('localhost', 'root', '', 'shopping_online');
@@ -67,7 +65,7 @@
 
         if (isset($_GET['productId'])) {
             $productId = $_GET['productId'];
-            if ($productId == '0') {
+            if ($productId === '0') {
                 include "searching/product-searching.php";
             } else {
                 include "searching/prodcut-detail.php";
