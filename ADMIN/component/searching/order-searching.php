@@ -4,75 +4,75 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['searchByIdOrder'])) {
             $searchTerm = $_POST['searchByIdOrder'];
-            $sql1 = "SELECT products.product_name, cart_items.price, cart_items.quantity
-            FROM cart_items 
-            JOIN products ON cart_items.product_id = products.id
-            WHERE cart_id = $id";
-
-            $result1 = $conn->query($sql1);
-
-            $sql2 = "SELECT shipping_methods.standard_price
+            $sql = "SELECT shopping_carts.id, shopping_carts.user_id, users.username, shopping_carts.created_at, status_cart.name_status, shipping_methods.method_name, shopping_carts.note
             FROM shopping_carts
+            JOIN users ON shopping_carts.user_id = users.id
             JOIN shipping_methods ON shopping_carts.ship_method = shipping_methods.id
-            WHERE shopping_carts.id = $id";
-
-            $sql3 = "SELECT * FROM shopping_carts WHERE id = $id";
-
-            $sql4 = "SELECT * FROM address_cart WHERE id_cart = $id";
-
-            $result1 = $conn->query($sql1);
-            $result2 = $conn->query($sql2);
-            $result3 = $conn->query($sql3);
-            $result4 = $conn->query($sql4);
-
-        } elseif (isset($_POST['searchByUsernameOrder'])) {
+            JOIN status_cart ON shopping_carts.status = status_cart.id
+            WHERE shopping_carts.id LIKE '%$searchTerm%'";
+            $result = $conn->query($sql);
+        } else if (isset($_POST['searchByUsernameOrder'])) {
             $searchTerm = $_POST['searchByUsernameOrder'];
-            // SQL của bảng Information
-            $sqlInformation = "SELECT username,full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'admin' AND email LIKE '%$searchTerm%'";
-            $resultInformation = $conn->query($sqlInformation);
-            // SQL của bảng Users
-            $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'admin'";
-            $resultUser = $conn->query($sqlUser);
-            // SQL của bảng Address (địa chỉ)
-            $sqlAddress = "SELECT username, province, district, commune, street, number FROM addresses WHERE role = 'admin'";
-            $resultAddress = $conn->query($sqlAddress);
+            $sql = "SELECT shopping_carts.id, shopping_carts.user_id, users.username, shopping_carts.created_at, status_cart.name_status, shipping_methods.method_name, shopping_carts.note
+            FROM shopping_carts
+            JOIN users ON shopping_carts.user_id = users.id
+            JOIN shipping_methods ON shopping_carts.ship_method = shipping_methods.id
+            JOIN status_cart ON shopping_carts.status = status_cart.id
+            WHERE users.username LIKE '%$searchTerm%'";
+            $result = $conn->query($sql);
         }
     }
 
-    if (($resultInformation && $resultInformation -> num_rows > 0) && ($resultUser && $resultUser -> num_rows > 0) && ($resultAddress && $resultInformation -> num_rows > 0)) {
+    if ($result->num_rows > 0) {
         $stt = $offset + 1;
 
-        while (($rowUser = $resultUser->fetch_assoc()) && ($rowInformation = $resultInformation->fetch_assoc()) && ($rowAddress = $resultAddress->fetch_assoc())) {
+        while ($row = $result->fetch_assoc()) {
+            $id = $row["id"];
+            echo "<form action='component/confirm-order.php' method='post'>";
+            echo "<input type='hidden' name='id' value='$id'>";
             echo "<tr>";
             echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
-            echo "<td style='width:4%; text-align: center;'>" . $rowUser["id"] . "</td>";
-            echo "<td style='width: 8%; padding: 10px 20px 10px 20px'>" . $rowUser["username"] . "</td>";
-            echo "<td style='width: 14%; padding: 10px 20px 10px 20px'>" . $rowInformation["full_name"] . "</td>";
-            echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>" . $rowInformation["phone_number"] . "</td>";
-            echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $rowInformation["email"] . "</td>";
-            echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $rowInformation["date_of_birth"] . "</td>";
-            if ($rowInformation["gender"] === '1') {
-                echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>Nam</td>";
+            echo "<td style='width:6%; text-align: center;'>" . $row["id"] . "</td>";
+            echo "<td style='width:6%; text-align: center;'>" . $row["username"] . "</td>";
+            echo "<td class='hover-cell' style='width:4%; cursor: pointer; text-align: center;' onmouseover='showButtons(this)' onmouseout='hideButtons(this)'> 
+                    <img style='width: 25px' src='../PUBLIC-PAGE/images/settingth.svg'>
+                    <div class='action-buttons'>
+                        <a href='index.php?pid=6&detail&id=$id'><button type='button' class='edit-button'>Detail</button></a>
+                        <br>
+                        <a href='../ADMIN/component/delete/order.php?id=$id'><button type='button' class='delete-button'>Delete</button></a>
+                    </div>
+                </td>";
+            echo "<td style='width: 15%; padding: 10px 20px 10px 20px'>" . $row["name_status"] . "</td>";
+            echo "<td style='width: 18%; padding: 10px 20px 10px 20px'>" . $row["created_at"] . "</td>";
+            echo "<td style='width: 10%; padding: 10px 20px 10px 20px'>" . $row["method_name"] . "</td>";
+            echo "<td style='width: 23%; padding: 10px 20px 10px 20px; line-height: 1.5;'>" . $row["note"] . "</td>";
+            if ($row["name_status"] === "Waiting for confirm") {
+                echo "<td style='width: 0%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                        <button name='submit' type='submit' style='width: 90px; height:40px; background: #3b5d50; color: #ffffff' class='button-order'>Confirm</button>
+                    </td>";
+            } else  if ($row["name_status"] === "Confirmed") {
+                echo "<td style='width: 0%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                        <button name='submit1' type='submit' style='width: 90px; height:40px; background: #d0aa0f; color: #ffffff' class='button-order'>Delivering</button>
+                    </td>";
+            } else if ($row["name_status"] === "Delivering") {
+                echo "<td style='width: 0%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                        <button name='submit3' type='submit' style='width: 90px; height:40px; background: #58913e; color: #ffffff' class='button-order'>Delivered</button>
+                    </td>";
+            } else if ($row["name_status"] === "Delivered") {
+                echo "<td style='width: 0%; padding: 10px 20px 10px 20px; line-height: 1.5;'>
+                        <button name='submit2' type='submit' style='width: 90px; height:40px; background: #cc0500; color: #ffffff' class='button-order'>Cancle</button>
+                    </td>";
             } else {
-                echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>Nữ</td>";
+                echo "<td style='width: 8%; padding: 10px 20px 10px 20px; line-height: 1.5;'></td>";
             }
-            echo "<td style='width: 5%; padding: 10px 20px 10px 20px'>
-                <img style='width: 40px' src='../PUBLIC-PAGE/images/" . $rowInformation["avatar"] . "'>
-            </td>";
-            $province = $rowAddress["province"];
-            $district = $rowAddress["district"];
-            $commune = $rowAddress["commune"];
-            $street = $rowAddress["street"];
-            $number = $rowAddress["number"];
-            $address = "$number, $street, $commune, $district, $province";
-            $rowAddress["address"] = $address;
-            echo "<td style='width: 30%; padding: 10px 20px 10px 20px'>" . $rowAddress["address"] . "</td>";
             echo "</tr>";
+            echo "</form>";
+
             $stt++;
         }
+
         echo "</table>";
         echo "</div>";
-        
     } else {
         echo "<script>
                 alert('No results found for the given search term: $searchTerm');
@@ -81,3 +81,15 @@
     }
     ?>
 </div>
+
+<style>
+    .button-order {
+        border-radius: 8px;
+        border: 0;
+        cursor: pointer !important;
+    }
+
+    .button-order:hover {
+        opacity: 0.5;
+    }
+</style>
