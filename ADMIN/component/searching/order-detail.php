@@ -48,34 +48,6 @@ if ($result->num_rows > 0) {
     }
 
     echo "</table>";
-
-    $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM shopping_carts"))['total'];
-    $totalPages = ceil($totalItems / $itemsPerPage);
-
-    echo "<div class='pagination'>";
-
-    // Always show "First" button
-    echo "<a href='index.php?pid=6&page=1'>First</a> ";
-
-    // Determine the first and last two pages to display
-    $startPage = max(1, $page - 1);
-    $endPage = min($totalPages, $page + 1);
-
-    // Show the page numbers
-    for ($i = $startPage; $i <= $endPage; $i++) {
-        echo "<a href='index.php?pid=6&page=$i'";
-        if ($i == $page) {
-            echo " class='current'";
-        }
-        echo ">$i</a> ";
-    }
-
-    // Always show "End" button
-    echo "<a href='index.php?pid=6&page=$totalPages'>End</a>";
-
-    echo "</div>";
-} else {
-    echo "0 results";
 }
 ?>
 <style>
