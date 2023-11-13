@@ -6,9 +6,11 @@ if ($conn->connect_error) {
     die("Kết nối thất bại: " . $conn->connect_error);
 }
 
+$username = $_SESSION["username_user"];
+
 // Lấy tên đăng nhập của người dùng từ phiên làm việc
 if (isset($_SESSION["username_user"])) {
-    $username = $_SESSION["username_user"];
+
 
     // Truy vấn thông tin cá nhân từ bảng Information dựa trên tên đăng nhập
     $sqlInformation = "SELECT * FROM information WHERE username = ?";
@@ -16,16 +18,16 @@ if (isset($_SESSION["username_user"])) {
     $stmtInformation->bind_param("s", $username);
     $stmtInformation->execute();
     $resultInformation = $stmtInformation->get_result();
-    $sqlInformation = "UPDATE information SET * WHERE username = ?";
 
     if ($resultInformation->num_rows > 0) {
         $row = $resultInformation->fetch_assoc();
-        $full_name = $row["full_name"];
-        $date_of_birth = $row["date_of_birth"];
-        $email = $row["email"];
-        $gender = $row["gender"];
-        $phone_number = $row["phone_number"];
-        $avatar = $row["avatar"];
+        $customerName = $row["full_name"];
+        $customerEmail = $row["email"];
+        $customerPhone = $row["phone_number"];
+        // $customerPassword = $rowUsers["password"]; 
+        $customerBirth = $row["date_of_birth"];
+        $customerGender = $row["gender"];
+        $customerAvatar = $row["avatar"];
     }
 
     // Truy vấn địa chỉ từ bảng Addresses dựa trên tên đăng nhập
@@ -36,18 +38,23 @@ if (isset($_SESSION["username_user"])) {
     $resultAddress = $stmtAddress->get_result();
 
     if ($resultAddress->num_rows > 0) {
-        $row = $resultAddress->fetch_assoc();
-        $id = $row["id"];
-        $country = $row["country"];
-        $province = $row["province"];
-        $district = $row["district"];
-        $commune = $row["commune"];
-        $street = $row["street"];
-        $number = $row["number"];
-
-        $address = "$number, $street, $commune, $district, $province, $country";
+        $rowAddresses = $resultAddress->fetch_assoc();
+        $id =  $rowAddresses["id"];
+        $customerAddressNumber = $rowAddresses["number"];
+        $customerAddressStreet = $rowAddresses["street"];
+        $customerAddressCommune = $rowAddresses["commune"];
+        $customerAddressDistrict = $rowAddresses["district"];
+        $customerAddressProvince = $rowAddresses["province"];
+        $customerAddressCountry = $rowAddresses["country"];
     }
+
+    $sql = "SELECT * FROM users WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 } else {
+
     echo "
     <script>
         alert('Bạn cần phải đăng nhập trước.');
@@ -58,48 +65,56 @@ if (isset($_SESSION["username_user"])) {
 ?>
 
 <div style="display: flex; justify-content: center; margin-bottom: 150px; margin-top: 100px; background-color: #ffffff; height: 600px">
-                <form action="" method="post">
-                    <label for="full_name"> Full name: </label>
-                    <input type="text" name="full_name" value="<?php echo $full_name; ?>">
-                    <br>
-                    <label for="">Information</label>
-                    <br>
-                    <label for="">Username:</label>
-                    <input type="text" name="username" value="<?php echo $username; ?>">
-                    <label for="">Date of birth:</label>
-                    <input type="date" name="date_of_birth" value="<?php echo $date_of_birth; ?>">
-                    <br>
-                    <label for="">Email:</label>
-                    <input type="text" name="email" value="<?php echo $email; ?>">
-                    <label for="">Gender:</label>
-                    <select name="cars">
-                    <option value="1">Male</option>
-                    <option value="2">Female</option>
-                    </select>
-                    <br>
-                    <label for="">Phone number:</label>
-                    <input type="text" name="phone_number" value="<?php echo $phone_number; ?>">
-                    <br>
-                    <label for="">Address</label>
-                    <br>
-                    <label for="">Country:</label>
-                    <input type="text" name="country" value="<?php echo $country; ?>">
-                    <label for="">Province:</label>
-                    <input type="text" name="username" value="<?php echo $province; ?>">
-                    <br>
-                    <label for="">District:</label>
-                    <input type="text" name="username" value="<?php echo $district; ?>">
-                    <label for="">Commune:</label>
-                    <input type="text" name="username" value="<?php echo $commune; ?>">
-                    <br>
-                    <label for="">Street:</label>
-                    <input type="text" name="username" value="<?php echo $street; ?>">
-                    <label for="">Number:</label>
-                    <input type="text" name="username" value="<?php echo $number; ?>" >
-                    <br>
-                    <input type="submit" value="Save">
-                    <br>
-                </form>
+    <form action="../PUBLIC-PAGE/component/ctrl_edit_profile.php" method="post">
+        <label for="customerName"> Full name: </label>
+        <input type="text" name="customerName" value="<?php echo $customerName; ?>">
+        <br>
+        <!-- <label for="customerAvatar">customerAvatar:</label>
+        <input style="border: none;" type="file" id="customerAvatar" name="customerAvatar"> -->
+        <br>
+        <label for="">Information</label>
+        <br>
+        <label for="">Username:</label>
+        <input type="text" name="username" value="<?php echo $username; ?>">
+        <label for="">Date of birth:</label>
+        <input type="date" name="customerBirth" value="<?php echo $customerBirth; ?>">
+        <br>
+        <label for="">Email:</label>
+        <input type="text" name="customerEmail" value="<?php echo $customerEmail; ?>">
+        <label for="">Gender:</label>
+        <select name="customerGender">
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+        </select>
+        <br>
+        <label for="">Phone number:</label>
+        <input type="text" name="customerPhone" value="<?php echo $customerPhone; ?>">
+        <br>
+        <label for="">Address</label>
+        <br>
+        <label for="">Country:</label>
+        <input type="text" name="customerAddressCountry" value="<?php echo $customerAddressCountry; ?>">
+        <label for="">Province:</label>
+        <input type="text" name="customerAddressProvince" value="<?php echo $customerAddressProvince; ?>">
+        <br>
+        <label for="">District:</label>
+        <input type="text" name="customerAddressDistrict" value="<?php echo $customerAddressDistrict; ?>">
+        <label for="">Commune:</label>
+        <input type="text" name="customerAddressCommune" value="<?php echo $customerAddressCommune; ?>">
+        <br>
+        <label for="">Street:</label>
+        <input type="text" name="customerAddressStreet" value="<?php echo $customerAddressStreet; ?>">
+        <label for="">Number:</label>
+        <input type="text" name="customerAddressNumber" value="<?php echo $customerAddressNumber; ?>">
+        <br>
+        <div>
+            <button type="submit">Change</button>
+            <a style="text-decoration: none;">
+                <button type="button" style="background-color: #BB0000;" onclick="window.location.href='index.php?pid=11';">Back</button>
+            </a>
+        </div>
+        <br>
+    </form>
 </div>
 
 <style>

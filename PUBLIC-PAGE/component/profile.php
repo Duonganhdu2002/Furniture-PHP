@@ -6,11 +6,18 @@ if ($conn->connect_error) {
     die("Kết nối thất bại: " . $conn->connect_error);
 }
 
+// Kiểm tra sự tồn tại của session
+$username = $_SESSION["username_user"];
+
+if (empty($username)) {
+    echo "<script>alert('Session không tồn tại.');</script>";
+    exit;
+}
 // Lấy tên đăng nhập của người dùng từ phiên làm việc
 if (isset($_SESSION["username_user"])) {
-    $username = $_SESSION["username_user"];
+   
 
-    // Truy vấn thông tin cá nhân từ bảng Information dựa trên tên đăng nhập
+    // Lấy thông tin cá nhân từ bảng Information
     $sqlInformation = "SELECT * FROM information WHERE username = ?";
     $stmtInformation = $conn->prepare($sqlInformation);
     $stmtInformation->bind_param("s", $username);
@@ -19,15 +26,15 @@ if (isset($_SESSION["username_user"])) {
 
     if ($resultInformation->num_rows > 0) {
         $row = $resultInformation->fetch_assoc();
-        $full_name = $row["full_name"];
-        $date_of_birth = $row["date_of_birth"];
-        $email = $row["email"];
-        $gender = $row["gender"];
-        $phone_number = $row["phone_number"];
-        $avatar = $row["avatar"];
-    }
+        $customerName = $row["full_name"];
+        $customerEmail = $row["email"];
+        $customerPhone = $row["phone_number"];
+        $customerBirth = $row["date_of_birth"];
+        $customerGender = $row["gender"];
+        $customerAvatar = $row["avatar"];
+    } 
 
-    // Truy vấn địa chỉ từ bảng Addresses dựa trên tên đăng nhập
+    // Lấy thông tin địa chỉ từ bảng Addresses
     $sqlAddress = "SELECT * FROM addresses WHERE username = ?";
     $stmtAddress = $conn->prepare($sqlAddress);
     $stmtAddress->bind_param("s", $username);
@@ -35,16 +42,19 @@ if (isset($_SESSION["username_user"])) {
     $resultAddress = $stmtAddress->get_result();
 
     if ($resultAddress->num_rows > 0) {
-        $row = $resultAddress->fetch_assoc();
-        $id = $row["id"];
-        $country = $row["country"];
-        $province = $row["province"];
-        $district = $row["district"];
-        $commune = $row["commune"];
-        $street = $row["street"];
-        $number = $row["number"];
+        $rowAddresses = $resultAddress->fetch_assoc();
+        $id =  $rowAddresses["id"];
+        $customerAddressNumber = $rowAddresses["number"];
+        $customerAddressStreet = $rowAddresses["street"];
+        $customerAddressCommune = $rowAddresses["commune"];
+        $customerAddressDistrict = $rowAddresses["district"];
+        $customerAddressProvince = $rowAddresses["province"];
+        $customerAddressCountry = $rowAddresses["country"];
 
-        $address = "$number, $street, $commune, $district, $province, $country";
+        $address = "$customerAddressNumber, $customerAddressStreet, $customerAddressCommune, $customerAddressDistrict, $customerAddressProvince, $customerAddressCountry";
+    } else {
+        // Xử lý theo yêu cầu của bạn nếu không có thông tin địa chỉ
+        $address = "Không có địa chỉ";
     }
 } else {
     echo "
@@ -61,10 +71,10 @@ if (isset($_SESSION["username_user"])) {
         <div class="header-profile">
             <div class="left-side">
                 <div class="info-emloyee">
-                    <img class="avatar-emloyee" src="../PUBLIC-PAGE/images/<?php echo $avatar ?>" alt="">
+                    <img class="avatar-emloyee" src="../PUBLIC-PAGE/images/<?php echo $customerAvatar ?>" alt="">
                 </div>
                 <div class="name-employee">
-                    <h1><?php echo $full_name; ?></h1>
+                    <h1><?php echo $customerName; ?></h1>
                 </div>
             </div>
             <div class="right-side">
@@ -79,29 +89,21 @@ if (isset($_SESSION["username_user"])) {
                 <h3>Username</h3>
                 <p><?php echo $username; ?></p>
                 <h3>Date of birth</h3>
-                <p><?php echo $date_of_birth; ?></p>
+                <p><?php echo $customerBirth; ?></p>
                 <h3>Email</h3>
-                <p><?php echo $email; ?></p>
+                <p><?php echo $customerEmail; ?></p>
             </div>
             <div class="detail" style="padding-left: 100px">
                 <h3>Gender</h3>
                 <p>
                     <?php
-                    if ($gender == 1) {
-                        echo "Male";
-                    } else {
-                        echo "Female";
-                    }
+                    echo ($customerGender == 1) ? "Male" : "Female";
                     ?>
                 </p>
                 <h3>Phone number</h3>
-                <p><?php echo $phone_number; ?></p>
+                <p><?php echo $customerPhone; ?></p>
                 <h3>Address</h3>
-                <p>
-                    <?php
-                    echo $address;
-                    ?>
-                </p>
+                <p><?php echo $address; ?></p>
             </div>
         </div>
     </div>
