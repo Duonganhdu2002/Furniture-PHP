@@ -76,6 +76,7 @@ $result = $link->query($sql);
         display: flex;
         justify-content: center;
         margin-bottom: 200px;
+        margin-top: 50px;
     }
 
     .user-cart .user-cart-child {

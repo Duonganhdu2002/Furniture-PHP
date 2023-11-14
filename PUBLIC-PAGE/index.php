@@ -95,6 +95,11 @@
                 case '12':
                     $Content1IndexFontContent = "Order details";
                     $Content1IndexPresentContent = "";
+                    break;
+                case '13':
+                    $Content1IndexFontContent = "Your history orders";
+                    $Content1IndexPresentContent = "";
+                    break;
             }
         } else {
             $Content1IndexFontContent = "Modern Interior <br> Design Studio";
@@ -137,7 +142,7 @@
                           </script>";
                     exit();
                 }
-            break;
+                break;
             case '8':
                 include("component/content-11.php");
                 break;
@@ -159,7 +164,6 @@
                         break;
                     }
                     include("component/profile.php");
-                    include("component/cart-user.php");
                     break;
                 } else {
                     echo "<script>
@@ -171,6 +175,18 @@
             case '12':
                 include("component/order-detail.php");
                 break;
+
+            case '13':
+                if (isset($_SESSION['username_user'])) {
+                    include("component/cart-user.php");
+                    break;
+                } else {
+                    echo "<script>
+                            alert('You need to login first');
+                            window.location.href = 'login.php';
+                          </script>";
+                    exit();
+                }
         }
     } else {
         include("component/content-2.php");

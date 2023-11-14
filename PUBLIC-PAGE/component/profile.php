@@ -15,7 +15,7 @@ if (empty($username)) {
 }
 // Lấy tên đăng nhập của người dùng từ phiên làm việc
 if (isset($_SESSION["username_user"])) {
-   
+
 
     // Lấy thông tin cá nhân từ bảng Information
     $sqlInformation = "SELECT * FROM information WHERE username = ?";
@@ -32,7 +32,7 @@ if (isset($_SESSION["username_user"])) {
         $customerBirth = $row["date_of_birth"];
         $customerGender = $row["gender"];
         $customerAvatar = $row["avatar"];
-    } 
+    }
 
     // Lấy thông tin địa chỉ từ bảng Addresses
     $sqlAddress = "SELECT * FROM addresses WHERE username = ?";
@@ -78,6 +78,9 @@ if (isset($_SESSION["username_user"])) {
                 </div>
             </div>
             <div class="right-side">
+                <a href="index.php?pid=13">
+                    <button style="margin-right: 20px" class="button-edit">History order</button>
+                </a>
                 <button class="button-edit" onclick="editProfile(<?php echo $id ?>)">Edit</button>
             </div>
         </div>
@@ -140,16 +143,19 @@ if (isset($_SESSION["username_user"])) {
         display: flex;
     }
 
+    .left-side {
+        width: 70%;
+    }
+
     .right-side {
-        width: 100%;
-        height: 5%;
+        width: 30%;
         display: flex;
     }
 
     .button-edit {
-        margin-left: 90%;
-        width: 70px;
+        width: fit-content;
         height: 40px;
+        padding: 10px 20px 10px 20px;
         color: #F0F7FF;
         cursor: pointer;
         font-size: 1em;
@@ -205,4 +211,5 @@ if (isset($_SESSION["username_user"])) {
 
     }
 </style>
+
 </html>
