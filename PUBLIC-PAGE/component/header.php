@@ -369,8 +369,8 @@ $result = $link->query($sql);
 
     .logout-module a:hover {
         opacity: 1;
-        background-color: #B22222;
-        color: #ffffff;
+        background-color: #f9bf29;
+        color: #2f2f2f;
     }
 
     .greeting {
