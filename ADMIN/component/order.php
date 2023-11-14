@@ -22,13 +22,13 @@
                 <img type='image' style='width: 25px' src='../PUBLIC-PAGE/images/filter.svg'>
             </td>
             <td style='text-align: center'>
-                <form action='index.php?pid=1&categoryId=0' method='post' id='myForm'>
-                    <input name='searchByIdCategory' type='text' id='searchByIdCategory'>
+                <form action='index.php?pid=6&orderId=0' method='post'>
+                    <input name='searchByIdOrder' type='text'>
                 </form>
             </td>
             <td style='text-align: center' colspan=2>
-                <form action='index.php?pid=1&categoryId=0' method='post' id='myForm'>
-                    <input name='searchByNameCategory' type='text' id='searchByNameCategory'>
+                <form action='index.php?pid=6&orderId=0' method='post'>
+                    <input name='searchByUsernameOrder' type='text'>
                 </form>
             </td>
         </tr>
@@ -92,7 +92,7 @@
             include "component/order-detail.php";
         } else if (isset($_GET['orderId'])) {
             $orderId = $_GET['orderId'];
-            if ($orderId == '0') {
+            if ($orderId === '0') {
                 include "searching/order-searching.php";
             } else {
                 include "searching/order-detail.php";

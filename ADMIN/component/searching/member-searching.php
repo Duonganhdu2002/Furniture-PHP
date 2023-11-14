@@ -1,25 +1,22 @@
 <div>
     <?php
-    $resultUser = null; // Khởi tạo biến $resultUser
-    $resultInformation = null; // Khởi tạo biến $resultInformation
-    $resultAddress = null; // Khởi tạo biến $resultAddress
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['searchByNamemember'])) {
-            $searchTerm = $_POST['searchByNamemember'];
+        if (isset($_POST['searchByUsernameMember'])) {
+            $searchTerm = $_POST['searchByUsernameMember'];
             // SQL của bảng Information
-            $sqlInformation = "SELECT username,full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'admin' AND full_name LIKE '%$searchTerm'";
+            $sqlInformation = "SELECT username,full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'admin' AND username LIKE '%$searchTerm%'";
             $resultInformation = $conn->query($sqlInformation);
             // SQL của bảng Users
-            $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'admin'";
+            $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'admin' AND username LIKE '%$searchTerm%'";
             $resultUser = $conn->query($sqlUser);
             // SQL của bảng Address (địa chỉ)
-            $sqlAddress = "SELECT username,province, district, commune, street, number FROM addresses WHERE role = 'admin'";
+            $sqlAddress = "SELECT username, province, district, commune, street, number FROM addresses WHERE role = 'admin' AND username LIKE '%$searchTerm%'";
             $resultAddress = $conn->query($sqlAddress);
-        } elseif (isset($_POST['searchByEmailmember'])) {
-            $searchTerm = $_POST['searchByEmailmember'];
+        } elseif (isset($_POST['searchByEmailMember'])) {
+            $searchTerm = $_POST['searchByEmailMember'];
             // SQL của bảng Information
-            $sqlInformation = "SELECT username,full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'admin' AND email LIKE '%$searchTerm'";
+            $sqlInformation = "SELECT username,full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'admin' AND email LIKE '%$searchTerm%'";
             $resultInformation = $conn->query($sqlInformation);
             // SQL của bảng Users
             $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'admin'";
@@ -30,9 +27,9 @@
         }
     }
 
-    if ($resultUser || $resultInformation || $resultAddress || $resultUser->num_rows > 0 || $resultInformation->num_rows > 0 || $resultAddress->num_rows > 0) {
+    if (($resultInformation && $resultInformation -> num_rows > 0) && ($resultUser && $resultUser -> num_rows > 0) && ($resultAddress && $resultInformation -> num_rows > 0)) {
         $stt = $offset + 1;
-    
+
         while (($rowUser = $resultUser->fetch_assoc()) && ($rowInformation = $resultInformation->fetch_assoc()) && ($rowAddress = $resultAddress->fetch_assoc())) {
             echo "<tr>";
             echo "<td style='width:4%; text-align: center;'>" . $stt . "</td>";
@@ -62,16 +59,13 @@
             $stt++;
         }
         echo "</table>";
-    
-    
-    $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'admin'"))['total'];
-    $totalPages = ceil($totalItems / $itemsPerPage);
-    
-    
-} else {
-    echo "<script>
-        alert('No results found for the given search term: $searchTerm');
-        </script>";
-}
+        echo "</div>";
+        
+    } else {
+        echo "<script>
+                alert('No results found for the given search term: $searchTerm');
+                window.location.href = 'index.php?pid=4';
+              </script>";
+    }
     ?>
 </div>

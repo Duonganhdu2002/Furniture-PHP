@@ -154,6 +154,10 @@
                         include("component/edit-profile.php");
                         break;
                     }
+                    if (isset($_GET['changepassword'])) {
+                        include("component/form-change-password.php");
+                        break;
+                    }
                     include("component/profile.php");
                     include("component/cart-user.php");
                     break;

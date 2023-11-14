@@ -140,13 +140,14 @@ $resultProducts = $link->query($sqlProducts);
     }
 
     .categories-column-a:hover {
-        background-color: #ddd;
-        transition: 0.3s;
-    }
-
-    .categories-column-a.active {
         color: #f9bf29;
         background-color: #2f2f2f;
+        transition: 0.4s;
+    }
+
+    .categories-column-a:active {
+        transition: 0s;
+        opacity: 0.8;
     }
     .products-column {
         display: flex;

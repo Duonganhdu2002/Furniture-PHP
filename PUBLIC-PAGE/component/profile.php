@@ -191,6 +191,19 @@ if (isset($_SESSION["username_user"])) {
     function editProfile(pr5_id) {
         window.location.href = '../PUBLIC-PAGE/index.php?pid=11&edit';
     }
+
+    window.addEventListener('beforeunload', function() {
+        sessionStorage.setItem('scrollPosition', window.scrollY);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var scrollPosition = sessionStorage.getItem('scrollPosition');
+
+        if (scrollPosition) {
+            window.scrollTo(0, scrollPosition);
+            sessionStorage.removeItem('scrollPosition'); // Xóa vị trí đã lưu
+        }
+    });
 </script>
 
 </html>

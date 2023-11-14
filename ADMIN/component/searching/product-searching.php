@@ -1,19 +1,18 @@
 <div>
     <?php
-    $result = null; // Khởi tạo biến $result
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['searchByIdproduct'])) {
             $searchTerm = $_POST['searchByIdproduct'];
             $sql = "SELECT p.id, p.category_id, p.product_name, b.brand_name, p.description, p.image, p.price, p.stock_quantity, ctg.category_name FROM products p 
             INNER JOIN brands b ON p.brand_id = b.id
-            INNER JOIN categories ctg ON p.category_id = ctg.id WHERE p.id LIKE '%$searchTerm'";
+            INNER JOIN categories ctg ON p.category_id = ctg.id WHERE p.id LIKE '%$searchTerm%'";
             $result = $conn->query($sql);
-        } elseif (isset($_POST['searchByNameproduct'])) {
+        } else if (isset($_POST['searchByNameproduct'])) {
             $searchTerm = $_POST['searchByNameproduct'];
             $sql = "SELECT p.id, p.category_id, p.product_name, b.brand_name, p.description, p.image, p.price, p.stock_quantity, ctg.category_name FROM products p 
             INNER JOIN brands b ON p.brand_id = b.id
-            INNER JOIN categories ctg ON p.category_id = ctg.id WHERE p.product_name LIKE '%$searchTerm'";
+            INNER JOIN categories ctg ON p.category_id = ctg.id WHERE p.product_name LIKE '%$searchTerm%'";
             $result = $conn->query($sql);
         }
     }
@@ -48,36 +47,12 @@
         }
 
         echo "</table>";
-
-        $totalItems = mysqli_fetch_assoc($conn->query("SELECT COUNT(*) as total FROM products"))['total'];
-        $totalPages = ceil($totalItems / $itemsPerPage);
-
-        echo "<div class='pagination'>";
-
-        // Always show "First" button
-        echo "<a href='index.php?pid=2&page=1'>First</a> ";
-
-        // Determine the first and last two pages to display
-        $startPage = max(1, $page - 1);
-        $endPage = min($totalPages, $page + 1);
-
-        // Show the page numbers
-        for ($i = $startPage; $i <= $endPage; $i++) {
-            echo "<a href='index.php?pid=2&page=$i'";
-            if ($i == $page) {
-                echo " class='current'";
-            }
-            echo ">$i</a> ";
-        }
-
-        // Always show "End" button
-        echo "<a href='index.php?pid=2&page=$totalPages'>End</a>";
-
         echo "</div>";
     } else {
         echo "<script>
-            alert('No results found for the given search term: $searchTerm');
-        </script>";
+                alert('No results found for the given search term: $searchTerm');
+                window.location.href = 'index.php?pid=2';
+              </script>";
     }
     ?>
 </div>

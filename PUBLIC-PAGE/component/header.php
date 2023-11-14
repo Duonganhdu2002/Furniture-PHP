@@ -1,3 +1,24 @@
+<?php 
+// Kết nối đến cơ sở dữ liệu
+$conn = new mysqli('localhost', 'root', '', 'shopping_online');
+if ($conn->connect_error) {
+    die("Kết nối thất bại: " . $conn->connect_error);
+}
+
+// Lấy tên đăng nhập của người dùng từ phiên làm việc
+$username = $_SESSION["username_user"];
+
+// Truy vấn thông tin cá nhân từ bảng Information dựa trên tên đăng nhập
+$sqlInformation = "SELECT * FROM information WHERE username = '$username' ";
+$resultInformation = $conn->query($sqlInformation);
+
+if ($resultInformation->num_rows > 0) {
+    $row = $resultInformation->fetch_assoc();
+    $username = $row["username"];
+}
+
+?>
+
 <script>
     const shopLink = document.getElementById('shop-link');
     const shopModule = document.getElementById('shop-module');
@@ -65,14 +86,43 @@ $result = $link->query($sql);
             <div><a style="<?php echo $headerHomeContactUsLinkCss ?>" class="menu-link" href="index.php?pid=5">Contact us</a></div>
         </div>
         <div class="user-cart-icon">
+
             <div class="user-icon">
-                <a href="index.php?pid=11">
-                    <img src="../PUBLIC-PAGE/images/user.svg" alt="">
-                </a>
+                <?php
+                    if (isset($_SESSION['username_user'])) {
+                        ?>
+                        <div class="user-info">
+                        
+                        <a href="index.php?pid=11">
+                            <img src="../PUBLIC-PAGE/images/user.svg" alt="">
+                        </a>
+                        <?php
+                        // Nếu tồn tại username trong phiên làm việc
+                        echo '<div class="greeting"><a href="index.php?pid=11">' . $username . '</a></div>';
+                        ?>
+                        </div>
+                    <?php
+                    } else { ?>
+                        <a href="index.php?pid=11">
+                            <img src="../PUBLIC-PAGE/images/user.svg" alt="">
+                        </a>
+                    <?php
+                    }
+                    ?>
+
                 <div class="user-module">
-                    <div class="login-module"><a href="../PUBLIC-PAGE/login.php" style="width:100% ;text-align: center; font-size: 18px;">Login</a></div>
-                    <div class="register-module"><a href="../PUBLIC-PAGE/register.php" style="text-align: center; font-size: 18px;">Register</a></div>
-                    <div class="logout-module"><a href="../PUBLIC-PAGE/logout.php" style="text-align: center; font-size: 18px;">Logout</a></div>
+                    <?php
+                    if (isset($_SESSION['username_user'])) {
+                        // Nếu tồn tại username trong phiên làm việc
+                        echo '<div class="login-module"><a href="index.php?pid=11">Profile</a></div>';
+                        echo '<div class="login-module"><a href="index.php?pid=11&changepassword">Change Password</a></div>';
+                        echo '<div class="logout-module"><a href="../PUBLIC-PAGE/logout.php">Logout</a></div>';
+                    } else {
+                        // Nếu không tồn tại username trong phiên làm việc
+                        echo '<div class="login-module"><a href="../PUBLIC-PAGE/login.php">Login</a></div>';
+                        echo '<div class="register-module"><a href="../PUBLIC-PAGE/register.php">Register</a></div>';
+                    }
+                    ?>
                 </div>
             </div>
             <div class="cart-icon">
@@ -114,7 +164,7 @@ $result = $link->query($sql);
     .header-child {
         display: flex;
         align-items: center;
-        width: 72%;
+        width: 70%;
         justify-content: center;
     }
 
@@ -133,17 +183,17 @@ $result = $link->query($sql);
 
 
     .search-products {
-        width: 30%;
+        width: 35%;
     }
 
     .menu {
-        width: 47%;
+        width: 60%;
         display: flex;
         justify-content: end;
     }
 
     .menu a {
-        margin-left: 42px;
+        margin-left: 38px;
         margin-top: 15px;
         display: inline-block;
         position: relative;
@@ -178,14 +228,14 @@ $result = $link->query($sql);
     }
 
     .user-cart-icon {
-        width: 15%;
+        width: 25%;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
     .user-cart-icon div {
-        margin-left: 50px;
+        margin-left: 30px;
     }
 
     .menu-icon {
@@ -235,14 +285,11 @@ $result = $link->query($sql);
     .user-module {
         display: none;
         position: absolute;
-        background-color: #3b5d50;
-        border: 2px solid white;
-        /* z-index: 2; */
+        background: rgba(59, 93, 80, 0.8);
+        border: 1px solid white;
         width: 5%;
-        /* height: 100px; */
         border-radius: 10px;
-        /* top: 65px; */
-        /* left: 78%; */
+
         
     }
 
@@ -252,7 +299,7 @@ $result = $link->query($sql);
 
     .user-icon:hover .user-module {
         display: block;
-        box-shadow: 0 0 10px #ffffff;
+        box-shadow: 0 0 8px #ffffff;
     }
 
     .action-buttons {
@@ -264,28 +311,6 @@ $result = $link->query($sql);
         margin-top: 0px;
         display: none;
     }
-
-    /* .login-button {
-        border-radius: 10px 10px 0 0;
-        border-bottom: 1px solid white;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-    }
-
-    .login-button:hover {
-        opacity: 0.7;
-    }
-
-    .register-button {
-        border-radius: 0 0 10px 10px;
-        border: none;
-        width: 100%;
-    }
-
-    .register-button:hover {
-        opacity: 0.7;
-    } */
 
     .action-buttons button {
         padding: 10px 28px 10px 28px;
@@ -299,20 +324,18 @@ $result = $link->query($sql);
     .register-module,
     .logout-module {
         position:relative;
-        /* background-color: #f9bf29; */
-        /* color: #f9bf29; */
-        opacity: 0.6;
         border-radius: 8px;
         transition: background-color 0.5s, width 0.5s ease;
-    }
-
-    .login-module,
-    .register-module,
-    .logout-module {
         display: flex; /* Sử dụng display: flex để căn giữa các thẻ con theo chiều dọc */
         align-items: center; /* Đảm bảo các thẻ con nằm giữa theo chiều dọc */
         justify-content: center; /* Đảm bảo các thẻ con nằm giữa theo chiều ngang */
         height: 50px;
+    }
+
+    .login-module a,
+    .register-module a,
+    .logout-module a {
+        border-radius: 8px;
     }
 
     .login-module a,
@@ -332,24 +355,38 @@ $result = $link->query($sql);
         align-items: center;
     }
 
-    .login-module:hover {
+    .login-module a:hover {
         opacity: 1;
-        background-color: #f9bf29;
-        color: #3b5d50;
+        background: #f9bf29;
+        color: #2f2f2f;
     }
 
-    .register-module:hover {
+    .register-module a:hover {
         opacity: 1;
         background-color: #f9bf29;
-        color: #3b5d50;
+        color: #2f2f2f;
     }
 
-    .logout-module:hover {
+    .logout-module a:hover {
         opacity: 1;
-        background-color: #f9bf29;
-        color: #3b5d50;
+        background-color: #B22222;
+        color: #ffffff;
     }
 
+    .greeting {
+        /* display: flex; */
+        width: 100%
+        
+    }
+
+    .greeting a {
+        cursor: pointer;
+    }
+
+    .user-info {
+    display: flex;
+    align-items: center;
+}
     @media (max-width: 400px) {
         .header {
             height: 80px;
@@ -418,3 +455,9 @@ $result = $link->query($sql);
         }
     }
 </style>
+
+<script>
+    function changePassword(pw_id) {
+        window.location.href = '../PUBLIC-PAGE/index.php?pid=11&changepassword';
+    }
+</script>

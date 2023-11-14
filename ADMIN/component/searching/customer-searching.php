@@ -1,36 +1,32 @@
 <div>
     <?php
-    $resultUser = null; // Khởi tạo biến $resultUser
-    $resultInformation = null; // Khởi tạo biến $resultInformation
-    $resultAddress = null; // Khởi tạo biến $resultAddress
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['searchByNameCustomer'])) {
-            $searchTerm = $_POST['searchByNameCustomer'];
+        if (isset($_POST['searchByUsernameCustomer'])) {
+            $searchTerm = $_POST['searchByUsernameCustomer'];
             // SQL của bảng Information
-            $sqlInformation = "SELECT username, full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE full_name LIKE '%$searchTerm'";
+            $sqlInformation = "SELECT username,full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'user' AND username LIKE '%$searchTerm%'";
             $resultInformation = $conn->query($sqlInformation);
             // SQL của bảng Users
-            $sqlUser = "SELECT id, username, password, image FROM users ";
+            $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'user' AND username LIKE '%$searchTerm%'";
             $resultUser = $conn->query($sqlUser);
             // SQL của bảng Address (địa chỉ)
-            $sqlAddress = "SELECT username, province, district, commune, street, number FROM addresses";
+            $sqlAddress = "SELECT username, province, district, commune, street, number FROM addresses WHERE role = 'user' AND username LIKE '%$searchTerm%'";
             $resultAddress = $conn->query($sqlAddress);
-        }  elseif (isset($_POST['searchByEmailCustomer'])) {
+        } else if (isset($_POST['searchByEmailCustomer'])) {
             $searchTerm = $_POST['searchByEmailCustomer'];
             // SQL của bảng Information
-            $sqlInformation = "SELECT username, full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE email LIKE '%$searchTerm'";
+            $sqlInformation = "SELECT username,full_name, date_of_birth, email, gender, phone_number, avatar FROM information WHERE role = 'user' AND email LIKE '%$searchTerm%'";
             $resultInformation = $conn->query($sqlInformation);
             // SQL của bảng Users
-            $sqlUser = "SELECT id, username, password, image FROM users ";
+            $sqlUser = "SELECT id, username, password, image FROM users WHERE role = 'user'";
             $resultUser = $conn->query($sqlUser);
             // SQL của bảng Address (địa chỉ)
-            $sqlAddress = "SELECT username, province, district, commune, street, number FROM addresses ";
+            $sqlAddress = "SELECT username, province, district, commune, street, number FROM addresses WHERE role = 'user'";
             $resultAddress = $conn->query($sqlAddress);
-        } 
+        }
     }
 
-    if ($resultUser || $resultInformation || $resultAddress || $resultUser->num_rows > 0 || $resultInformation->num_rows > 0 || $resultAddress->num_rows > 0) {
+    if (($resultInformation && $resultInformation -> num_rows > 0) && ($resultUser && $resultUser -> num_rows > 0) && ($resultAddress && $resultAddress -> num_rows > 0)) {
         $stt = $offset + 1;
 
         while (($rowUser = $resultUser->fetch_assoc()) && ($rowInformation = $resultInformation->fetch_assoc()) && ($rowAddress = $resultAddress->fetch_assoc())) {
@@ -76,7 +72,8 @@
     } else {
         echo "<script>
         alert('No results found for the given search term: $searchTerm');
-        </script>";
+        window.location.href = 'index.php?pid=5';
+      </script>";
     }
     ?>
 </div>

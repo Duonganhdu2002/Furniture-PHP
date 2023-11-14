@@ -18,29 +18,28 @@
             <th style="text-align: center">Address</th>
         </tr>
         <!-- Form chổ tìm kiếm đóa anh chị -->
-        <form id="myForm" action="" method="post">
-            <tr>
-                <td style="text-align: center">
-                    <img type="image" style="width: 25px" src="../PUBLIC-PAGE/images/filter.svg">
-                </td>
-                <td style="text-align: center" colspan="2">
-                </td>
-                <td style="text-align: center">
-                </td>
-                <td style="text-align: center">
-                    <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
-                        <input name="searchByNameCustomer" id="searchByNameCustomer" type="text">
-                    </form>
-                </td>
-                <td style="text-align: center">
-                    <form action="index.php?pid=5&customerId=0" method="post" id="myForm">
-                        <input name="searchByEmailCustomer" id="searchByEmailCustomer" type="text">
-                    </form>
-                </td>
-                <td style="text-align: center">
-                </td>
-            </tr>
-        </form>
+        <tr>
+            <td style="text-align: center">
+                <img type="image" style="width: 25px" src="../PUBLIC-PAGE/images/filter.svg">
+            </td>
+            <td style="text-align: center" colspan="2">
+            </td>
+            <td style="text-align: center">
+                <form action="index.php?pid=5&customerId=0" method="post">
+                    <input name="searchByUsernameCustomer" type="text">
+                </form>
+            </td>
+            <td style="text-align: center">
+
+            </td>
+            <td style="text-align: center">
+                <form action="index.php?pid=5&customerId=0" method="post">
+                    <input name="searchByEmailCustomer" type="text">
+                </form>
+            </td>
+            <td style="text-align: center">
+            </td>
+        </tr>
 
         <?php
         $conn = new mysqli('localhost', 'root', '', 'shopping_online');
@@ -131,6 +130,7 @@
         font-size: 15px;
         cursor: pointer;
     }
+
     .category {
         width: 100%;
         margin-top: 20px;

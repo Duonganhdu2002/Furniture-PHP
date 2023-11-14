@@ -1,15 +1,15 @@
 <div>
     <?php
-    $result = null; // Khởi tạo biến $result
+    // $result = null; 
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['searchByIdCategory'])) {
             $searchTerm = $_POST['searchByIdCategory'];
-            $sql = "SELECT id, parent_category_id, category_name, description FROM categories WHERE id LIKE '%$searchTerm'";
+            $sql = "SELECT id, parent_category_id, category_name, description FROM categories WHERE id LIKE '%$searchTerm%'";
             $result = $conn->query($sql);
-        } elseif (isset($_POST['searchByNameCategory'])) {
+        } else if (isset($_POST['searchByNameCategory'])) {
             $searchTerm = $_POST['searchByNameCategory'];
-            $sql = "SELECT id, parent_category_id, category_name, description FROM categories WHERE category_name LIKE '%$searchTerm'";
+            $sql = "SELECT id, parent_category_id, category_name, description FROM categories WHERE category_name LIKE '%$searchTerm%'";
             $result = $conn->query($sql);
         }
     }
@@ -43,8 +43,9 @@
         $totalPages = ceil($totalItems / $itemsPerPage);
     } else {
         echo "<script>
-        alert('No results found for the given search term: $searchTerm');
-        </script>";
+                alert('No results found for the given search term: $searchTerm');
+                window.location.href = 'index.php?pid=1';
+              </script>";
     }
     ?>
 </div>
