@@ -186,16 +186,15 @@ include('sql/countryOrder.php');
             <h3>Sale by country</h3>
             <table class="tableCountry">
                 <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
+                    <td style="width: 20%;">Country name</td>
+                    <td style="width: 30%;">Sales</td>
+                    <td style="width: 30%;">Values</td>
+                    <td style="width: 20%;">Bonces</td>
                 </tr>
             </table>
         </div>
         <div style="width: 35%;" class="byCategory">
-            byCategory
+            <h3>Sale by Category</h3>
         </div>
     </div>
 </div>

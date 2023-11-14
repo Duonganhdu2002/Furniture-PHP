@@ -109,6 +109,25 @@ if (isset($_SESSION["username_user"])) {
     </div>
 </div>
 
+<script>
+    function editProfile(pr5_id) {
+        window.location.href = '../PUBLIC-PAGE/index.php?pid=11&edit';
+    }
+
+    window.addEventListener('beforeunload', function() {
+        sessionStorage.setItem('scrollPosition', window.scrollY);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var scrollPosition = sessionStorage.getItem('scrollPosition');
+
+        if (scrollPosition) {
+            window.scrollTo(0, scrollPosition);
+            sessionStorage.removeItem('scrollPosition'); // Xóa vị trí đã lưu
+        }
+    });
+</script>
+
 <style>
     .profile {
         padding-left: 200px;
@@ -186,24 +205,4 @@ if (isset($_SESSION["username_user"])) {
 
     }
 </style>
-
-<script>
-    function editProfile(pr5_id) {
-        window.location.href = '../PUBLIC-PAGE/index.php?pid=11&edit';
-    }
-
-    window.addEventListener('beforeunload', function() {
-        sessionStorage.setItem('scrollPosition', window.scrollY);
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var scrollPosition = sessionStorage.getItem('scrollPosition');
-
-        if (scrollPosition) {
-            window.scrollTo(0, scrollPosition);
-            sessionStorage.removeItem('scrollPosition'); // Xóa vị trí đã lưu
-        }
-    });
-</script>
-
 </html>
