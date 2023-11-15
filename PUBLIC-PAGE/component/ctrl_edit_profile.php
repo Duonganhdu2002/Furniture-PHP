@@ -1,20 +1,11 @@
 <?php
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION["username_user"])) {
-    echo "<script>alert('Session không tồn tại.');</script>";
-    exit;
-}
-
 // Database connection
 $conn = new mysqli('localhost', 'root', '', 'shopping_online');
 if ($conn->connect_error) {
     die("Kết nối thất bại: " . $conn->connect_error);
 }
-
-// Get the current username from the session
-$username = $_SESSION["username_user"];
 
 // Get data from the form
 $id = $_POST["id"];

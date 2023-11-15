@@ -53,3 +53,5 @@ if ($result1) {
 // Rest of your code remains the same
 $percentIncreaseCountry = ($totalCountryPreviousYear != 0) ? (($totalCountry / $totalCountryPreviousYear) * 100) : 0;
 $percentIncreaseCountry = round($percentIncreaseCountry, 0);
+// Loop through the results of the first query
+?>
