@@ -175,7 +175,7 @@ include('sql/categoryOrder.php');
     </div>
 
     <div class="revenue3">
-        <div style="width: 55%" class="byCountry">
+        <div style="width: 55%; height: fit-content" class="byCountry">
             <h3>Sale by country</h3>
             <table class="tableCountry">
                 <tr>
@@ -212,7 +212,7 @@ include('sql/categoryOrder.php');
                 ?>
             </table>
         </div>
-        <div style="width: 35%;" class="byCategory">
+        <div style="width: 35%; height: fit-content" class="byCategory">
             <h3>Sale by Category</h3>
             <table class="tableCountry">
                 <tr>
