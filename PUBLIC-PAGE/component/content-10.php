@@ -103,9 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $sqlAddress = "INSERT INTO address_cart (id_cart, username, country, province, district, commune, street, number, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmtAddress = $conn->prepare($sqlAddress);
         $stmtAddress->bind_param("issssssiss", $cartId, $idUser, $country, $province, $district, $commune, $street, $number, $email, $phone);
-        if ($stmtAddress->execute() !== TRUE) {
-            echo "Error: " . $sqlAddress . "<br>" . $stmtAddress->error;
-        }
 
         // Loop through the products and insert into cart_items
         for ($i = 0; $i < count($idProducts); $i++) {
