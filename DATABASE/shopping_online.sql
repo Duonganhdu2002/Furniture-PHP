@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 11, 2023 lúc 09:42 AM
+-- Thời gian đã tạo: Th10 15, 2023 lúc 04:11 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.1.17
+-- Phiên bản PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,7 +44,7 @@ CREATE TABLE `addresses` (
 --
 
 INSERT INTO `addresses` (`id`, `username`, `country`, `province`, `district`, `commune`, `street`, `number`, `role`) VALUES
-(1, 'user1', 'Vietnam', 'Hanoi', 'Ba Dinh', 'Quan Thanh', 'Phan Dinh Phung', '123', 'user'),
+(1, 'ducooms', 'Việt Nam', 'Ho Chi Minh', 'Ba Dinh', 'TP Hồ Chí Minh', 'Lê Lợi - Quận 7 -  TP HCM - Việt Nam', '125', 'user'),
 (2, 'user2', 'USA', 'California', 'Los Angeles', 'Downtown', 'Main Street', '456', 'user'),
 (3, 'user3', 'UK', 'England', 'London', 'Westminster', 'Abbey Road', '789', 'user'),
 (4, 'user4', 'France', 'Île-de-France', 'Paris', '1st Arrondissement', 'Champs-Élysées', '101', 'user'),
@@ -73,7 +73,8 @@ INSERT INTO `addresses` (`id`, `username`, `country`, `province`, `district`, `c
 (27, 'admin17', 'Finland', 'Helsinki', 'Uusimaa', 'Kluuvi', 'Aleksanterinkatu', '2424', 'admin'),
 (28, 'admin18', 'Portugal', 'Lisbon', 'Lisbon', 'Baixa', 'Rua Augusta', '2525', 'admin'),
 (29, 'admin19', 'Ireland', 'Dublin', 'Leinster', 'City Centre', 'Grafton Street', '2626', 'admin'),
-(30, 'admin20', 'Belgium', 'Brussels', 'Brussels-Capital Region', 'City of Brussels', 'Rue Neuve', '2727', 'admin');
+(30, 'admin20', 'Belgium', 'Brussels', 'Brussels-Capital Region', 'City of Brussels', 'Rue Neuve', '2727', 'admin'),
+(280, 'kaka1', 'Vietnam', 'okok', 'nmnnvrer', 'higyui', '909 qrrrr', '123', '');
 
 -- --------------------------------------------------------
 
@@ -104,19 +105,30 @@ INSERT INTO `address_cart` (`id_cart`, `username`, `country`, `province`, `distr
 (4, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', NULL, NULL),
 (5, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', NULL, NULL),
 (6, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', NULL, NULL),
-(7, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(8, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(9, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(10, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(11, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(12, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(13, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(14, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(15, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(16, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(17, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(18, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', NULL, NULL),
-(19, 7, 'Canadaaaa', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street3333', '40434', NULL, NULL);
+(7, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(8, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(9, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(10, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(11, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123456789'),
+(12, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(13, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(14, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(15, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(16, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(17, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(18, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(19, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(20, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(21, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(22, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(23, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(24, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(25, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(26, 7, 'Canada', 'Ontario', 'Toronto', 'Downtown', 'Yonge Street', '404', 'sophia.lee@example.com', '+123987654'),
+(27, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', 'eva.williams@example.com', '+999888777'),
+(28, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', 'eva.williams@example.com', '+999888777'),
+(29, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', 'eva.williams@example.com', '+999888777'),
+(30, 5, 'Germany', 'Bavaria', 'Munich', 'Altstadt', 'Marienplatz', '202', 'eva.williams@example.com', '+999888777');
 
 -- --------------------------------------------------------
 
@@ -181,27 +193,63 @@ INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `quantity`, `user`, `pr
 (2, 2, 41, 1, 1, 899.99),
 (5, 4, 1, 1, 5, 499.99),
 (6, 5, 41, 1, 5, 899.99),
-(7, 6, 1, 12, 5, 499.99),
-(8, 7, 201, 11, 7, 899.99),
-(9, 8, 7, 1, 7, 299.99),
-(10, 10, 41, 1, 7, 899.99),
-(11, 11, 41, 4, 7, 899.99),
-(12, 12, 42, 1, 7, 1199.99),
-(13, 12, 43, 1, 7, 1099.99),
-(14, 12, 61, 1, 7, 1599.99),
-(15, 13, 41, 1, 7, 899.99),
-(16, 14, 41, 3, 7, 899.99),
-(17, 15, 3, 1, 7, 599.99),
-(18, 16, 41, 1, 7, 899.99),
-(19, 16, 42, 1, 7, 1199.99),
-(20, 16, 61, 1, 7, 1599.99),
-(21, 16, 123, 1, 7, 89.99),
-(22, 17, 63, 1, 7, 1399.99),
-(23, 18, 43, 1, 7, 1099.99),
-(24, 19, 42, 1, 7, 1199.99),
-(25, 19, 63, 6, 7, 1399.99),
-(26, 19, 121, 1, 7, 699.99),
-(27, 19, 162, 5, 7, 44.99);
+(7, 7, 41, 1, 7, 899.99),
+(8, 8, 123, 1, 7, 89.99),
+(9, 9, 42, 1, 7, 1199.99),
+(10, 9, 121, 1, 7, 699.99),
+(11, 10, 61, 1, 7, 1599.99),
+(12, 11, 61, 1, 7, 1599.99),
+(13, 11, 3, 1, 7, 599.99),
+(14, 11, 5, 1, 7, 549.99),
+(15, 11, 4, 1, 7, 449.99),
+(16, 12, 43, 1, 7, 1099.99),
+(17, 12, 61, 1, 7, 1599.99),
+(18, 12, 143, 1, 7, 79.99),
+(19, 13, 1, 1, 7, 499.99),
+(20, 13, 6, 1, 7, 799.99),
+(21, 14, 121, 1, 7, 699.99),
+(22, 14, 222, 1, 7, 59.99),
+(23, 14, 201, 1, 7, 899.99),
+(24, 14, 41, 1, 7, 899.99),
+(25, 15, 43, 1, 7, 1099.99),
+(26, 15, 121, 1, 7, 699.99),
+(27, 16, 142, 1, 7, 49.99),
+(28, 16, 149, 1, 7, 89.99),
+(29, 16, 164, 1, 7, 24.99),
+(30, 16, 168, 1, 7, 49.99),
+(31, 16, 263, 1, 7, 549.99),
+(32, 17, 41, 1, 7, 899.99),
+(33, 18, 46, 1, 7, 1599.99),
+(34, 18, 47, 1, 7, 899.99),
+(35, 19, 220, 1, 7, 79.99),
+(36, 19, 265, 10, 7, 649.99),
+(37, 19, 244, 1, 7, 399.99),
+(38, 19, 200, 1, 7, 799.99),
+(39, 19, 182, 1, 7, 279.99),
+(40, 19, 163, 1, 7, 79.99),
+(41, 19, 124, 1, 7, 129.99),
+(42, 19, 64, 1, 7, 1799.99),
+(43, 19, 41, 1, 7, 899.99),
+(44, 19, 23, 1, 7, 249.99),
+(45, 20, 121, 1, 7, 699.99),
+(46, 20, 129, 1, 7, 19.99),
+(47, 21, 160, 1, 7, 34.99),
+(48, 22, 203, 1, 7, 349.99),
+(49, 22, 208, 1, 7, 899.99),
+(50, 22, 224, 1, 7, 49.99),
+(51, 23, 63, 1, 7, 1399.99),
+(52, 24, 182, 8, 7, 279.99),
+(53, 24, 162, 1, 7, 44.99),
+(54, 25, 65, 1, 7, 1999.99),
+(55, 25, 69, 3, 7, 1599.99),
+(56, 26, 140, 1, 7, 24.99),
+(57, 26, 139, 5, 7, 29.99),
+(58, 27, 41, 2, 5, 899.99),
+(59, 28, 123, 5, 5, 89.99),
+(60, 28, 134, 1, 5, 59.99),
+(61, 29, 63, 1, 5, 1399.99),
+(62, 29, 121, 1, 5, 699.99),
+(63, 30, 162, 1, 5, 44.99);
 
 -- --------------------------------------------------------
 
@@ -257,13 +305,13 @@ CREATE TABLE `information` (
 --
 
 INSERT INTO `information` (`id`, `username`, `full_name`, `date_of_birth`, `email`, `gender`, `phone_number`, `avatar`, `role`) VALUES
-(1, 'user1', 'John Doe', '1990-01-15', 'john.doe@example.com', 1, '+123456789', 'person_1.jpg', 'user'),
+(1, 'ducooms', 'Nguyen Tan Dung', '2004-11-29', 'dung5715@gmail.com', 1, '+123456789', 'person_1.jpg', 'user'),
 (2, 'user2', 'Jane Doe', '1985-05-22', 'jane.doe@example.com', 2, '+987654321', 'person_2.jpg', 'user'),
 (3, 'user3', 'Alice Smith', '1995-08-10', 'alice.smith@example.com', 2, '+111223344', 'person_3.jpg', 'user'),
 (4, 'user4', 'Bob Johnson', '1980-03-30', 'bob.johnson@example.com', 1, '+555666777', 'person_4.jpg', 'user'),
 (5, 'user5', 'Eva Williams', '1992-11-05', 'eva.williams@example.com', 2, '+999888777', 'person_5.jpg', 'user'),
 (6, 'user6', 'Michael Brown', '1993-04-18', 'michael.brown@example.com', 1, '+444333222', 'person_6.jpg', 'user'),
-(7, 'user7', 'Sophia Lee', '1988-09-12', 'sophia.lee@example.com', 2, '+123987654', 'person_7.jpg', 'user'),
+(7, 'user7', 'Phạm Thị Thảo', '2004-11-29', 'sophia.lee@example.com', 1, '+123987654', 'person_7.jpg', 'user'),
 (8, 'user8', 'Daniel Taylor', '1998-07-25', 'daniel.taylor@example.com', 1, '+987123654', 'person_8.jpg', 'user'),
 (9, 'user9', 'Olivia Davis', '1987-12-08', 'olivia.davis@example.com', 2, '+555111222', 'person_9.jpg', 'user'),
 (10, 'user10', 'Matthew Evans', '1994-02-28', 'matthew.evans@example.com', 1, '+111222333', 'person_10.jpg', 'user'),
@@ -286,7 +334,8 @@ INSERT INTO `information` (`id`, `username`, `full_name`, `date_of_birth`, `emai
 (27, 'admin17', 'Olivia Wilson', '1994-03-01', 'olivia.wilson@example.com', 2, '+111222333', 'person_27.jpg', 'admin'),
 (28, 'admin18', 'Lucas Anderson', '1996-06-18', 'lucas.anderson@example.com', 1, '+999555777', 'person_28.jpg', 'admin'),
 (29, 'admin19', 'Ava Wilson', '1986-10-07', 'ava.wilson@example.com', 2, '+333888999', 'person_29.jpg', 'admin'),
-(30, 'admin20', 'Mason Martinez', '1991-03-25', 'mason.martinez@example.com', 1, '+777444555', 'person_30.jpg', 'admin');
+(30, 'admin20', 'Mason Martinez', '1991-03-25', 'mason.martinez@example.com', 1, '+777444555', 'person_30.jpg', 'admin'),
+(280, 'kaka1', 'Mâmmma', '2004-11-29', '', 1, '0338890999', 'download.jpg', '');
 
 -- --------------------------------------------------------
 
@@ -636,24 +685,35 @@ CREATE TABLE `shopping_carts` (
 --
 
 INSERT INTO `shopping_carts` (`id`, `user_id`, `created_at`, `status`, `ship_method`, `note`, `total_price`, `canceled_at`) VALUES
-(1, 5, '2023-11-06 11:35:25', 1, 2, 'HIIHIHIH', NULL, NULL),
-(2, 1, '2023-11-06 16:47:01', 1, 1, '', NULL, NULL),
-(4, 5, '2023-11-08 10:56:58', 1, 1, '0', 0.00, NULL),
-(5, 5, '2023-11-08 10:57:24', 1, 1, '0', 922.98, NULL),
-(6, 5, '2023-11-08 10:57:50', 1, 2, '0', 6019.87, NULL),
-(7, 7, '2023-11-08 11:11:00', 1, 1, '', 9922.88, NULL),
-(8, 7, '2023-11-10 07:43:53', 1, 1, '', 322.98, NULL),
-(9, 7, '2023-11-10 08:11:10', 1, 1, '', 0.00, NULL),
-(10, 7, '2023-11-10 08:18:20', 1, 1, '', 922.98, NULL),
-(11, 7, '2023-11-10 08:11:10', 1, 1, '', 3622.95, NULL),
-(12, 7, '2023-11-10 08:18:08', 1, 1, '', 3922.96, NULL),
-(13, 7, '2023-11-10 08:15:05', 1, 1, '', 922.98, NULL),
-(14, 7, '2023-11-10 08:21:43', 1, 1, '', 2722.96, NULL),
-(15, 7, '2023-11-10 09:59:47', 5, 1, '', 622.98, '2023-11-10 12:43:06'),
-(16, 7, '2023-11-10 11:50:07', 1, 1, '', 3812.95, NULL),
-(17, 7, '2023-11-10 12:45:25', 1, 1, '', 1422.98, NULL),
-(18, 7, '2023-11-10 13:36:09', 5, 1, '', 1122.98, '2023-11-10 13:36:21'),
-(19, 7, '2023-11-10 13:37:07', 5, 1, '', 10547.86, '2023-11-10 15:19:55');
+(1, 5, '2023-11-06 11:35:25', 5, 2, 'HIIHIHIH', NULL, NULL),
+(2, 1, '2023-11-06 16:47:01', 5, 1, '', NULL, NULL),
+(4, 5, '2023-11-08 10:56:58', 5, 1, '0', 0.00, '2023-11-15 15:04:30'),
+(5, 5, '2023-11-04 17:57:24', 1, 1, '0', 922.98, NULL),
+(6, 5, '2023-11-04 17:57:50', 1, 2, '0', 6019.87, NULL),
+(7, 7, '2023-11-14 18:28:08', 1, 1, '', 922.98, NULL),
+(8, 7, '2023-11-14 18:29:14', 1, 1, '', 112.98, NULL),
+(9, 7, '2023-11-15 08:33:28', 1, 1, '', 1922.97, NULL),
+(10, 7, '2023-11-15 09:14:51', 1, 1, '', 1622.98, NULL),
+(11, 7, '2023-11-15 10:39:47', 1, 1, '', 3222.95, NULL),
+(12, 7, '2023-11-15 14:24:43', 1, 1, '', 2802.96, NULL),
+(13, 7, '2023-11-15 14:25:17', 1, 2, '', 1319.97, NULL),
+(14, 7, '2023-11-15 14:26:03', 1, 2, '', 2579.95, NULL),
+(15, 7, '2023-11-15 14:44:51', 1, 2, '', 1819.97, NULL),
+(16, 7, '2023-11-15 14:46:40', 1, 1, '', 787.94, NULL),
+(17, 7, '2023-11-15 14:56:56', 1, 1, '', 922.98, NULL),
+(18, 7, '2023-11-15 14:57:08', 1, 1, '', 2522.97, NULL),
+(19, 7, '2023-11-15 14:58:29', 1, 1, '', 11242.80, NULL),
+(20, 7, '2023-11-15 14:59:26', 1, 1, '', 742.97, NULL),
+(21, 7, '2023-11-15 14:59:39', 1, 2, '', 54.98, NULL),
+(22, 7, '2023-11-15 15:00:08', 1, 1, '', 1322.96, NULL),
+(23, 7, '2023-11-15 15:00:25', 1, 1, '', 1422.98, NULL),
+(24, 7, '2023-11-15 15:00:56', 1, 1, '', 2307.90, NULL),
+(25, 7, '2023-11-15 15:01:33', 1, 1, '', 6822.95, NULL),
+(26, 7, '2023-11-15 15:02:06', 1, 1, '', 197.93, NULL),
+(27, 5, '2023-11-15 15:02:43', 1, 2, '', 1819.97, NULL),
+(28, 5, '2023-11-15 15:03:10', 1, 1, '', 532.93, NULL),
+(29, 5, '2023-11-15 15:03:59', 1, 1, '', 2122.97, NULL),
+(30, 5, '2023-11-15 15:04:09', 1, 1, '', 67.98, NULL);
 
 -- --------------------------------------------------------
 
@@ -697,13 +757,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `created_at`, `image`) VALUES
-(1, 'user1', 'password1', 'user', '2023-10-17 04:13:34', NULL),
+(1, 'ducooms', 'n88vEy5SXEq4@tP', 'user', '2023-11-15 10:27:42', NULL),
 (2, 'user2', 'password2', 'user', '2023-10-17 04:13:34', NULL),
 (3, 'user3', 'password3', 'user', '2023-10-17 04:13:34', NULL),
 (4, 'user4', 'password4', 'user', '2023-10-17 04:13:34', NULL),
 (5, 'user5', 'password5', 'user', '2023-10-17 04:13:34', NULL),
 (6, 'user6', 'password6', 'user', '2023-10-17 04:13:34', NULL),
-(7, 'user7', 'password7', 'user', '2023-10-17 04:13:34', NULL),
+(7, 'user7', 'password7', 'user', '2023-11-14 16:07:37', NULL),
 (8, 'user8', 'password8', 'user', '2023-10-17 04:13:34', NULL),
 (9, 'user9', 'password9', 'user', '2023-10-17 04:13:34', NULL),
 (10, 'user10', 'password10', 'user', '2023-10-17 04:13:34', NULL),
@@ -726,7 +786,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `created_at`, `image`
 (27, 'admin17', 'adminpass17', 'admin', '2023-10-17 04:14:09', NULL),
 (28, 'admin18', 'adminpass18', 'admin', '2023-10-17 04:14:09', NULL),
 (29, 'admin19', 'adminpass19', 'admin', '2023-10-17 04:14:09', NULL),
-(30, 'admin20', 'adminpass20', 'admin', '2023-10-17 04:14:09', NULL);
+(30, 'admin20', 'adminpass20', 'admin', '2023-10-17 04:14:09', NULL),
+(280, 'kaka1', NULL, NULL, '2023-11-14 07:45:23', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
