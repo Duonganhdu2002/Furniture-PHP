@@ -156,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         }
 
-        $maxIdResult = $conn->query("SELECT MAX(id) AS max_id FROM products");
+        $maxIdResult = $conn->query("SELECT MAX(id) AS max_id FROM users");
         $maxId = $maxIdResult->fetch_assoc()['max_id'];
         $newId = $maxId + 1;
 
