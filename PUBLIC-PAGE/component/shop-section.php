@@ -20,7 +20,7 @@ if ($resultProducts->num_rows > 0) {
 
                 <span class="icon-cross">
                     <a class="add" id="<?php echo $row["id"]; ?>">
-                        <button name="submit" style="background-color: #2f2f2f; border: none;" type="submit">
+                        <button name="submitButton1" style="background-color: #2f2f2f; border: none;" type="submit">
                             <img src="images/cross.svg">
                         </button>
                     </a>

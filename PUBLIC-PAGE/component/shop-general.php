@@ -56,7 +56,7 @@ foreach ($category_ids as $category_id) {
 
                             <span class="icon-cross">
                                 <a class="add" id="<?php echo $row1["id"]; ?>">
-                                    <button name="submit" style="background-color: #2f2f2f; border: none;" type="submit">
+                                    <button name="submitButton1" style="background-color: #2f2f2f; border: none;" type="submit">
                                         <img src="images/cross.svg">
                                     </button>
                                 </a>
