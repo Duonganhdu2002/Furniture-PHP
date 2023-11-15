@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_POST["submit"])) {
+if (isset($_POST['submitButton1'])) {
     $id = $_POST["id"];
     $quantity = isset($_POST["quantity"]) ? $_POST["quantity"] : 1;
 

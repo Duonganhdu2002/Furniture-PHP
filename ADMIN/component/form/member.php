@@ -41,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     do {
         // Thông báo nếu không điền đủ thông tin sản phẩm
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // ... (code trước đó)
 
             $missingFields = [];
 

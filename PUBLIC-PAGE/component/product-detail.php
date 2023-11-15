@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 <div class="product-detail">
     <div class="product-datil-child">
-        <form style="display: flex;" action="component/ctrl-cart/addToCart.php" method="post">
+        <form style="display: flex;" action="component/ctrl-cart/Add_and_Buy.php" method="post">
             <div class="leftside">
                 <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <input type="hidden" name="image" value="<?php echo $image; ?>">
@@ -63,14 +63,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
                 <div style="display:flex; margin-top: 40px; margin-bottom: 40px; ">
                     <div style="margin-right: 20px;">
-                        <button type="submit" name="submit" id="<?php echo $id; ?>" class="button" id="cartButton">
+                        <button type="submit" name="submitButton1" id="<?php echo $id; ?>" class="button" id="cartButton">
                             <img src="../PUBLIC-PAGE/images/cart.svg" alt="" style="margin-right:8px" id="cartImage">
                             Add to cart
                         </button>
 
                     </div>
                     <div>
-                        <button type="button" class="button" id="buyNowButton">Buy now</button>
+                        <button type="submit"  name="submitButton2"  class="button"  id="<?php echo $id; ?>"  id="buyNowButton">Buy now</button>
                     </div>
                 </div>
                 <div style="position: relative; height: 150px; /* Chiều cao của phần tử chứa */">
@@ -82,6 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         </form>
     </div>
 </div>
+
+
 
 <style>
     .product-detail {
