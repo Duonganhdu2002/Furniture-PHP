@@ -68,6 +68,7 @@ if (isset($_SESSION["username_user"])) {
 <div id="myForm" style="display: flex; margin-bottom: 150px; margin-top: 100px; background-color: #ffffff; width:600px; margin-left: 300px; padding:50px; border: solid 1px rgba(128, 128, 128, 0.5);">
     <form action="../PUBLIC-PAGE/component/ctrl_edit_profile.php" method="post" class="form-edit-profile" id="editSection">
         <div class="second-child">
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
             <label for="customerAvatar" style="font-size: large;">Customer Avatar:</label>
             <input type="file" id="customerAvatar" name="customerAvatar" style="padding: 12px 5px 5px 20px; border:none">
             <div style="display: flex; justify-content: space-between;">

@@ -17,6 +17,7 @@ if ($conn->connect_error) {
 $username = $_SESSION["username_user"];
 
 // Get data from the form
+$id = $_POST["id"];
 $customerUserName = $_POST["username"];
 $customerName = $_POST["customerName"];
 $customerEmail = $_POST["customerEmail"];
@@ -41,15 +42,14 @@ if (
     $message = "All the fields are required";
 } else {
     // Check if the new username already exists
-    $checkUsernameQuery = "SELECT * FROM users WHERE username = ?";
-    $checkUsernameStmt = $conn->prepare($checkUsernameQuery);
-    $checkUsernameStmt->bind_param("s", $customerUserName);
-    $checkUsernameStmt->execute();
-    $checkUsernameResult = $checkUsernameStmt->get_result();
+    $checkIdQuery = "SELECT * FROM users WHERE id = ?";
+    $checkIdStmt = $conn->prepare($checkIdQuery);
+    $checkIdStmt->bind_param("i", $id);
+    $checkIdStmt->execute();
+    $checkIdResult = $checkIdStmt->get_result();
 
-    if ($checkUsernameResult->num_rows > 0) {
-        $message = "Username already exists. Please choose a different one.";
-    } else {
+    if ($checkIdResult->num_rows > 0) {
+        
         // Update user information
         $sqlInformation = "UPDATE information SET username = ?, full_name = ?, date_of_birth = ?, email = ?, gender = ?, phone_number = ? WHERE username = ?";
         $stmtInformation = $conn->prepare($sqlInformation);
