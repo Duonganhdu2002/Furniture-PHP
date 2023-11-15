@@ -66,7 +66,7 @@ if (isset($_SESSION["username_user"])) {
 <div style="display: flex; margin-bottom: 150px; margin-top: 100px; background-color: #ffffff; width:600px; margin-left: 300px; padding:50px; border: solid 1px rgba(128, 128, 128, 0.5);">
     <form action="../PUBLIC-PAGE/component/ctrl_edit_profile.php" method="post" class="form-edit-profile">
         <div class="second-child">
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
             <label for="customerAvatar" style="font-size: large;">Customer Avatar:</label>
             <input type="file" id="customerAvatar" name="customerAvatar" style="padding: 12px 5px 5px 20px; border:none">
             <div style="display: flex; justify-content: space-between;">
@@ -81,61 +81,61 @@ if (isset($_SESSION["username_user"])) {
             </div>
             <div style="display: flex; justify-content: space-between;">
                 <div style="width: 28%;">
-                <label for="" class="form-edit-profile-label">Date of birth:</label>
-                <input type="date" name="customerBirth" value="<?php echo $customerBirth; ?>">
+                    <label for="" class="form-edit-profile-label">Date of birth:</label>
+                    <input type="date" name="customerBirth" value="<?php echo $customerBirth; ?>">
                 </div>
                 <div style="width: 28%;">
-                <label for="" class="form-edit-profile-label">Gender:</label>
-                <select name="customerGender">
-                    <option value="1">Male</option>
-                    <option value="2">Female</option>
-                </select>
+                    <label for="" class="form-edit-profile-label">Gender:</label>
+                    <select name="customerGender">
+                        <option value="1" <?php echo ($customerGender == 1) ? 'selected' : ''; ?>>Male</option>
+                        <option value="2" <?php echo ($customerGender == 2) ? 'selected' : ''; ?>>Female</option>
+                    </select>
                 </div>
-                <div style="width: 28%;">
-                <label for="" class="form-edit-profile-label">Phone number:</label>
-                <input type="text" name="customerPhone" value="<?php echo $customerPhone; ?>">
+                    <div style="width: 28%;">
+                        <label for="" class="form-edit-profile-label">Phone number:</label>
+                        <input type="text" name="customerPhone" value="<?php echo $customerPhone; ?>">
+                    </div>
                 </div>
-            </div>
-            <label for="" class="form-edit-profile-label">Email:</label>
-            <input type="text" name="customerEmail" value="<?php echo $customerEmail; ?>">
-            <div style="display: flex; justify-content: space-between;">
-                <div style="width: 28%;">
-                <label for="" class="form-edit-profile-label" style="margin-bottom: 5px">Country:</label>
-                <input type="text" name="customerAddressCountry" value="<?php echo $customerAddressCountry; ?>">
+                <label for="" class="form-edit-profile-label">Email:</label>
+                <input type="text" name="customerEmail" value="<?php echo $customerEmail; ?>">
+                <div style="display: flex; justify-content: space-between;">
+                    <div style="width: 28%;">
+                        <label for="" class="form-edit-profile-label" style="margin-bottom: 5px">Country:</label>
+                        <input type="text" name="customerAddressCountry" value="<?php echo $customerAddressCountry; ?>">
+                    </div>
+                    <div style="width: 28%;">
+                        <label for="" class="form-edit-profile-label" style="margin-bottom: 5px">Province:</label>
+                        <input type="text" name="customerAddressProvince" value="<?php echo $customerAddressProvince; ?>">
+                    </div>
+                    <div style="width: 28%;">
+                        <label for="" class="form-edit-profile-label" style="margin-bottom: 5px">District:</label>
+                        <input type="text" name="customerAddressDistrict" value="<?php echo $customerAddressDistrict; ?>">
+                    </div>
                 </div>
-                <div style="width: 28%;">
-                <label for="" class="form-edit-profile-label" style="margin-bottom: 5px">Province:</label>
-                <input type="text" name="customerAddressProvince" value="<?php echo $customerAddressProvince; ?>">
+                <div style="display: flex; justify-content: space-between;">
+                    <div style="width: 28%;">
+                        <label for="" class="form-edit-profile-label" style="margin-bottom: 5px">Commune:</label>
+                        <input type="text" name="customerAddressCommune" value="<?php echo $customerAddressCommune; ?>">
+                    </div>
+                    <div style="width: 28%;">
+                        <label for="" class="form-edit-profile-label" style="margin-bottom: 5px">Street:</label>
+                        <input type="text" name="customerAddressStreet" value="<?php echo $customerAddressStreet; ?>">
+                    </div>
+                    <div style="width: 28%;">
+                        <label for="" class="form-edit-profile-label" style="margin-bottom: 5px">Number:</label>
+                        <input type="text" name="customerAddressNumber" value="<?php echo $customerAddressNumber; ?>">
+                    </div>
                 </div>
-                <div style="width: 28%;">
-                <label for="" class="form-edit-profile-label" style="margin-bottom: 5px">District:</label>
-                <input type="text" name="customerAddressDistrict" value="<?php echo $customerAddressDistrict; ?>">
-                </div>
-            </div>
-            <div style="display: flex; justify-content: space-between;">
-                <div style="width: 28%;">
-                <label for="" class="form-edit-profile-label" style="margin-bottom: 5px">Commune:</label>
-                <input type="text" name="customerAddressCommune" value="<?php echo $customerAddressCommune; ?>">
-                </div>
-                <div style="width: 28%;">
-                <label for="" class="form-edit-profile-label" style="margin-bottom: 5px">Street:</label>
-                <input type="text" name="customerAddressStreet" value="<?php echo $customerAddressStreet; ?>">
-                </div>
-                <div style="width: 28%;">
-                <label for="" class="form-edit-profile-label" style="margin-bottom: 5px">Number:</label>
-                <input type="text" name="customerAddressNumber" value="<?php echo $customerAddressNumber; ?>">
-                </div>
-            </div>
 
-    </div>
+            </div>
             <div class="button-save-back-profile">
                 <button type="submit" class="button-1">Change</button>
                 <a style="text-decoration: none;">
                     <button type="button" class="button-2" onclick="window.location.href='index.php?pid=11';">Back</button>
                 </a>
             </div>
-            </div>
-    
+        </div>
+
     </form>
 </div>
 
@@ -216,7 +216,7 @@ if (isset($_SESSION["username_user"])) {
 
     }
 
-    .form-edit-profile  {
+    .form-edit-profile {
         width: 100%;
     }
 
@@ -227,7 +227,7 @@ if (isset($_SESSION["username_user"])) {
     }
 
     .form-edit-profile input {
-        font-size:large;
+        font-size: large;
         width: 100%;
         height: 35px;
         border-radius: 10px;
@@ -237,7 +237,7 @@ if (isset($_SESSION["username_user"])) {
     }
 
     .form-edit-profile select {
-        font-size:large;
+        font-size: large;
         width: 115%;
         height: 47px;
         border-radius: 10px;
@@ -248,14 +248,14 @@ if (isset($_SESSION["username_user"])) {
 
     .button-save-back-profile {
         margin-top: 20px;
-        text-align:right;
+        text-align: right;
         width: 100%;
         display: flex;
         margin-left: 50%;
     }
 
     .button-save-back-profile button {
-        display:flexbox;
+        display: flexbox;
         width: 120px;
         height: 50px;
         margin-left: 20px;
@@ -285,6 +285,7 @@ if (isset($_SESSION["username_user"])) {
     .button-save-back-profile button:active {
         opacity: 0.6;
     }
+
     .second-child {
         justify-content: space-between;
         width: 93%;
@@ -295,7 +296,7 @@ if (isset($_SESSION["username_user"])) {
     function saveProfile(pr5_id) {
         window.location.href = '../PUBLIC-PAGE/index.php?pid=11&edit' + pr5_id;
     }
-    
+
     //Giữ nguyên tại vị trí đã cuộn
     window.addEventListener('beforeunload', function() {
         sessionStorage.setItem('scrollPosition', window.scrollY);
