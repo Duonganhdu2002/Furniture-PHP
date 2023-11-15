@@ -82,6 +82,6 @@ if (
     }
 }
 
-// Display the message
 echo "<script>alert('$message');</script>";
-?>
+header("location: ../index.php?pid=11&edit");
+exit();
