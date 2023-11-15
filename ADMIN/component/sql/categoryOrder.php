@@ -20,7 +20,8 @@ AND YEAR(sc.created_at) = YEAR(CURDATE())
 GROUP BY
 c.id
 ORDER BY
-total_sold DESC;
+total_sold DESC
+LIMIT 5
 ";
 
 $resultCategoryOrder = $conn->query($sqlCategoryOrder);
