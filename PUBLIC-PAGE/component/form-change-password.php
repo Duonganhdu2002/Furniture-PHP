@@ -1,15 +1,17 @@
 <div class="popup">
 <form action="../PUBLIC-PAGE/component/change-password.php" method="post">
-    <label for="old_password">Old Password:</label><br>
-    <input type="password" id="old_password" name="old_password" class="input"><br>
+    <div class="form-div">
+        <label for="old_password">Old Password:</label><br>
+        <input type="password" id="old_password" name="old_password" class="input"><br>
 
-    <label for="new_password">New Password:</label><br>
-    <input type="password" id="new_password" name="new_password" class="input"><br>
+        <label for="new_password">New Password:</label><br>
+        <input type="password" id="new_password" name="new_password" class="input"><br>
 
-    <label for="confirm_password">Confirm New Password:</label><br>
-    <input type="password" id="confirm_password" name="confirm_password" class="input"><br><br>
-    <div style="justify-content: center; display:flex">
-    <input type="submit" class="submit">
+        <label for="confirm_password">Confirm New Password:</label><br>
+        <input type="password" id="confirm_password" name="confirm_password" class="input"><br><br>
+        <div style="justify-content: center; display:flex">
+        <input type="submit" class="submit">
+        </div>
     </div>
 </form>
 </div>
@@ -25,7 +27,7 @@
             background: #fff;
             z-index: 9999;
             font-size: x-large;
-            border-radius: 20px;
+            border-radius: 7px;
         }
 
         .input {
