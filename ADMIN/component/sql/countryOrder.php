@@ -5,7 +5,7 @@ $sql = "SELECT address_cart.country, COUNT(*) AS order_count, SUM(shopping_carts
         WHERE YEAR(shopping_carts.created_at) = YEAR(CURDATE())
         GROUP BY address_cart.country
         ORDER BY order_count DESC
-        LIMIT 5";
+        LIMIT 6";
 
 $result = $conn->query($sql);
 
@@ -33,7 +33,7 @@ $sql1 = "SELECT address_cart.country, COUNT(*) AS order_count, SUM(shopping_cart
         WHERE YEAR(shopping_carts.created_at) = YEAR(CURDATE()) - 1
         GROUP BY address_cart.country
         ORDER BY order_count DESC
-        LIMIT 5";
+        LIMIT 6";
 
 $result1 = $conn->query($sql1);
 
