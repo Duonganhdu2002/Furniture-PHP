@@ -10,8 +10,6 @@ $username = $_SESSION["username_user"];
 
 // Lấy tên đăng nhập của người dùng từ phiên làm việc
 if (isset($_SESSION["username_user"])) {
-
-
     // Truy vấn thông tin cá nhân từ bảng Information dựa trên tên đăng nhập
     $sqlInformation = "SELECT * FROM information WHERE username = ?";
     $stmtInformation = $conn->prepare($sqlInformation);
@@ -60,13 +58,13 @@ if (isset($_SESSION["username_user"])) {
         alert('Bạn cần phải đăng nhập trước.');
         window.location.href = 'index.php';
     </script>";
-    exit;
+    exit();
 }
 ?>
 
 <p style="font-size: x-large; margin-top: 60px; margin-bottom:-70px; margin-left: 300px">Edit Profile:</p>
-<div id="myForm" style="display: flex; margin-bottom: 150px; margin-top: 100px; background-color: #ffffff; width:600px; margin-left: 300px; padding:50px; border: solid 1px rgba(128, 128, 128, 0.5);">
-    <form action="../PUBLIC-PAGE/component/ctrl_edit_profile.php" method="post" class="form-edit-profile" id="editSection">
+<div style="display: flex; margin-bottom: 150px; margin-top: 100px; background-color: #ffffff; width:600px; margin-left: 300px; padding:50px; border: solid 1px rgba(128, 128, 128, 0.5);">
+    <form action="../PUBLIC-PAGE/component/ctrl_edit_profile.php" method="post" class="form-edit-profile">
         <div class="second-child">
             <label for="customerAvatar" style="font-size: large;">Customer Avatar:</label>
             <input type="file" id="customerAvatar" name="customerAvatar" style="padding: 12px 5px 5px 20px; border:none">
