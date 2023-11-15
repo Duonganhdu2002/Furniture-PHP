@@ -10,15 +10,8 @@ include('sql/cancleOrder.php');
 include('sql/sales.php');
 include('sql/shipMethod.php');
 include('sql/countryOrder.php');
+include('sql/categoryOrder.php');
 
-// while ($row = $result->fetch_assoc()) {
-//     echo "Quốc gia: " . $row['country'] . " - Số lượng đơn hàng: " . $row['order_count'] . " - Tổng giá trị đơn hàng: " . $row['total_value'] . "<br>";
-// }
-// while ($row1 = $result1->fetch_assoc()) {
-//     echo "Quốc gia: " . $row1['country'] . " - Số lượng đơn hàng: " . $row1['order_count'] . " - Tổng giá trị đơn hàng: " . $row1['last_total_value'] . "<br>";
-// }
-
-// echo $percentIncreaseCountry;
 ?>
 
 <div class="revenue">
@@ -191,10 +184,55 @@ include('sql/countryOrder.php');
                     <td style="width: 30%;">Values</td>
                     <td style="width: 20%;">Bonces</td>
                 </tr>
+                <?php
+                while ($row = $result->fetch_assoc()) {
+                    $country = $row['country'];
+                    $orderCount = $row['order_count'];
+                    $totalValue = $row['total_value'];
+
+                    // Find the corresponding result from the second query
+                    $totalValuePreviousYear = 0; // Default value
+                    while ($row1 = $result1->fetch_assoc()) {
+                        if ($row1['country'] === $country) {
+                            $totalValuePreviousYear = $row1['last_total_value'];
+                            break;
+                        }
+                    }
+
+                    // Calculate and display the percentage increase
+                    $percentIncrease = ($totalValuePreviousYear != 0) ? (($totalValue / $totalValuePreviousYear) * 100) : 0;
+                    $percentIncrease = round($percentIncrease, 0);
+                    echo "<tr>";
+                    echo "<td style='width: 20%;'>$country</td>";
+                    echo "<td style='width: 30%;'>$orderCount</td>";
+                    echo "<td style='width: 30%;'>$totalValue</td>";
+                    echo "<td style='width: 20%;'>$percentIncrease %</td>";
+                    echo "</tr>";
+                }
+                ?>
             </table>
         </div>
         <div style="width: 35%;" class="byCategory">
             <h3>Sale by Category</h3>
+            <table class="tableCountry">
+                <tr>
+                    <td style="width: 40%;">Category name</td>
+                    <td style="width: 30%;">Sales</td>
+                    <td style="width: 30%;">Values</td>
+                </tr>
+                <?php
+                if ($resultCategoryOrder->num_rows > 0) {
+                    // Output data of each row
+                    while ($row = $resultCategoryOrder->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td style='width: 40%;'>". $row["category_name"] ."</td>";
+                        echo "<td style='width: 30%;'>". $row["total_sold"] ."</td>";
+                        echo "<td style='width: 30%;'>". $row["total_revenue"] ."</td>";
+                        echo "</tr>";
+                    }
+                }
+                ?>
+            </table>
         </div>
     </div>
 </div>
