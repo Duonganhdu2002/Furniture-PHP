@@ -66,32 +66,32 @@
 
 <body>
     <?php
-    session_start(); // Khởi tạo phiên làm việc
-    $conn = new mysqli('localhost', 'root', '', 'shopping_online');
+    session_start(); // Starts the session
+    $conn = new mysqli('localhost', 'root', '', 'shopping_online'); // Connects to the database
 
-    // Kiểm tra khi có sự kiện đăng nhập
+    // Checks if the form is submitted via POST method
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        // Lấy thông tin từ form đăng nhập
+        // Retrieves the username and password from the form
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        // Bảo vệ chống SQL injection
+        // Protects against SQL injection by escaping special characters
         $username = $conn->real_escape_string($username);
         $password = $conn->real_escape_string($password);
 
-        // Kiểm tra thông tin đăng nhập
+        // Queries the database for matching username and password with admin role
         $queryLogin  = "SELECT * FROM users WHERE username = '$username' AND password = '$password' AND role = 'admin'";
         $result = $conn->query($queryLogin);
 
         if ($result->num_rows == 1) {
-            // Đăng nhập thành công, lưu ID người dùng vào SESSION và chuyển hướng đến index.php
+            // If login is successful, store the username and user ID in session and redirect to index.php
             $admin = $result->fetch_assoc();
             $_SESSION['username_admin'] = $admin['username'];
             $_SESSION['id_admin'] = $admin['id'];
             header("Location: index.php?pid=0");
             exit();
         } else {
+            // If login fails, show an alert
             echo '<script>alert("Sai thông tin đăng nhập!");</script>';
         }
     }

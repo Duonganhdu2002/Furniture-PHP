@@ -1,4 +1,4 @@
-<?php ob_start(); ?>
+<?php ob_start(); // Starts output buffering ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,22 +9,24 @@
 </head>
 
 <body>
-    <?php session_start(); ?>
+    <?php session_start(); // Starts the session ?>
     <div class="container-main">
-        <?php
-        include "component/side-bar.php";
-        ?>
+        <?php include "component/side-bar.php"; // Includes the sidebar component ?>
         <div id="right-side">
             <?php
-            include "component/header.php";
-            include "component/title.php";
+            include "component/header.php"; // Includes the header component
+            include "component/title.php";  // Includes the title component
             ?>
             <div class="display-info">
                 <div class="data">
                     <?php
+                    // Check if the user is logged in as admin
                     if (isset($_SESSION["username_admin"])) {
+                        // Check if a page ID is provided via GET request
                         if (isset($_GET['pid'])) {
                             $id = $_GET['pid'];
+
+                            // Include appropriate component based on page ID and action (add-new or update)
                             if ($id == '1' && isset($_GET['add-new'])) {
                                 include("component/form/category.php");
                             } else if ($id == '2' && isset($_GET['add-new'])) {
@@ -42,6 +44,7 @@
                             } else if ($id == '5' && isset($_GET['update'])) {
                                 include("component/modal-update/customer.php");
                             } else {
+                                // Default component inclusion based on the page ID
                                 switch ($id) {
                                     case '1':
                                         include("component/category.php");
@@ -68,12 +71,13 @@
                                         include("component/profile.php");
                                         break;
                                     default:
-                                        include("component/nova.php");
+                                        include("component/nova.php"); // Default case if no valid ID is provided
                                         break;
                                 }
                             }
                         }
                     } else {
+                        // Redirect to login page if not logged in
                         header("location: login.php");
                         exit();
                     }
@@ -117,4 +121,4 @@
 </style>
 
 </html>
-<?php ob_end_flush(); ?>
+<?php ob_end_flush(); // Ends output buffering and flushes output ?>
