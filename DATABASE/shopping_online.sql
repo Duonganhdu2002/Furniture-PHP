@@ -157,7 +157,7 @@ INSERT INTO `address_cart` (`id_cart`, `username`, `country`, `province`, `distr
 (56, 1, 'Việt Nam', 'Ho Chi Minh', 'Ba Dinh', 'TP Hồ Chí Minh', 'Lê Lợi - Quận 7 -  TP HCM - Việt Nam', '125', 'dung5715@gmail.com', '+123456789'),
 (57, 1, 'Việt Nam', 'Ho Chi Minh', 'Ba Dinh', 'TP Hồ Chí Minh', 'Lê Lợi - Quận 7 -  TP HCM - Việt Nam', '125', 'dung5715@gmail.com', '+123456789');
 
--- --------------------------------------------------------
+-- ---------------------------------------------------------
 
 --
 -- Cấu trúc bảng cho bảng `brands`
